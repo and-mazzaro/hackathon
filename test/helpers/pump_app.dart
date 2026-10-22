@@ -1,16 +1,22 @@
+import 'dart:math';
+
 import 'package:ecoquest/app/app.dart';
 import 'package:ecoquest/app/theme/app_theme.dart';
+import 'package:ecoquest/data/content/quiz_content.dart';
 import 'package:ecoquest/data/save/in_memory_save_repository.dart';
 import 'package:ecoquest/data/save/save_repository.dart';
 import 'package:ecoquest/domain/game_controller.dart';
 import 'package:ecoquest/domain/models/eco_topic.dart';
 import 'package:ecoquest/domain/models/game_state.dart';
 import 'package:ecoquest/domain/models/player_profile.dart';
+import 'package:ecoquest/domain/models/quiz_question.dart';
 import 'package:ecoquest/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
+
+import 'quiz_fixtures.dart';
 
 const tabLabels = ['Home', 'Impara', 'Cucciolo', 'Profilo'];
 
@@ -30,9 +36,12 @@ GameState onboardedState() => GameState.initial(now: testNow).copyWith(
 ///
 /// The save lives in memory (no files). By default the player has already
 /// finished onboarding; pass `InMemorySaveRepository()` for a new player.
+/// Quiz questions come from [quizBank] (default: the test fixtures, not the
+/// real content file) and randomness uses a fixed seed.
 Future<void> pumpEcoQuestApp(
   WidgetTester tester, {
   SaveRepository? repository,
+  QuizBank? quizBank,
 }) async {
   await tester.pumpWidget(ProviderScope(
     retry: (retryCount, error) => null,
@@ -40,6 +49,8 @@ Future<void> pumpEcoQuestApp(
       saveRepositoryProvider.overrideWithValue(
           repository ?? InMemorySaveRepository(onboardedState())),
       clockProvider.overrideWithValue(() => testNow),
+      randomProvider.overrideWithValue(Random(42)),
+      quizBankProvider.overrideWith((ref) async => quizBank ?? testQuizBank()),
     ],
     child: const EcoQuestApp(),
   ));

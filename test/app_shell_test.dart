@@ -50,7 +50,8 @@ void main() {
     await scrollTo(tester, find.text('Quiz del giorno'));
     await tester.tap(find.text('Quiz del giorno'));
     await tester.pumpAndSettle();
-    expect(find.text('Impara giocando'), findsOneWidget);
+    // Opens the personal mixed quiz directly.
+    expect(find.text('Quiz misto'), findsOneWidget);
   });
 
   testWidgets('Android back on another tab returns to Home', (tester) async {

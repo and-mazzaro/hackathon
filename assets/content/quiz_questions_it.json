@@ -1,0 +1,1005 @@
+{
+  "version": 1,
+  "questions": [
+    {
+      "id": "recycling_001",
+      "topic": "recycling",
+      "difficulty": 1,
+      "question": "Secondo CoReVe, quante volte si può riciclare il vetro di bottiglie e vasetti?",
+      "options": [
+        "Solo una volta",
+        "Al massimo dieci volte",
+        "Infinite volte, senza perdere qualità",
+        "Mai: il vetro non si ricicla"
+      ],
+      "correctIndex": 2,
+      "explanation": "Il vetro si può fondere e rifondere mantenendo le sue proprietà: bottiglie e vasetti raccolti bene diventano nuovi contenitori all'infinito, risparmiando materie prime.",
+      "source": {
+        "name": "CoReVe",
+        "url": "https://coreve.it/proprieta-del-vetro/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "il vetro è un materiale riciclabile all'infinito"
+    },
+    {
+      "id": "recycling_002",
+      "topic": "recycling",
+      "difficulty": 1,
+      "question": "Secondo CoReVe, quale di questi oggetti NON va nella raccolta del vetro?",
+      "options": [
+        "Una bottiglia di vetro vuota",
+        "Una tazza di ceramica rotta",
+        "Un barattolo di vetro della marmellata",
+        "Un vasetto di vetro dello yogurt"
+      ],
+      "correctIndex": 1,
+      "explanation": "La ceramica ha una composizione diversa e anche pochi frammenti creano difetti nei nuovi contenitori. Dove buttarla dipende dal tuo Comune: di solito indifferenziato o isola ecologica.",
+      "source": {
+        "name": "CoReVe",
+        "url": "https://coreve.it/regole-del-riciclo/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Ceramica, cristallo, vetro borosilicato e rifiuti da apparecchiature elettriche ed elettroniche non vanno nel vetro"
+    },
+    {
+      "id": "recycling_003",
+      "topic": "recycling",
+      "difficulty": 2,
+      "question": "Secondo CIAL, quanta energia si risparmia riciclando l'alluminio invece di produrlo dalla materia prima?",
+      "options": [
+        "Circa il 5%",
+        "Circa il 30%",
+        "Circa il 50%",
+        "Il 95%"
+      ],
+      "correctIndex": 3,
+      "explanation": "Rifondere l'alluminio richiede molta meno energia che produrlo da zero. Per questo lattine e vaschette raccolte bene sono preziose: l'alluminio si può riciclare all'infinito.",
+      "source": {
+        "name": "CIAL",
+        "url": "https://www.cial.it/riciclo-alluminio/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "il riciclo dell'alluminio permette di risparmiare il 95% dell'energia necessaria a produrlo dalla materia prima"
+    },
+    {
+      "id": "recycling_004",
+      "topic": "recycling",
+      "difficulty": 2,
+      "question": "Secondo la gerarchia dei rifiuti dell'Unione europea, qual è l'opzione preferibile?",
+      "options": [
+        "Prevenirli, cioè non produrli",
+        "Riciclarli",
+        "Bruciarli per produrre energia",
+        "Portarli in discarica"
+      ],
+      "correctIndex": 0,
+      "explanation": "Nella gerarchia UE la prevenzione viene prima di tutto: il rifiuto migliore è quello che non nasce. Il riciclo è importante, ma viene dopo; la discarica è l'ultima scelta.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://environment.ec.europa.eu/topics/waste-and-recycling/waste-framework-directive_en",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Preventing waste is the preferred option, and sending waste to landfill should be the last resort."
+    },
+    {
+      "id": "recycling_005",
+      "topic": "recycling",
+      "difficulty": 3,
+      "question": "Quale obiettivo di raccolta separata ha fissato l'UE per le bottiglie di plastica entro il 2029?",
+      "options": [
+        "65%",
+        "90%",
+        "50%",
+        "77%"
+      ],
+      "correctIndex": 1,
+      "explanation": "La direttiva UE sulla plastica monouso chiede di raccogliere separatamente il 77% delle bottiglie di plastica entro il 2025 e il 90% entro il 2029, così da poterle riciclare.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://environment.ec.europa.eu/topics/plastics/single-use-plastics_en",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "A 77% separate collection target for plastic bottles by 2025, increasing to 90% by 2029"
+    },
+    {
+      "id": "climate_001",
+      "topic": "climate",
+      "difficulty": 1,
+      "question": "Qual è la causa principale del cambiamento climatico in corso dal 1800 a oggi?",
+      "options": [
+        "Le eruzioni dei vulcani",
+        "Il buco nell'ozono",
+        "Bruciare carbone, petrolio e gas",
+        "I cicli naturali del Sole"
+      ],
+      "correctIndex": 2,
+      "explanation": "Bruciare combustibili fossili libera gas serra che trattengono il calore nell'atmosfera. Secondo l'ONU, dal 1800 le attività umane sono il motore principale del cambiamento climatico.",
+      "source": {
+        "name": "Nazioni Unite",
+        "url": "https://www.un.org/en/climatechange/what-is-climate-change",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "primarily due to the burning of fossil fuels like coal, oil and gas"
+    },
+    {
+      "id": "climate_002",
+      "topic": "climate",
+      "difficulty": 1,
+      "question": "Quale di questi gas è tra i principali responsabili del cambiamento climatico?",
+      "options": [
+        "L'ossigeno",
+        "L'azoto",
+        "L'elio",
+        "L'anidride carbonica (CO2)"
+      ],
+      "correctIndex": 3,
+      "explanation": "La CO2, insieme al metano, è uno dei principali gas serra: trattiene il calore vicino alla superficie della Terra e la sua quantità è aumentata a causa delle attività umane.",
+      "source": {
+        "name": "Nazioni Unite",
+        "url": "https://www.un.org/en/climatechange/what-is-climate-change",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "The main greenhouse gases that are causing climate change include carbon dioxide and methane."
+    },
+    {
+      "id": "climate_003",
+      "topic": "climate",
+      "difficulty": 2,
+      "question": "Entro quale limite l'Accordo di Parigi (2015) vuole contenere l'aumento della temperatura globale rispetto all'era preindustriale?",
+      "options": [
+        "Ben sotto 2 °C, puntando a 1,5 °C",
+        "Sotto 4 °C, puntando a 3 °C",
+        "Sotto 6 °C, puntando a 5 °C",
+        "Sotto 0,5 °C entro il 2020"
+      ],
+      "correctIndex": 0,
+      "explanation": "Con l'Accordo di Parigi i Paesi si sono impegnati a restare ben sotto i 2 °C e a fare sforzi per fermarsi a 1,5 °C. L'accordo è stato raggiunto alla COP21 di Parigi il 12 dicembre 2015.",
+      "source": {
+        "name": "Nazioni Unite",
+        "url": "https://www.un.org/en/climatechange/paris-agreement",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "hold global temperature increase to well below 2°C above pre-industrial levels"
+    },
+    {
+      "id": "climate_004",
+      "topic": "climate",
+      "difficulty": 2,
+      "question": "Il metano è un gas serra. Secondo l'EPA, quanto è potente nel trattenere calore rispetto alla CO2?",
+      "options": [
+        "Molto meno della CO2",
+        "Più di 28 volte tanto",
+        "Esattamente come la CO2",
+        "Non trattiene calore"
+      ],
+      "correctIndex": 1,
+      "explanation": "Il metano trattiene il calore oltre 28 volte più della CO2, ma resta in atmosfera per meno tempo: per questo ridurne le emissioni ha effetti rapidi sul riscaldamento.",
+      "source": {
+        "name": "EPA",
+        "url": "https://www.epa.gov/gmi/importance-methane",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "more than 28 times as potent as carbon dioxide at trapping heat in the atmosphere"
+    },
+    {
+      "id": "climate_005",
+      "topic": "climate",
+      "difficulty": 3,
+      "question": "Secondo la NASA, quali due fenomeni stanno facendo alzare il livello del mare?",
+      "options": [
+        "Più piogge e fiumi più gonfi",
+        "Ghiaccio marino che fonde e onde più alte",
+        "Ghiacci terrestri che fondono e acqua che si dilata",
+        "Più evaporazione e più nuvole"
+      ],
+      "correctIndex": 2,
+      "explanation": "L'acqua dei ghiacci che si trovano sulla terraferma finisce in mare, e l'acqua marina, scaldandosi, si espande e occupa più spazio: entrambi i fenomeni alzano il livello del mare.",
+      "source": {
+        "name": "NASA",
+        "url": "https://science.nasa.gov/climate-change/effects/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "added water from melting land ice and the expansion of seawater as it warms"
+    },
+    {
+      "id": "oceans_001",
+      "topic": "oceans",
+      "difficulty": 1,
+      "question": "Quanta parte della superficie della Terra è coperta dall'oceano?",
+      "options": [
+        "Più del 70%",
+        "Circa il 30%",
+        "Circa la metà",
+        "Più del 95%"
+      ],
+      "correctIndex": 0,
+      "explanation": "Secondo NOAA l'oceano copre oltre il 70% della superficie del pianeta e contiene circa il 97% di tutta l'acqua della Terra.",
+      "source": {
+        "name": "NOAA",
+        "url": "https://oceanservice.noaa.gov/facts/oceanwater.html",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "The ocean covers more than 70 percent of the surface of our planet."
+    },
+    {
+      "id": "oceans_002",
+      "topic": "oceans",
+      "difficulty": 1,
+      "question": "Qual è il bacino oceanico più grande e più profondo del mondo?",
+      "options": [
+        "L'Oceano Atlantico",
+        "L'Oceano Indiano",
+        "L'Oceano Pacifico",
+        "L'Oceano Artico"
+      ],
+      "correctIndex": 2,
+      "explanation": "Secondo NOAA il Pacifico è il più grande e il più profondo tra i bacini oceanici del mondo; al secondo posto per estensione c'è l'Atlantico.",
+      "source": {
+        "name": "NOAA",
+        "url": "https://oceanservice.noaa.gov/facts/biggestocean.html",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "The Pacific Ocean is the largest and deepest of the world ocean basins."
+    },
+    {
+      "id": "oceans_003",
+      "topic": "oceans",
+      "difficulty": 2,
+      "question": "Sotto quale dimensione un frammento di plastica viene chiamato microplastica?",
+      "options": [
+        "5 centimetri",
+        "5 millimetri",
+        "50 centimetri",
+        "1 metro"
+      ],
+      "correctIndex": 1,
+      "explanation": "Secondo NOAA le microplastiche misurano meno di 5 mm, più o meno come la gommina di una matita. Si formano anche quando oggetti di plastica più grandi si rompono in pezzi.",
+      "source": {
+        "name": "NOAA",
+        "url": "https://oceanservice.noaa.gov/facts/microplastics.html",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "less than five millimeters in length (or about the size of a pencil eraser)"
+    },
+    {
+      "id": "oceans_004",
+      "topic": "oceans",
+      "difficulty": 2,
+      "question": "Cosa succede a un corallo quando si \"sbianca\"?",
+      "options": [
+        "Viene coperto da uno strato di sabbia",
+        "Cambia colore per mimetizzarsi",
+        "Produce più calcare del normale",
+        "Espelle le alghe che vivono nei suoi tessuti"
+      ],
+      "correctIndex": 3,
+      "explanation": "Sotto stress, soprattutto per l'acqua troppo calda, i coralli espellono le microalghe che vivono nei loro tessuti e diventano bianchi. Secondo NOAA la causa principale è il riscaldamento.",
+      "source": {
+        "name": "NOAA",
+        "url": "https://oceanservice.noaa.gov/facts/coral_bleach.html",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Warmer water temperatures can result in coral bleaching."
+    },
+    {
+      "id": "oceans_005",
+      "topic": "oceans",
+      "difficulty": 3,
+      "question": "L'oceano assorbe parte della CO2 che emettiamo e diventa più acido. Quali organismi marini ne risentono di più?",
+      "options": [
+        "Gli uccelli marini",
+        "Quelli che costruiscono gusci e scheletri calcarei",
+        "I pesci d'acqua dolce dei fiumi",
+        "Le piante che crescono sulle spiagge"
+      ],
+      "correctIndex": 1,
+      "explanation": "Con più CO2 il pH del mare scende e restano meno ioni carbonato, i \"mattoni\" che molluschi e coralli usano per gusci e scheletri. L'oceano assorbe circa il 30% della CO2 emessa.",
+      "source": {
+        "name": "NOAA",
+        "url": "https://www.noaa.gov/education/resource-collections/ocean-coasts/ocean-acidification",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "fewer carbonate ions available for calcifying organisms to build and maintain their shells"
+    },
+    {
+      "id": "biodiversity_001",
+      "topic": "biodiversity",
+      "difficulty": 1,
+      "question": "Cosa significa \"biodiversità\"?",
+      "options": [
+        "Il numero di animali in uno zoo",
+        "La varietà della vita: geni, specie ed ecosistemi",
+        "Solo l'insieme delle specie in pericolo",
+        "Le piante coltivate in un orto"
+      ],
+      "correctIndex": 1,
+      "explanation": "La Convenzione ONU sulla diversità biologica la definisce come la varietà degli organismi viventi: la diversità dentro le specie, tra le specie e tra gli ecosistemi.",
+      "source": {
+        "name": "CBD (ONU)",
+        "url": "https://www.cbd.int/convention/articles/?a=cbd-02",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "this includes diversity within species, between species and of ecosystems"
+    },
+    {
+      "id": "biodiversity_002",
+      "topic": "biodiversity",
+      "difficulty": 1,
+      "question": "Perché api e altri impollinatori sono così importanti?",
+      "options": [
+        "Portano il polline e aiutano le piante a dare frutti",
+        "Producono l'ossigeno che respiriamo",
+        "Tengono lontani tutti gli insetti nocivi",
+        "Rendono il terreno più fertile col miele"
+      ],
+      "correctIndex": 0,
+      "explanation": "Secondo la FAO oltre l'80% delle piante con fiori è impollinato da animali, soprattutto insetti, e molte delle colture più produttive dipendono almeno in parte da loro.",
+      "source": {
+        "name": "FAO",
+        "url": "https://www.fao.org/pollination/en/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Over 80 percent of all flowering plant species are pollinated by animals, mostly insects"
+    },
+    {
+      "id": "biodiversity_003",
+      "topic": "biodiversity",
+      "difficulty": 2,
+      "question": "Nella Lista Rossa IUCN, quale di queste categorie indica una specie minacciata di estinzione?",
+      "options": [
+        "Minor preoccupazione",
+        "Dati insufficienti",
+        "Vulnerabile",
+        "Non valutata"
+      ],
+      "correctIndex": 2,
+      "explanation": "Per la IUCN le specie Vulnerabili, In pericolo e In pericolo critico sono considerate minacciate di estinzione. La Lista Rossa aiuta a capire dove servono azioni di tutela.",
+      "source": {
+        "name": "IUCN",
+        "url": "https://iucn.org/resources/conservation-tool/iucn-red-list-threatened-species",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Vulnerable, Endangered and Critically Endangered species are considered to be threatened with extinction."
+    },
+    {
+      "id": "biodiversity_004",
+      "topic": "biodiversity",
+      "difficulty": 2,
+      "question": "Che cos'è Natura 2000?",
+      "options": [
+        "Un trattato ONU sul clima del 2000",
+        "Un progetto per piantare 2000 alberi",
+        "Un parco nazionale delle Alpi",
+        "Una rete europea di aree naturali protette"
+      ],
+      "correctIndex": 3,
+      "explanation": "Natura 2000 è la rete di siti protetti dell'UE basata sulle direttive Uccelli e Habitat. Secondo la Commissione europea è la rete di aree protette più grande al mondo.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://environment.ec.europa.eu/topics/nature-and-biodiversity/natura-2000_en",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "The largest network of protected areas in the world."
+    },
+    {
+      "id": "biodiversity_005",
+      "topic": "biodiversity",
+      "difficulty": 3,
+      "question": "L'orso bruno marsicano è una sottospecie endemica italiana. Dove vive in natura?",
+      "options": [
+        "Sulle Alpi occidentali",
+        "Nell'Appennino centrale",
+        "In Sardegna",
+        "In Sicilia"
+      ],
+      "correctIndex": 1,
+      "explanation": "Endemico significa che vive solo in un'area precisa: l'orso marsicano si trova nell'Appennino centrale. Secondo ISPRA è gravemente minacciato: nell'estate 2025 erano stimati circa 81 individui.",
+      "source": {
+        "name": "ISPRA",
+        "url": "https://www.isprambiente.gov.it/it/news/orso-bruno-marsicano-i-risultati-della-stima-di-popolazione-2025-presentati-al-mase",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "questa sottospecie endemica di orso, gravemente minacciata di estinzione … oltre 6.000 km2 nell'Appennino centrale"
+    },
+    {
+      "id": "forests_001",
+      "topic": "forests",
+      "difficulty": 1,
+      "question": "Con la fotosintesi, quale gas gli alberi assorbono dall'aria?",
+      "options": [
+        "L'anidride carbonica (CO2)",
+        "L'ossigeno",
+        "L'azoto",
+        "L'elio"
+      ],
+      "correctIndex": 0,
+      "explanation": "Con la fotosintesi le piante verdi tolgono CO2 dall'atmosfera e la usano per crescere. Gli alberi conservano il carbonio nel legno per tutta la loro vita.",
+      "source": {
+        "name": "FAO",
+        "url": "https://www.fao.org/4/ac132e/ac132e04.htm",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "green plants take carbon dioxide gas out of the atmosphere in the process of photosynthesis"
+    },
+    {
+      "id": "forests_002",
+      "topic": "forests",
+      "difficulty": 1,
+      "question": "Qual è la foresta tropicale più grande del mondo?",
+      "options": [
+        "La foresta del Congo",
+        "La foresta del Borneo",
+        "La Foresta Nera",
+        "La foresta amazzonica"
+      ],
+      "correctIndex": 3,
+      "explanation": "Secondo la NASA la foresta amazzonica, in Sud America, è la foresta tropicale più grande del mondo: proteggerla è importante per il clima e per la biodiversità.",
+      "source": {
+        "name": "NASA",
+        "url": "https://svs.gsfc.nasa.gov/2407/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "The Amazon rain forest is the largest tropical forest in the world."
+    },
+    {
+      "id": "forests_003",
+      "topic": "forests",
+      "difficulty": 2,
+      "question": "Secondo uno studio FAO del 2021, qual è la causa principale della deforestazione nel mondo?",
+      "options": [
+        "Gli incendi causati dai fulmini",
+        "La costruzione di nuove città",
+        "L'espansione dell'agricoltura",
+        "La produzione di carta"
+      ],
+      "correctIndex": 2,
+      "explanation": "Lo studio FAO presentato alla COP26 indica che l'agricoltura causa quasi il 90% della deforestazione globale: soprattutto nuovi campi coltivati e pascoli per il bestiame.",
+      "source": {
+        "name": "FAO",
+        "url": "https://www.fao.org/newsroom/detail/cop26-agricultural-expansion-drives-almost-90-percent-of-global-deforestation/en",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Agricultural expansion drives almost 90 percent of global deforestation"
+    },
+    {
+      "id": "forests_004",
+      "topic": "forests",
+      "difficulty": 2,
+      "question": "Il regolamento UE sui prodotti a deforestazione zero riguarda materie prime come caffè e cacao. Quale di queste è inclusa?",
+      "options": [
+        "L'olio di palma",
+        "Le mele",
+        "Le patate",
+        "Il grano"
+      ],
+      "correctIndex": 0,
+      "explanation": "Il regolamento riguarda bovini, legno, cacao, soia, olio di palma, caffè e gomma, e prodotti derivati come cioccolato o mobili, perché la loro produzione può causare deforestazione.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://environment.ec.europa.eu/topics/forests/deforestation/regulation-deforestation-free-products_en",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "commodities like cattle, wood, cocoa, soy, palm oil, coffee, rubber"
+    },
+    {
+      "id": "forests_005",
+      "topic": "forests",
+      "difficulty": 3,
+      "question": "Negli alberi delle zone temperate si forma di solito un anello all'anno. Cosa indica un anello più largo del solito?",
+      "options": [
+        "Che l'albero era malato",
+        "Un inverno molto lungo",
+        "Un anno con condizioni di crescita favorevoli",
+        "Che l'albero è stato potato"
+      ],
+      "correctIndex": 2,
+      "explanation": "Gli anelli registrano il clima di ogni anno: quando caldo e umidità sono favorevoli l'albero cresce di più e l'anello è più largo. Per questo gli anelli aiutano a studiare il clima passato.",
+      "source": {
+        "name": "NOAA",
+        "url": "https://www.ncei.noaa.gov/news/what-are-proxy-data",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "trees generally produce one ring a year, recording the climate conditions each year"
+    },
+    {
+      "id": "energy_001",
+      "topic": "energy",
+      "difficulty": 1,
+      "question": "Quale di queste è una fonte di energia rinnovabile?",
+      "options": [
+        "Il carbone",
+        "Il petrolio",
+        "Il sole",
+        "Il gas naturale"
+      ],
+      "correctIndex": 2,
+      "explanation": "La luce del sole si rinnova di continuo, più in fretta di quanto la usiamo. Carbone, petrolio e gas invece impiegano centinaia di milioni di anni a formarsi: non sono rinnovabili.",
+      "source": {
+        "name": "Nazioni Unite",
+        "url": "https://www.un.org/en/climatechange/what-is-renewable-energy",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Sunlight and wind, for example, are such sources that are constantly being replenished."
+    },
+    {
+      "id": "energy_002",
+      "topic": "energy",
+      "difficulty": 1,
+      "question": "A parità di luce, quale tipo di lampadina consuma meno energia?",
+      "options": [
+        "LED",
+        "A incandescenza",
+        "Alogena",
+        "Consumano tutte allo stesso modo"
+      ],
+      "correctIndex": 0,
+      "explanation": "Secondo la Commissione europea, le lampadine LED usano il 90% di energia in meno rispetto alle classiche lampadine a incandescenza, e in casa durano molto a lungo.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://energy-efficient-products.ec.europa.eu/product-list/light-sources_en",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "LED lights use 90 percent less energy than standard incandescent bulbs."
+    },
+    {
+      "id": "energy_003",
+      "topic": "energy",
+      "difficulty": 2,
+      "question": "Sulla nuova etichetta energetica UE degli elettrodomestici, quale classe indica il prodotto più efficiente?",
+      "options": [
+        "G",
+        "A+++",
+        "A",
+        "D"
+      ],
+      "correctIndex": 2,
+      "explanation": "Dal 2021 l'etichetta energetica UE usa, per diversi prodotti, una scala più semplice da A (più efficiente) a G (meno efficiente): le vecchie classi come A+++ vengono sostituite gradualmente.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://energy-efficient-products.ec.europa.eu/ecodesign-and-energy-label/understanding-energy-label_en",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "a new, simpler scale from A (most efficient) to G (least efficient)"
+    },
+    {
+      "id": "energy_004",
+      "topic": "energy",
+      "difficulty": 2,
+      "question": "Come fa una pompa di calore a scaldare un edificio?",
+      "options": [
+        "Brucia gas metano come una caldaia",
+        "Preleva calore da aria, terreno o acqua e lo porta dentro",
+        "Funziona solo con pannelli solari termici",
+        "Brucia legna in modo più efficiente"
+      ],
+      "correctIndex": 1,
+      "explanation": "La pompa di calore non brucia combustibili: usando energia, di solito elettricità, prende il calore presente nell'aria, nel terreno o nell'acqua all'esterno e lo trasferisce all'interno.",
+      "source": {
+        "name": "IEA HPT TCP",
+        "url": "https://heatpumpingtechnologies.org/articles/what-is-a-heat-pump/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "It can take heat from the air, ground, or water outside a building and transfer it indoors to provide heating."
+    },
+    {
+      "id": "energy_005",
+      "topic": "energy",
+      "difficulty": 3,
+      "question": "Secondo l'IEA, abbassare il termostato di casa di 1 °C quanta energia per il riscaldamento fa risparmiare?",
+      "options": [
+        "Circa il 60%",
+        "Circa il 30%",
+        "Circa lo 0,5%",
+        "Circa il 7%"
+      ],
+      "correctIndex": 3,
+      "explanation": "Secondo l'IEA, abbassare il termostato di appena 1 °C fa risparmiare circa il 7% dell'energia usata per il riscaldamento: un piccolo gesto quotidiano con un effetto concreto.",
+      "source": {
+        "name": "IEA",
+        "url": "https://www.iea.org/reports/playing-my-part",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Turning down the thermostat … by just 1 °C would save around 7% of the energy you use for heating."
+    },
+    {
+      "id": "water_001",
+      "topic": "water",
+      "difficulty": 1,
+      "question": "Come si chiama il processo in cui l'acqua passa da liquido a vapore?",
+      "options": [
+        "Condensazione",
+        "Evaporazione",
+        "Precipitazione",
+        "Infiltrazione"
+      ],
+      "correctIndex": 1,
+      "explanation": "L'evaporazione trasforma l'acqua liquida in vapore acqueo: è uno dei passaggi chiave del ciclo dell'acqua, che porta l'acqua dalla superficie all'atmosfera.",
+      "source": {
+        "name": "USGS",
+        "url": "https://www.usgs.gov/special-topics/water-science-school/science/evaporation-and-water-cycle",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Evaporation is the process that changes liquid water to gaseous water (water vapor)."
+    },
+    {
+      "id": "water_002",
+      "topic": "water",
+      "difficulty": 1,
+      "question": "Per lavarti, in genere cosa consuma meno acqua?",
+      "options": [
+        "Un bagno nella vasca",
+        "Una doccia, se non è troppo lunga",
+        "Consumano sempre la stessa acqua",
+        "Dipende solo dalla temperatura dell'acqua"
+      ],
+      "correctIndex": 1,
+      "explanation": "Una doccia usa in genere meno acqua di un bagno, purché non duri troppo: ogni minuto in più sotto il getto aumenta i litri consumati.",
+      "source": {
+        "name": "US EPA (WaterSense)",
+        "url": "https://www.epa.gov/watersense/start-saving",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Showers use less water than baths, as long as you keep an eye on how long you've been lathering up."
+    },
+    {
+      "id": "water_003",
+      "topic": "water",
+      "difficulty": 2,
+      "question": "Quanta dell'acqua presente sulla Terra è acqua dolce?",
+      "options": [
+        "Circa il 2,5%",
+        "Circa il 25%",
+        "Circa il 50%",
+        "Circa il 75%"
+      ],
+      "correctIndex": 0,
+      "explanation": "Oltre il 96% dell'acqua del pianeta è salata, soprattutto negli oceani: solo circa il 2,5% è dolce. Per questo l'acqua dolce è una risorsa preziosa da non sprecare.",
+      "source": {
+        "name": "USGS",
+        "url": "https://www.usgs.gov/special-topics/water-science-school/science/where-earths-water",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "only 2.5% of Earth's water is freshwater"
+    },
+    {
+      "id": "water_004",
+      "topic": "water",
+      "difficulty": 2,
+      "question": "Che cos'è l'impronta idrica di un prodotto?",
+      "options": [
+        "Il peso dell'acqua nella sua confezione",
+        "L'acqua che bevi in un giorno",
+        "L'acqua consumata e inquinata per produrlo",
+        "La pioggia caduta dove viene venduto"
+      ],
+      "correctIndex": 2,
+      "explanation": "L'impronta idrica conta l'acqua usata e inquinata lungo la produzione, anche quella \"nascosta\", ad esempio per coltivare il cibo: spesso è molto più di quella che usi dal rubinetto.",
+      "source": {
+        "name": "Water Footprint Network",
+        "url": "https://www.waterfootprint.org/time-for-action/what-can-consumers-do/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "The water footprint of a product is the amount of water that is consumed and polluted"
+    },
+    {
+      "id": "water_005",
+      "topic": "water",
+      "difficulty": 3,
+      "question": "Per grammo di proteine, quante volte è più grande l'impronta idrica della carne bovina rispetto a quella dei legumi?",
+      "options": [
+        "È la stessa",
+        "Circa la metà",
+        "Circa 6 volte",
+        "Circa 100 volte"
+      ],
+      "correctIndex": 2,
+      "explanation": "Secondo il Water Footprint Network, per ogni grammo di proteine la carne bovina richiede circa 6 volte più acqua dei legumi: alternare le fonti di proteine aiuta a ridurre l'impronta idrica.",
+      "source": {
+        "name": "Water Footprint Network",
+        "url": "https://www.waterfootprint.org/time-for-action/what-can-consumers-do/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "For beef, the water footprint per gram of protein is 6 times larger than for pulses."
+    },
+    {
+      "id": "transport_001",
+      "topic": "transport",
+      "difficulty": 1,
+      "question": "Quale di questi modi di spostarti ha emissioni vicine allo zero?",
+      "options": [
+        "Auto a benzina",
+        "Scooter a benzina",
+        "Bicicletta",
+        "Aereo"
+      ],
+      "correctIndex": 2,
+      "explanation": "Pedalare e camminare non usano carburante: per l'Agenzia europea dell'ambiente le loro emissioni si possono considerare vicine allo zero, per questo sono scelte pulite e sostenibili.",
+      "source": {
+        "name": "EEA",
+        "url": "https://www.eea.europa.eu/publications/rail-and-waterborne-transport/rail-and-waterborne-best/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "an obvious choice for clean and sustainable mobility because their emissions can be assumed to be close to zero"
+    },
+    {
+      "id": "transport_002",
+      "topic": "transport",
+      "difficulty": 1,
+      "question": "Secondo l'OMS, camminare 30 minuti o pedalare 20 minuti quasi ogni giorno cosa riduce?",
+      "options": [
+        "La forza delle gambe",
+        "Il rischio di mortalità",
+        "La capacità polmonare",
+        "La qualità del sonno"
+      ],
+      "correctIndex": 1,
+      "explanation": "Secondo l'OMS Europa, camminare 30 minuti o pedalare 20 minuti quasi ogni giorno riduce il rischio di mortalità di almeno il 10%. E aiuta anche a ridurre l'inquinamento dell'aria.",
+      "source": {
+        "name": "OMS Europa",
+        "url": "https://www.who.int/europe/news-room/07-06-2022-cycling-and-walking-can-help-reduce-physical-inactivity-and-air-pollution--save-lives-and-mitigate-climate-change",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "walking for 30 minutes or cycling for 20 minutes on most days reduces mortality risk by at least 10%"
+    },
+    {
+      "id": "transport_003",
+      "topic": "transport",
+      "difficulty": 2,
+      "question": "Per lo stesso tragitto in auto, cosa riduce le emissioni per passeggero-km?",
+      "options": [
+        "Viaggiare da soli",
+        "Usare un'auto più grande e pesante",
+        "Ripetere il tragitto più volte",
+        "Condividere l'auto con più persone"
+      ],
+      "correctIndex": 3,
+      "explanation": "Con più persone a bordo, emissioni ed energia si dividono tra più passeggeri: secondo uno studio presentato dalla Chalmers University, più occupanti per auto significa meno emissioni per passeggero-km.",
+      "source": {
+        "name": "Chalmers University of Technology",
+        "url": "https://www.chalmers.se/en/current/news/see-lone-drivers-use-the-most-energy/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "An increased occupancy rate in the cars would reduce both emissions and energy consumption per passenger kilometer"
+    },
+    {
+      "id": "transport_004",
+      "topic": "transport",
+      "difficulty": 2,
+      "question": "Nell'UE, quale mezzo a motore ha in media le emissioni più basse per passeggero-km?",
+      "options": [
+        "Treno",
+        "Aereo",
+        "Auto privata",
+        "Moto"
+      ],
+      "correctIndex": 0,
+      "explanation": "Secondo l'Agenzia europea dell'ambiente, in media il treno emette per passeggero-km solo una frazione della maggior parte degli altri mezzi. Il valore di ogni viaggio dipende comunque da tratta e situazione.",
+      "source": {
+        "name": "EEA",
+        "url": "https://www.eea.europa.eu/publications/rail-and-waterborne-transport/rail-and-waterborne-best/",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Trains are the most efficient form of passenger transport in the EU"
+    },
+    {
+      "id": "transport_005",
+      "topic": "transport",
+      "difficulty": 3,
+      "question": "Nel 2023, nell'UE, quale tipo di trasporto ha prodotto la quota maggiore delle emissioni di gas serra dei trasporti?",
+      "options": [
+        "Ferroviario",
+        "Navigazione interna",
+        "Aviazione internazionale",
+        "Stradale"
+      ],
+      "correctIndex": 3,
+      "explanation": "Secondo l'Agenzia europea dell'ambiente, nel 2023 il trasporto su strada ha causato il 72,9% delle emissioni di gas serra dei trasporti nell'UE, mentre il treno è quello che ne produce meno.",
+      "source": {
+        "name": "EEA",
+        "url": "https://www.eea.europa.eu/en/analysis/publications/sustainability-of-europes-mobility-systems-2025/climate",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Road is the largest contributor of GHG emissions in transport, accounting for 72.9% in 2023"
+    },
+    {
+      "id": "consumption_001",
+      "topic": "consumption",
+      "difficulty": 1,
+      "question": "Quando sistemi la spesa in frigo, quale abitudine ti aiuta a non sprecare cibo?",
+      "options": [
+        "Mettere davanti i prodotti appena comprati",
+        "Spingere gli avanzi in fondo al frigo",
+        "Lasciare la spesa fuori dal frigo per un giorno",
+        "Spostare davanti i prodotti più vecchi"
+      ],
+      "correctIndex": 3,
+      "explanation": "Secondo la FAO, quando aggiungi prodotti nuovi conviene spostare davanti quelli più vecchi: così niente resta dimenticato in fondo al frigo e finisce sprecato.",
+      "source": {
+        "name": "FAO",
+        "url": "https://www.fao.org/americas/news/news-detail/cinco-consejos-celebraciones/en",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Move older products to the front as you add new items, ensuring nothing gets forgotten in the back…"
+    },
+    {
+      "id": "consumption_002",
+      "topic": "consumption",
+      "difficulty": 1,
+      "question": "Che cosa indica il marchio Ecolabel UE, quello a forma di fiore?",
+      "options": [
+        "Che il prodotto è fatto in Europa",
+        "Un ridotto impatto ambientale in tutto il ciclo di vita",
+        "Che il prodotto è il più economico",
+        "Che il prodotto è da agricoltura biologica"
+      ],
+      "correctIndex": 1,
+      "explanation": "L'Ecolabel UE è il marchio ufficiale volontario dell'Unione europea per l'eccellenza ambientale: premia beni e servizi con un impatto ambientale ridotto lungo tutto il loro ciclo di vita.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://green-forum.ec.europa.eu/green-business/eu-ecolabel_en",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "promotes goods and services with a guaranteed reduced environmental impact throughout their entire life cycle"
+    },
+    {
+      "id": "consumption_003",
+      "topic": "consumption",
+      "difficulty": 2,
+      "question": "Sulla confezione di un alimento, cosa indica la dicitura «da consumarsi preferibilmente entro»?",
+      "options": [
+        "La data oltre cui è sempre pericoloso",
+        "La data di produzione",
+        "La data in cui il negozio deve ritirarlo",
+        "Una data legata alla qualità, non alla sicurezza"
+      ],
+      "correctIndex": 3,
+      "explanation": "Secondo la Commissione europea, «da consumarsi entro» riguarda la sicurezza, mentre «preferibilmente entro» riguarda la qualità. Conoscere la differenza aiuta a evitare sprechi di cibo.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://food.ec.europa.eu/food-safety/food-waste/eu-actions-against-food-waste/date-marking-and-food-waste-prevention_en",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "the difference between \"use by\" as an indicator of safety and \"best before\" as an indicator of quality"
+    },
+    {
+      "id": "consumption_004",
+      "topic": "consumption",
+      "difficulty": 2,
+      "question": "Secondo l'UNEP, nel 2022 da dove veniva la quota maggiore del cibo sprecato nel mondo?",
+      "options": [
+        "Da negozi e supermercati",
+        "Da ristoranti e mense",
+        "Dalle famiglie, nelle case",
+        "Dai distributori automatici"
+      ],
+      "correctIndex": 2,
+      "explanation": "Secondo l'UNEP, nel 2022 sono state sprecate 1,05 miliardi di tonnellate di cibo, di cui 631 milioni nelle case. Pianificare la spesa e usare gli avanzi può fare la differenza.",
+      "source": {
+        "name": "ONU (UN News)",
+        "url": "https://news.un.org/en/node/1148036",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Most of the world's food waste comes from households, totalling 631 million tonnes."
+    },
+    {
+      "id": "consumption_005",
+      "topic": "consumption",
+      "difficulty": 3,
+      "question": "Nella gerarchia dei rifiuti del Codice dell'ambiente italiano, cosa viene subito dopo la prevenzione?",
+      "options": [
+        "Il riciclaggio",
+        "La preparazione per il riutilizzo",
+        "Il recupero di energia",
+        "Lo smaltimento"
+      ],
+      "correctIndex": 1,
+      "explanation": "L'ordine è: prevenzione, preparazione per il riutilizzo, riciclaggio, altro recupero (ad esempio di energia) e smaltimento. Rimettere in uso un oggetto viene prima di riciclarne i materiali.",
+      "source": {
+        "name": "Normattiva (D.Lgs. 152/2006, art. 179)",
+        "url": "https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legislativo:2006-04-03;152~art179",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "La gestione dei rifiuti avviene nel rispetto della seguente gerarchia: a) prevenzione; b) preparazione per il riutilizzo;"
+    },
+    {
+      "id": "innovation_001",
+      "topic": "innovation",
+      "difficulty": 1,
+      "question": "Che cosa fa una cella fotovoltaica, quella dei pannelli solari?",
+      "options": [
+        "Trasforma la luce del sole in elettricità",
+        "Scalda l'acqua bruciando gas",
+        "Accumula l'energia del vento",
+        "Produce elettricità dal calore del terreno"
+      ],
+      "correctIndex": 0,
+      "explanation": "Una cella fotovoltaica è un dispositivo senza parti meccaniche in movimento che converte direttamente la luce del sole in elettricità.",
+      "source": {
+        "name": "US EIA",
+        "url": "https://www.eia.gov/energyexplained/solar/photovoltaics-and-electricity.php",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "a nonmechanical device that converts sunlight directly into electricity"
+    },
+    {
+      "id": "innovation_002",
+      "topic": "innovation",
+      "difficulty": 1,
+      "question": "Quale di queste azioni fa parte dell'economia circolare?",
+      "options": [
+        "Usare un oggetto una volta e buttarlo",
+        "Riparare un oggetto per usarlo più a lungo",
+        "Comprare sempre prodotti nuovi",
+        "Mettere tutto in discarica"
+      ],
+      "correctIndex": 1,
+      "explanation": "L'economia circolare punta a condividere, riutilizzare, riparare, rigenerare e riciclare, così i materiali restano in uso il più a lungo possibile, invece di «prendere, produrre, usare e gettare».",
+      "source": {
+        "name": "Parlamento europeo",
+        "url": "https://www.europarl.europa.eu/topics/en/article/20151201STO05603/circular-economy-definition-importance-and-benefits",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "a model of production and consumption, which involves sharing, leasing, reusing, repairing, refurbishing and recycling"
+    },
+    {
+      "id": "innovation_003",
+      "topic": "innovation",
+      "difficulty": 2,
+      "question": "Che cos'è l'agrivoltaico?",
+      "options": [
+        "Coltivare in serre riscaldate a gas",
+        "Produrre biocarburanti dai rifiuti agricoli",
+        "Un trattore elettrico a batteria",
+        "Coltivare e produrre energia solare sullo stesso terreno"
+      ],
+      "correctIndex": 3,
+      "explanation": "L'agrivoltaico usa contemporaneamente lo stesso terreno agricolo per produrre cibo ed elettricità con il fotovoltaico, così si aggiunge energia solare senza sottrarre molta terra fertile.",
+      "source": {
+        "name": "Fraunhofer ISE",
+        "url": "https://www.ise.fraunhofer.de/en/key-topics/integrated-photovoltaics/agrivoltaics.html",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Agrivoltaics describes a process for the simultaneous use of agricultural land for food production and PV power generation."
+    },
+    {
+      "id": "innovation_004",
+      "topic": "innovation",
+      "difficulty": 2,
+      "question": "Come si può produrre idrogeno usando energia rinnovabile?",
+      "options": [
+        "Con l'elettrolisi alimentata da elettricità rinnovabile",
+        "Bruciando carbone in una centrale",
+        "Estraendolo dai giacimenti di petrolio",
+        "Raffreddando l'aria a bassissima temperatura"
+      ],
+      "correctIndex": 0,
+      "explanation": "Con l'elettrolisi l'elettricità rinnovabile si trasforma in idrogeno, utile per gli usi difficili da elettrificare. Secondo IRENA, a fine 2021 solo il 4% circa dell'idrogeno mondiale veniva dall'elettrolisi.",
+      "source": {
+        "name": "IRENA",
+        "url": "https://www.irena.org/Energy-Transition/Technology/Hydrogen",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "Renewable electricity can be converted to hydrogen via electrolysis"
+    },
+    {
+      "id": "innovation_005",
+      "topic": "innovation",
+      "difficulty": 3,
+      "question": "Che cos'è il «passaporto digitale dei prodotti» previsto dalle regole UE sull'ecodesign?",
+      "options": [
+        "Un documento per viaggiare con dispositivi elettronici",
+        "Un buono sconto per prodotti green",
+        "Una carta d'identità digitale con dati ambientali",
+        "Un'app per tracciare le spedizioni"
+      ],
+      "correctIndex": 2,
+      "explanation": "Il passaporto digitale dei prodotti, previsto dal regolamento UE sull'ecodesign, è come una carta d'identità digitale del prodotto, con dati su sostenibilità, riciclabilità e impatto ambientale.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://single-market-economy.ec.europa.eu/news/commission-seeks-views-future-digital-product-passport-2024-11-13_en",
+        "verifiedOn": "2026-10-22"
+      },
+      "sourceExcerpt": "act as a digital identity card … storing valuable data on a product's sustainability performance, recyclability, and environmental impact"
+    }
+  ]
+}

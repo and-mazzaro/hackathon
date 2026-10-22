@@ -105,7 +105,7 @@ class _HomeContent extends ConsumerWidget {
                 color: EcoColors.xp,
                 title: l10n.homeQuizTitle,
                 subtitle: l10n.homeQuizSubtitle,
-                onTap: () => context.go(AppRoutes.learn),
+                onTap: () => context.push(AppRoutes.quiz()),
               ),
               const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
               _ActivityShortcut(

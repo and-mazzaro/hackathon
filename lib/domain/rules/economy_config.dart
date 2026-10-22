@@ -9,7 +9,9 @@ class EconomyConfig {
     this.startingPetNeed = 80,
     this.xpForFirstLevelUp = 100,
     this.xpIncreasePerLevel = 50,
+    this.quizQuestionCount = 5,
     this.quizXpPerCorrectAnswer = 10,
+    this.quizRepeatXp = 2,
     this.quizStreakBonusXp = 5,
     this.coinsPerCorrectSort = 2,
     this.sortComboLength = 3,
@@ -31,10 +33,18 @@ class EconomyConfig {
   final int xpForFirstLevelUp;
   final int xpIncreasePerLevel;
 
-  // Topic Quiz (Mode 5) — used from the quiz milestone
+  // Topic Quiz (Mode 5)
+  final int quizQuestionCount;
+
+  /// XP for a question answered correctly for the first time.
   final int quizXpPerCorrectAnswer;
 
-  /// Extra XP for each correct answer after the first one in a row.
+  /// XP for a correct answer to a question already learned before.
+  /// Low on purpose: replaying the same quiz should not farm levels.
+  final int quizRepeatXp;
+
+  /// Extra XP for each correct answer after the first one in a row
+  /// (also for repeats: it rewards attention).
   final int quizStreakBonusXp;
 
   // Room Cleanup (Mode 1) — used from the recycling milestone

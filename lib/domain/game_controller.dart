@@ -1,19 +1,26 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/save/save_repository.dart';
+import 'dart:math';
+
 import 'models/eco_topic.dart';
 import 'models/game_state.dart';
+import 'models/learning_progress.dart';
 import 'models/player_profile.dart';
 import 'models/reward.dart';
 import 'rules/economy_config.dart';
 import 'rules/profile_rules.dart';
 import 'rules/progression.dart';
+import 'rules/quiz_rules.dart';
 
 /// The balancing numbers. Tests can override this with other values.
 final economyProvider = Provider<EconomyConfig>((ref) => EconomyConfig.defaults);
 
 /// The current time. Tests override this to control dates.
 final clockProvider = Provider<DateTime Function()>((ref) => DateTime.now);
+
+/// Randomness (question choice, option order). Tests use a fixed seed.
+final randomProvider = Provider<Random>((ref) => Random());
 
 /// The saved game. Widgets read it with `ref.watch(gameControllerProvider)`
 /// and change it ONLY through the methods of [GameController].
@@ -38,6 +45,14 @@ class ClaimResult {
   bool get leveledUp => levelAfter > levelBefore;
 }
 
+/// The result of [GameController.completeQuiz], for the results screen.
+class QuizOutcome {
+  const QuizOutcome({required this.score, required this.claim});
+
+  final QuizScore score;
+  final ClaimResult claim;
+}
+
 /// The single place where the game state changes.
 ///
 /// Every change: compute the new state → show it → save it.
@@ -47,7 +62,7 @@ class ClaimResult {
 ///
 /// | Planned method (milestone)         | Builds on / claim id                |
 /// |------------------------------------|-------------------------------------|
-/// | `completeQuiz` (quiz)              | claimReward, `quiz:sessionId`       |
+/// | `completeQuiz` (quiz) — DONE       | claimReward, `quiz:sessionId`       |
 /// | `sortWasteItem` (recycling)        | claimReward, `sort:roundId:itemNo`  |
 /// | `claimMission` (missions)          | claimReward, `mission:missionId:day`|
 /// | `spendCoins` / `buyItem` (shop)    | new spend method, same pattern      |
@@ -71,16 +86,44 @@ class GameController extends AsyncNotifier<GameState> {
   /// Pays [reward] once for [claimId]. Calling it again with the same id
   /// (double tap, back button, app restart) changes nothing.
   Future<ClaimResult> claimReward(String claimId, Reward reward) async {
+    final (next, result) = _applyReward(state.requireValue, claimId, reward);
+    if (result.applied) await _commit(next);
+    return result;
+  }
+
+  /// Saves a finished quiz: XP (paid once per session) and learning stats,
+  /// in ONE write so they can never disagree.
+  Future<QuizOutcome> completeQuiz({
+    required String sessionId,
+    required List<AnsweredQuestion> answers,
+  }) async {
     final current = state.requireValue;
+    // Score against what was learned BEFORE this quiz (first-time XP).
+    final score = scoreQuiz(answers, current.learning, _economy);
+    final (withXp, claim) = _applyReward(
+        current, 'quiz:$sessionId', Reward(xp: score.xp));
+
+    if (claim.applied) {
+      await _commit(withXp.copyWith(learning: current.learning.record(answers)));
+    }
+    return QuizOutcome(score: score, claim: claim);
+  }
+
+  /// Pure calculation shared by every reward: no saving here.
+  (GameState, ClaimResult) _applyReward(
+      GameState current, String claimId, Reward reward) {
     final progress = current.progress;
     final levelBefore = levelForTotalXp(progress.totalXp, _economy).level;
 
     if (progress.claimedRewardIds.contains(claimId)) {
-      return ClaimResult(
-        applied: false,
-        reward: Reward.none,
-        levelBefore: levelBefore,
-        levelAfter: levelBefore,
+      return (
+        current,
+        ClaimResult(
+          applied: false,
+          reward: Reward.none,
+          levelBefore: levelBefore,
+          levelAfter: levelBefore,
+        ),
       );
     }
 
@@ -90,13 +133,14 @@ class GameController extends AsyncNotifier<GameState> {
       tickets: progress.tickets + reward.tickets,
       claimedRewardIds: {...progress.claimedRewardIds, claimId},
     );
-    await _commit(current.copyWith(progress: updated));
-
-    return ClaimResult(
-      applied: true,
-      reward: reward,
-      levelBefore: levelBefore,
-      levelAfter: levelForTotalXp(updated.totalXp, _economy).level,
+    return (
+      current.copyWith(progress: updated),
+      ClaimResult(
+        applied: true,
+        reward: reward,
+        levelBefore: levelBefore,
+        levelAfter: levelForTotalXp(updated.totalXp, _economy).level,
+      ),
     );
   }
 

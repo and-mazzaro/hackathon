@@ -1,6 +1,7 @@
 import '../rules/economy_config.dart';
 import 'inventory.dart';
 import 'json_utils.dart';
+import 'learning_progress.dart';
 import 'pet_state.dart';
 import 'player_profile.dart';
 import 'player_progress.dart';
@@ -16,6 +17,7 @@ class GameState {
     required this.progress,
     required this.pet,
     required this.inventory,
+    this.learning = const LearningProgress(),
   });
 
   /// A brand-new player.
@@ -45,17 +47,22 @@ class GameState {
   final PetState pet;
   final Inventory inventory;
 
+  /// Quiz statistics. Added in M5: older saves simply start empty.
+  final LearningProgress learning;
+
   GameState copyWith({
     PlayerProfile? profile,
     PlayerProgress? progress,
     PetState? pet,
     Inventory? inventory,
+    LearningProgress? learning,
   }) {
     return GameState(
       profile: profile ?? this.profile,
       progress: progress ?? this.progress,
       pet: pet ?? this.pet,
       inventory: inventory ?? this.inventory,
+      learning: learning ?? this.learning,
     );
   }
 
@@ -64,6 +71,7 @@ class GameState {
         'progress': progress.toJson(),
         'pet': pet.toJson(),
         'inventory': inventory.toJson(),
+        'learning': learning.toJson(),
       };
 
   /// [now] is only used for dates missing from an old or partial save.
@@ -73,6 +81,7 @@ class GameState {
       progress: PlayerProgress.fromJson(readObject(json, 'progress')),
       pet: PetState.fromJson(readObject(json, 'pet'), now: now),
       inventory: Inventory.fromJson(readObject(json, 'inventory')),
+      learning: LearningProgress.fromJson(readObject(json, 'learning')),
     );
   }
 }

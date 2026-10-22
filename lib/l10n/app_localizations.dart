@@ -271,8 +271,254 @@ abstract class AppLocalizations {
   /// No description provided for @learnBody.
   ///
   /// In it, this message translates to:
-  /// **'Qui arriveranno quiz, mini-giochi e curiosità sull\'ambiente.'**
+  /// **'Rispondi ai quiz per guadagnare XP e far crescere il tuo cucciolo.'**
   String get learnBody;
+
+  /// No description provided for @learnForYouTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Quiz per te'**
+  String get learnForYouTitle;
+
+  /// No description provided for @learnForYouBody.
+  ///
+  /// In it, this message translates to:
+  /// **'5 domande sui tuoi argomenti preferiti, dalla più facile alla più difficile.'**
+  String get learnForYouBody;
+
+  /// No description provided for @learnForYouAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Gioca'**
+  String get learnForYouAction;
+
+  /// No description provided for @learnTopicsTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Quiz per argomento'**
+  String get learnTopicsTitle;
+
+  /// No description provided for @learnForYouBadge.
+  ///
+  /// In it, this message translates to:
+  /// **'Per te'**
+  String get learnForYouBadge;
+
+  /// No description provided for @learnQuestionCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =0{Domande in arrivo} =1{1 domanda} other{{count} domande}}'**
+  String learnQuestionCount(int count);
+
+  /// No description provided for @learnTopicStats.
+  ///
+  /// In it, this message translates to:
+  /// **'Risposte giuste: {correct} su {answered}'**
+  String learnTopicStats(int correct, int answered);
+
+  /// No description provided for @learnQuizzesCompleted.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =0{Non hai ancora completato nessun quiz} =1{1 quiz completato} other{{count} quiz completati}}'**
+  String learnQuizzesCompleted(int count);
+
+  /// No description provided for @learnContentError.
+  ///
+  /// In it, this message translates to:
+  /// **'Non riesco a caricare le domande. Riavvia l\'app; se il problema continua, avvisa il team.'**
+  String get learnContentError;
+
+  /// No description provided for @quizMixedTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Quiz misto'**
+  String get quizMixedTitle;
+
+  /// No description provided for @quizQuestionOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Domanda {current} di {total}'**
+  String quizQuestionOf(int current, int total);
+
+  /// No description provided for @quizExit.
+  ///
+  /// In it, this message translates to:
+  /// **'Esci dal quiz'**
+  String get quizExit;
+
+  /// No description provided for @quizExitTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Vuoi uscire dal quiz?'**
+  String get quizExitTitle;
+
+  /// No description provided for @quizExitBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Le risposte di questo quiz non verranno salvate e non riceverai XP.'**
+  String get quizExitBody;
+
+  /// No description provided for @quizExitConfirm.
+  ///
+  /// In it, this message translates to:
+  /// **'Esci'**
+  String get quizExitConfirm;
+
+  /// No description provided for @quizExitStay.
+  ///
+  /// In it, this message translates to:
+  /// **'Continua il quiz'**
+  String get quizExitStay;
+
+  /// No description provided for @difficultyEasy.
+  ///
+  /// In it, this message translates to:
+  /// **'Facile'**
+  String get difficultyEasy;
+
+  /// No description provided for @difficultyMedium.
+  ///
+  /// In it, this message translates to:
+  /// **'Media'**
+  String get difficultyMedium;
+
+  /// No description provided for @difficultyHard.
+  ///
+  /// In it, this message translates to:
+  /// **'Difficile'**
+  String get difficultyHard;
+
+  /// No description provided for @quizStreak.
+  ///
+  /// In it, this message translates to:
+  /// **'Serie di {count}'**
+  String quizStreak(int count);
+
+  /// No description provided for @quizCorrect.
+  ///
+  /// In it, this message translates to:
+  /// **'Corretto!'**
+  String get quizCorrect;
+
+  /// No description provided for @quizWrong.
+  ///
+  /// In it, this message translates to:
+  /// **'Non proprio.'**
+  String get quizWrong;
+
+  /// No description provided for @quizCorrectAnswerIs.
+  ///
+  /// In it, this message translates to:
+  /// **'La risposta giusta è: {answer}'**
+  String quizCorrectAnswerIs(String answer);
+
+  /// No description provided for @quizOptionCorrect.
+  ///
+  /// In it, this message translates to:
+  /// **'risposta giusta'**
+  String get quizOptionCorrect;
+
+  /// No description provided for @quizOptionWrong.
+  ///
+  /// In it, this message translates to:
+  /// **'risposta sbagliata'**
+  String get quizOptionWrong;
+
+  /// No description provided for @quizSource.
+  ///
+  /// In it, this message translates to:
+  /// **'Fonte: {name}'**
+  String quizSource(String name);
+
+  /// No description provided for @quizSourceVerified.
+  ///
+  /// In it, this message translates to:
+  /// **'Verificata dal team il {date}'**
+  String quizSourceVerified(String date);
+
+  /// No description provided for @quizSourceCopyHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Tieni premuto l\'indirizzo per copiarlo.'**
+  String get quizSourceCopyHint;
+
+  /// No description provided for @quizSeeResult.
+  ///
+  /// In it, this message translates to:
+  /// **'Vedi il risultato'**
+  String get quizSeeResult;
+
+  /// No description provided for @quizNotEnough.
+  ///
+  /// In it, this message translates to:
+  /// **'Non ci sono ancora domande per questo quiz.'**
+  String get quizNotEnough;
+
+  /// No description provided for @quizResultScore.
+  ///
+  /// In it, this message translates to:
+  /// **'{correct} su {total} risposte giuste'**
+  String quizResultScore(int correct, int total);
+
+  /// No description provided for @quizResultPerfect.
+  ///
+  /// In it, this message translates to:
+  /// **'Perfetto! Hai risposto bene a tutto.'**
+  String get quizResultPerfect;
+
+  /// No description provided for @quizResultGood.
+  ///
+  /// In it, this message translates to:
+  /// **'Ottimo lavoro!'**
+  String get quizResultGood;
+
+  /// No description provided for @quizResultKeepGoing.
+  ///
+  /// In it, this message translates to:
+  /// **'Ogni risposta ti insegna qualcosa: riprova!'**
+  String get quizResultKeepGoing;
+
+  /// No description provided for @quizResultXp.
+  ///
+  /// In it, this message translates to:
+  /// **'+{xp} XP'**
+  String quizResultXp(int xp);
+
+  /// No description provided for @quizResultBestStreak.
+  ///
+  /// In it, this message translates to:
+  /// **'Serie migliore: {count}'**
+  String quizResultBestStreak(int count);
+
+  /// No description provided for @quizResultNewlyLearned.
+  ///
+  /// In it, this message translates to:
+  /// **'Cose nuove imparate: {count}'**
+  String quizResultNewlyLearned(int count);
+
+  /// No description provided for @quizResultRepeatNote.
+  ///
+  /// In it, this message translates to:
+  /// **'Le domande che conoscevi già valgono meno XP: prova un altro argomento per guadagnarne di più!'**
+  String get quizResultRepeatNote;
+
+  /// No description provided for @quizLevelUp.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai raggiunto il livello {level}!'**
+  String quizLevelUp(int level);
+
+  /// No description provided for @quizPlayAgain.
+  ///
+  /// In it, this message translates to:
+  /// **'Gioca ancora'**
+  String get quizPlayAgain;
+
+  /// No description provided for @quizClose.
+  ///
+  /// In it, this message translates to:
+  /// **'Chiudi'**
+  String get quizClose;
 
   /// No description provided for @petTitle.
   ///

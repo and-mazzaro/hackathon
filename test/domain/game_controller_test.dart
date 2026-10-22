@@ -3,6 +3,7 @@ import 'package:ecoquest/data/save/save_repository.dart';
 import 'package:ecoquest/domain/game_controller.dart';
 import 'package:ecoquest/domain/models/eco_topic.dart';
 import 'package:ecoquest/domain/models/game_state.dart';
+import 'package:ecoquest/domain/models/learning_progress.dart';
 import 'package:ecoquest/domain/models/player_profile.dart';
 import 'package:ecoquest/domain/models/reward.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -172,6 +173,74 @@ void main() {
     expect(state.profile.onboardingCompleted, isTrue);
     expect(state.progress.coins, 9);
     expect(repository.saved!.profile.nickname, 'Luna');
+  });
+
+  group('completeQuiz', () {
+    List<AnsweredQuestion> answers(List<bool> results) => [
+          for (var i = 0; i < results.length; i++)
+            AnsweredQuestion(
+              questionId: 'oceans_00${i + 1}',
+              topic: EcoTopic.oceans,
+              correct: results[i],
+            ),
+        ];
+
+    test('adds XP and learning stats in one save', () async {
+      final app = await startApp();
+
+      final outcome = await controller(app).completeQuiz(
+        sessionId: 's1',
+        answers: answers([true, true, false, true, true]),
+      );
+
+      expect(outcome.score.xp, 50);
+      expect(outcome.claim.applied, isTrue);
+      expect(game(app).progress.totalXp, 50);
+      expect(game(app).learning.quizzesCompleted, 1);
+      expect(game(app).learning.statsByTopic[EcoTopic.oceans]!.correct, 4);
+      expect(repository.saveCount, 1);
+      expect(repository.saved!.learning.learnedQuestionIds, hasLength(4));
+    });
+
+    test('the same session is never paid or counted twice', () async {
+      final app = await startApp();
+      final quiz = answers([true, true, true, true, true]);
+
+      await controller(app).completeQuiz(sessionId: 's1', answers: quiz);
+      final again =
+          await controller(app).completeQuiz(sessionId: 's1', answers: quiz);
+
+      expect(again.claim.applied, isFalse);
+      expect(game(app).progress.totalXp, 70);
+      expect(game(app).learning.quizzesCompleted, 1);
+    });
+
+    test('replaying known questions pays much less', () async {
+      final app = await startApp();
+      final quiz = answers([true, true, true, true, true]);
+
+      final first =
+          await controller(app).completeQuiz(sessionId: 's1', answers: quiz);
+      final second =
+          await controller(app).completeQuiz(sessionId: 's2', answers: quiz);
+
+      expect(first.score.xp, 70);
+      expect(second.score.xp, 30); // 5 × 2 + 4 × 5
+      expect(second.score.newlyLearned, 0);
+    });
+
+    test('a quiz can cause a level-up', () async {
+      final app = await startApp();
+      await controller(app).claimReward('earlier', const Reward(xp: 60));
+
+      final outcome = await controller(app).completeQuiz(
+        sessionId: 's1',
+        answers: answers([true, true, true, true, true]),
+      );
+
+      expect(outcome.claim.leveledUp, isTrue);
+      expect(outcome.claim.levelAfter, 2);
+    });
   });
 
   test('a broken save shows an error; startFresh recovers', () async {

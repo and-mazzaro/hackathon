@@ -37,6 +37,10 @@ flutter:
   # Generates lib/l10n/app_localizations.dart from the .arb files.
   generate: true
 
+  # Educational content (questions, facts, ...) as JSON files.
+  assets:
+    - assets/content/
+
   fonts:
     # Nunito, SIL Open Font License 1.1 (see assets/fonts/OFL.txt).
     - family: Nunito

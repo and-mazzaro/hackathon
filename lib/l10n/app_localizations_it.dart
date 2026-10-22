@@ -131,7 +131,175 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get learnBody =>
-      'Qui arriveranno quiz, mini-giochi e curiosità sull\'ambiente.';
+      'Rispondi ai quiz per guadagnare XP e far crescere il tuo cucciolo.';
+
+  @override
+  String get learnForYouTitle => 'Quiz per te';
+
+  @override
+  String get learnForYouBody =>
+      '5 domande sui tuoi argomenti preferiti, dalla più facile alla più difficile.';
+
+  @override
+  String get learnForYouAction => 'Gioca';
+
+  @override
+  String get learnTopicsTitle => 'Quiz per argomento';
+
+  @override
+  String get learnForYouBadge => 'Per te';
+
+  @override
+  String learnQuestionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count domande',
+      one: '1 domanda',
+      zero: 'Domande in arrivo',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String learnTopicStats(int correct, int answered) {
+    return 'Risposte giuste: $correct su $answered';
+  }
+
+  @override
+  String learnQuizzesCompleted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count quiz completati',
+      one: '1 quiz completato',
+      zero: 'Non hai ancora completato nessun quiz',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get learnContentError =>
+      'Non riesco a caricare le domande. Riavvia l\'app; se il problema continua, avvisa il team.';
+
+  @override
+  String get quizMixedTitle => 'Quiz misto';
+
+  @override
+  String quizQuestionOf(int current, int total) {
+    return 'Domanda $current di $total';
+  }
+
+  @override
+  String get quizExit => 'Esci dal quiz';
+
+  @override
+  String get quizExitTitle => 'Vuoi uscire dal quiz?';
+
+  @override
+  String get quizExitBody =>
+      'Le risposte di questo quiz non verranno salvate e non riceverai XP.';
+
+  @override
+  String get quizExitConfirm => 'Esci';
+
+  @override
+  String get quizExitStay => 'Continua il quiz';
+
+  @override
+  String get difficultyEasy => 'Facile';
+
+  @override
+  String get difficultyMedium => 'Media';
+
+  @override
+  String get difficultyHard => 'Difficile';
+
+  @override
+  String quizStreak(int count) {
+    return 'Serie di $count';
+  }
+
+  @override
+  String get quizCorrect => 'Corretto!';
+
+  @override
+  String get quizWrong => 'Non proprio.';
+
+  @override
+  String quizCorrectAnswerIs(String answer) {
+    return 'La risposta giusta è: $answer';
+  }
+
+  @override
+  String get quizOptionCorrect => 'risposta giusta';
+
+  @override
+  String get quizOptionWrong => 'risposta sbagliata';
+
+  @override
+  String quizSource(String name) {
+    return 'Fonte: $name';
+  }
+
+  @override
+  String quizSourceVerified(String date) {
+    return 'Verificata dal team il $date';
+  }
+
+  @override
+  String get quizSourceCopyHint => 'Tieni premuto l\'indirizzo per copiarlo.';
+
+  @override
+  String get quizSeeResult => 'Vedi il risultato';
+
+  @override
+  String get quizNotEnough => 'Non ci sono ancora domande per questo quiz.';
+
+  @override
+  String quizResultScore(int correct, int total) {
+    return '$correct su $total risposte giuste';
+  }
+
+  @override
+  String get quizResultPerfect => 'Perfetto! Hai risposto bene a tutto.';
+
+  @override
+  String get quizResultGood => 'Ottimo lavoro!';
+
+  @override
+  String get quizResultKeepGoing =>
+      'Ogni risposta ti insegna qualcosa: riprova!';
+
+  @override
+  String quizResultXp(int xp) {
+    return '+$xp XP';
+  }
+
+  @override
+  String quizResultBestStreak(int count) {
+    return 'Serie migliore: $count';
+  }
+
+  @override
+  String quizResultNewlyLearned(int count) {
+    return 'Cose nuove imparate: $count';
+  }
+
+  @override
+  String get quizResultRepeatNote =>
+      'Le domande che conoscevi già valgono meno XP: prova un altro argomento per guadagnarne di più!';
+
+  @override
+  String quizLevelUp(int level) {
+    return 'Hai raggiunto il livello $level!';
+  }
+
+  @override
+  String get quizPlayAgain => 'Gioca ancora';
+
+  @override
+  String get quizClose => 'Chiudi';
 
   @override
   String get petTitle => 'La stanza del tuo cucciolo';

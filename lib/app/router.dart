@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../domain/game_controller.dart';
+import '../domain/models/eco_topic.dart';
 import '../features/home/home_screen.dart';
 import '../features/learn/learn_screen.dart';
+import '../features/learn/quiz_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/pet/pet_screen.dart';
 import '../features/profile/profile_screen.dart';
@@ -17,6 +19,12 @@ abstract final class AppRoutes {
   static const learn = '/learn';
   static const pet = '/pet';
   static const profile = '/profile';
+  static const quizPath = '/quiz';
+
+  /// `/quiz` for the personal mixed quiz, `/quiz?topic=oceans` for a topic.
+  /// Open it with `context.push(...)` so Back returns to where you were.
+  static String quiz([EcoTopic? topic]) =>
+      topic == null ? quizPath : '$quizPath?topic=${topic.id}';
 }
 
 /// The router lives in a provider: every ProviderScope (the app, or each
@@ -48,6 +56,16 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.onboarding,
         builder: (context, state) => const OnboardingScreen(),
+      ),
+      // Full screen above the tabs: the quiz needs the player's attention.
+      GoRoute(
+        path: AppRoutes.quizPath,
+        builder: (context, state) {
+          final topicId = state.uri.queryParameters['topic'];
+          return QuizScreen(
+            topic: topicId == null ? null : EcoTopic.fromId(topicId),
+          );
+        },
       ),
       // One branch per bottom tab. "indexedStack" keeps each tab alive,
       // so switching tabs does not lose scroll position or state.

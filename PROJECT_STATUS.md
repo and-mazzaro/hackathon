@@ -1,9 +1,9 @@
 # EcoQuest — Project Status
 
-**Current milestone:** M3 — Onboarding + local profile → **done on Android** (iOS untested, no Mac)
-**Done before:** M1 app shell (`39e8b3d`) · M2 game state + saving (`d7c3454`)
-**Next milestone:** M5 — first complete Topic Quiz (questions with sources, scoring, explanations, XP via `claimReward`).
-Pet room (M6) and recycling (M7) can run in parallel.
+**Current milestone:** M5 — Topic Quiz → **done on Android** (iOS untested, no Mac)
+**Done before:** M1 app shell (`39e8b3d`) · M2 game state + saving (`d7c3454`) · M3 onboarding + profile (`6695199`)
+**Next milestone:** M6 — Virtual pet room (pet state, care interactions, visual feedback).
+Recycling (M7) can run in parallel. Read-aloud (flutter_tts) is a small follow-up for the quiz.
 
 ## Environment (lead PC)
 | Item | Status |
@@ -52,7 +52,12 @@ Pet room (M6) and recycling (M7) can run in parallel.
 | D23 | Half-finished onboarding answers are temporary screen state; nothing is saved until "Fine"/"Salta" | New (M3) |
 | D24 | Profile interest changes save immediately (no "save" button); at least one interest is kept by the UI | New (M3) |
 | D25 | Nickname cleaned in one place (`normalizeNickname`, max 20 visible characters), applied inside `GameController` | New (M3) |
-| D26 | Topic/age labels and icons live in the UI layer (`profile_labels.dart`); the domain only knows stable ids | New (M3) |
+| D26 | Topic/age labels and icons live in the UI layer (`profile_labels.dart`); the domain only knows stable ids | Accepted |
+| D27 | Quiz content = data: `assets/content/quiz_questions_it.json`, every question with source name, URL, `verifiedOn` and a short `sourceExcerpt` for reviewers; checked by `test/content/quiz_content_test.dart` | New (M5) |
+| D28 | Quiz = 5 questions, easy → hard; topic quiz = only that topic; personal quiz prefers interests, avoids the last 20 questions shown | New (M5) |
+| D29 | Quiz XP: 10 per first-time correct answer, 2 for a question already learned, +5 for each correct answer in a row after the first; quizzes give XP only (coins come from recycling/games) | New (M5) |
+| D30 | `QuizSession` (plain Dart) runs a quiz; `completeQuiz` saves XP + learning stats in one write, once per session id | New (M5) |
+| D31 | Randomness through `randomProvider`, so tests use a fixed seed | New (M5) |
 
 ## Implemented (M1)
 - App entry point, `ProviderScope`, router in a provider (fresh router per test)
@@ -85,6 +90,28 @@ Pet room (M6) and recycling (M7) can run in parallel.
 - `GameController.updateProfileDetails`; nickname cleaning in `profile_rules.dart`
 - Screen readers: tiles read as checked/not checked, step changes announced ("Passo 2 di 3"), field hints and counters
 
+## Implemented (M5)
+- Learn hub: "Quiz per te" (mixed, from interests) + one quiz per topic, interests first with a "Per te" badge,
+  question counts, per-topic stats, quizzes completed; reorders immediately when interests change
+- Quiz screen (full screen, route `/quiz?topic=...`): 5 questions easy → hard, shuffled options, difficulty and
+  streak chips, right/wrong with icons + text (not colour only), explanation, source sheet (name, URL, date),
+  exit confirmation (X, Android back) that saves nothing; Home "Quiz del giorno" opens the personal quiz
+- Result screen: score, XP, level-up banner, best streak, newly learned, note about reduced XP for repeats,
+  "Gioca ancora" / "Chiudi"
+- `QuizSession`, `pickQuizQuestions`, `scoreQuiz`, `LearningProgress` (stats per topic, learned ids, last 20 seen)
+- **Content: 50 questions in Italian, 5 per topic (difficulty 1,1,2,2,3)**, researched by two AI research agents
+  that opened every source page (ISPRA, CoReVe, CIAL, Commissione europea, ONU, NASA, NOAA, EPA, FAO, IUCN, CBD,
+  EEA, OMS, IEA, IRENA, USGS, Water Footprint Network, Fraunhofer ISE, Normattiva, ...). Reviewed by the lead
+  agent: one duplicate replaced; three extra explanation claims re-checked on the pages (all supported).
+
+### Content still needing a human check (before the demo)
+- Excerpts were read through a summarising web tool: open a few source pages and compare the wording.
+- Dated figures that will age: biodiversity_005 (ISPRA bear estimate, summer 2025), transport_005 (EEA, 2023),
+  consumption_004 (UNEP 2022 food waste), innovation_004 (IRENA, end 2021), energy_005 (IEA, −1 °C ≈ 7%).
+- Industry/secondary sources: recycling_003 (CIAL's own 95% figure), transport_003 (Chalmers news article),
+  energy_004 (IEA heat-pump programme site), consumption_004 (UN News, UNEP page blocked).
+- climate_004: EPA gives "more than 28 times" without a time horizon (it is the usual 100-year value).
+
 ## Tests
 | Check | Result |
 |-------|--------|
@@ -93,6 +120,8 @@ Pet room (M6) and recycling (M7) can run in parallel.
 | M2 on the emulator: earned 2 debug rewards → force-stop → relaunch → still 60/100 XP, 30 coins; save + backup files present in the app folder | ✅ Checked (2026-10-22) |
 | `flutter test` after M3 — 75 tests (+ onboarding flow, profile editing, nickname rules, guidelines and 200% text on every onboarding step) | ✅ All pass (2026-10-22) |
 | M3 on the emulator: wiped data → onboarding (2 topics, nickname, age) → Home; restart skips onboarding; profile interest change saved at once and kept after restart; save file checked | ✅ Checked (2026-10-22) |
+| `flutter test` after M5 — 116 tests (+ quiz selection/scoring/session, learning stats, old saves without quiz data, completeQuiz pay-once and reduced repeat XP, full quiz UI flow, exit dialog, guidelines and 200% text on quiz + result, **content validation of the real 50-question file**) | ✅ All pass (2026-10-22) |
+| M5 on the emulator: Learn hub with real content and "Per te" order; a personal quiz played (questions easy → hard, wrong-answer feedback with correct answer + explanation); save shows 1 quiz, claim id, XP 0 → 40 | ⚠️ Partly — the emulator was being used at the same time, so the scripted run was interrupted; a clean manual play-through is still worth doing |
 | `flutter build apk --debug` | ✅ Builds |
 | Android emulator (Pixel 7, Android 36): app starts, Home renders, tab switch, system Back from a tab returns to Home | ✅ Checked manually with screenshots (2026-10-22) |
 | Android accessibility tree (uiautomator dump): every stat, balance, image, card and tab has an Italian label | ✅ Checked (2026-10-22) |
@@ -108,13 +137,18 @@ Pet room (M6) and recycling (M7) can run in parallel.
 - Web preview keeps progress in memory only.
 - Polish idea: on onboarding step 3 the open keyboard pushes "Fine/Salta" up so they cover the last age chips
   (still scrollable; the keyboard ✓ closes it). Consider moving the buttons into the scroll area on that step.
-- Interests are stored but not used yet: recommendations come with the quiz/recommendation milestones.
+- Interests now drive the quiz ("Per te" order and the personal quiz). Facts, missions and other activities
+  will use them later (recommendation milestone).
+- Not done yet for the quiz: read-aloud button (flutter_tts), difficulty adapting to past answers (stats are
+  already saved), English content file.
+- The research content files and merge script used for M5 lived in a temporary folder; the merged result is
+  `assets/content/quiz_questions_it.json`, which is now the file to edit.
 
 ## Open questions
 1. Hackathon deadline / available hours (unknown → keep MVP small)
 2. Choice of Modes 2–4 (options in the Phase 0 plan)
 
 ## Remaining work
-- Commit M3
+- Commit M5 (after a quick human look at the content checklist above)
 - Parallel work, each building on `GameController` + `EconomyConfig`:
-  M5 quiz · M6 pet room · M7 recycling (then M8 cosmetics, M9 recommendations)
+  M6 pet room · M7 recycling (then M8 cosmetics, M9 recommendations) · quiz read-aloud

@@ -53,7 +53,98 @@
   "debugRewardAction": "Ricompensa di prova (solo debug)",
 
   "learnTitle": "Impara giocando",
-  "learnBody": "Qui arriveranno quiz, mini-giochi e curiosità sull'ambiente.",
+  "learnBody": "Rispondi ai quiz per guadagnare XP e far crescere il tuo cucciolo.",
+  "learnForYouTitle": "Quiz per te",
+  "learnForYouBody": "5 domande sui tuoi argomenti preferiti, dalla più facile alla più difficile.",
+  "learnForYouAction": "Gioca",
+  "learnTopicsTitle": "Quiz per argomento",
+  "learnForYouBadge": "Per te",
+  "learnQuestionCount": "{count, plural, =0{Domande in arrivo} =1{1 domanda} other{{count} domande}}",
+  "@learnQuestionCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "learnTopicStats": "Risposte giuste: {correct} su {answered}",
+  "@learnTopicStats": {
+    "placeholders": {
+      "correct": { "type": "int" },
+      "answered": { "type": "int" }
+    }
+  },
+  "learnQuizzesCompleted": "{count, plural, =0{Non hai ancora completato nessun quiz} =1{1 quiz completato} other{{count} quiz completati}}",
+  "@learnQuizzesCompleted": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "learnContentError": "Non riesco a caricare le domande. Riavvia l'app; se il problema continua, avvisa il team.",
+
+  "quizMixedTitle": "Quiz misto",
+  "quizQuestionOf": "Domanda {current} di {total}",
+  "@quizQuestionOf": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "quizExit": "Esci dal quiz",
+  "quizExitTitle": "Vuoi uscire dal quiz?",
+  "quizExitBody": "Le risposte di questo quiz non verranno salvate e non riceverai XP.",
+  "quizExitConfirm": "Esci",
+  "quizExitStay": "Continua il quiz",
+  "difficultyEasy": "Facile",
+  "difficultyMedium": "Media",
+  "difficultyHard": "Difficile",
+  "quizStreak": "Serie di {count}",
+  "@quizStreak": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "quizCorrect": "Corretto!",
+  "quizWrong": "Non proprio.",
+  "quizCorrectAnswerIs": "La risposta giusta è: {answer}",
+  "@quizCorrectAnswerIs": {
+    "placeholders": { "answer": { "type": "String" } }
+  },
+  "quizOptionCorrect": "risposta giusta",
+  "quizOptionWrong": "risposta sbagliata",
+  "quizSource": "Fonte: {name}",
+  "@quizSource": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "quizSourceVerified": "Verificata dal team il {date}",
+  "@quizSourceVerified": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "quizSourceCopyHint": "Tieni premuto l'indirizzo per copiarlo.",
+  "quizSeeResult": "Vedi il risultato",
+  "quizNotEnough": "Non ci sono ancora domande per questo quiz.",
+
+  "quizResultScore": "{correct} su {total} risposte giuste",
+  "@quizResultScore": {
+    "placeholders": {
+      "correct": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "quizResultPerfect": "Perfetto! Hai risposto bene a tutto.",
+  "quizResultGood": "Ottimo lavoro!",
+  "quizResultKeepGoing": "Ogni risposta ti insegna qualcosa: riprova!",
+  "quizResultXp": "+{xp} XP",
+  "@quizResultXp": {
+    "placeholders": { "xp": { "type": "int" } }
+  },
+  "quizResultBestStreak": "Serie migliore: {count}",
+  "@quizResultBestStreak": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "quizResultNewlyLearned": "Cose nuove imparate: {count}",
+  "@quizResultNewlyLearned": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "quizResultRepeatNote": "Le domande che conoscevi già valgono meno XP: prova un altro argomento per guadagnarne di più!",
+  "quizLevelUp": "Hai raggiunto il livello {level}!",
+  "@quizLevelUp": {
+    "placeholders": { "level": { "type": "int" } }
+  },
+  "quizPlayAgain": "Gioca ancora",
+  "quizClose": "Chiudi",
   "petTitle": "La stanza del tuo cucciolo",
   "petBody": "Qui potrai prenderti cura del tuo compagno e riciclare i rifiuti della sua stanza.",
   "onboardingStep": "Passo {step} di {total}",
