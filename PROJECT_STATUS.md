@@ -1,7 +1,8 @@
 # EcoQuest — Project Status
 
-**Current milestone:** M1 — Toolchain + runnable app shell → **done on Android** (iOS untested, no Mac)
-**Next milestone:** M2 — Shared foundations (GameState model, economy config, SaveRepository, GameController contract)
+**Current milestone:** M2 — Shared foundations → **done on Android** (iOS untested, no Mac)
+**Done before:** M1 — Toolchain + runnable app shell (commit `39e8b3d`)
+**Next milestone:** M3 — Onboarding + profile (guest profile, interest selection, edit interests later) — can now run in parallel with Quiz, Pet and Recycling work
 
 ## Environment (lead PC)
 | Item | Status |
@@ -39,22 +40,41 @@
 | D12 | Use `GlobalMaterialLocalizations.delegates` from `material_ui` + `AppLocalizations.delegate` (the generated `AppLocalizations.localizationsDelegates` still points at the old framework library) | Accepted |
 | D13 | `web/` folder is a **developer preview only**, not a supported platform; it may stop working when we add file-based saving | Accepted |
 | D14 | Font: Nunito (SIL OFL 1.1, bundled in `assets/fonts`, works offline) | Accepted |
-| D15 | Each balance/stat/image that the screen reader should focus on its own uses `Semantics(container: true, ...)`; otherwise its label merges into a neighbour | New |
+| D15 | Each balance/stat/image that the screen reader should focus on its own uses `Semantics(container: true, ...)`; otherwise its label merges into a neighbour | Accepted |
+| D16 | Only **total XP** is saved; the level is always computed (`levelForTotalXp`), so level and XP can never disagree | New (M2) |
+| D17 | All game changes go through `GameController`; rewards only via `claimReward(claimId, reward)`, claim ids `feature:uniqueId`, each paid once (also across restarts) | New (M2) |
+| D18 | Save file = `{version, savedAt, state}` JSON in the app support folder; write temp → copy backup → atomic rename; unreadable file → backup; both broken → error screen with "Riprova"/"Ricomincia da capo"; newer version → refused, never overwritten | New (M2) |
+| D19 | Saved ids are stable strings (`EcoTopic.id`, `PetStage.id`, item ids), never enum indexes; new fields need a default in `fromJson` | New (M2) |
+| D20 | Riverpod automatic retry is switched off (`ProviderScope(retry: ...)`): re-reading a broken save does not help | New (M2) |
+| D21 | `EconomyConfig` holds every balancing number (first guesses, to tune in play-tests) | New (M2) |
 
 ## Implemented (M1)
 - App entry point, `ProviderScope`, router in a provider (fresh router per test)
 - Theme tokens: `eco_colors.dart` (all text pairs ≥ 4.5:1 WCAG AA), `eco_spacing.dart`, `app_theme.dart`
 - Bottom-tab shell; Android back on a non-Home tab returns to Home
 - Reusable widgets in `lib/core/widgets/`: `EcoCard`, `EcoButton`, `StatBar`, `CurrencyChip`, `ComingSoonView`
-- Home screen layout preview: level/XP, coins/tickets, drawn room + egg, 3 need bars, 2 activity shortcuts
-  - **PLACEHOLDER DATA**: all numbers on Home are fixed preview constants until M2
+- Home screen: level/XP, coins/tickets, drawn room + egg, 3 need bars, 2 activity shortcuts
 - Learn / Pet / Profile: "In arrivo" placeholders
+
+## Implemented (M2)
+- Models in `lib/domain/models/`: `GameState` = `PlayerProfile` (nickname, age range, interests, onboarding flag),
+  `PlayerProgress` (total XP, coins, tickets, claimed reward ids), `PetState` (stage, 3 needs 0–100), `Inventory`; `Reward`
+- Rules in `lib/domain/rules/`: `EconomyConfig`, `levelForTotalXp` (100 XP for level 2, +50 per level)
+- Saving in `lib/data/save/`: `SaveRepository` interface, `SaveFormat` (version 1 + migration hook),
+  `JsonFileSaveRepository` (Android/iOS), `InMemorySaveRepository` (tests, web preview)
+- `GameController` (`lib/domain/game_controller.dart`): `claimReward`, `completeOnboarding`, `updateInterests`,
+  `startFresh`, `levelInfo`; planned feature methods listed in its doc comment
+- Home shows the saved game, with loading and error states (`SaveErrorView`)
+- New player: level 1, 0 coins, 1 welcome ticket, pet needs 80
+- **DEBUG ONLY** button on Home "Ricompensa di prova" (+30 XP, +15 coins), hidden in release builds by `kDebugMode`.
+  Remove it once real activities exist.
 
 ## Tests
 | Check | Result |
 |-------|--------|
-| `flutter analyze` | ✅ No issues (2026-10-22) |
-| `flutter test` — 15 tests: navigation, back button, semantics, tap-target/label/contrast guidelines, 200% text on 320×568 | ✅ All pass (2026-10-22) |
+| `flutter analyze` | ✅ No issues (2026-10-22, after M2) |
+| `flutter test` — 51 tests: M1 UI/accessibility tests + level curve, JSON round-trip and defaults, file save (backup, corruption, newer version, overlapping saves, leftover temp file), controller (pay once, double tap, simultaneous claims, level-up, restart, interests keep progress, error → start fresh), Home with saved data and error screens | ✅ All pass (2026-10-22) |
+| M2 on the emulator: earned 2 debug rewards → force-stop → relaunch → still 60/100 XP, 30 coins; save + backup files present in the app folder | ✅ Checked (2026-10-22) |
 | `flutter build apk --debug` | ✅ Builds |
 | Android emulator (Pixel 7, Android 36): app starts, Home renders, tab switch, system Back from a tab returns to Home | ✅ Checked manually with screenshots (2026-10-22) |
 | Android accessibility tree (uiautomator dump): every stat, balance, image, card and tab has an Italian label | ✅ Checked (2026-10-22) |
@@ -62,14 +82,18 @@
 | Physical Android phone | ⏳ Not tested |
 | iOS | ⛔ Not possible (no Mac) |
 
-## Known issues
-_None open._ (Smart App Control and the sdkmanager `;` problem are solved on the lead PC; see setup tips.)
+## Known issues / notes
+- No open bugs. (Smart App Control and the sdkmanager `;` problem are solved on the lead PC; see setup tips.)
+- `claimedRewardIds` grows with every claim. Fine for the hackathon; prune old ids if it ever gets large.
+- Android Auto Backup (on by default) can copy the save to the user's own Google account backup. Decide before
+  release whether to keep it (restores progress on a new phone) or turn it off in `AndroidManifest.xml`.
+- Web preview keeps progress in memory only.
 
 ## Open questions
 1. Hackathon deadline / available hours (unknown → keep MVP small)
 2. Choice of Modes 2–4 (options in the Phase 0 plan)
 
 ## Remaining work
-- First Git commit of M1 (repository initialised, nothing committed yet)
-- M2 shared contracts (GameState, economy config, SaveRepository + JSON implementation with tests,
-  GameController signatures) → unlocks parallel work for the six team members
+- Commit M2
+- Parallel work can start now, each building on `GameController` + `EconomyConfig`:
+  M3 onboarding/profile · M5 quiz · M6 pet room · M7 recycling (then M8 cosmetics, M9 recommendations)

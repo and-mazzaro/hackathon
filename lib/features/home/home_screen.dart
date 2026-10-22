@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -8,29 +10,48 @@ import '../../app/theme/eco_colors.dart';
 import '../../app/theme/eco_spacing.dart';
 import '../../core/widgets/currency_chip.dart';
 import '../../core/widgets/eco_card.dart';
+import '../../core/widgets/save_error_view.dart';
 import '../../core/widgets/stat_bar.dart';
+import '../../domain/game_controller.dart';
+import '../../domain/models/game_state.dart';
+import '../../domain/models/pet_state.dart';
+import '../../domain/models/reward.dart';
+import '../../domain/rules/progression.dart';
 import '../../l10n/app_localizations.dart';
 
 /// Home: the pet room on top (about 60%), today's activities below.
-///
-/// PLACEHOLDER DATA: the numbers below are fixed preview values.
-/// Milestone M2 replaces them with the saved GameState.
-class HomeScreen extends StatelessWidget {
+/// Shows the saved game; while it loads, a spinner; if it fails, an error.
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
-  static const _previewLevel = 1;
-  static const _previewXp = 40;
-  static const _previewXpTarget = 100;
-  static const _previewCoins = 120;
-  static const _previewTickets = 1;
-  static const _previewSatiety = 0.8;
-  static const _previewHappiness = 0.65;
-  static const _previewCleanliness = 0.4;
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return ref.watch(gameControllerProvider).when(
+          data: (game) => _HomeContent(game: game),
+          error: (error, stackTrace) => SaveErrorView(error: error),
+          loading: () => Center(
+            child: CircularProgressIndicator(
+              semanticsLabel: AppLocalizations.of(context).loadingProgress,
+            ),
+          ),
+        );
+  }
+}
+
+class _HomeContent extends ConsumerWidget {
+  const _HomeContent({required this.game});
+
+  final GameState game;
+
+  double _need(int value) => value / PetState.maxNeed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
+    final level =
+        levelForTotalXp(game.progress.totalXp, ref.watch(economyProvider));
+    final pet = game.pet;
 
     return SafeArea(
       child: LayoutBuilder(
@@ -43,12 +64,12 @@ class HomeScreen extends StatelessWidget {
           return ListView(
             padding: const EdgeInsets.all(EcoSpacing.m),
             children: [
-              const _TopBar(
-                level: _previewLevel,
-                xp: _previewXp,
-                xpTarget: _previewXpTarget,
-                coins: _previewCoins,
-                tickets: _previewTickets,
+              _TopBar(
+                level: level.level,
+                xp: level.xpIntoLevel,
+                xpTarget: level.xpForNextLevel,
+                coins: game.progress.coins,
+                tickets: game.progress.tickets,
               ),
               const SizedBox(height: EcoSpacing.m),
               SizedBox(height: roomHeight, child: const _PetRoomPreview()),
@@ -58,21 +79,21 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     StatBar(
                       label: l10n.statSatiety,
-                      value: _previewSatiety,
+                      value: _need(pet.satiety),
                       color: EcoColors.satiety,
                       icon: Icons.restaurant_rounded,
                     ),
                     const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
                     StatBar(
                       label: l10n.statHappiness,
-                      value: _previewHappiness,
+                      value: _need(pet.happiness),
                       color: EcoColors.happiness,
                       icon: Icons.favorite_rounded,
                     ),
                     const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
                     StatBar(
                       label: l10n.statCleanliness,
-                      value: _previewCleanliness,
+                      value: _need(pet.cleanliness),
                       color: EcoColors.cleanliness,
                       icon: Icons.water_drop_rounded,
                     ),
@@ -101,6 +122,23 @@ class HomeScreen extends StatelessWidget {
                 subtitle: l10n.homeCleanupSubtitle,
                 onTap: () => context.go(AppRoutes.pet),
               ),
+              // DEBUG ONLY (removed from release builds): earns a test
+              // reward so we can check that saving works on a device.
+              if (kDebugMode) ...[
+                const SizedBox(height: EcoSpacing.m),
+                Center(
+                  child: TextButton.icon(
+                    icon: const Icon(Icons.bug_report_rounded),
+                    label: Text(l10n.debugRewardAction),
+                    onPressed: () => ref
+                        .read(gameControllerProvider.notifier)
+                        .claimReward(
+                          'debug:${DateTime.now().microsecondsSinceEpoch}',
+                          const Reward(xp: 30, coins: 15),
+                        ),
+                  ),
+                ),
+              ],
             ],
           );
         },

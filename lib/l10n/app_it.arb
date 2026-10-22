@@ -43,6 +43,15 @@
   "homeCleanupTitle": "Pulisci la stanza",
   "homeCleanupSubtitle": "Ricicla i rifiuti e guadagna monete",
 
+  "loadingProgress": "Carico i tuoi progressi…",
+  "saveErrorTitle": "Non riesco a leggere i tuoi progressi",
+  "saveCorruptedBody": "Il salvataggio sembra danneggiato. Puoi riprovare oppure ricominciare da capo.",
+  "saveNewerAppBody": "Questi progressi sono stati salvati da una versione più recente di EcoQuest. Aggiorna l'app per continuare.",
+  "saveUnknownErrorBody": "Si è verificato un problema imprevisto. Riprova tra poco.",
+  "retryAction": "Riprova",
+  "startFreshAction": "Ricomincia da capo",
+  "debugRewardAction": "Ricompensa di prova (solo debug)",
+
   "learnTitle": "Impara giocando",
   "learnBody": "Qui arriveranno quiz, mini-giochi e curiosità sull'ambiente.",
   "petTitle": "La stanza del tuo cucciolo",

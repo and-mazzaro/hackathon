@@ -39,7 +39,8 @@ void main() {
     final semantics = tester.ensureSemantics();
     await pumpEcoQuestApp(tester);
 
-    expect(find.bySemanticsLabel('120 monete'), findsOneWidget);
+    // A new player: 0 coins and 1 welcome ticket.
+    expect(find.bySemanticsLabel('0 monete'), findsOneWidget);
     expect(find.bySemanticsLabel('1 biglietto premio'), findsOneWidget);
     expect(find.bySemanticsLabel('Sazietà'), findsOneWidget);
     expect(find.bySemanticsLabel('Il tuo cucciolo, ancora nell\'uovo'),

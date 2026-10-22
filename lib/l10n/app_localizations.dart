@@ -214,6 +214,54 @@ abstract class AppLocalizations {
   /// **'Ricicla i rifiuti e guadagna monete'**
   String get homeCleanupSubtitle;
 
+  /// No description provided for @loadingProgress.
+  ///
+  /// In it, this message translates to:
+  /// **'Carico i tuoi progressi…'**
+  String get loadingProgress;
+
+  /// No description provided for @saveErrorTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Non riesco a leggere i tuoi progressi'**
+  String get saveErrorTitle;
+
+  /// No description provided for @saveCorruptedBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Il salvataggio sembra danneggiato. Puoi riprovare oppure ricominciare da capo.'**
+  String get saveCorruptedBody;
+
+  /// No description provided for @saveNewerAppBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Questi progressi sono stati salvati da una versione più recente di EcoQuest. Aggiorna l\'app per continuare.'**
+  String get saveNewerAppBody;
+
+  /// No description provided for @saveUnknownErrorBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Si è verificato un problema imprevisto. Riprova tra poco.'**
+  String get saveUnknownErrorBody;
+
+  /// No description provided for @retryAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Riprova'**
+  String get retryAction;
+
+  /// No description provided for @startFreshAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricomincia da capo'**
+  String get startFreshAction;
+
+  /// No description provided for @debugRewardAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricompensa di prova (solo debug)'**
+  String get debugRewardAction;
+
   /// No description provided for @learnTitle.
   ///
   /// In it, this message translates to:

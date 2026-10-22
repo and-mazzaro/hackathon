@@ -1,5 +1,8 @@
 import 'package:ecoquest/app/app.dart';
 import 'package:ecoquest/app/theme/app_theme.dart';
+import 'package:ecoquest/data/save/in_memory_save_repository.dart';
+import 'package:ecoquest/data/save/save_repository.dart';
+import 'package:ecoquest/domain/game_controller.dart';
 import 'package:ecoquest/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,9 +11,26 @@ import 'package:material_ui/material_ui.dart';
 
 const tabLabels = ['Home', 'Impara', 'Cucciolo', 'Profilo'];
 
+/// A fixed "now" so tests never depend on the real date.
+final testNow = DateTime(2026, 10, 22, 10);
+
 /// Starts the whole app with a fresh ProviderScope (and so a fresh router).
-Future<void> pumpEcoQuestApp(WidgetTester tester) async {
-  await tester.pumpWidget(const ProviderScope(child: EcoQuestApp()));
+///
+/// The save lives in memory (no files), so every test starts clean unless
+/// it passes its own [repository].
+Future<void> pumpEcoQuestApp(
+  WidgetTester tester, {
+  SaveRepository? repository,
+}) async {
+  await tester.pumpWidget(ProviderScope(
+    retry: (retryCount, error) => null,
+    overrides: [
+      saveRepositoryProvider
+          .overrideWithValue(repository ?? InMemorySaveRepository()),
+      clockProvider.overrideWithValue(() => testNow),
+    ],
+    child: const EcoQuestApp(),
+  ));
   await tester.pumpAndSettle();
 }
 

@@ -100,6 +100,33 @@ class AppLocalizationsIt extends AppLocalizations {
   String get homeCleanupSubtitle => 'Ricicla i rifiuti e guadagna monete';
 
   @override
+  String get loadingProgress => 'Carico i tuoi progressi…';
+
+  @override
+  String get saveErrorTitle => 'Non riesco a leggere i tuoi progressi';
+
+  @override
+  String get saveCorruptedBody =>
+      'Il salvataggio sembra danneggiato. Puoi riprovare oppure ricominciare da capo.';
+
+  @override
+  String get saveNewerAppBody =>
+      'Questi progressi sono stati salvati da una versione più recente di EcoQuest. Aggiorna l\'app per continuare.';
+
+  @override
+  String get saveUnknownErrorBody =>
+      'Si è verificato un problema imprevisto. Riprova tra poco.';
+
+  @override
+  String get retryAction => 'Riprova';
+
+  @override
+  String get startFreshAction => 'Ricomincia da capo';
+
+  @override
+  String get debugRewardAction => 'Ricompensa di prova (solo debug)';
+
+  @override
   String get learnTitle => 'Impara giocando';
 
   @override
