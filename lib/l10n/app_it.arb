@@ -1,0 +1,52 @@
+{
+  "@@locale": "it",
+  "appTitle": "EcoQuest",
+
+  "navHome": "Home",
+  "navLearn": "Impara",
+  "navPet": "Cucciolo",
+  "navProfile": "Profilo",
+
+  "levelLabel": "Livello {level}",
+  "@levelLabel": {
+    "placeholders": { "level": { "type": "int" } }
+  },
+  "xpProgress": "{current} su {target} punti esperienza",
+  "@xpProgress": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "target": { "type": "int" }
+    }
+  },
+  "coinsAmount": "{count, plural, =1{1 moneta} other{{count} monete}}",
+  "@coinsAmount": {
+    "placeholders": { "count": { "type": "int", "format": "decimalPattern" } }
+  },
+  "ticketsAmount": "{count, plural, =1{1 biglietto premio} other{{count} biglietti premio}}",
+  "@ticketsAmount": {
+    "placeholders": { "count": { "type": "int", "format": "decimalPattern" } }
+  },
+  "percentValue": "{percent} percento",
+  "@percentValue": {
+    "placeholders": { "percent": { "type": "int" } }
+  },
+
+  "statSatiety": "Sazietà",
+  "statHappiness": "Felicità",
+  "statCleanliness": "Pulizia",
+
+  "comingSoon": "In arrivo",
+  "homePetPreview": "Il tuo cucciolo, ancora nell'uovo",
+  "homeActivitiesTitle": "Attività di oggi",
+  "homeQuizTitle": "Quiz del giorno",
+  "homeQuizSubtitle": "5 domande · circa 3 minuti",
+  "homeCleanupTitle": "Pulisci la stanza",
+  "homeCleanupSubtitle": "Ricicla i rifiuti e guadagna monete",
+
+  "learnTitle": "Impara giocando",
+  "learnBody": "Qui arriveranno quiz, mini-giochi e curiosità sull'ambiente.",
+  "petTitle": "La stanza del tuo cucciolo",
+  "petBody": "Qui potrai prenderti cura del tuo compagno e riciclare i rifiuti della sua stanza.",
+  "profileTitle": "Il tuo profilo",
+  "profileBody": "Qui troverai i tuoi interessi, i progressi e le impostazioni."
+}

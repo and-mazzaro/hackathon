@@ -1,0 +1,44 @@
+name: ecoquest
+description: "EcoQuest - educazione ambientale con un cucciolo virtuale"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.5
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State management + dependency injection (plain Notifier, no codegen).
+  flutter_riverpod: ^3.4.3
+  # Navigation: bottom-tab shell, Android back button, deep links later.
+  go_router: ^18.1.1
+  # Material Design widgets (moved out of the Flutter framework in 2026).
+  material_ui: ^1.8.0
+  # Number/date formatting for Italian; version is pinned by flutter_localizations.
+  intl: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  # Generates lib/l10n/app_localizations.dart from the .arb files.
+  generate: true
+
+  fonts:
+    # Nunito, SIL Open Font License 1.1 (see assets/fonts/OFL.txt).
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Nunito-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Nunito-ExtraBold.ttf
+          weight: 800

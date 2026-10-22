@@ -1,0 +1,12 @@
+# Same line endings (LF) for everyone, whatever editor or OS they use.
+* text=auto eol=lf
+
+# Windows scripts need CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Never touch binary files.
+*.png binary
+*.jpg binary
+*.ttf binary
+*.jar binary
