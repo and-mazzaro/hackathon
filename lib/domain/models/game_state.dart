@@ -1,4 +1,5 @@
 import '../rules/economy_config.dart';
+import 'audio_settings.dart';
 import 'inventory.dart';
 import 'json_utils.dart';
 import 'learning_progress.dart';
@@ -20,6 +21,7 @@ class GameState {
     required this.inventory,
     this.learning = const LearningProgress(),
     this.recycling = const RecyclingProgress(),
+    this.audio = AudioSettings.defaults,
   });
 
   /// A brand-new player.
@@ -55,6 +57,9 @@ class GameState {
   /// Recycling statistics. Added in M7: older saves simply start empty.
   final RecyclingProgress recycling;
 
+  /// Sound preferences. Added with audio: older saves get the defaults.
+  final AudioSettings audio;
+
   GameState copyWith({
     PlayerProfile? profile,
     PlayerProgress? progress,
@@ -62,6 +67,7 @@ class GameState {
     Inventory? inventory,
     LearningProgress? learning,
     RecyclingProgress? recycling,
+    AudioSettings? audio,
   }) {
     return GameState(
       profile: profile ?? this.profile,
@@ -70,6 +76,7 @@ class GameState {
       inventory: inventory ?? this.inventory,
       learning: learning ?? this.learning,
       recycling: recycling ?? this.recycling,
+      audio: audio ?? this.audio,
     );
   }
 
@@ -80,6 +87,7 @@ class GameState {
         'inventory': inventory.toJson(),
         'learning': learning.toJson(),
         'recycling': recycling.toJson(),
+        'audio': audio.toJson(),
       };
 
   /// [now] is only used for dates missing from an old or partial save.
@@ -91,6 +99,7 @@ class GameState {
       inventory: Inventory.fromJson(readObject(json, 'inventory')),
       learning: LearningProgress.fromJson(readObject(json, 'learning')),
       recycling: RecyclingProgress.fromJson(readObject(json, 'recycling')),
+      audio: AudioSettings.fromJson(readObject(json, 'audio')),
     );
   }
 }

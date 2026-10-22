@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../core/audio/audio_binding.dart';
 import '../l10n/app_localizations.dart';
 import 'router.dart';
 import 'theme/app_theme.dart';
@@ -15,6 +16,8 @@ class EcoQuestApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
       routerConfig: ref.watch(routerProvider),
+      // Sound settings and app lifecycle → audio service (no UI).
+      builder: (context, child) => AudioBinding(child: child!),
       // Our strings + Material/Cupertino strings from material_ui.
       // (AppLocalizations.localizationsDelegates still points at the old
       // framework Material library, so we do not use it.)

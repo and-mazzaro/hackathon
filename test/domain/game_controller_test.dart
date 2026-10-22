@@ -1,6 +1,7 @@
 import 'package:ecoquest/data/save/in_memory_save_repository.dart';
 import 'package:ecoquest/data/save/save_repository.dart';
 import 'package:ecoquest/domain/game_controller.dart';
+import 'package:ecoquest/domain/models/audio_settings.dart';
 import 'package:ecoquest/domain/models/eco_topic.dart';
 import 'package:ecoquest/domain/models/game_state.dart';
 import 'package:ecoquest/domain/models/learning_progress.dart';
@@ -121,6 +122,24 @@ void main() {
     final again =
         await controller(second).claimReward('quiz:1', const Reward(xp: 30));
     expect(again.applied, isFalse);
+  });
+
+  test('audio settings are saved, kept after a restart, never re-saved '
+      'when unchanged', () async {
+    final first = await startApp();
+    expect(game(first).audio, AudioSettings.defaults);
+
+    final quiet = AudioSettings.defaults
+        .withVolume(AudioChannel.music, 0)
+        .withMuted(true);
+    await controller(first).updateAudioSettings(quiet);
+    expect(repository.saveCount, 1);
+    await controller(first).updateAudioSettings(quiet);
+    expect(repository.saveCount, 1);
+    first.dispose();
+
+    final second = await startApp();
+    expect(game(second).audio, quiet);
   });
 
   test('changing interests keeps all progress and onboarding status',

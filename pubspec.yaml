@@ -26,11 +26,16 @@ dependencies:
   # Cuts text by visible characters, so emoji are never split in half.
   # Already part of Flutter; listed because we import it directly.
   characters: ^1.4.1
+  # Sound effects, music and ambience loops (Android + iOS). Only used
+  # behind AudioBackend in lib/core/audio/, never directly by screens.
+  audioplayers: ^6.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  # Lets tests move time forward (music ducking, sound cooldowns).
+  fake_async: ^1.3.3
 
 flutter:
   uses-material-design: true
@@ -40,6 +45,9 @@ flutter:
   # Educational content (questions, facts, ...) as JSON files.
   assets:
     - assets/content/
+    # Sounds: one line per folder (Flutter does not include subfolders).
+    # Licences in assets/audio/ATTRIBUTION.md.
+    - assets/audio/ambience/
 
   fonts:
     # Nunito, SIL Open Font License 1.1 (see assets/fonts/OFL.txt).

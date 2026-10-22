@@ -1,3 +1,4 @@
+import 'package:ecoquest/domain/models/audio_settings.dart';
 import 'package:ecoquest/domain/models/eco_topic.dart';
 import 'package:ecoquest/domain/models/game_state.dart';
 import 'package:ecoquest/domain/models/inventory.dart';
@@ -35,6 +36,7 @@ void main() {
           ownedItemIds: {'hat_leaf', 'plant_fern'},
           equippedBySlot: {'head': 'hat_leaf'},
         ),
+        audio: const AudioSettings(muted: true, musicVolume: 20),
       );
 
   test('toJson → fromJson keeps every field', () {
@@ -45,6 +47,7 @@ void main() {
     expect(copy.profile.interests, {EcoTopic.oceans, EcoTopic.recycling});
     expect(copy.pet.stage, PetStage.baby);
     expect(copy.inventory.equippedBySlot['head'], 'hat_leaf');
+    expect(copy.audio, const AudioSettings(muted: true, musicVolume: 20));
   });
 
   test('missing fields fall back to safe defaults', () {
@@ -56,6 +59,7 @@ void main() {
     expect(state.profile.createdAt, now);
     expect(state.pet.stage, PetStage.egg);
     expect(state.inventory.ownedItemIds, isEmpty);
+    expect(state.audio, AudioSettings.defaults); // saves from before audio
   });
 
   test('unknown topic ids from another app version are ignored', () {

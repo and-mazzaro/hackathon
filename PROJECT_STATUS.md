@@ -5,6 +5,7 @@
 M6 pet (`e7b7281`) · M7 cleanup (`8be652d`)
 **Repository:** https://github.com/and-mazzaro/hackathon (`origin`, branch `main`; pushed up to M7 on 2026-10-22).
 Teammates need to be added as collaborators by and-mazzaro before they can push.
+**Audio:** Milestones 1 (audit, `AUDIO_AUDIT.md`) and 2 (infrastructure) done — no sounds wired to screens yet.
 **Next milestone:** M8 — Cosmetics: shop (coins), reward roll (tickets, visible odds, duplicates rule), inventory,
 equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a small follow-up.
 
@@ -69,6 +70,11 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
 | D37 | Sorting by tap (item → bin, screen-reader friendly) AND drag that starts at once (no long press: players did not discover it and a plain drag only scrolled); a wrong bin teaches (right bin + why) and never blocks or costs anything | New (M7) |
 | D38 | Coins per round: 2 per first-time correct item, 1 for known items, +3 every 3 in a row; +10 XP for ≥ 75% right; paid once per round (`sort:roundId`) with stats and pet cleanliness (+25) in one write | New (M7) |
 | D39 | Waste content = data: `assets/content/waste_items_it.json` (name, icon key, bin, difficulty, explanation, localNote, source, excerpt), checked by `test/content/waste_content_test.dart` | New (M7) |
+| D40 | Audio with **`audioplayers`** only, hidden behind `AudioBackend` (`lib/core/audio/`); screens ask for sounds by meaning (`SoundId`), never by file, and only in event handlers (never in `build`) | New (Audio 2) |
+| D41 | Only sounds with a known licence are bundled, each listed in `assets/audio/ATTRIBUTION.md`; ids without a file stay silent. Tests check catalog ↔ files ↔ pubspec ↔ attribution | New (Audio 2) |
+| D42 | 3 channels (music / effects / pet + ambience) with volumes 0–100 + master mute, saved in `GameState.audio` (defaults 35 / 80 / 60 for old saves) via `GameController.updateAudioSettings` | New (Audio 2) |
+| D43 | "Ambient" audio session: mixes with the player's own music (no audio focus on Android), follows the iOS silent switch. Loops pause in the background and resume on return (unless muted); short sounds are never replayed later | New (Audio 2) |
+| D44 | Important sounds (level-up, hatch/grow, quiz/cleanup complete) duck the music to 30% for 0.5 s, back in 0.3 s; the same sound within 80 ms plays once; a failing file is logged and skipped, never crashes (`AudioTiming` holds the numbers) | New (Audio 2) |
 
 ## Implemented (M1)
 - App entry point, `ProviderScope`, router in a provider (fresh router per test)
@@ -147,6 +153,17 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
   spot-check the excerpts (all found) and removed explanation details the pages did not support (caps left on,
   "no rinsing", "recyclable forever", "a few pieces ruin a lot of glass").
 
+## Implemented (Audio Milestone 1–2)
+- Audit of the team archive `Effetti.zip` in `AUDIO_AUDIT.md`: 6 files, only "Sea Waves" (YouTube CC BY) cleared;
+  Pokémon level-up (copyrighted) and an empty file rejected; 3 files with unknown licence left out
+- `assets/audio/ambience/sea_waves.mp3` (unchanged copy) + `assets/audio/ATTRIBUTION.md`
+- `lib/core/audio/`: `SoundId` (27 semantic ids with channel, ducking, loop flag), `AudioCatalog` (id → file;
+  today only `ambience.sea`), `AudioService` (settings, mute, ducking, cooldown, loops per channel, background
+  pause, error-proof), `AudioBackend` + `AudioplayersBackend` (4 shared effect players, 1 player per loop
+  channel, lazy creation), `AudioBinding` (applies saved settings at start and on change; app lifecycle)
+- `AudioSettings` in the save; `GameController.updateAudioSettings`
+- Nothing plays yet: screens are connected in Audio Milestone 3, the settings screen comes in Milestone 4
+
 ### Waste content still needing a human check
 - waste_016 toothbrush, waste_017 pen, waste_023 toy cite a single municipal dictionary (Gaeta). Common practice,
   but a national or big-city source would be better. The same dictionary disagrees with Comieco on receipts and
@@ -179,6 +196,8 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
 | M5 on the emulator: Learn hub with real content and "Per te" order; a personal quiz played (questions easy → hard, wrong-answer feedback with correct answer + explanation); save shows 1 quiz, claim id, XP 0 → 40 | ⚠️ Partly — the emulator was being used at the same time, so the scripted run was interrupted; a clean manual play-through is still worth doing |
 | `flutter test` after M7 — 182 tests (+ item picking/recent/tricky, scoring first-time/repeat/combo/XP threshold, `CleanupRound` select/deselect/wrong bin, old saves without recycling data, `completeCleanup` pay-once + pet cleanliness, cleanup UI: tap sorting, plain drag without holding (fails on the old long-press version), drop outside a bin, wrong-bin feedback with source, empty bin tap, full round saved, exit dialog, Pet tab entry, screen-reader states, guidelines, 200% text on a small phone, **content validation of the real 24-item file**) · `flutter analyze` clean | ✅ All pass (2026-10-22) |
 | M7 on the emulator: Home → Pulisci la stanza → 8 real items; crystal glass into "Vetro" → "Quasi!" card with CoReVe explanation; the other 7 right → "Combo x7", result 7/8, +20 coins, +10 XP, pet cleaner; save shows 1 round, 8 sorted, 7 correct, 7 learned, `sort:` claim | ✅ Checked by script + screenshots (2026-10-22) |
+| `flutter test` after Audio 2 — 209 tests (+ audio settings defaults/mute/clamping/JSON, old saves without audio, settings saved once and kept after restart, service with a fake backend and fake time: channel volumes, master mute, missing file silent, cooldown, loop not restarted, loops side by side, live volume change, background pause/resume, no replay of dropped sounds, ducking down/hold/smooth return/extension, broken file skipped; real files ↔ catalog ↔ pubspec ↔ ATTRIBUTION; app wiring: saved settings applied at start and on change, lifecycle pause/resume, nothing plays at start) · `flutter analyze` clean | ✅ All pass (2026-10-22) |
+| Audio 2 on the emulator (temporary check entry point, then removed): saved settings loaded; sea loop on the pet channel + same file as music loop really play (audio_flinger: 2 active tracks, −4.4 dB = 60% and −9.1 dB = 35%, restarting every 13 s = looping); level-up effect via SoundPool started and ducked the music, back to −9.1 dB after ~1 s; missing file only logged; Home → both tracks stop, back to the app → both resume; usage `USAGE_GAME`, no audio focus taken | ✅ Checked (2026-10-22) — not listened to by ear (no speakers in this setup) |
 | M7 drag fix on the emulator: the old version ignored a plain drag (only a ~1 s hold worked); now a quick swipe from an item to a bin sorts it, tap-then-bin still works, swiping on the feedback card scrolls | ✅ Checked by script (2026-10-22) |
 | `flutter build apk --debug` | ✅ Builds |
 | Android emulator (Pixel 7, Android 36): app starts, Home renders, tab switch, system Back from a tab returns to Home | ✅ Checked manually with screenshots (2026-10-22) |
@@ -213,4 +232,7 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
   app stays open on the same screen. Fine for the demo; a periodic refresh can be added later.
 - The pet's idle animation keeps Android's `uiautomator dump` from working (it waits for a still screen).
   TalkBack is not affected; scripted device tests should use screenshots or turn animations off.
+- Audio: Milestone 3 (connect quiz, cleanup, pet, level-up, rewards; sea ambience in the pet room) ·
+  Milestone 4 (settings screen) · licensed files for the 25 silent ids (see `AUDIO_AUDIT.md` §4) ·
+  listen to every sound on a real phone · iOS audio untested (no Mac)
 - Next: M8 cosmetics · M9 recommendations · quiz read-aloud

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:ecoquest/app/app.dart';
 import 'package:ecoquest/app/theme/app_theme.dart';
 import 'package:ecoquest/core/animations.dart';
+import 'package:ecoquest/core/audio/audio_service.dart';
 import 'package:ecoquest/data/content/quiz_content.dart';
 import 'package:ecoquest/data/content/waste_content.dart';
 import 'package:ecoquest/data/save/in_memory_save_repository.dart';
@@ -19,6 +20,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'fake_audio_backend.dart';
 import 'quiz_fixtures.dart';
 import 'waste_fixtures.dart';
 
@@ -47,6 +49,7 @@ Future<void> pumpEcoQuestApp(
   SaveRepository? repository,
   QuizBank? quizBank,
   WasteBank? wasteBank,
+  FakeAudioBackend? audioBackend,
 }) async {
   await tester.pumpWidget(ProviderScope(
     retry: (retryCount, error) => null,
@@ -60,6 +63,8 @@ Future<void> pumpEcoQuestApp(
           .overrideWith((ref) async => wasteBank ?? testWasteBank()),
       // Endless idle animations would keep pumpAndSettle waiting forever.
       animationsEnabledProvider.overrideWithValue(false),
+      // No real audio in tests: calls are recorded instead.
+      audioBackendProvider.overrideWithValue(audioBackend ?? FakeAudioBackend()),
     ],
     child: const EcoQuestApp(),
   ));

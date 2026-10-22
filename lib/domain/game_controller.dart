@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/save/save_repository.dart';
+import 'models/audio_settings.dart';
 import 'models/eco_topic.dart';
 import 'models/game_state.dart';
 import 'models/learning_progress.dart';
@@ -94,6 +95,7 @@ class CleanupOutcome {
 /// | `spendCoins` / `buyItem` (shop)    | new spend method, same pattern      |
 /// | `rollCosmetic`, `equip` (cosmetics)| inventory update                    |
 /// | `careForPet`, `evolvePet` — DONE   | pet update (no rewards)             |
+/// | `updateAudioSettings` — DONE       | settings update (no rewards)        |
 class GameController extends AsyncNotifier<GameState> {
   SaveRepository get _repository => ref.read(saveRepositoryProvider);
   EconomyConfig get _economy => ref.read(economyProvider);
@@ -281,6 +283,14 @@ class GameController extends AsyncNotifier<GameState> {
     await _commit(current.copyWith(
       profile: current.profile.copyWith(interests: interests),
     ));
+  }
+
+  /// Saves the sound preferences. Nothing is written when they did not
+  /// change (sliders call this when released, not while moving).
+  Future<void> updateAudioSettings(AudioSettings audio) async {
+    final current = state.requireValue;
+    if (current.audio == audio) return;
+    await _commit(current.copyWith(audio: audio));
   }
 
   /// Starts a new game, replacing the saved one. Used by the "start over"
