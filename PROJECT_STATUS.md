@@ -248,9 +248,9 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
 - The research content files and merge script used for M5 lived in a temporary folder; the merged result is
   `assets/content/quiz_questions_it.json`, which is now the file to edit.
 
+### Hackathon deadline is set at Friday, October 23, 2026, at 9:00 PM CEST (Central European Summer Time) / UTC+2.
 ## Open questions
-1. Hackathon deadline / available hours (unknown → keep MVP small)
-2. Choice of Modes 2–4 (options in the Phase 0 plan)
+1. Choice of Modes 2–4 (options in the Phase 0 plan)
 
 ## Remaining work
 - Room Cleanup polish ideas: a short "how to play" for first-timers, a simple room drawing that gets tidier as
