@@ -1,8 +1,9 @@
 # EcoQuest — Project Status
 
-**Current milestone:** M2 — Shared foundations → **done on Android** (iOS untested, no Mac)
-**Done before:** M1 — Toolchain + runnable app shell (commit `39e8b3d`)
-**Next milestone:** M3 — Onboarding + profile (guest profile, interest selection, edit interests later) — can now run in parallel with Quiz, Pet and Recycling work
+**Current milestone:** M3 — Onboarding + local profile → **done on Android** (iOS untested, no Mac)
+**Done before:** M1 app shell (`39e8b3d`) · M2 game state + saving (`d7c3454`)
+**Next milestone:** M5 — first complete Topic Quiz (questions with sources, scoring, explanations, XP via `claimReward`).
+Pet room (M6) and recycling (M7) can run in parallel.
 
 ## Environment (lead PC)
 | Item | Status |
@@ -46,7 +47,12 @@
 | D18 | Save file = `{version, savedAt, state}` JSON in the app support folder; write temp → copy backup → atomic rename; unreadable file → backup; both broken → error screen with "Riprova"/"Ricomincia da capo"; newer version → refused, never overwritten | New (M2) |
 | D19 | Saved ids are stable strings (`EcoTopic.id`, `PetStage.id`, item ids), never enum indexes; new fields need a default in `fromJson` | New (M2) |
 | D20 | Riverpod automatic retry is switched off (`ProviderScope(retry: ...)`): re-reading a broken save does not help | New (M2) |
-| D21 | `EconomyConfig` holds every balancing number (first guesses, to tune in play-tests) | New (M2) |
+| D21 | `EconomyConfig` holds every balancing number (first guesses, to tune in play-tests) | Accepted |
+| D22 | Navigation to/from onboarding is decided only by the router `redirect` (re-checked on every game change). Screens never navigate there themselves | New (M3) |
+| D23 | Half-finished onboarding answers are temporary screen state; nothing is saved until "Fine"/"Salta" | New (M3) |
+| D24 | Profile interest changes save immediately (no "save" button); at least one interest is kept by the UI | New (M3) |
+| D25 | Nickname cleaned in one place (`normalizeNickname`, max 20 visible characters), applied inside `GameController` | New (M3) |
+| D26 | Topic/age labels and icons live in the UI layer (`profile_labels.dart`); the domain only knows stable ids | New (M3) |
 
 ## Implemented (M1)
 - App entry point, `ProviderScope`, router in a provider (fresh router per test)
@@ -69,12 +75,24 @@
 - **DEBUG ONLY** button on Home "Ricompensa di prova" (+30 XP, +15 coins), hidden in release builds by `kDebugMode`.
   Remove it once real activities exist.
 
+## Implemented (M3)
+- Onboarding route `/onboarding` (no tabs), 3 steps with progress bar, on-screen back arrow (iOS) and Android back:
+  welcome + privacy note → interests (≥ 1 required, counter) → optional nickname + age range ("Fine" / "Salta")
+- Router redirect: unfinished players → onboarding; finished players never see it again; "Ricomincia da capo" → onboarding
+- Profile tab: nickname/"Ospite", level, age range; edit sheet for nickname + age (Salva/Annulla);
+  interest tiles saved immediately; "I tuoi dati" privacy card
+- Shared widgets: `GameStateView` (loading/error/data for any screen), `EggArt`, `InterestPicker`, `AboutYouFields`
+- `GameController.updateProfileDetails`; nickname cleaning in `profile_rules.dart`
+- Screen readers: tiles read as checked/not checked, step changes announced ("Passo 2 di 3"), field hints and counters
+
 ## Tests
 | Check | Result |
 |-------|--------|
 | `flutter analyze` | ✅ No issues (2026-10-22, after M2) |
 | `flutter test` — 51 tests: M1 UI/accessibility tests + level curve, JSON round-trip and defaults, file save (backup, corruption, newer version, overlapping saves, leftover temp file), controller (pay once, double tap, simultaneous claims, level-up, restart, interests keep progress, error → start fresh), Home with saved data and error screens | ✅ All pass (2026-10-22) |
 | M2 on the emulator: earned 2 debug rewards → force-stop → relaunch → still 60/100 XP, 30 coins; save + backup files present in the app folder | ✅ Checked (2026-10-22) |
+| `flutter test` after M3 — 75 tests (+ onboarding flow, profile editing, nickname rules, guidelines and 200% text on every onboarding step) | ✅ All pass (2026-10-22) |
+| M3 on the emulator: wiped data → onboarding (2 topics, nickname, age) → Home; restart skips onboarding; profile interest change saved at once and kept after restart; save file checked | ✅ Checked (2026-10-22) |
 | `flutter build apk --debug` | ✅ Builds |
 | Android emulator (Pixel 7, Android 36): app starts, Home renders, tab switch, system Back from a tab returns to Home | ✅ Checked manually with screenshots (2026-10-22) |
 | Android accessibility tree (uiautomator dump): every stat, balance, image, card and tab has an Italian label | ✅ Checked (2026-10-22) |
@@ -88,12 +106,15 @@
 - Android Auto Backup (on by default) can copy the save to the user's own Google account backup. Decide before
   release whether to keep it (restores progress on a new phone) or turn it off in `AndroidManifest.xml`.
 - Web preview keeps progress in memory only.
+- Polish idea: on onboarding step 3 the open keyboard pushes "Fine/Salta" up so they cover the last age chips
+  (still scrollable; the keyboard ✓ closes it). Consider moving the buttons into the scroll area on that step.
+- Interests are stored but not used yet: recommendations come with the quiz/recommendation milestones.
 
 ## Open questions
 1. Hackathon deadline / available hours (unknown → keep MVP small)
 2. Choice of Modes 2–4 (options in the Phase 0 plan)
 
 ## Remaining work
-- Commit M2
-- Parallel work can start now, each building on `GameController` + `EconomyConfig`:
-  M3 onboarding/profile · M5 quiz · M6 pet room · M7 recycling (then M8 cosmetics, M9 recommendations)
+- Commit M3
+- Parallel work, each building on `GameController` + `EconomyConfig`:
+  M5 quiz · M6 pet room · M7 recycling (then M8 cosmetics, M9 recommendations)

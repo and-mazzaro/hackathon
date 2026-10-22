@@ -141,9 +141,168 @@ class AppLocalizationsIt extends AppLocalizations {
       'Qui potrai prenderti cura del tuo compagno e riciclare i rifiuti della sua stanza.';
 
   @override
-  String get profileTitle => 'Il tuo profilo';
+  String onboardingStep(int step, int total) {
+    return 'Passo $step di $total';
+  }
 
   @override
-  String get profileBody =>
-      'Qui troverai i tuoi interessi, i progressi e le impostazioni.';
+  String get backAction => 'Indietro';
+
+  @override
+  String get nextAction => 'Avanti';
+
+  @override
+  String get skipAction => 'Salta';
+
+  @override
+  String get finishAction => 'Fine';
+
+  @override
+  String get saveAction => 'Salva';
+
+  @override
+  String get cancelAction => 'Annulla';
+
+  @override
+  String get welcomeTitle => 'Ti diamo il benvenuto in EcoQuest!';
+
+  @override
+  String get welcomeBody =>
+      'Impara a proteggere l\'ambiente giocando. Ogni quiz e ogni rifiuto riciclato aiutano il tuo cucciolo a schiudersi e a vivere in una stanza sempre più verde.';
+
+  @override
+  String get welcomePrivacy =>
+      'Non serve un account: i tuoi progressi vengono salvati su questo telefono.';
+
+  @override
+  String get welcomeStartAction => 'Iniziamo';
+
+  @override
+  String get welcomeEggLabel =>
+      'Il tuo cucciolo, ancora nell\'uovo, ti aspetta';
+
+  @override
+  String get interestsTitle => 'Cosa ti interessa?';
+
+  @override
+  String get interestsBody =>
+      'Scegli gli argomenti che preferisci: li useremo per proporti quiz e curiosità. Potrai cambiarli quando vuoi dal profilo.';
+
+  @override
+  String interestsSelectedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count argomenti scelti',
+      one: '1 argomento scelto',
+      zero: 'Nessun argomento scelto',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get interestsMinHint => 'Scegline almeno uno per continuare.';
+
+  @override
+  String get aboutTitle => 'Parlaci un po\' di te';
+
+  @override
+  String get aboutBody =>
+      'Entrambe le risposte sono facoltative. L\'età ci serve solo per scegliere domande adatte: non chiediamo la data di nascita.';
+
+  @override
+  String get nicknameLabel => 'Soprannome (facoltativo)';
+
+  @override
+  String get nicknameHint => 'Es. EcoAle';
+
+  @override
+  String get nicknameHelper => 'Non usare il tuo nome e cognome completi.';
+
+  @override
+  String get ageRangeLabel => 'Età (facoltativa)';
+
+  @override
+  String get ageRange13to15 => '13–15 anni';
+
+  @override
+  String get ageRange16to18 => '16–18 anni';
+
+  @override
+  String get ageRange19to22 => '19–22 anni';
+
+  @override
+  String get ageRange23to26 => '23–26 anni';
+
+  @override
+  String get ageRangeOver26 => '27 anni o più';
+
+  @override
+  String get ageRangeNotSaid => 'Preferisco non dirlo';
+
+  @override
+  String get topicRecycling => 'Riciclo e rifiuti';
+
+  @override
+  String get topicClimate => 'Clima';
+
+  @override
+  String get topicOceans => 'Oceani e vita marina';
+
+  @override
+  String get topicBiodiversity => 'Animali e biodiversità';
+
+  @override
+  String get topicForests => 'Foreste ed ecosistemi';
+
+  @override
+  String get topicEnergy => 'Energia rinnovabile';
+
+  @override
+  String get topicWater => 'Risparmio d\'acqua';
+
+  @override
+  String get topicTransport => 'Mobilità sostenibile';
+
+  @override
+  String get topicConsumption => 'Consumo responsabile';
+
+  @override
+  String get topicInnovation => 'Innovazione green';
+
+  @override
+  String get profileGuestName => 'Ospite';
+
+  @override
+  String profileLevelLine(int level) {
+    return 'Livello $level · profilo su questo telefono';
+  }
+
+  @override
+  String profileAgeLine(String range) {
+    return 'Età: $range';
+  }
+
+  @override
+  String get profileEditDetails => 'Modifica soprannome ed età';
+
+  @override
+  String get profileEditTitle => 'Soprannome ed età';
+
+  @override
+  String get profileInterestsTitle => 'I tuoi interessi';
+
+  @override
+  String get profileInterestsBody =>
+      'Tocca un argomento per attivarlo o disattivarlo. Le modifiche vengono salvate subito e i tuoi progressi restano invariati.';
+
+  @override
+  String get profileKeepOneInterest => 'Tieni almeno un interesse.';
+
+  @override
+  String get profileDataTitle => 'I tuoi dati';
+
+  @override
+  String get profileDataBody =>
+      'Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. EcoQuest non usa la tua posizione e non chiede la data di nascita.';
 }

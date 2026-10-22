@@ -2,6 +2,7 @@ import 'package:ecoquest/data/save/in_memory_save_repository.dart';
 import 'package:ecoquest/data/save/save_repository.dart';
 import 'package:ecoquest/domain/models/game_state.dart';
 import 'package:ecoquest/domain/models/player_progress.dart';
+// GameState is still used by _FailingRepository below.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -9,7 +10,7 @@ import 'helpers/pump_app.dart';
 
 void main() {
   testWidgets('Home shows the saved level, XP and balances', (tester) async {
-    final saved = GameState.initial(now: testNow).copyWith(
+    final saved = onboardedState().copyWith(
       progress: const PlayerProgress(totalXp: 260, coins: 1250, tickets: 4),
     );
     await pumpEcoQuestApp(tester,
@@ -23,7 +24,7 @@ void main() {
 
   testWidgets('the debug reward button updates Home and the save',
       (tester) async {
-    final repository = InMemorySaveRepository();
+    final repository = InMemorySaveRepository(onboardedState());
     await pumpEcoQuestApp(tester, repository: repository);
 
     final button = find.text('Ricompensa di prova (solo debug)');
@@ -49,7 +50,8 @@ void main() {
 
     await tester.tap(find.text('Ricomincia da capo'));
     await tester.pumpAndSettle();
-    expect(find.text('Livello 1'), findsOneWidget);
+    // A fresh game starts with onboarding.
+    expect(find.text('Ti diamo il benvenuto in EcoQuest!'), findsOneWidget);
   });
 
   testWidgets('a save from a newer app cannot be overwritten from the UI',

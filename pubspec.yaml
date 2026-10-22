@@ -23,6 +23,9 @@ dependencies:
   intl: any
   # Finds the app's private folder for the save file (Android/iOS).
   path_provider: ^2.1.6
+  # Cuts text by visible characters, so emoji are never split in half.
+  # Already part of Flutter; listed because we import it directly.
+  characters: ^1.4.1
 
 dev_dependencies:
   flutter_test:

@@ -32,7 +32,7 @@ void main() {
     expect(find.text('La stanza del tuo cucciolo'), findsOneWidget);
 
     await tapTab(tester, 'Profilo');
-    expect(find.text('Il tuo profilo'), findsOneWidget);
+    expect(find.text('I tuoi interessi'), findsOneWidget);
 
     await tapTab(tester, 'Home');
     expect(_homeTop, findsOneWidget);

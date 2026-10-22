@@ -142,6 +142,38 @@ void main() {
         {EcoTopic.oceans, EcoTopic.biodiversity});
   });
 
+  test('onboarding cleans the nickname', () async {
+    final app = await startApp();
+
+    await controller(app).completeOnboarding(
+        interests: {EcoTopic.climate}, nickname: '   ');
+
+    expect(game(app).profile.nickname, isNull);
+    expect(game(app).profile.onboardingCompleted, isTrue);
+  });
+
+  test('profile details can be changed and cleared; progress stays',
+      () async {
+    final app = await startApp();
+    await controller(app).completeOnboarding(
+      interests: {EcoTopic.energy},
+      nickname: 'Sole',
+      ageRange: AgeRange.age19to22,
+    );
+    await controller(app).claimReward('quiz:1', const Reward(coins: 9));
+
+    await controller(app)
+        .updateProfileDetails(nickname: '  Luna ', ageRange: null);
+
+    final state = game(app);
+    expect(state.profile.nickname, 'Luna');
+    expect(state.profile.ageRange, isNull);
+    expect(state.profile.interests, {EcoTopic.energy});
+    expect(state.profile.onboardingCompleted, isTrue);
+    expect(state.progress.coins, 9);
+    expect(repository.saved!.profile.nickname, 'Luna');
+  });
+
   test('a broken save shows an error; startFresh recovers', () async {
     final broken = _BrokenRepository();
     final container = ProviderContainer(

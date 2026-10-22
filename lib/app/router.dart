@@ -1,14 +1,18 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../domain/game_controller.dart';
 import '../features/home/home_screen.dart';
 import '../features/learn/learn_screen.dart';
+import '../features/onboarding/onboarding_screen.dart';
 import '../features/pet/pet_screen.dart';
 import '../features/profile/profile_screen.dart';
 import 'app_shell.dart';
 
 /// All route paths in one place, so features never hard-code strings.
 abstract final class AppRoutes {
+  static const onboarding = '/onboarding';
   static const home = '/home';
   static const learn = '/learn';
   static const pet = '/pet';
@@ -18,9 +22,33 @@ abstract final class AppRoutes {
 /// The router lives in a provider: every ProviderScope (the app, or each
 /// test) gets its own fresh router instead of sharing a global one.
 final routerProvider = Provider<GoRouter>((ref) {
+  // Tells go_router to re-check `redirect` whenever the game changes
+  // (loaded, onboarding finished, game restarted).
+  // A counter whose only job is to "tick" on every change.
+  final gameChanged = ValueNotifier(0);
+  ref.listen(gameControllerProvider, (previous, next) => gameChanged.value++);
+
   final router = GoRouter(
     initialLocation: AppRoutes.home,
+    refreshListenable: gameChanged,
+    redirect: (context, state) {
+      final game = ref.read(gameControllerProvider).value;
+      // Still loading, or the save could not be read: stay put, the
+      // screen shows the spinner or the error.
+      if (game == null) return null;
+
+      final onOnboarding = state.matchedLocation == AppRoutes.onboarding;
+      final finished = game.profile.onboardingCompleted;
+      if (!finished && !onOnboarding) return AppRoutes.onboarding;
+      if (finished && onOnboarding) return AppRoutes.home;
+      return null;
+    },
     routes: [
+      // Outside the tab shell: no bottom navigation during onboarding.
+      GoRoute(
+        path: AppRoutes.onboarding,
+        builder: (context, state) => const OnboardingScreen(),
+      ),
       // One branch per bottom tab. "indexedStack" keeps each tab alive,
       // so switching tabs does not lose scroll position or state.
       StatefulShellRoute.indexedStack(
@@ -55,6 +83,9 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
     ],
   );
-  ref.onDispose(router.dispose);
+  ref.onDispose(() {
+    router.dispose();
+    gameChanged.dispose();
+  });
   return router;
 });

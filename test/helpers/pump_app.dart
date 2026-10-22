@@ -3,6 +3,9 @@ import 'package:ecoquest/app/theme/app_theme.dart';
 import 'package:ecoquest/data/save/in_memory_save_repository.dart';
 import 'package:ecoquest/data/save/save_repository.dart';
 import 'package:ecoquest/domain/game_controller.dart';
+import 'package:ecoquest/domain/models/eco_topic.dart';
+import 'package:ecoquest/domain/models/game_state.dart';
+import 'package:ecoquest/domain/models/player_profile.dart';
 import 'package:ecoquest/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,10 +17,19 @@ const tabLabels = ['Home', 'Impara', 'Cucciolo', 'Profilo'];
 /// A fixed "now" so tests never depend on the real date.
 final testNow = DateTime(2026, 10, 22, 10);
 
+/// A player who already finished onboarding (interested in recycling).
+GameState onboardedState() => GameState.initial(now: testNow).copyWith(
+      profile: PlayerProfile(
+        createdAt: testNow,
+        interests: {EcoTopic.recycling},
+        onboardingCompleted: true,
+      ),
+    );
+
 /// Starts the whole app with a fresh ProviderScope (and so a fresh router).
 ///
-/// The save lives in memory (no files), so every test starts clean unless
-/// it passes its own [repository].
+/// The save lives in memory (no files). By default the player has already
+/// finished onboarding; pass `InMemorySaveRepository()` for a new player.
 Future<void> pumpEcoQuestApp(
   WidgetTester tester, {
   SaveRepository? repository,
@@ -25,8 +37,8 @@ Future<void> pumpEcoQuestApp(
   await tester.pumpWidget(ProviderScope(
     retry: (retryCount, error) => null,
     overrides: [
-      saveRepositoryProvider
-          .overrideWithValue(repository ?? InMemorySaveRepository()),
+      saveRepositoryProvider.overrideWithValue(
+          repository ?? InMemorySaveRepository(onboardedState())),
       clockProvider.overrideWithValue(() => testNow),
     ],
     child: const EcoQuestApp(),

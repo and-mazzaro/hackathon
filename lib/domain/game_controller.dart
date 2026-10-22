@@ -6,6 +6,7 @@ import 'models/game_state.dart';
 import 'models/player_profile.dart';
 import 'models/reward.dart';
 import 'rules/economy_config.dart';
+import 'rules/profile_rules.dart';
 import 'rules/progression.dart';
 
 /// The balancing numbers. Tests can override this with other values.
@@ -100,6 +101,7 @@ class GameController extends AsyncNotifier<GameState> {
   }
 
   /// Saves the onboarding answers. Progress is left untouched.
+  /// [nickname] is cleaned with `normalizeNickname`.
   Future<void> completeOnboarding({
     required Set<EcoTopic> interests,
     String? nickname,
@@ -107,17 +109,39 @@ class GameController extends AsyncNotifier<GameState> {
   }) async {
     final current = state.requireValue;
     await _commit(current.copyWith(
-      profile: current.profile.copyWith(
-        interests: interests,
-        nickname: nickname,
+      profile: PlayerProfile(
+        createdAt: current.profile.createdAt,
+        nickname: normalizeNickname(nickname),
         ageRange: ageRange,
+        interests: interests,
         onboardingCompleted: true,
+      ),
+    ));
+  }
+
+  /// Changes nickname and age range from the profile. Passing null clears
+  /// them. Interests and progress stay as they are.
+  Future<void> updateProfileDetails({
+    required String? nickname,
+    required AgeRange? ageRange,
+  }) async {
+    final current = state.requireValue;
+    final profile = current.profile;
+    await _commit(current.copyWith(
+      profile: PlayerProfile(
+        createdAt: profile.createdAt,
+        nickname: normalizeNickname(nickname),
+        ageRange: ageRange,
+        interests: profile.interests,
+        onboardingCompleted: profile.onboardingCompleted,
       ),
     ));
   }
 
   /// Changes the interests at any time. XP, coins, pet and items stay
   /// exactly as they are, and onboarding does not restart.
+  /// An empty set means "no preference" (recommendations use all topics);
+  /// the UI asks the player to keep at least one.
   Future<void> updateInterests(Set<EcoTopic> interests) async {
     final current = state.requireValue;
     await _commit(current.copyWith(

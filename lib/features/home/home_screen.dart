@@ -10,7 +10,8 @@ import '../../app/theme/eco_colors.dart';
 import '../../app/theme/eco_spacing.dart';
 import '../../core/widgets/currency_chip.dart';
 import '../../core/widgets/eco_card.dart';
-import '../../core/widgets/save_error_view.dart';
+import '../../core/widgets/egg_art.dart';
+import '../../core/widgets/game_state_view.dart';
 import '../../core/widgets/stat_bar.dart';
 import '../../domain/game_controller.dart';
 import '../../domain/models/game_state.dart';
@@ -21,20 +22,12 @@ import '../../l10n/app_localizations.dart';
 
 /// Home: the pet room on top (about 60%), today's activities below.
 /// Shows the saved game; while it loads, a spinner; if it fails, an error.
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(gameControllerProvider).when(
-          data: (game) => _HomeContent(game: game),
-          error: (error, stackTrace) => SaveErrorView(error: error),
-          loading: () => Center(
-            child: CircularProgressIndicator(
-              semanticsLabel: AppLocalizations.of(context).loadingProgress,
-            ),
-          ),
-        );
+  Widget build(BuildContext context) {
+    return GameStateView(builder: (context, game) => _HomeContent(game: game));
   }
 }
 
@@ -294,7 +287,7 @@ class _PetRoomPreview extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         top: EcoSpacing.l, bottom: EcoSpacing.m),
-                    child: FittedBox(child: _Egg()),
+                    child: const FittedBox(child: EggArt()),
                   ),
                 ),
               ],
@@ -306,69 +299,6 @@ class _PetRoomPreview extends StatelessWidget {
   }
 }
 
-class _Egg extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    const spot = EcoColors.primary;
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 120,
-          height: 150,
-          decoration: BoxDecoration(
-            color: const Color(0xFFFFFBF0),
-            // Narrower top, rounder bottom: an egg shape.
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.elliptical(60, 90),
-              topRight: Radius.elliptical(60, 90),
-              bottomLeft: Radius.elliptical(60, 60),
-              bottomRight: Radius.elliptical(60, 60),
-            ),
-            border: Border.all(color: EcoColors.ink.withValues(alpha: 0.12)),
-          ),
-          child: Stack(
-            children: [
-              _spot(left: 30, top: 40, size: 22, color: spot),
-              _spot(left: 70, top: 70, size: 16, color: spot),
-              _spot(left: 40, top: 100, size: 12, color: spot),
-            ],
-          ),
-        ),
-        // Shadow under the egg
-        Container(
-          width: 100,
-          height: 14,
-          decoration: BoxDecoration(
-            color: EcoColors.ink.withValues(alpha: 0.12),
-            borderRadius: const BorderRadius.all(Radius.elliptical(50, 7)),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _spot({
-    required double left,
-    required double top,
-    required double size,
-    required Color color,
-  }) {
-    return Positioned(
-      left: left,
-      top: top,
-      child: Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-          color: color.withValues(alpha: 0.35),
-          shape: BoxShape.circle,
-        ),
-      ),
-    );
-  }
-}
 
 class _ActivityShortcut extends StatelessWidget {
   const _ActivityShortcut({

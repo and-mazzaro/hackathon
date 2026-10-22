@@ -286,17 +286,293 @@ abstract class AppLocalizations {
   /// **'Qui potrai prenderti cura del tuo compagno e riciclare i rifiuti della sua stanza.'**
   String get petBody;
 
-  /// No description provided for @profileTitle.
+  /// No description provided for @onboardingStep.
   ///
   /// In it, this message translates to:
-  /// **'Il tuo profilo'**
-  String get profileTitle;
+  /// **'Passo {step} di {total}'**
+  String onboardingStep(int step, int total);
 
-  /// No description provided for @profileBody.
+  /// No description provided for @backAction.
   ///
   /// In it, this message translates to:
-  /// **'Qui troverai i tuoi interessi, i progressi e le impostazioni.'**
-  String get profileBody;
+  /// **'Indietro'**
+  String get backAction;
+
+  /// No description provided for @nextAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Avanti'**
+  String get nextAction;
+
+  /// No description provided for @skipAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Salta'**
+  String get skipAction;
+
+  /// No description provided for @finishAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Fine'**
+  String get finishAction;
+
+  /// No description provided for @saveAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Salva'**
+  String get saveAction;
+
+  /// No description provided for @cancelAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Annulla'**
+  String get cancelAction;
+
+  /// No description provided for @welcomeTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Ti diamo il benvenuto in EcoQuest!'**
+  String get welcomeTitle;
+
+  /// No description provided for @welcomeBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Impara a proteggere l\'ambiente giocando. Ogni quiz e ogni rifiuto riciclato aiutano il tuo cucciolo a schiudersi e a vivere in una stanza sempre più verde.'**
+  String get welcomeBody;
+
+  /// No description provided for @welcomePrivacy.
+  ///
+  /// In it, this message translates to:
+  /// **'Non serve un account: i tuoi progressi vengono salvati su questo telefono.'**
+  String get welcomePrivacy;
+
+  /// No description provided for @welcomeStartAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Iniziamo'**
+  String get welcomeStartAction;
+
+  /// No description provided for @welcomeEggLabel.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tuo cucciolo, ancora nell\'uovo, ti aspetta'**
+  String get welcomeEggLabel;
+
+  /// No description provided for @interestsTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Cosa ti interessa?'**
+  String get interestsTitle;
+
+  /// No description provided for @interestsBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Scegli gli argomenti che preferisci: li useremo per proporti quiz e curiosità. Potrai cambiarli quando vuoi dal profilo.'**
+  String get interestsBody;
+
+  /// No description provided for @interestsSelectedCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =0{Nessun argomento scelto} =1{1 argomento scelto} other{{count} argomenti scelti}}'**
+  String interestsSelectedCount(int count);
+
+  /// No description provided for @interestsMinHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Scegline almeno uno per continuare.'**
+  String get interestsMinHint;
+
+  /// No description provided for @aboutTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Parlaci un po\' di te'**
+  String get aboutTitle;
+
+  /// No description provided for @aboutBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Entrambe le risposte sono facoltative. L\'età ci serve solo per scegliere domande adatte: non chiediamo la data di nascita.'**
+  String get aboutBody;
+
+  /// No description provided for @nicknameLabel.
+  ///
+  /// In it, this message translates to:
+  /// **'Soprannome (facoltativo)'**
+  String get nicknameLabel;
+
+  /// No description provided for @nicknameHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Es. EcoAle'**
+  String get nicknameHint;
+
+  /// No description provided for @nicknameHelper.
+  ///
+  /// In it, this message translates to:
+  /// **'Non usare il tuo nome e cognome completi.'**
+  String get nicknameHelper;
+
+  /// No description provided for @ageRangeLabel.
+  ///
+  /// In it, this message translates to:
+  /// **'Età (facoltativa)'**
+  String get ageRangeLabel;
+
+  /// No description provided for @ageRange13to15.
+  ///
+  /// In it, this message translates to:
+  /// **'13–15 anni'**
+  String get ageRange13to15;
+
+  /// No description provided for @ageRange16to18.
+  ///
+  /// In it, this message translates to:
+  /// **'16–18 anni'**
+  String get ageRange16to18;
+
+  /// No description provided for @ageRange19to22.
+  ///
+  /// In it, this message translates to:
+  /// **'19–22 anni'**
+  String get ageRange19to22;
+
+  /// No description provided for @ageRange23to26.
+  ///
+  /// In it, this message translates to:
+  /// **'23–26 anni'**
+  String get ageRange23to26;
+
+  /// No description provided for @ageRangeOver26.
+  ///
+  /// In it, this message translates to:
+  /// **'27 anni o più'**
+  String get ageRangeOver26;
+
+  /// No description provided for @ageRangeNotSaid.
+  ///
+  /// In it, this message translates to:
+  /// **'Preferisco non dirlo'**
+  String get ageRangeNotSaid;
+
+  /// No description provided for @topicRecycling.
+  ///
+  /// In it, this message translates to:
+  /// **'Riciclo e rifiuti'**
+  String get topicRecycling;
+
+  /// No description provided for @topicClimate.
+  ///
+  /// In it, this message translates to:
+  /// **'Clima'**
+  String get topicClimate;
+
+  /// No description provided for @topicOceans.
+  ///
+  /// In it, this message translates to:
+  /// **'Oceani e vita marina'**
+  String get topicOceans;
+
+  /// No description provided for @topicBiodiversity.
+  ///
+  /// In it, this message translates to:
+  /// **'Animali e biodiversità'**
+  String get topicBiodiversity;
+
+  /// No description provided for @topicForests.
+  ///
+  /// In it, this message translates to:
+  /// **'Foreste ed ecosistemi'**
+  String get topicForests;
+
+  /// No description provided for @topicEnergy.
+  ///
+  /// In it, this message translates to:
+  /// **'Energia rinnovabile'**
+  String get topicEnergy;
+
+  /// No description provided for @topicWater.
+  ///
+  /// In it, this message translates to:
+  /// **'Risparmio d\'acqua'**
+  String get topicWater;
+
+  /// No description provided for @topicTransport.
+  ///
+  /// In it, this message translates to:
+  /// **'Mobilità sostenibile'**
+  String get topicTransport;
+
+  /// No description provided for @topicConsumption.
+  ///
+  /// In it, this message translates to:
+  /// **'Consumo responsabile'**
+  String get topicConsumption;
+
+  /// No description provided for @topicInnovation.
+  ///
+  /// In it, this message translates to:
+  /// **'Innovazione green'**
+  String get topicInnovation;
+
+  /// No description provided for @profileGuestName.
+  ///
+  /// In it, this message translates to:
+  /// **'Ospite'**
+  String get profileGuestName;
+
+  /// No description provided for @profileLevelLine.
+  ///
+  /// In it, this message translates to:
+  /// **'Livello {level} · profilo su questo telefono'**
+  String profileLevelLine(int level);
+
+  /// No description provided for @profileAgeLine.
+  ///
+  /// In it, this message translates to:
+  /// **'Età: {range}'**
+  String profileAgeLine(String range);
+
+  /// No description provided for @profileEditDetails.
+  ///
+  /// In it, this message translates to:
+  /// **'Modifica soprannome ed età'**
+  String get profileEditDetails;
+
+  /// No description provided for @profileEditTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Soprannome ed età'**
+  String get profileEditTitle;
+
+  /// No description provided for @profileInterestsTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'I tuoi interessi'**
+  String get profileInterestsTitle;
+
+  /// No description provided for @profileInterestsBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca un argomento per attivarlo o disattivarlo. Le modifiche vengono salvate subito e i tuoi progressi restano invariati.'**
+  String get profileInterestsBody;
+
+  /// No description provided for @profileKeepOneInterest.
+  ///
+  /// In it, this message translates to:
+  /// **'Tieni almeno un interesse.'**
+  String get profileKeepOneInterest;
+
+  /// No description provided for @profileDataTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'I tuoi dati'**
+  String get profileDataTitle;
+
+  /// No description provided for @profileDataBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. EcoQuest non usa la tua posizione e non chiede la data di nascita.'**
+  String get profileDataBody;
 }
 
 class _AppLocalizationsDelegate

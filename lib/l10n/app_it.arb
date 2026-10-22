@@ -56,6 +56,72 @@
   "learnBody": "Qui arriveranno quiz, mini-giochi e curiosità sull'ambiente.",
   "petTitle": "La stanza del tuo cucciolo",
   "petBody": "Qui potrai prenderti cura del tuo compagno e riciclare i rifiuti della sua stanza.",
-  "profileTitle": "Il tuo profilo",
-  "profileBody": "Qui troverai i tuoi interessi, i progressi e le impostazioni."
+  "onboardingStep": "Passo {step} di {total}",
+  "@onboardingStep": {
+    "placeholders": {
+      "step": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "backAction": "Indietro",
+  "nextAction": "Avanti",
+  "skipAction": "Salta",
+  "finishAction": "Fine",
+  "saveAction": "Salva",
+  "cancelAction": "Annulla",
+
+  "welcomeTitle": "Ti diamo il benvenuto in EcoQuest!",
+  "welcomeBody": "Impara a proteggere l'ambiente giocando. Ogni quiz e ogni rifiuto riciclato aiutano il tuo cucciolo a schiudersi e a vivere in una stanza sempre più verde.",
+  "welcomePrivacy": "Non serve un account: i tuoi progressi vengono salvati su questo telefono.",
+  "welcomeStartAction": "Iniziamo",
+  "welcomeEggLabel": "Il tuo cucciolo, ancora nell'uovo, ti aspetta",
+
+  "interestsTitle": "Cosa ti interessa?",
+  "interestsBody": "Scegli gli argomenti che preferisci: li useremo per proporti quiz e curiosità. Potrai cambiarli quando vuoi dal profilo.",
+  "interestsSelectedCount": "{count, plural, =0{Nessun argomento scelto} =1{1 argomento scelto} other{{count} argomenti scelti}}",
+  "@interestsSelectedCount": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "interestsMinHint": "Scegline almeno uno per continuare.",
+
+  "aboutTitle": "Parlaci un po' di te",
+  "aboutBody": "Entrambe le risposte sono facoltative. L'età ci serve solo per scegliere domande adatte: non chiediamo la data di nascita.",
+  "nicknameLabel": "Soprannome (facoltativo)",
+  "nicknameHint": "Es. EcoAle",
+  "nicknameHelper": "Non usare il tuo nome e cognome completi.",
+  "ageRangeLabel": "Età (facoltativa)",
+  "ageRange13to15": "13–15 anni",
+  "ageRange16to18": "16–18 anni",
+  "ageRange19to22": "19–22 anni",
+  "ageRange23to26": "23–26 anni",
+  "ageRangeOver26": "27 anni o più",
+  "ageRangeNotSaid": "Preferisco non dirlo",
+
+  "topicRecycling": "Riciclo e rifiuti",
+  "topicClimate": "Clima",
+  "topicOceans": "Oceani e vita marina",
+  "topicBiodiversity": "Animali e biodiversità",
+  "topicForests": "Foreste ed ecosistemi",
+  "topicEnergy": "Energia rinnovabile",
+  "topicWater": "Risparmio d'acqua",
+  "topicTransport": "Mobilità sostenibile",
+  "topicConsumption": "Consumo responsabile",
+  "topicInnovation": "Innovazione green",
+
+  "profileGuestName": "Ospite",
+  "profileLevelLine": "Livello {level} · profilo su questo telefono",
+  "@profileLevelLine": {
+    "placeholders": { "level": { "type": "int" } }
+  },
+  "profileAgeLine": "Età: {range}",
+  "@profileAgeLine": {
+    "placeholders": { "range": { "type": "String" } }
+  },
+  "profileEditDetails": "Modifica soprannome ed età",
+  "profileEditTitle": "Soprannome ed età",
+  "profileInterestsTitle": "I tuoi interessi",
+  "profileInterestsBody": "Tocca un argomento per attivarlo o disattivarlo. Le modifiche vengono salvate subito e i tuoi progressi restano invariati.",
+  "profileKeepOneInterest": "Tieni almeno un interesse.",
+  "profileDataTitle": "I tuoi dati",
+  "profileDataBody": "Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. EcoQuest non usa la tua posizione e non chiede la data di nascita."
 }
