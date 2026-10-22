@@ -1,0 +1,269 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "waste_001",
+      "name": "Bottiglia d'acqua di plastica",
+      "icon": "bottle",
+      "category": "plastic_metal",
+      "difficulty": 1,
+      "explanation": "È un imballaggio in plastica, come le bottiglie di latte, bibite e olio: svuotala e buttala con plastica e metalli.",
+      "localNote": null,
+      "source": { "name": "COREPLA", "url": "https://www.corepla.it/cosa-si-mette-nella-raccolta-differenziata/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "BOTTIGLIE DI ACQUA, LATTE, BIBITE E OLIO"
+    },
+    {
+      "id": "waste_002",
+      "name": "Lattina della bibita",
+      "icon": "can",
+      "category": "plastic_metal",
+      "difficulty": 1,
+      "explanation": "La lattina è un imballaggio in alluminio, come le vaschette e le scatolette per il cibo: svuotala prima di buttarla.",
+      "localNote": "In alcuni Comuni i metalli vanno con il vetro: controlla le regole del tuo Comune.",
+      "source": { "name": "CIAL", "url": "https://www.cial.it/5regole/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "oltre alle più note lattine per bevande, vanno inseriti anche: vaschette e scatolette per il cibo"
+    },
+    {
+      "id": "waste_003",
+      "name": "Giornale o rivista",
+      "icon": "newspaper",
+      "category": "paper",
+      "difficulty": 1,
+      "explanation": "Giornali, riviste e fumetti sono carta pulita: in cartiera diventano nuova carta.",
+      "localNote": null,
+      "source": { "name": "Comieco", "url": "https://www.comieco.org/carta-e-cartone/la-raccolta-differenziata/dove-lo-butto/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "Giornali, riviste, fumetti, fotocopie"
+    },
+    {
+      "id": "waste_004",
+      "name": "Scatola di cartone",
+      "icon": "box",
+      "category": "paper",
+      "difficulty": 1,
+      "explanation": "Le scatole di cartone, anche quelle degli acquisti online, vanno nella carta. Ricordati di appiattirle prima di buttarle!",
+      "localNote": null,
+      "source": { "name": "Comieco", "url": "https://www.comieco.org/carta-e-cartone/la-raccolta-differenziata/dove-lo-butto/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "Scatole in cartoncino e cartone per e-commerce, appiattite"
+    },
+    {
+      "id": "waste_005",
+      "name": "Avanzi di cibo",
+      "icon": "food",
+      "category": "organic",
+      "difficulty": 1,
+      "explanation": "Gli scarti di cucina sono rifiuti organici: negli impianti diventano compost e biogas.",
+      "localNote": null,
+      "source": { "name": "CIC - Consorzio Italiano Compostatori", "url": "https://www.compost.it/cittadini-e-comuni/come-raccogliere-lo-scarto-umido-di-qualita/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "SCARTI DI CUCINA inclusi gusci e uova"
+    },
+    {
+      "id": "waste_006",
+      "name": "Buccia di banana",
+      "icon": "fruit",
+      "category": "organic",
+      "difficulty": 1,
+      "explanation": "Le bucce di frutta e verdura sono scarti di cucina: vanno nell'umido e si trasformano in compost.",
+      "localNote": null,
+      "source": { "name": "CIC - Consorzio Italiano Compostatori", "url": "https://www.compost.it/cittadini-e-comuni/come-raccogliere-lo-scarto-umido-di-qualita/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "SCARTI DI CUCINA inclusi gusci e uova"
+    },
+    {
+      "id": "waste_007",
+      "name": "Bottiglia di vetro",
+      "icon": "bottle",
+      "category": "glass",
+      "difficulty": 1,
+      "explanation": "Le bottiglie sono imballaggi in vetro: svuotale, togli il tappo e buttale nel vetro.",
+      "localNote": null,
+      "source": { "name": "CoReVe", "url": "https://coreve.it/imballaggi-in-vetro/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "solo bottiglie e vasetti in vetro da imballaggio possono essere riciclati!"
+    },
+    {
+      "id": "waste_008",
+      "name": "Vasetto della marmellata",
+      "icon": "jar",
+      "category": "glass",
+      "difficulty": 1,
+      "explanation": "Il vasetto è un imballaggio in vetro: svuotalo dai residui e togli il coperchio, che va separato dal vetro.",
+      "localNote": null,
+      "source": { "name": "CoReVe", "url": "https://coreve.it/imballaggi-in-vetro/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "La tua marmellata"
+    },
+    {
+      "id": "waste_009",
+      "name": "Flacone del detersivo",
+      "icon": "bottle",
+      "category": "plastic_metal",
+      "difficulty": 2,
+      "explanation": "Flaconi di detersivi, saponi e cosmetici sono imballaggi in plastica: svuotali bene e buttali con plastica e metalli.",
+      "localNote": null,
+      "source": { "name": "COREPLA", "url": "https://www.corepla.it/cosa-si-mette-nella-raccolta-differenziata/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "FLACONI E DISPENSER PER DETERSIVI, SAPONI E COSMETICI"
+    },
+    {
+      "id": "waste_010",
+      "name": "Vaschetta di polistirolo",
+      "icon": "tray",
+      "category": "plastic_metal",
+      "difficulty": 2,
+      "explanation": "Il polistirolo è una plastica: le vaschette per alimenti sono imballaggi, quindi svuotale e buttale nella plastica.",
+      "localNote": null,
+      "source": { "name": "COREPLA", "url": "https://www.corepla.it/cittadini/buone-pratiche/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "Le vaschette in polistirolo, essendo imballaggi, vanno nella raccolta differenziata della plastica,"
+    },
+    {
+      "id": "waste_011",
+      "name": "Vaschetta di alluminio",
+      "icon": "tray",
+      "category": "plastic_metal",
+      "difficulty": 2,
+      "explanation": "Non solo lattine: anche vaschette e scatolette per il cibo sono imballaggi in alluminio. Svuotale prima di buttarle.",
+      "localNote": "In alcuni Comuni i metalli vanno con il vetro: controlla le regole del tuo Comune.",
+      "source": { "name": "CIAL", "url": "https://www.cial.it/5regole/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "oltre alle più note lattine per bevande, vanno inseriti anche: vaschette e scatolette per il cibo"
+    },
+    {
+      "id": "waste_012",
+      "name": "Sacchetto di carta del pane",
+      "icon": "bag",
+      "category": "paper",
+      "difficulty": 2,
+      "explanation": "I sacchetti di carta del pane, della frutta o della spesa vanno nella carta. Togli prima briciole e avanzi.",
+      "localNote": null,
+      "source": { "name": "Comieco", "url": "https://www.comieco.org/carta-e-cartone/la-raccolta-differenziata/dove-lo-butto/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "Sacchetti in carta (es. pane, ortofrutta, spesa)"
+    },
+    {
+      "id": "waste_013",
+      "name": "Gusci d'uovo",
+      "icon": "eggshell",
+      "category": "organic",
+      "difficulty": 2,
+      "explanation": "Anche se sono duri, i gusci d'uovo sono scarti di cucina: vanno nell'umido insieme agli altri avanzi.",
+      "localNote": null,
+      "source": { "name": "CIC - Consorzio Italiano Compostatori", "url": "https://www.compost.it/cittadini-e-comuni/come-raccogliere-lo-scarto-umido-di-qualita/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "SCARTI DI CUCINA inclusi gusci e uova"
+    },
+    {
+      "id": "waste_014",
+      "name": "Barattolo di vetro della passata",
+      "icon": "jar",
+      "category": "glass",
+      "difficulty": 2,
+      "explanation": "La bottiglia o il barattolo della passata è un imballaggio in vetro. Svuotalo e separa il tappo di metallo.",
+      "localNote": null,
+      "source": { "name": "CoReVe", "url": "https://coreve.it/imballaggi-in-vetro/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "La tua passata di pomodoro"
+    },
+    {
+      "id": "waste_015",
+      "name": "Bottiglia d'olio di vetro",
+      "icon": "bottle",
+      "category": "glass",
+      "difficulty": 2,
+      "explanation": "Una volta vuota, la bottiglia dell'olio è un normale imballaggio in vetro: va nel vetro come le altre bottiglie.",
+      "localNote": null,
+      "source": { "name": "CoReVe", "url": "https://coreve.it/imballaggi-in-vetro/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "La tua bottiglia d'olio"
+    },
+    {
+      "id": "waste_016",
+      "name": "Spazzolino da denti",
+      "icon": "toothbrush",
+      "category": "residual",
+      "difficulty": 2,
+      "explanation": "Lo spazzolino è di plastica, ma non è un imballaggio: nella raccolta della plastica non ci va. Buttalo nell'indifferenziato.",
+      "localNote": "Le regole per la plastica non da imballaggio cambiano tra i Comuni: controlla quelle del tuo.",
+      "source": { "name": "Comune di Gaeta - Dizionario dei rifiuti", "url": "https://comunicacity.net/gaeta/rdiff/dizionario/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "Spazzolino da denti: residuo indifferenziato"
+    },
+    {
+      "id": "waste_017",
+      "name": "Penna biro",
+      "icon": "pen",
+      "category": "residual",
+      "difficulty": 2,
+      "explanation": "Le penne sono di plastica, ma non sono imballaggi: nella raccolta della plastica non ci vanno. Buttale nell'indifferenziato.",
+      "localNote": "Le regole per la plastica non da imballaggio cambiano tra i Comuni: controlla quelle del tuo.",
+      "source": { "name": "Comune di Gaeta - Dizionario dei rifiuti", "url": "https://comunicacity.net/gaeta/rdiff/dizionario/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "Biro e penna a sfera: residuo indifferenziato"
+    },
+    {
+      "id": "waste_018",
+      "name": "Scontrino",
+      "icon": "receipt",
+      "category": "residual",
+      "difficulty": 3,
+      "explanation": "Quasi tutti gli scontrini sono in carta termica, che crea problemi nel riciclo della carta: se non c'è scritto che è riciclabile, va nell'indifferenziato.",
+      "localNote": "Se sul retro c'è scritto che è riciclabile con la carta, buttalo nella carta.",
+      "source": { "name": "Comieco", "url": "https://www.comieco.org/dove-buttare-gli-scontrini/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "Sul retro dello scontrino non trovate l'indicazione riciclabile con la carta e NON va nella raccolta differenziata."
+    },
+    {
+      "id": "waste_019",
+      "name": "Cartone della pizza unto, senza avanzi",
+      "icon": "pizza_box",
+      "category": "paper",
+      "difficulty": 3,
+      "explanation": "Un po' d'unto non è un problema: il cartone va nella carta. Gli avanzi vanno nell'umido e le parti intrise di pomodoro nell'indifferenziato.",
+      "localNote": "Alcuni Comuni chiedono di mettere i cartoni molto unti nell'umido: controlla le regole del tuo Comune.",
+      "source": { "name": "Comieco", "url": "https://www.comieco.org/dove-buttare-il-cartone-della-pizza/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "il contenitore della pizza va gettato insieme alla carta, come un normale cartone da imballaggio, anche se unto."
+    },
+    {
+      "id": "waste_020",
+      "name": "Cartone del latte (tipo Tetra Pak)",
+      "icon": "carton",
+      "category": "paper",
+      "difficulty": 3,
+      "explanation": "È fatto soprattutto di carta, con strati sottili di plastica e alluminio: in ogni caso viene riciclato in cartiera.",
+      "localNote": "In molti Comuni va con plastica e metalli: controlla le regole del tuo Comune.",
+      "source": { "name": "Comieco", "url": "https://www.comieco.org/dove-buttare-i-cartoni-per-bevande/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "nel bidone di carta e cartone; nella raccolta multimateriale (plastica e metalli), da cui vengono poi separati"
+    },
+    {
+      "id": "waste_021",
+      "name": "Tazza di ceramica rotta",
+      "icon": "cup",
+      "category": "residual",
+      "difficulty": 3,
+      "explanation": "La ceramica non è vetro: fonde a una temperatura molto più alta e rovina il vetro riciclato. Mai nella campana del vetro!",
+      "localNote": "Alcuni Comuni chiedono di portare la ceramica al centro di raccolta: controlla le regole del tuo Comune.",
+      "source": { "name": "CoReVe", "url": "https://coreve.it/regole-del-riciclo/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "La destinazione giusta? Indifferenziato o isola ecologica. Sempre lontano dalla campana del vetro!"
+    },
+    {
+      "id": "waste_022",
+      "name": "Bicchiere di cristallo",
+      "icon": "glass",
+      "category": "residual",
+      "difficulty": 3,
+      "explanation": "Sembra vetro, ma il cristallo contiene piombo, che è vietato negli imballaggi: per questo non va nel vetro ma nell'indifferenziato.",
+      "localNote": null,
+      "source": { "name": "CoReVe", "url": "https://coreve.it/regole-del-riciclo/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "Dove va allora? Nell'indifferenziato (o all'isola ecologica, se in grandi quantità da smaltire)."
+    },
+    {
+      "id": "waste_023",
+      "name": "Piccolo giocattolo di plastica",
+      "icon": "toy",
+      "category": "residual",
+      "difficulty": 3,
+      "explanation": "La raccolta della plastica riguarda solo gli imballaggi: un giocattolo non lo è. Se è piccolo e senza pile, va nell'indifferenziato.",
+      "localNote": "I giochi grandi o elettronici vanno spesso al centro di raccolta: controlla le regole del tuo Comune.",
+      "source": { "name": "Comune di Gaeta - Dizionario dei rifiuti", "url": "https://comunicacity.net/gaeta/rdiff/dizionario/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "Giocattoli non elettrici e non elettronici: residuo indifferenziato"
+    },
+    {
+      "id": "waste_024",
+      "name": "Tovagliolo di carta sporco di cibo",
+      "icon": "tissue",
+      "category": "organic",
+      "difficulty": 3,
+      "explanation": "La carta sporca di cibo non va con la carta, ma è compostabile: i tovaglioli sporchi di cibo vanno nell'umido.",
+      "localNote": null,
+      "source": { "name": "CIC - Consorzio Italiano Compostatori", "url": "https://www.compost.it/cittadini-e-comuni/come-raccogliere-lo-scarto-umido-di-qualita/", "verifiedOn": "2026-10-22" },
+      "sourceExcerpt": "TOVAGLIOLI, FAZZOLETTI E TOVAGLIE DI CARTA imbrattati di alimenti"
+    }
+  ]
+}

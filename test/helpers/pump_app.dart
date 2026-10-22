@@ -4,6 +4,7 @@ import 'package:ecoquest/app/app.dart';
 import 'package:ecoquest/app/theme/app_theme.dart';
 import 'package:ecoquest/core/animations.dart';
 import 'package:ecoquest/data/content/quiz_content.dart';
+import 'package:ecoquest/data/content/waste_content.dart';
 import 'package:ecoquest/data/save/in_memory_save_repository.dart';
 import 'package:ecoquest/data/save/save_repository.dart';
 import 'package:ecoquest/domain/game_controller.dart';
@@ -11,6 +12,7 @@ import 'package:ecoquest/domain/models/eco_topic.dart';
 import 'package:ecoquest/domain/models/game_state.dart';
 import 'package:ecoquest/domain/models/player_profile.dart';
 import 'package:ecoquest/domain/models/quiz_question.dart';
+import 'package:ecoquest/domain/models/waste_item.dart';
 import 'package:ecoquest/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,6 +20,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'quiz_fixtures.dart';
+import 'waste_fixtures.dart';
 
 const tabLabels = ['Home', 'Impara', 'Cucciolo', 'Profilo'];
 
@@ -43,6 +46,7 @@ Future<void> pumpEcoQuestApp(
   WidgetTester tester, {
   SaveRepository? repository,
   QuizBank? quizBank,
+  WasteBank? wasteBank,
 }) async {
   await tester.pumpWidget(ProviderScope(
     retry: (retryCount, error) => null,
@@ -52,6 +56,8 @@ Future<void> pumpEcoQuestApp(
       clockProvider.overrideWithValue(() => testNow),
       randomProvider.overrideWithValue(Random(42)),
       quizBankProvider.overrideWith((ref) async => quizBank ?? testQuizBank()),
+      wasteBankProvider
+          .overrideWith((ref) async => wasteBank ?? testWasteBank()),
       // Endless idle animations would keep pumpAndSettle waiting forever.
       animationsEnabledProvider.overrideWithValue(false),
     ],

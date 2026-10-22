@@ -718,6 +718,162 @@ abstract class AppLocalizations {
   /// **'Anche il tuo cucciolo è più felice grazie al quiz!'**
   String get quizPetHappier;
 
+  /// No description provided for @binPlasticMetal.
+  ///
+  /// In it, this message translates to:
+  /// **'Plastica e metalli'**
+  String get binPlasticMetal;
+
+  /// No description provided for @binPaper.
+  ///
+  /// In it, this message translates to:
+  /// **'Carta e cartone'**
+  String get binPaper;
+
+  /// No description provided for @binOrganic.
+  ///
+  /// In it, this message translates to:
+  /// **'Organico'**
+  String get binOrganic;
+
+  /// No description provided for @binGlass.
+  ///
+  /// In it, this message translates to:
+  /// **'Vetro'**
+  String get binGlass;
+
+  /// No description provided for @binResidual.
+  ///
+  /// In it, this message translates to:
+  /// **'Indifferenziato'**
+  String get binResidual;
+
+  /// No description provided for @cleanupProgress.
+  ///
+  /// In it, this message translates to:
+  /// **'{done} di {total} sistemati'**
+  String cleanupProgress(int done, int total);
+
+  /// No description provided for @cleanupLocalRules.
+  ///
+  /// In it, this message translates to:
+  /// **'Qui trovi le indicazioni generali: le regole possono cambiare da Comune a Comune, controlla sempre quelle del tuo.'**
+  String get cleanupLocalRules;
+
+  /// No description provided for @cleanupHowTo.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca un rifiuto e poi il bidone giusto. Puoi anche trascinarlo sul bidone.'**
+  String get cleanupHowTo;
+
+  /// No description provided for @cleanupSelected.
+  ///
+  /// In it, this message translates to:
+  /// **'Selezionato: {name}. Ora tocca un bidone.'**
+  String cleanupSelected(String name);
+
+  /// No description provided for @cleanupPickFirst.
+  ///
+  /// In it, this message translates to:
+  /// **'Prima scegli un rifiuto nella stanza.'**
+  String get cleanupPickFirst;
+
+  /// No description provided for @cleanupCorrect.
+  ///
+  /// In it, this message translates to:
+  /// **'Giusto! {name} va in: {bin}.'**
+  String cleanupCorrect(String name, String bin);
+
+  /// No description provided for @cleanupWrong.
+  ///
+  /// In it, this message translates to:
+  /// **'Quasi! {name} va in: {bin}.'**
+  String cleanupWrong(String name, String bin);
+
+  /// No description provided for @cleanupComboBonus.
+  ///
+  /// In it, this message translates to:
+  /// **'Combo di {count}: monete bonus!'**
+  String cleanupComboBonus(int count);
+
+  /// No description provided for @cleanupCombo.
+  ///
+  /// In it, this message translates to:
+  /// **'Combo x{count}'**
+  String cleanupCombo(int count);
+
+  /// No description provided for @cleanupExit.
+  ///
+  /// In it, this message translates to:
+  /// **'Esci dalla pulizia'**
+  String get cleanupExit;
+
+  /// No description provided for @cleanupExitTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Vuoi interrompere la pulizia?'**
+  String get cleanupExitTitle;
+
+  /// No description provided for @cleanupExitBody.
+  ///
+  /// In it, this message translates to:
+  /// **'I rifiuti già sistemati non verranno salvati e non riceverai monete.'**
+  String get cleanupExitBody;
+
+  /// No description provided for @cleanupExitStay.
+  ///
+  /// In it, this message translates to:
+  /// **'Continua a pulire'**
+  String get cleanupExitStay;
+
+  /// No description provided for @cleanupNoItems.
+  ///
+  /// In it, this message translates to:
+  /// **'Non ci sono ancora rifiuti da sistemare.'**
+  String get cleanupNoItems;
+
+  /// No description provided for @cleanupResultScore.
+  ///
+  /// In it, this message translates to:
+  /// **'{correct} rifiuti su {total} nel bidone giusto'**
+  String cleanupResultScore(int correct, int total);
+
+  /// No description provided for @cleanupResultCoins.
+  ///
+  /// In it, this message translates to:
+  /// **'+{coins} monete'**
+  String cleanupResultCoins(int coins);
+
+  /// No description provided for @cleanupResultBestCombo.
+  ///
+  /// In it, this message translates to:
+  /// **'Combo migliore: {count}'**
+  String cleanupResultBestCombo(int count);
+
+  /// No description provided for @cleanupRoomClean.
+  ///
+  /// In it, this message translates to:
+  /// **'La stanza è pulita!'**
+  String get cleanupRoomClean;
+
+  /// No description provided for @cleanupPetCleaner.
+  ///
+  /// In it, this message translates to:
+  /// **'La stanza è in ordine e anche il tuo cucciolo è più pulito!'**
+  String get cleanupPetCleaner;
+
+  /// No description provided for @cleanupRepeatNote.
+  ///
+  /// In it, this message translates to:
+  /// **'I rifiuti che sapevi già sistemare valgono meno monete: le combo invece valgono sempre!'**
+  String get cleanupRepeatNote;
+
+  /// No description provided for @cleanupOpenFromPet.
+  ///
+  /// In it, this message translates to:
+  /// **'Pulisci la stanza'**
+  String get cleanupOpenFromPet;
+
   /// No description provided for @onboardingStep.
   ///
   /// In it, this message translates to:

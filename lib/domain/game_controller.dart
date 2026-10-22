@@ -8,12 +8,14 @@ import 'models/game_state.dart';
 import 'models/learning_progress.dart';
 import 'models/pet_state.dart';
 import 'models/player_profile.dart';
+import 'models/recycling_progress.dart';
 import 'models/reward.dart';
 import 'rules/economy_config.dart';
 import 'rules/pet_rules.dart';
 import 'rules/profile_rules.dart';
 import 'rules/progression.dart';
 import 'rules/quiz_rules.dart';
+import 'rules/recycling_rules.dart';
 
 /// The balancing numbers. Tests can override this with other values.
 final economyProvider = Provider<EconomyConfig>((ref) => EconomyConfig.defaults);
@@ -62,6 +64,21 @@ class QuizOutcome {
   final bool petHappier;
 }
 
+/// The result of [GameController.completeCleanup], for the results screen.
+class CleanupOutcome {
+  const CleanupOutcome({
+    required this.score,
+    required this.claim,
+    this.petCleaner = false,
+  });
+
+  final CleanupScore score;
+  final ClaimResult claim;
+
+  /// True when the clean room also made a hatched pet cleaner.
+  final bool petCleaner;
+}
+
 /// The single place where the game state changes.
 ///
 /// Every change: compute the new state → show it → save it.
@@ -72,7 +89,7 @@ class QuizOutcome {
 /// | Planned method (milestone)         | Builds on / claim id                |
 /// |------------------------------------|-------------------------------------|
 /// | `completeQuiz` (quiz) — DONE       | claimReward, `quiz:sessionId`       |
-/// | `sortWasteItem` (recycling)        | claimReward, `sort:roundId:itemNo`  |
+/// | `completeCleanup` — DONE           | claimReward, `sort:roundId`         |
 /// | `claimMission` (missions)          | claimReward, `mission:missionId:day`|
 /// | `spendCoins` / `buyItem` (shop)    | new spend method, same pattern      |
 /// | `rollCosmetic`, `equip` (cosmetics)| inventory update                    |
@@ -121,6 +138,28 @@ class GameController extends AsyncNotifier<GameState> {
       pet: petAfterQuiz(current.pet, _now(), _economy),
     ));
     return QuizOutcome(score: score, claim: claim, petHappier: hatched);
+  }
+
+  /// Saves a finished cleanup round: coins (+ XP for a good round), the
+  /// recycling stats and a cleaner pet, in ONE write, paid once per round.
+  Future<CleanupOutcome> completeCleanup({
+    required String roundId,
+    required List<SortedItem> sorted,
+  }) async {
+    final current = state.requireValue;
+    // Score against what was learned BEFORE this round (first-time coins).
+    final score = scoreCleanup(sorted, current.recycling, _economy);
+    final (withReward, claim) = _applyReward(current, 'sort:$roundId',
+        Reward(coins: score.coins, xp: score.xp));
+
+    if (!claim.applied) return CleanupOutcome(score: score, claim: claim);
+
+    final hatched = current.pet.stage != PetStage.egg;
+    await _commit(withReward.copyWith(
+      recycling: current.recycling.record(sorted),
+      pet: petAfterCleanup(current.pet, _now(), _economy),
+    ));
+    return CleanupOutcome(score: score, claim: claim, petCleaner: hatched);
   }
 
   /// Feeds, plays with or bathes the pet. Free, and gives no XP or coins

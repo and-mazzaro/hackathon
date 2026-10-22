@@ -5,6 +5,7 @@ import 'package:ecoquest/domain/models/eco_topic.dart';
 import 'package:ecoquest/domain/models/game_state.dart';
 import 'package:ecoquest/domain/models/learning_progress.dart';
 import 'package:ecoquest/domain/models/pet_state.dart';
+import 'package:ecoquest/domain/models/recycling_progress.dart';
 import 'package:ecoquest/domain/rules/pet_rules.dart';
 import 'package:ecoquest/domain/models/player_profile.dart';
 import 'package:ecoquest/domain/models/reward.dart';
@@ -242,6 +243,52 @@ void main() {
 
       expect(outcome.claim.leveledUp, isTrue);
       expect(outcome.claim.levelAfter, 2);
+    });
+  });
+
+  group('completeCleanup', () {
+    List<SortedItem> sorted(List<bool> results) => [
+          for (var i = 0; i < results.length; i++)
+            SortedItem(itemId: 'w$i', correct: results[i]),
+        ];
+
+    test('adds coins, XP and recycling stats in one save', () async {
+      final app = await startApp();
+
+      final outcome = await controller(app).completeCleanup(
+          roundId: 'r1', sorted: sorted(List.filled(8, true)));
+
+      expect(outcome.claim.applied, isTrue);
+      expect(game(app).progress.coins, 22);
+      expect(game(app).progress.totalXp, 10);
+      expect(game(app).recycling.roundsCompleted, 1);
+      expect(game(app).recycling.itemsCorrect, 8);
+      expect(repository.saveCount, 1);
+    });
+
+    test('the same round is never paid twice', () async {
+      final app = await startApp();
+      final items = sorted([true, false, true]);
+
+      await controller(app).completeCleanup(roundId: 'r1', sorted: items);
+      final again =
+          await controller(app).completeCleanup(roundId: 'r1', sorted: items);
+
+      expect(again.claim.applied, isFalse);
+      expect(game(app).recycling.roundsCompleted, 1);
+      expect(game(app).progress.coins, 4);
+    });
+
+    test('a clean room makes the hatched pet cleaner', () async {
+      final app = await startApp();
+      await controller(app).claimReward('xp', const Reward(xp: 100));
+      await controller(app).evolvePet(); // cleanliness 80
+
+      final outcome = await controller(app)
+          .completeCleanup(roundId: 'r1', sorted: sorted([true]));
+
+      expect(outcome.petCleaner, isTrue);
+      expect(game(app).pet.cleanliness, 100); // 80 + 25, capped
     });
   });
 

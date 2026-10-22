@@ -5,6 +5,7 @@ import 'learning_progress.dart';
 import 'pet_state.dart';
 import 'player_profile.dart';
 import 'player_progress.dart';
+import 'recycling_progress.dart';
 
 /// Everything that is saved. One object, saved as one JSON document, so a
 /// reward and the "already claimed" mark are always written together.
@@ -18,6 +19,7 @@ class GameState {
     required this.pet,
     required this.inventory,
     this.learning = const LearningProgress(),
+    this.recycling = const RecyclingProgress(),
   });
 
   /// A brand-new player.
@@ -50,12 +52,16 @@ class GameState {
   /// Quiz statistics. Added in M5: older saves simply start empty.
   final LearningProgress learning;
 
+  /// Recycling statistics. Added in M7: older saves simply start empty.
+  final RecyclingProgress recycling;
+
   GameState copyWith({
     PlayerProfile? profile,
     PlayerProgress? progress,
     PetState? pet,
     Inventory? inventory,
     LearningProgress? learning,
+    RecyclingProgress? recycling,
   }) {
     return GameState(
       profile: profile ?? this.profile,
@@ -63,6 +69,7 @@ class GameState {
       pet: pet ?? this.pet,
       inventory: inventory ?? this.inventory,
       learning: learning ?? this.learning,
+      recycling: recycling ?? this.recycling,
     );
   }
 
@@ -72,6 +79,7 @@ class GameState {
         'pet': pet.toJson(),
         'inventory': inventory.toJson(),
         'learning': learning.toJson(),
+        'recycling': recycling.toJson(),
       };
 
   /// [now] is only used for dates missing from an old or partial save.
@@ -82,6 +90,7 @@ class GameState {
       pet: PetState.fromJson(readObject(json, 'pet'), now: now),
       inventory: Inventory.fromJson(readObject(json, 'inventory')),
       learning: LearningProgress.fromJson(readObject(json, 'learning')),
+      recycling: RecyclingProgress.fromJson(readObject(json, 'recycling')),
     );
   }
 }

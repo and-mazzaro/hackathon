@@ -44,7 +44,10 @@ void main() {
     await scrollTo(tester, find.text('Pulisci la stanza'));
     await tester.tap(find.text('Pulisci la stanza'));
     await tester.pumpAndSettle();
-    expect(find.text('Uovo misterioso'), findsOneWidget);
+    // Opens the Room Cleanup game; close it to return to Home.
+    expect(find.text('0 di 8 sistemati'), findsOneWidget);
+    await tester.tap(find.byTooltip('Esci dalla pulizia'));
+    await tester.pumpAndSettle();
 
     await tapTab(tester, 'Home');
     await scrollTo(tester, find.text('Quiz del giorno'));

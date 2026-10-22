@@ -23,9 +23,14 @@ class EconomyConfig {
     this.youngLevel = 5,
     this.adultLevel = 10,
     this.levelsPerRoomPlant = 2,
+    this.cleanupItemCount = 8,
     this.coinsPerCorrectSort = 2,
+    this.coinsPerRepeatSort = 1,
     this.sortComboLength = 3,
     this.sortComboBonusCoins = 3,
+    this.cleanupGoodRoundXp = 10,
+    this.cleanupGoodRoundPercent = 75,
+    this.cleanupPetCleanliness = 25,
     this.ticketPriceInCoins = 100,
   })  : assert(xpForFirstLevelUp > 0),
         assert(xpIncreasePerLevel >= 0);
@@ -80,12 +85,25 @@ class EconomyConfig {
   /// The room gets one more plant every N levels (max 3).
   final int levelsPerRoomPlant;
 
-  // Room Cleanup (Mode 1) — used from the recycling milestone
+  // Room Cleanup (Mode 1)
+  final int cleanupItemCount;
+
+  /// Coins for an item sorted correctly for the first time.
   final int coinsPerCorrectSort;
+
+  /// Coins for an item already sorted correctly before (anti-farming).
+  final int coinsPerRepeatSort;
 
   /// Every [sortComboLength] correct sorts in a row pay [sortComboBonusCoins].
   final int sortComboLength;
   final int sortComboBonusCoins;
+
+  /// XP for a round with at least [cleanupGoodRoundPercent]% right.
+  final int cleanupGoodRoundXp;
+  final int cleanupGoodRoundPercent;
+
+  /// A clean room makes a hatched pet cleaner too.
+  final int cleanupPetCleanliness;
 
   // Shop — used from the cosmetics milestone
   final int ticketPriceInCoins;

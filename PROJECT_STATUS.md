@@ -1,9 +1,10 @@
 # EcoQuest — Project Status
 
-**Current milestone:** M6 — Virtual pet room → **done on Android** (iOS untested, no Mac)
-**Done before:** M1 app shell (`39e8b3d`) · M2 saving (`d7c3454`) · M3 onboarding (`6695199`) · M5 quiz (`11f752a`)
-**Next milestone:** M7 — Recycling game (Room Cleanup): sorting, combos, coins via `claimReward`, cleans the room.
-Read-aloud (flutter_tts) is a small follow-up for the quiz.
+**Current milestone:** M7 — Room Cleanup (recycling game) → **done on Android** (iOS untested, no Mac)
+**Done before:** M1 shell (`39e8b3d`) · M2 saving (`d7c3454`) · M3 onboarding (`6695199`) · M5 quiz (`11f752a`) ·
+M6 pet (`e7b7281`)
+**Next milestone:** M8 — Cosmetics: shop (coins), reward roll (tickets, visible odds, duplicates rule), inventory,
+equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a small follow-up.
 
 ## Environment (lead PC)
 | Item | Status |
@@ -61,7 +62,11 @@ Read-aloud (flutter_tts) is a small follow-up for the quiz.
 | D32 | Pet needs drop per hour (4/3/2) but never below 20; the egg has no needs; decay is CALCULATED (`petNow`) when shown, never saved just by time passing; clock going backwards changes nothing | New (M6) |
 | D33 | Pet stages follow the player level (hatch 2, young 5, adult 10): learning makes the pet grow. Growing is a player action ("Fai schiudere" / "Fai crescere") | New (M6) |
 | D34 | Care (feed/play/bath, +30) is free and gives no XP/coins (cannot be farmed); each completed quiz gives the pet +15 happiness in the same save write | New (M6) |
-| D35 | Looping animations go through `animationsEnabledProvider` (off in tests) and respect the phone's "remove animations" setting | New (M6) |
+| D35 | Looping animations go through `animationsEnabledProvider` (off in tests) and respect the phone's "remove animations" setting | Accepted |
+| D36 | Room Cleanup: 5 bins (plastica e metalli, carta e cartone, organico, vetro, indifferenziato) with GENERAL national guidance, a visible "rules differ by Comune" note and a per-item `localNote` where municipalities differ | New (M7) |
+| D37 | Sorting by tap (item → bin, screen-reader friendly) AND drag that starts at once (no long press: players did not discover it and a plain drag only scrolled); a wrong bin teaches (right bin + why) and never blocks or costs anything | New (M7) |
+| D38 | Coins per round: 2 per first-time correct item, 1 for known items, +3 every 3 in a row; +10 XP for ≥ 75% right; paid once per round (`sort:roundId`) with stats and pet cleanliness (+25) in one write | New (M7) |
+| D39 | Waste content = data: `assets/content/waste_items_it.json` (name, icon key, bin, difficulty, explanation, localNote, source, excerpt), checked by `test/content/waste_content_test.dart` | New (M7) |
 
 ## Implemented (M1)
 - App entry point, `ProviderScope`, router in a provider (fresh router per test)
@@ -120,6 +125,36 @@ Read-aloud (flutter_tts) is a small follow-up for the quiz.
 - `pet_rules.dart`: `petNow`, `moodOf`, `applyCare`, `petAfterQuiz`, `nextStage`, `roomPlants`;
   `GameController.careForPet` / `evolvePet`; `totalXpForLevel` in progression
 
+## Implemented (M7)
+- Room Cleanup (full screen, route `/cleanup`), opened from the Home card "Pulisci la stanza" and from the Pet tab
+- 8 items per round: avoids the last 24 shown, always at least one tricky item (difficulty 3)
+- Tap an item (selected state read by screen readers) then a bin, or drag it straight onto a bin (swiping
+  next to the items still scrolls the page);
+  a bin tapped with nothing selected explains what to do
+- Feedback card after every item: right/wrong with icon + text, the right bin, why, the local note when rules
+  differ, and the source sheet; combo chip ("Combo xN"); a wrong item still leaves the room (no blocking)
+- Result: score, coins, XP, level-up, best combo, newly learned, "the pet is cleaner too", repeat note;
+  exit dialog (X, Android back) that saves nothing
+- With 200% text, bins and "Vedi il risultato" scroll with the page instead of being pinned at the bottom
+- `CleanupRound` (plain Dart), `pickCleanupItems`, `scoreCleanup`, `petAfterCleanup`, `RecyclingProgress`
+  (rounds, sorted, correct, learned ids, last 24 seen); `GameController.completeCleanup`
+- `showSourceSheet` moved to `lib/core/widgets/source_sheet.dart`, shared by quiz and cleanup
+- **Content: 24 items** (plastic/metal 5, paper 5, organic 4, glass 4, residual 6; difficulty 8/9/7), researched by
+  an AI agent that opened every page: COREPLA, CIAL, Comieco, CoReVe, CIC (national consortia) and, for three items
+  with no national page, the Comune di Gaeta waste dictionary. The lead agent re-fetched six of the pages to
+  spot-check the excerpts (all found) and removed explanation details the pages did not support (caps left on,
+  "no rinsing", "recyclable forever", "a few pieces ruin a lot of glass").
+
+### Waste content still needing a human check
+- waste_016 toothbrush, waste_017 pen, waste_023 toy cite a single municipal dictionary (Gaeta). Common practice,
+  but a national or big-city source would be better. The same dictionary disagrees with Comieco on receipts and
+  very greasy pizza boxes, so it is used only where no national page exists.
+- waste_020 drink carton: Comieco allows paper OR plastic/metals depending on the Comune; the game says paper
+  (always recycled at the paper mill) with a local note. waste_019 pizza box follows Comieco ("anche se unto").
+- waste_006 banana peel: the CIC page says "scarti di cucina", it does not name fruit peels.
+- Left out on purpose (sources disagree or only municipal): used tissues, baking paper, coffee grounds, tea bags,
+  CDs, corks, single-use plastic plates. The `wasteIcon` map already has keys for some of them.
+
 ### Content still needing a human check (before the demo)
 - Excerpts were read through a summarising web tool: open a few source pages and compare the wording.
 - Dated figures that will age: biodiversity_005 (ISPRA bear estimate, summer 2025), transport_005 (EEA, 2023),
@@ -140,6 +175,9 @@ Read-aloud (flutter_tts) is a small follow-up for the quiz.
 | `flutter test` after M6 — 147 tests (+ decay/floor/30-day absence/clock backwards, mood, care cap, growth thresholds, plants, controller care/evolve/quiz happiness, Pet tab flows: egg progress, hatch with name, dismissed sheet, feed, already-full, sad hint, guidelines and 200% text in all three states) | ✅ All pass (2026-10-22) |
 | M6 visual check: pet art rendered for every stage/mood (test render), then on the emulator: Home with a hatched pet "Boss" (leaf, mood face, plants, needs 100%), save file shows stage baby + name + needs | ✅ Checked (2026-10-22); the emulator was again used by someone in parallel, so the hatch/care taps were done by hand, not by script |
 | M5 on the emulator: Learn hub with real content and "Per te" order; a personal quiz played (questions easy → hard, wrong-answer feedback with correct answer + explanation); save shows 1 quiz, claim id, XP 0 → 40 | ⚠️ Partly — the emulator was being used at the same time, so the scripted run was interrupted; a clean manual play-through is still worth doing |
+| `flutter test` after M7 — 182 tests (+ item picking/recent/tricky, scoring first-time/repeat/combo/XP threshold, `CleanupRound` select/deselect/wrong bin, old saves without recycling data, `completeCleanup` pay-once + pet cleanliness, cleanup UI: tap sorting, plain drag without holding (fails on the old long-press version), drop outside a bin, wrong-bin feedback with source, empty bin tap, full round saved, exit dialog, Pet tab entry, screen-reader states, guidelines, 200% text on a small phone, **content validation of the real 24-item file**) · `flutter analyze` clean | ✅ All pass (2026-10-22) |
+| M7 on the emulator: Home → Pulisci la stanza → 8 real items; crystal glass into "Vetro" → "Quasi!" card with CoReVe explanation; the other 7 right → "Combo x7", result 7/8, +20 coins, +10 XP, pet cleaner; save shows 1 round, 8 sorted, 7 correct, 7 learned, `sort:` claim | ✅ Checked by script + screenshots (2026-10-22) |
+| M7 drag fix on the emulator: the old version ignored a plain drag (only a ~1 s hold worked); now a quick swipe from an item to a bin sorts it, tap-then-bin still works, swiping on the feedback card scrolls | ✅ Checked by script (2026-10-22) |
 | `flutter build apk --debug` | ✅ Builds |
 | Android emulator (Pixel 7, Android 36): app starts, Home renders, tab switch, system Back from a tab returns to Home | ✅ Checked manually with screenshots (2026-10-22) |
 | Android accessibility tree (uiautomator dump): every stat, balance, image, card and tab has an Italian label | ✅ Checked (2026-10-22) |
@@ -167,9 +205,11 @@ Read-aloud (flutter_tts) is a small follow-up for the quiz.
 2. Choice of Modes 2–4 (options in the Phase 0 plan)
 
 ## Remaining work
-- Commit M6
+- Commit M7
+- Room Cleanup polish ideas: a short "how to play" for first-timers, a simple room drawing that gets tidier as
+  items leave, more items (Pyrex, greaseproof paper and colour-catcher sheets were verified but left out for space)
 - Pet needs are recalculated when a screen rebuilds (tab switch, any action), not every minute while the
   app stays open on the same screen. Fine for the demo; a periodic refresh can be added later.
 - The pet's idle animation keeps Android's `uiautomator dump` from working (it waits for a still screen).
   TalkBack is not affected; scripted device tests should use screenshots or turn animations off.
-- Next: M7 recycling (cleans the room) · M8 cosmetics · M9 recommendations · quiz read-aloud
+- Next: M8 cosmetics · M9 recommendations · quiz read-aloud

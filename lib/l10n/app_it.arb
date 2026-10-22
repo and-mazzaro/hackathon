@@ -204,6 +204,62 @@
   "nextGrowth": "Prossima crescita al livello {level}.",
   "@nextGrowth": { "placeholders": { "level": { "type": "int" } } },
   "quizPetHappier": "Anche il tuo cucciolo è più felice grazie al quiz!",
+
+  "binPlasticMetal": "Plastica e metalli",
+  "binPaper": "Carta e cartone",
+  "binOrganic": "Organico",
+  "binGlass": "Vetro",
+  "binResidual": "Indifferenziato",
+  "cleanupProgress": "{done} di {total} sistemati",
+  "@cleanupProgress": {
+    "placeholders": {
+      "done": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "cleanupLocalRules": "Qui trovi le indicazioni generali: le regole possono cambiare da Comune a Comune, controlla sempre quelle del tuo.",
+  "cleanupHowTo": "Tocca un rifiuto e poi il bidone giusto. Puoi anche trascinarlo sul bidone.",
+  "cleanupSelected": "Selezionato: {name}. Ora tocca un bidone.",
+  "@cleanupSelected": { "placeholders": { "name": { "type": "String" } } },
+  "cleanupPickFirst": "Prima scegli un rifiuto nella stanza.",
+  "cleanupCorrect": "Giusto! {name} va in: {bin}.",
+  "@cleanupCorrect": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "bin": { "type": "String" }
+    }
+  },
+  "cleanupWrong": "Quasi! {name} va in: {bin}.",
+  "@cleanupWrong": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "bin": { "type": "String" }
+    }
+  },
+  "cleanupComboBonus": "Combo di {count}: monete bonus!",
+  "@cleanupComboBonus": { "placeholders": { "count": { "type": "int" } } },
+  "cleanupCombo": "Combo x{count}",
+  "@cleanupCombo": { "placeholders": { "count": { "type": "int" } } },
+  "cleanupExit": "Esci dalla pulizia",
+  "cleanupExitTitle": "Vuoi interrompere la pulizia?",
+  "cleanupExitBody": "I rifiuti già sistemati non verranno salvati e non riceverai monete.",
+  "cleanupExitStay": "Continua a pulire",
+  "cleanupNoItems": "Non ci sono ancora rifiuti da sistemare.",
+  "cleanupResultScore": "{correct} rifiuti su {total} nel bidone giusto",
+  "@cleanupResultScore": {
+    "placeholders": {
+      "correct": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "cleanupResultCoins": "+{coins} monete",
+  "@cleanupResultCoins": { "placeholders": { "coins": { "type": "int" } } },
+  "cleanupResultBestCombo": "Combo migliore: {count}",
+  "@cleanupResultBestCombo": { "placeholders": { "count": { "type": "int" } } },
+  "cleanupRoomClean": "La stanza è pulita!",
+  "cleanupPetCleaner": "La stanza è in ordine e anche il tuo cucciolo è più pulito!",
+  "cleanupRepeatNote": "I rifiuti che sapevi già sistemare valgono meno monete: le combo invece valgono sempre!",
+  "cleanupOpenFromPet": "Pulisci la stanza",
   "onboardingStep": "Passo {step} di {total}",
   "@onboardingStep": {
     "placeholders": {

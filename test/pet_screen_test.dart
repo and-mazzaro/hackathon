@@ -92,7 +92,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(repository.saveCount, 0);
-    expect(find.text('Uovo misterioso'), findsOneWidget);
+    expect(find.text('Fai schiudere l\'uovo'), findsOneWidget); // still an egg
   });
 
   testWidgets('feeding raises satiety, saves and says what happened',

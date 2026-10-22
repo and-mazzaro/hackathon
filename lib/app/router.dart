@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../domain/game_controller.dart';
 import '../domain/models/eco_topic.dart';
+import '../features/cleanup/cleanup_screen.dart';
 import '../features/home/home_screen.dart';
 import '../features/learn/learn_screen.dart';
 import '../features/learn/quiz_screen.dart';
@@ -20,6 +21,9 @@ abstract final class AppRoutes {
   static const pet = '/pet';
   static const profile = '/profile';
   static const quizPath = '/quiz';
+
+  /// Room Cleanup (open with `context.push`).
+  static const cleanup = '/cleanup';
 
   /// `/quiz` for the personal mixed quiz, `/quiz?topic=oceans` for a topic.
   /// Open it with `context.push(...)` so Back returns to where you were.
@@ -66,6 +70,10 @@ final routerProvider = Provider<GoRouter>((ref) {
             topic: topicId == null ? null : EcoTopic.fromId(topicId),
           );
         },
+      ),
+      GoRoute(
+        path: AppRoutes.cleanup,
+        builder: (context, state) => const CleanupScreen(),
       ),
       // One branch per bottom tab. "indexedStack" keeps each tab alive,
       // so switching tabs does not lose scroll position or state.

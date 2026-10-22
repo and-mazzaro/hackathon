@@ -103,7 +103,7 @@ class _HomeContent extends ConsumerWidget {
                 color: EcoColors.primary,
                 title: l10n.homeCleanupTitle,
                 subtitle: l10n.homeCleanupSubtitle,
-                onTap: () => context.go(AppRoutes.pet),
+                onTap: () => context.push(AppRoutes.cleanup),
               ),
               // DEBUG ONLY (removed from release builds): earns a test
               // reward so we can check that saving works on a device.

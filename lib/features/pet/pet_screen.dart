@@ -1,8 +1,10 @@
 import 'dart:math' as math;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../app/router.dart';
 import '../../app/theme/eco_colors.dart';
 import '../../app/theme/eco_spacing.dart';
 import '../../core/widgets/eco_button.dart';
@@ -152,6 +154,15 @@ class _PetContentState extends ConsumerState<_PetContent> {
                 onStroke: () =>
                     _show(Icons.favorite_rounded, l10n.eggStrokeMessage),
               ),
+            const SizedBox(height: EcoSpacing.m),
+            // Room Cleanup: sorting waste here also cleans the pet.
+            EcoButton(
+              label: l10n.cleanupOpenFromPet,
+              icon: Icons.recycling_rounded,
+              expand: true,
+              onPressed: () => context.push(AppRoutes.cleanup),
+            ),
+            const SizedBox(height: EcoSpacing.m),
             if (!isEgg) ...[
               if (canGrow) const SizedBox(height: EcoSpacing.m),
               EcoCard(child: PetNeedBars(pet: pet)),

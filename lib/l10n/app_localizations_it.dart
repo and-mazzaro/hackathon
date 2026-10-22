@@ -425,6 +425,107 @@ class AppLocalizationsIt extends AppLocalizations {
       'Anche il tuo cucciolo è più felice grazie al quiz!';
 
   @override
+  String get binPlasticMetal => 'Plastica e metalli';
+
+  @override
+  String get binPaper => 'Carta e cartone';
+
+  @override
+  String get binOrganic => 'Organico';
+
+  @override
+  String get binGlass => 'Vetro';
+
+  @override
+  String get binResidual => 'Indifferenziato';
+
+  @override
+  String cleanupProgress(int done, int total) {
+    return '$done di $total sistemati';
+  }
+
+  @override
+  String get cleanupLocalRules =>
+      'Qui trovi le indicazioni generali: le regole possono cambiare da Comune a Comune, controlla sempre quelle del tuo.';
+
+  @override
+  String get cleanupHowTo =>
+      'Tocca un rifiuto e poi il bidone giusto. Puoi anche trascinarlo sul bidone.';
+
+  @override
+  String cleanupSelected(String name) {
+    return 'Selezionato: $name. Ora tocca un bidone.';
+  }
+
+  @override
+  String get cleanupPickFirst => 'Prima scegli un rifiuto nella stanza.';
+
+  @override
+  String cleanupCorrect(String name, String bin) {
+    return 'Giusto! $name va in: $bin.';
+  }
+
+  @override
+  String cleanupWrong(String name, String bin) {
+    return 'Quasi! $name va in: $bin.';
+  }
+
+  @override
+  String cleanupComboBonus(int count) {
+    return 'Combo di $count: monete bonus!';
+  }
+
+  @override
+  String cleanupCombo(int count) {
+    return 'Combo x$count';
+  }
+
+  @override
+  String get cleanupExit => 'Esci dalla pulizia';
+
+  @override
+  String get cleanupExitTitle => 'Vuoi interrompere la pulizia?';
+
+  @override
+  String get cleanupExitBody =>
+      'I rifiuti già sistemati non verranno salvati e non riceverai monete.';
+
+  @override
+  String get cleanupExitStay => 'Continua a pulire';
+
+  @override
+  String get cleanupNoItems => 'Non ci sono ancora rifiuti da sistemare.';
+
+  @override
+  String cleanupResultScore(int correct, int total) {
+    return '$correct rifiuti su $total nel bidone giusto';
+  }
+
+  @override
+  String cleanupResultCoins(int coins) {
+    return '+$coins monete';
+  }
+
+  @override
+  String cleanupResultBestCombo(int count) {
+    return 'Combo migliore: $count';
+  }
+
+  @override
+  String get cleanupRoomClean => 'La stanza è pulita!';
+
+  @override
+  String get cleanupPetCleaner =>
+      'La stanza è in ordine e anche il tuo cucciolo è più pulito!';
+
+  @override
+  String get cleanupRepeatNote =>
+      'I rifiuti che sapevi già sistemare valgono meno monete: le combo invece valgono sempre!';
+
+  @override
+  String get cleanupOpenFromPet => 'Pulisci la stanza';
+
+  @override
   String onboardingStep(int step, int total) {
     return 'Passo $step di $total';
   }
