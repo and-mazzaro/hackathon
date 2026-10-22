@@ -1,10 +1,13 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../core/audio/audio_service.dart';
+import '../core/audio/sound_id.dart';
 import '../l10n/app_localizations.dart';
 
 /// Bottom navigation around the four main tabs.
-class AppShell extends StatelessWidget {
+class AppShell extends ConsumerWidget {
   const AppShell({super.key, required this.navigationShell});
 
   final StatefulNavigationShell navigationShell;
@@ -18,7 +21,7 @@ class AppShell extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final onHomeTab = navigationShell.currentIndex == 0;
 
@@ -33,7 +36,10 @@ class AppShell extends StatelessWidget {
         body: navigationShell,
         bottomNavigationBar: NavigationBar(
           selectedIndex: navigationShell.currentIndex,
-          onDestinationSelected: _goTo,
+          onDestinationSelected: (index) {
+            ref.read(audioServiceProvider).play(SoundId.uiTap);
+            _goTo(index);
+          },
           destinations: [
             NavigationDestination(
               icon: const Icon(Icons.home_outlined),

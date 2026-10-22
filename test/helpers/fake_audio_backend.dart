@@ -1,5 +1,12 @@
 import 'package:ecoquest/core/audio/audio_backend.dart';
+import 'package:ecoquest/core/audio/audio_catalog.dart';
+import 'package:ecoquest/core/audio/sound_id.dart';
 import 'package:ecoquest/domain/models/audio_settings.dart';
+
+/// A catalog with a (fake) file for EVERY sound id, so UI tests can check
+/// which sound each event asks for: `test/sound/quiz.correct`, ...
+AudioCatalog testAudioCatalog() =>
+    AudioCatalog({for (final id in SoundId.values) id: 'test/sound/${id.key}'});
 
 /// Records what the audio service asked for, instead of making noise.
 /// Each call is one readable line, e.g. `once assets/x.mp3 0.8`.
@@ -10,6 +17,13 @@ class FakeAudioBackend implements AudioBackend {
   final Set<String> failing = {};
 
   bool disposed = false;
+
+  /// The short sounds played so far, by key (with [testAudioCatalog]),
+  /// e.g. `['quiz.streak.1', 'quiz.question']`.
+  List<String> get played => [
+        for (final call in calls)
+          if (call.startsWith('once ')) call.split(' ')[1].split('/').last,
+      ];
 
   Future<void> _record(String call, [String? asset]) async {
     calls.add(call);

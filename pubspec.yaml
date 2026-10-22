@@ -48,6 +48,11 @@ flutter:
     # Sounds: one line per folder (Flutter does not include subfolders).
     # Licences in assets/audio/ATTRIBUTION.md.
     - assets/audio/ambience/
+    - assets/audio/pet/
+    - assets/audio/quiz/
+    - assets/audio/recycling/
+    - assets/audio/rewards/
+    - assets/audio/ui/
 
   fonts:
     # Nunito, SIL Open Font License 1.1 (see assets/fonts/OFL.txt).

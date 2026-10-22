@@ -206,6 +206,39 @@ void main() {
     });
   });
 
+  test('playAny plays the first sound that has a file', () {
+    withService((async) {
+      audio.playAny([SoundId.quizStreak1, SoundId.quizCorrect]); // no note
+      audio.playAny([SoundId.uiTap]); // nothing at all: silent
+
+      expect(backend.calls, ['once assets/a/correct.mp3 0.80']);
+    });
+  });
+
+  test('playSequence plays one sound after the other, never together; '
+      'silent ids leave no gap', () {
+    withService((async) {
+      audio.playSequence(
+          [SoundId.levelUp, SoundId.rewardCoins, SoundId.quizCorrect]);
+      expect(backend.played, ['level.mp3']);
+
+      async.elapse(const Duration(milliseconds: 699));
+      expect(backend.played, ['level.mp3']);
+      async.elapse(const Duration(milliseconds: 1));
+      expect(backend.played, ['level.mp3', 'correct.mp3']); // coins skipped
+    });
+  });
+
+  test('a pending sequence is dropped when the service is disposed', () {
+    withService((async) {
+      audio.playSequence([SoundId.levelUp, SoundId.quizCorrect]);
+      audio.dispose();
+      async.elapse(const Duration(seconds: 2));
+
+      expect(backend.played, ['level.mp3']);
+    });
+  });
+
   test('a broken file never throws and is not tried again', () {
     withService((async) {
       backend.failing.add('assets/a/correct.mp3');

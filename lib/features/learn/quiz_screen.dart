@@ -3,6 +3,9 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../app/theme/eco_colors.dart';
 import '../../app/theme/eco_spacing.dart';
+import '../../core/audio/audio_service.dart';
+import '../../core/audio/game_sounds.dart';
+import '../../core/audio/sound_id.dart';
 import '../../core/widgets/eco_button.dart';
 import '../../core/widgets/source_sheet.dart';
 import '../../data/content/quiz_content.dart';
@@ -55,7 +58,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   }
 
   void _answer(QuizSession session, int option) {
-    setState(() => session.answer(option));
+    bool? correct;
+    setState(() => correct = session.answer(option));
+    // Played when the answer is checked, never on a rebuild; a second tap
+    // on the same question (null) stays silent.
+    if (correct != null) {
+      ref.read(audioServiceProvider).playAny(answerSounds(
+          correct: correct!, streak: session.currentStreak));
+    }
     // Bring the explanation into view on small screens.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final feedback = _feedbackKey.currentContext;
@@ -70,8 +80,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   }
 
   Future<void> _next(QuizSession session) async {
+    final audio = ref.read(audioServiceProvider);
     if (!session.isLastQuestion) {
       setState(session.next);
+      audio.play(SoundId.quizQuestion);
       return;
     }
     setState(() => _finishing = true);
@@ -83,6 +95,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         _outcome = outcome;
         _finishing = false;
       });
+      audio.playSequence(resultSounds(
+        claim: outcome.claim,
+        complete: SoundId.quizComplete,
+        reward: SoundId.rewardXp,
+      ));
     }
   }
 

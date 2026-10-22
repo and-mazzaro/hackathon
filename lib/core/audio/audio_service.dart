@@ -18,6 +18,7 @@ class AudioTiming {
     this.duckRelease = const Duration(milliseconds: 300),
     this.duckSteps = 6,
     this.repeatCooldown = const Duration(milliseconds: 80),
+    this.sequenceGap = const Duration(milliseconds: 700),
   });
 
   /// Music volume during an important sound, as a share of normal.
@@ -33,6 +34,10 @@ class AudioTiming {
   /// The same sound asked for again within this time plays only once
   /// (e.g. two events for one tap).
   final Duration repeatCooldown;
+
+  /// Time between the sounds of a [AudioService.playSequence] (fanfare,
+  /// then coins), so they never pile up.
+  final Duration sequenceGap;
 }
 
 /// The one place that decides what is heard.
@@ -70,6 +75,7 @@ class AudioService {
   final Map<SoundId, Duration> _lastPlayed = {};
   final Set<String> _brokenAssets = {};
 
+  final Set<Timer> _sequenceTimers = {};
   double _duckFactor = 1;
   Timer? _duckHoldTimer;
   Timer? _duckReleaseTimer;
@@ -111,6 +117,40 @@ class AudioService {
 
     if (id.ducksMusic) _duckMusic();
     _safely(asset, () => backend.playOnce(asset, volume));
+  }
+
+  /// True when [id] has a usable file.
+  bool hasSound(SoundId id) {
+    final asset = catalog.assetFor(id);
+    return asset != null && !_brokenAssets.contains(asset);
+  }
+
+  /// Plays the first of [ids] that has a file, e.g. a streak note, else
+  /// the plain "correct" sound.
+  void playAny(List<SoundId> ids) {
+    for (final id in ids) {
+      if (hasSound(id)) return play(id);
+    }
+  }
+
+  /// Plays [ids] one after another, [AudioTiming.sequenceGap] apart
+  /// (e.g. level-up fanfare, then the coins). Ids without a file are
+  /// skipped, so no silent gap is left.
+  void playSequence(List<SoundId> ids) {
+    final audible = ids.where(hasSound).toList();
+    for (var i = 0; i < audible.length; i++) {
+      final id = audible[i];
+      if (i == 0) {
+        play(id);
+      } else {
+        late final Timer timer;
+        timer = Timer(timing.sequenceGap * i, () {
+          _sequenceTimers.remove(timer);
+          play(id);
+        });
+        _sequenceTimers.add(timer);
+      }
+    }
   }
 
   /// Starts a music or ambience loop. Asking for the loop that is already
@@ -216,12 +256,19 @@ class AudioService {
   void dispose() {
     _duckHoldTimer?.cancel();
     _duckReleaseTimer?.cancel();
+    for (final timer in _sequenceTimers) {
+      timer.cancel();
+    }
+    _sequenceTimers.clear();
   }
 }
 
 extension on Stopwatch {
   Duration Function() get elapsedFunction => () => elapsed;
 }
+
+/// Ducking, cooldown and sequence timing (tests can shorten them).
+final audioTimingProvider = Provider<AudioTiming>((ref) => const AudioTiming());
 
 /// The real audio library. Tests override this with a fake.
 final audioBackendProvider = Provider<AudioBackend>((ref) {
@@ -237,6 +284,7 @@ final audioServiceProvider = Provider<AudioService>((ref) {
   final service = AudioService(
     backend: ref.watch(audioBackendProvider),
     catalog: ref.watch(audioCatalogProvider),
+    timing: ref.watch(audioTimingProvider),
   );
   ref.onDispose(service.dispose);
   return service;

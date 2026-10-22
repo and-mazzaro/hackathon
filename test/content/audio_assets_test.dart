@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:ecoquest/core/audio/audio_catalog.dart';
 import 'package:ecoquest/core/audio/sound_id.dart';
@@ -37,6 +38,23 @@ void main() {
     }
   });
 
+  test('short sounds are WAV (plays on iOS too), mono 44.1 kHz, and short',
+      () {
+    catalog.assets.forEach((id, path) {
+      if (id.loops) return;
+      expect(path, endsWith('.wav'), reason: '${id.key}: iOS cannot play OGG');
+      final bytes = File(path).readAsBytesSync();
+      final header = ByteData.sublistView(bytes, 0, 44);
+      expect(String.fromCharCodes(bytes.sublist(0, 4)), 'RIFF', reason: path);
+      expect(header.getUint16(22, Endian.little), 1, reason: '$path: mono');
+      expect(header.getUint32(24, Endian.little), 44100, reason: path);
+      final seconds =
+          header.getUint32(40, Endian.little) / header.getUint32(28, Endian.little);
+      // Feedback 0.1–0.6 s, rewards ~1–1.5 s: nothing drags on.
+      expect(seconds, lessThanOrEqualTo(1.5), reason: '${id.key}: ${seconds}s');
+    });
+  });
+
   test('sound ids have unique keys', () {
     final keys = SoundId.values.map((id) => id.key).toList();
     expect(keys.toSet().length, keys.length);
@@ -46,6 +64,7 @@ void main() {
     // Not a failure: a reminder of what is missing, shown in the log.
     // ignore: avoid_print
     print('Silent sound ids: ${catalog.missing.map((id) => id.key).join(', ')}');
-    expect(catalog.missing, isNot(contains(SoundId.ambienceSea)));
+    // Only the background music is still missing (no CC0 loop yet).
+    expect(catalog.missing, [SoundId.musicMain]);
   });
 }

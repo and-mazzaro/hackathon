@@ -3,6 +3,10 @@
 Date: 2026-10-22. Nothing in the app was changed for this audit: no assets copied, no packages added.
 
 > **Status:** Milestone 2 (infrastructure) is done as planned in §7 — see PROJECT_STATUS.md (D40–D44).
+> Milestone 3 connected every event of §3 (plus `ui.unavailable`) in `lib/core/audio/game_sounds.dart` and the
+> screens; to make a sound audible, add its file to `AudioCatalog.ecoQuest` — no screen code changes needed.
+> With the team's OK, the missing effects of §4 were filled from Kenney CC0 packs (details and processing in
+> `assets/audio/ATTRIBUTION.md`). Still missing: a background music loop.
 > Only `Sea Waves` was copied into the app; every other id is silent until a licensed file is added to
 > `AudioCatalog.ecoQuest` and `assets/audio/ATTRIBUTION.md`.
 

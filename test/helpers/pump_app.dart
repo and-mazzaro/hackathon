@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:ecoquest/app/app.dart';
 import 'package:ecoquest/app/theme/app_theme.dart';
 import 'package:ecoquest/core/animations.dart';
+import 'package:ecoquest/core/audio/audio_catalog.dart';
 import 'package:ecoquest/core/audio/audio_service.dart';
 import 'package:ecoquest/data/content/quiz_content.dart';
 import 'package:ecoquest/data/content/waste_content.dart';
@@ -63,8 +64,13 @@ Future<void> pumpEcoQuestApp(
           .overrideWith((ref) async => wasteBank ?? testWasteBank()),
       // Endless idle animations would keep pumpAndSettle waiting forever.
       animationsEnabledProvider.overrideWithValue(false),
-      // No real audio in tests: calls are recorded instead.
+      // No real audio in tests: calls are recorded instead. Every sound id
+      // has a fake file, so tests see which sound each event asks for.
       audioBackendProvider.overrideWithValue(audioBackend ?? FakeAudioBackend()),
+      audioCatalogProvider.overrideWithValue(testAudioCatalog()),
+      // Test taps come faster than any finger: no repeat protection.
+      audioTimingProvider
+          .overrideWithValue(const AudioTiming(repeatCooldown: Duration.zero)),
     ],
     child: const EcoQuestApp(),
   ));

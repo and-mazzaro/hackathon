@@ -7,6 +7,10 @@ import 'package:material_ui/material_ui.dart';
 import '../../app/router.dart';
 import '../../app/theme/eco_colors.dart';
 import '../../app/theme/eco_spacing.dart';
+import '../../core/audio/ambience_loop.dart';
+import '../../core/audio/audio_service.dart';
+import '../../core/audio/game_sounds.dart';
+import '../../core/audio/sound_id.dart';
 import '../../core/widgets/eco_button.dart';
 import '../../core/widgets/eco_card.dart';
 import '../../core/widgets/game_state_view.dart';
@@ -28,7 +32,11 @@ class PetScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GameStateView(builder: (context, game) => _PetContent(game: game));
+    // Soft sea waves while the room is on screen.
+    return AmbienceLoop(
+      sound: SoundId.ambienceSea,
+      child: GameStateView(builder: (context, game) => _PetContent(game: game)),
+    );
   }
 }
 
@@ -54,12 +62,15 @@ class _PetContentState extends ConsumerState<_PetContent> {
   Future<void> _care(PetState pet, CareAction action) async {
     final l10n = AppLocalizations.of(context);
     final name = petDisplayName(pet, l10n);
+    final audio = ref.read(audioServiceProvider);
     if (needFor(pet, action) >= PetState.maxNeed) {
       _show(Icons.thumb_up_rounded, l10n.careAlreadyFull(name));
+      audio.play(SoundId.uiUnavailable);
       return;
     }
     await ref.read(gameControllerProvider.notifier).careForPet(action);
     if (!mounted) return;
+    audio.play(careSound(action));
     switch (action) {
       case CareAction.feed:
         _show(Icons.restaurant_rounded, l10n.careFedMessage(name));
@@ -73,14 +84,19 @@ class _PetContentState extends ConsumerState<_PetContent> {
   Future<void> _evolve(PetState pet) async {
     final l10n = AppLocalizations.of(context);
     final controller = ref.read(gameControllerProvider.notifier);
+    final audio = ref.read(audioServiceProvider);
+    final PetStage? grownTo;
     if (pet.stage == PetStage.egg) {
       final name = await showHatchSheet(context);
       if (name == null || !mounted) return; // sheet dismissed
-      await controller.evolvePet(name: name);
+      grownTo = await controller.evolvePet(name: name);
     } else {
-      await controller.evolvePet();
+      grownTo = await controller.evolvePet();
     }
     if (!mounted) return;
+    if (grownTo != null) {
+      audio.play(pet.stage == PetStage.egg ? SoundId.petHatch : SoundId.petGrow);
+    }
     final grown = ref.read(gameControllerProvider).requireValue.pet;
     final name = petDisplayName(grown, l10n);
     _show(
@@ -151,8 +167,10 @@ class _PetContentState extends ConsumerState<_PetContent> {
             else if (isEgg)
               _EggProgressCard(
                 totalXp: game.progress.totalXp,
-                onStroke: () =>
-                    _show(Icons.favorite_rounded, l10n.eggStrokeMessage),
+                onStroke: () {
+                  _show(Icons.favorite_rounded, l10n.eggStrokeMessage);
+                  ref.read(audioServiceProvider).play(SoundId.petEggPat);
+                },
               ),
             const SizedBox(height: EcoSpacing.m),
             // Room Cleanup: sorting waste here also cleans the pet.

@@ -8,6 +8,8 @@ import '../../domain/models/audio_settings.dart';
 enum SoundId {
   // Interface
   uiTap('ui.tap', AudioChannel.effects),
+  // "Not possible right now": a soft, neutral bop, never a buzzer.
+  uiUnavailable('ui.unavailable', AudioChannel.effects),
 
   // Quiz
   quizQuestion('quiz.question', AudioChannel.effects),

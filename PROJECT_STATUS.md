@@ -5,7 +5,8 @@
 M6 pet (`e7b7281`) · M7 cleanup (`8be652d`)
 **Repository:** https://github.com/and-mazzaro/hackathon (`origin`, branch `main`; pushed up to M7 on 2026-10-22).
 Teammates need to be added as collaborators by and-mazzaro before they can push.
-**Audio:** Milestones 1 (audit, `AUDIO_AUDIT.md`) and 2 (infrastructure) done — no sounds wired to screens yet.
+**Audio:** Milestones 1 (audit, `AUDIO_AUDIT.md`), 2 (infrastructure, `be6eace`) and 3 (game events wired) done.
+25 Kenney CC0 effects + the sea ambience are in; only background music is missing. Next: Milestone 4 (settings screen).
 **Next milestone:** M8 — Cosmetics: shop (coins), reward roll (tickets, visible odds, duplicates rule), inventory,
 equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a small follow-up.
 
@@ -162,7 +163,29 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
   pause, error-proof), `AudioBackend` + `AudioplayersBackend` (4 shared effect players, 1 player per loop
   channel, lazy creation), `AudioBinding` (applies saved settings at start and on change; app lifecycle)
 - `AudioSettings` in the save; `GameController.updateAudioSettings`
-- Nothing plays yet: screens are connected in Audio Milestone 3, the settings screen comes in Milestone 4
+- Committed as `be6eace`
+
+## Implemented (Audio Milestone 3 — sounds connected to the game)
+- `lib/core/audio/game_sounds.dart`: pure functions choosing the sound for each event (answer + streak note,
+  results, sorting, care); `AudioService.playAny` (first sound with a file: streak note → plain "correct") and
+  `playSequence` (fanfare, then the reward chime 0.7 s later, never together)
+- Quiz: answer checked → note climbing with the streak (C D E G A) or soft "not quite"; next question → swoosh;
+  result → level-up OR "quiz complete", then XP chime. A reward already paid → no celebration
+- Room Cleanup: item picked (tap or drag start) → pick-up; correct → chime, every 3rd in a row → combo chime;
+  wrong bin → neutral sound; bin with nothing selected → soft "unavailable"; result → level-up OR "room clean",
+  then coins
+- Pet: feed / play / bath sounds after the care is saved; "already full" → soft "unavailable"; stroke the egg;
+  hatch / grow (duck the music)
+- Bottom tabs → soft tap
+- `AmbienceLoop`: the sea waves loop only while the Pet room is really on screen (stops on other tabs, under
+  full-screen pages and in the background)
+- All sounds are played in event handlers, never in `build`; all feedback stays visual + screen-reader text
+- **Sound files (2026-10-22):** 25 effects made from Kenney CC0 packs (Interface Sounds, Music Jingles, RPG Audio,
+  Impact Sounds, Digital Audio), downloaded with the team's OK. Chosen by measuring length, pitch direction and
+  brightness (not by ear), converted OGG → WAV mono 44.1 kHz in the browser (iOS cannot play OGG), peak-normalised
+  per sound, streak notes pitch-shifted to C D E G A, a few mixed (sort = thud + ding, hatch = crack + crack +
+  chirp). 1.1 MB in total; every file, source and processing step in `assets/audio/ATTRIBUTION.md`
+- Every sound id now has a file except `music.main` (no CC0 music loop yet → no background music)
 
 ### Waste content still needing a human check
 - waste_016 toothbrush, waste_017 pen, waste_023 toy cite a single municipal dictionary (Gaeta). Common practice,
@@ -198,6 +221,10 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
 | M7 on the emulator: Home → Pulisci la stanza → 8 real items; crystal glass into "Vetro" → "Quasi!" card with CoReVe explanation; the other 7 right → "Combo x7", result 7/8, +20 coins, +10 XP, pet cleaner; save shows 1 round, 8 sorted, 7 correct, 7 learned, `sort:` claim | ✅ Checked by script + screenshots (2026-10-22) |
 | `flutter test` after Audio 2 — 209 tests (+ audio settings defaults/mute/clamping/JSON, old saves without audio, settings saved once and kept after restart, service with a fake backend and fake time: channel volumes, master mute, missing file silent, cooldown, loop not restarted, loops side by side, live volume change, background pause/resume, no replay of dropped sounds, ducking down/hold/smooth return/extension, broken file skipped; real files ↔ catalog ↔ pubspec ↔ ATTRIBUTION; app wiring: saved settings applied at start and on change, lifecycle pause/resume, nothing plays at start) · `flutter analyze` clean | ✅ All pass (2026-10-22) |
 | Audio 2 on the emulator (temporary check entry point, then removed): saved settings loaded; sea loop on the pet channel + same file as music loop really play (audio_flinger: 2 active tracks, −4.4 dB = 60% and −9.1 dB = 35%, restarting every 13 s = looping); level-up effect via SoundPool started and ducked the music, back to −9.1 dB after ~1 s; missing file only logged; Home → both tracks stop, back to the app → both resume; usage `USAGE_GAME`, no audio focus taken | ✅ Checked (2026-10-22) — not listened to by ear (no speakers in this setup) |
+| `flutter test` after Audio 3 — 224 tests (+ sound choice rules: pentatonic streak + fallback, results with level-up / no celebration for a reward already paid, sorting, care; `playAny`, `playSequence` order and gap, sequence dropped on dispose; UI with a fake file for every id: full quiz sound order, second tap and rebuilds silent, full cleanup round incl. combo / wrong / empty bin / result, sea ambience on Pet tab only and stopped under the cleanup page, care / full / egg stroke / hatch, tab tap, master mute = total silence) · `flutter analyze` clean | ✅ All pass (2026-10-22) |
+| `flutter test` after adding the Kenney sounds — 225 tests (+ every effect is WAV, mono, 44.1 kHz, ≤ 1.5 s; only `music.main` still silent; files ↔ catalog ↔ pubspec ↔ ATTRIBUTION) · `flutter analyze` clean | ✅ All pass (2026-10-22) |
+| Kenney sounds on the emulator: tab tap → SoundPool effect player `event:started`; Pet tab → sea loop player created; no audio errors in the log | ✅ Checked (2026-10-22) — not listened to by ear; the team should listen to every sound |
+| Audio 3 on the emulator: Home → 0 active audio tracks; Pet tab → 1 (sea loop); Home → 0; Pet → 1; app in background → 0; back → 1; no audio errors in the log for the silent ids | ✅ Checked (2026-10-22) |
 | M7 drag fix on the emulator: the old version ignored a plain drag (only a ~1 s hold worked); now a quick swipe from an item to a bin sorts it, tap-then-bin still works, swiping on the feedback card scrolls | ✅ Checked by script (2026-10-22) |
 | `flutter build apk --debug` | ✅ Builds |
 | Android emulator (Pixel 7, Android 36): app starts, Home renders, tab switch, system Back from a tab returns to Home | ✅ Checked manually with screenshots (2026-10-22) |
@@ -232,7 +259,7 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
   app stays open on the same screen. Fine for the demo; a periodic refresh can be added later.
 - The pet's idle animation keeps Android's `uiautomator dump` from working (it waits for a still screen).
   TalkBack is not affected; scripted device tests should use screenshots or turn animations off.
-- Audio: Milestone 3 (connect quiz, cleanup, pet, level-up, rewards; sea ambience in the pet room) ·
-  Milestone 4 (settings screen) · licensed files for the 25 silent ids (see `AUDIO_AUDIT.md` §4) ·
-  listen to every sound on a real phone · iOS audio untested (no Mac)
+- Audio: Milestone 4 (settings screen: master mute, 3 sliders, reset) · listen to every sound on a real phone and
+  swap any that feel wrong (alternatives in the same Kenney packs) · background music (`music.main`) is wired in
+  the service but not started anywhere until a CC0 music loop is found · iOS audio untested (no Mac)
 - Next: M8 cosmetics · M9 recommendations · quiz read-aloud

@@ -63,7 +63,7 @@ void main() {
     ]);
 
     expect(backend.calls, [
-      'loop pet assets/audio/ambience/sea_waves.mp3 0.60',
+      'loop pet test/sound/ambience.sea 0.60',
       'pause pet',
       'resume pet',
     ]);

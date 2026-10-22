@@ -3,6 +3,9 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../app/theme/eco_colors.dart';
 import '../../app/theme/eco_spacing.dart';
+import '../../core/audio/audio_service.dart';
+import '../../core/audio/game_sounds.dart';
+import '../../core/audio/sound_id.dart';
 import '../../core/widgets/eco_button.dart';
 import '../../core/widgets/source_sheet.dart';
 import '../../data/content/waste_content.dart';
@@ -51,11 +54,16 @@ class _CleanupScreenState extends ConsumerState<CleanupScreen> {
     );
   }
 
-  void _select(CleanupRound round, WasteItem item) => setState(() {
-        round.select(item);
-        final l10n = AppLocalizations.of(context);
-        _hint = round.selected == null ? null : l10n.cleanupSelected(item.name);
-      });
+  AudioService get _audio => ref.read(audioServiceProvider);
+
+  void _select(CleanupRound round, WasteItem item) {
+    setState(() {
+      round.select(item);
+      final l10n = AppLocalizations.of(context);
+      _hint = round.selected == null ? null : l10n.cleanupSelected(item.name);
+    });
+    if (round.selected != null) _audio.play(SoundId.recyclingSelect);
+  }
 
   void _sort(CleanupRound round, WasteCategory bin, {WasteItem? item}) {
     final feedback = round.sortInto(bin, item: item);
@@ -67,6 +75,8 @@ class _CleanupScreenState extends ConsumerState<CleanupScreen> {
         _hint = null;
       }
     });
+    _audio.play(
+        feedback == null ? SoundId.uiUnavailable : sortSound(feedback));
   }
 
   Future<void> _finish(CleanupRound round) async {
@@ -79,6 +89,11 @@ class _CleanupScreenState extends ConsumerState<CleanupScreen> {
         _outcome = outcome;
         _finishing = false;
       });
+      _audio.playSequence(resultSounds(
+        claim: outcome.claim,
+        complete: SoundId.recyclingComplete,
+        reward: SoundId.rewardCoins,
+      ));
     }
   }
 
@@ -194,6 +209,7 @@ class _CleanupScreenState extends ConsumerState<CleanupScreen> {
                       _Room(
                         round: round,
                         onSelect: (item) => _select(round, item),
+                        onPickUp: () => _audio.play(SoundId.recyclingSelect),
                         doneText: l10n.cleanupRoomClean,
                       ),
                       const SizedBox(height: EcoSpacing.s),
@@ -295,11 +311,15 @@ class _Room extends StatelessWidget {
   const _Room({
     required this.round,
     required this.onSelect,
+    required this.onPickUp,
     required this.doneText,
   });
 
   final CleanupRound round;
   final ValueChanged<WasteItem> onSelect;
+
+  /// An item was picked up for dragging.
+  final VoidCallback onPickUp;
   final String doneText;
 
   @override
@@ -331,6 +351,7 @@ class _Room extends StatelessWidget {
                     item: item,
                     selected: identical(item, round.selected),
                     onTap: () => onSelect(item),
+                    onDragStarted: onPickUp,
                   ),
               ],
             ),
@@ -343,11 +364,13 @@ class _WasteChip extends StatelessWidget {
     required this.item,
     required this.selected,
     required this.onTap,
+    required this.onDragStarted,
   });
 
   final WasteItem item;
   final bool selected;
   final VoidCallback onTap;
+  final VoidCallback onDragStarted;
 
   Widget _chip(BuildContext context, {bool dragging = false}) {
     return Material(
@@ -393,6 +416,7 @@ class _WasteChip extends StatelessWidget {
     // scrolls.
     return Draggable<WasteItem>(
       data: item,
+      onDragStarted: onDragStarted,
       feedback: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 260),
         child: _chip(context, dragging: true),
