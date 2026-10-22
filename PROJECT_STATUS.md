@@ -2,7 +2,9 @@
 
 **Current milestone:** M7 — Room Cleanup (recycling game) → **done on Android** (iOS untested, no Mac)
 **Done before:** M1 shell (`39e8b3d`) · M2 saving (`d7c3454`) · M3 onboarding (`6695199`) · M5 quiz (`11f752a`) ·
-M6 pet (`e7b7281`)
+M6 pet (`e7b7281`) · M7 cleanup (`8be652d`)
+**Repository:** https://github.com/and-mazzaro/hackathon (`origin`, branch `main`; pushed up to M7 on 2026-10-22).
+Teammates need to be added as collaborators by and-mazzaro before they can push.
 **Next milestone:** M8 — Cosmetics: shop (coins), reward roll (tickets, visible odds, duplicates rule), inventory,
 equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a small follow-up.
 
@@ -205,7 +207,6 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
 2. Choice of Modes 2–4 (options in the Phase 0 plan)
 
 ## Remaining work
-- Commit M7
 - Room Cleanup polish ideas: a short "how to play" for first-timers, a simple room drawing that gets tidier as
   items leave, more items (Pyrex, greaseproof paper and colour-catcher sheets were verified but left out for space)
 - Pet needs are recalculated when a screen rebuilds (tab switch, any action), not every minute while the
