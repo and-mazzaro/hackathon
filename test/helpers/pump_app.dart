@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:ecoquest/app/app.dart';
 import 'package:ecoquest/app/theme/app_theme.dart';
+import 'package:ecoquest/core/animations.dart';
 import 'package:ecoquest/data/content/quiz_content.dart';
 import 'package:ecoquest/data/save/in_memory_save_repository.dart';
 import 'package:ecoquest/data/save/save_repository.dart';
@@ -51,6 +52,8 @@ Future<void> pumpEcoQuestApp(
       clockProvider.overrideWithValue(() => testNow),
       randomProvider.overrideWithValue(Random(42)),
       quizBankProvider.overrideWith((ref) async => quizBank ?? testQuizBank()),
+      // Endless idle animations would keep pumpAndSettle waiting forever.
+      animationsEnabledProvider.overrideWithValue(false),
     ],
     child: const EcoQuestApp(),
   ));

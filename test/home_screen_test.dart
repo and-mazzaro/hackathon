@@ -36,7 +36,8 @@ void main() {
     expect(repository.saved!.progress.totalXp, 30);
     await tester.drag(find.byType(Scrollable).first, const Offset(0, 3000));
     await tester.pumpAndSettle();
-    expect(find.text('30/100'), findsOneWidget);
+    // XP bar and the egg's hatching bar both show 30 of 100 XP.
+    expect(find.text('30/100'), findsNWidgets(2));
   });
 
   testWidgets('a broken save shows the error with both choices',

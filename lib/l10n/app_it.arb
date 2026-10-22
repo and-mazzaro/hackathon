@@ -36,7 +36,6 @@
   "statCleanliness": "Pulizia",
 
   "comingSoon": "In arrivo",
-  "homePetPreview": "Il tuo cucciolo, ancora nell'uovo",
   "homeActivitiesTitle": "Attività di oggi",
   "homeQuizTitle": "Quiz del giorno",
   "homeQuizSubtitle": "5 domande · circa 3 minuti",
@@ -145,8 +144,66 @@
   },
   "quizPlayAgain": "Gioca ancora",
   "quizClose": "Chiudi",
-  "petTitle": "La stanza del tuo cucciolo",
-  "petBody": "Qui potrai prenderti cura del tuo compagno e riciclare i rifiuti della sua stanza.",
+  "petStageEgg": "Uovo",
+  "petStageBaby": "Cucciolo",
+  "petStageYoung": "Giovane",
+  "petStageAdult": "Adulto",
+  "petMoodHappy": "Di buon umore",
+  "petMoodOk": "Tutto ok",
+  "petMoodSad": "Un po' giù",
+  "petEggName": "Uovo misterioso",
+  "petSemantics": "{name}, {stage}, {mood}",
+  "@petSemantics": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "stage": { "type": "String" },
+      "mood": { "type": "String" }
+    }
+  },
+  "petSadHint": "Non succede niente di grave: prenditene cura e tornerà di buon umore.",
+  "careFeed": "Dai da mangiare",
+  "carePlay": "Gioca insieme",
+  "careClean": "Fai il bagnetto",
+  "careFedMessage": "Gnam! {name} ha mangiato con gusto.",
+  "@careFedMessage": { "placeholders": { "name": { "type": "String" } } },
+  "carePlayedMessage": "Che divertimento per {name}!",
+  "@carePlayedMessage": { "placeholders": { "name": { "type": "String" } } },
+  "careCleanedMessage": "Bagnetto fatto: {name} ora profuma di fresco!",
+  "@careCleanedMessage": { "placeholders": { "name": { "type": "String" } } },
+  "careAlreadyFull": "Già al massimo: {name} sta benissimo così!",
+  "@careAlreadyFull": { "placeholders": { "name": { "type": "String" } } },
+  "eggHatchProgress": "Si schiuderà al livello {level}: ti mancano {xp} XP.",
+  "@eggHatchProgress": {
+    "placeholders": {
+      "level": { "type": "int" },
+      "xp": { "type": "int" }
+    }
+  },
+  "eggHatchHint": "Completa i quiz in Impara per guadagnare XP e farlo schiudere!",
+  "eggStroke": "Accarezza l'uovo",
+  "eggStrokeMessage": "L'uovo si è mosso un pochino…",
+  "eggReady": "L'uovo si muove: è pronto a schiudersi!",
+  "eggHatchAction": "Fai schiudere l'uovo",
+  "hatchTitle": "Il tuo cucciolo è nato!",
+  "hatchBody": "Scegli un nome (facoltativo). Crescerà insieme a te, quiz dopo quiz.",
+  "petNameLabel": "Nome del cucciolo (facoltativo)",
+  "petNameHint": "Es. Ecò",
+  "hatchConfirm": "Fatto",
+  "hatchedMessage": "Ecco {name}, il tuo nuovo cucciolo!",
+  "@hatchedMessage": { "placeholders": { "name": { "type": "String" } } },
+  "growReady": "È il momento di crescere per {name}!",
+  "@growReady": { "placeholders": { "name": { "type": "String" } } },
+  "growAction": "Fai crescere",
+  "grownMessage": "{name} ora è {stage}!",
+  "@grownMessage": {
+    "placeholders": {
+      "name": { "type": "String" },
+      "stage": { "type": "String" }
+    }
+  },
+  "nextGrowth": "Prossima crescita al livello {level}.",
+  "@nextGrowth": { "placeholders": { "level": { "type": "int" } } },
+  "quizPetHappier": "Anche il tuo cucciolo è più felice grazie al quiz!",
   "onboardingStep": "Passo {step} di {total}",
   "@onboardingStep": {
     "placeholders": {

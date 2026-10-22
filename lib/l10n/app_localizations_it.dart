@@ -82,9 +82,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get comingSoon => 'In arrivo';
 
   @override
-  String get homePetPreview => 'Il tuo cucciolo, ancora nell\'uovo';
-
-  @override
   String get homeActivitiesTitle => 'Attività di oggi';
 
   @override
@@ -302,11 +299,130 @@ class AppLocalizationsIt extends AppLocalizations {
   String get quizClose => 'Chiudi';
 
   @override
-  String get petTitle => 'La stanza del tuo cucciolo';
+  String get petStageEgg => 'Uovo';
 
   @override
-  String get petBody =>
-      'Qui potrai prenderti cura del tuo compagno e riciclare i rifiuti della sua stanza.';
+  String get petStageBaby => 'Cucciolo';
+
+  @override
+  String get petStageYoung => 'Giovane';
+
+  @override
+  String get petStageAdult => 'Adulto';
+
+  @override
+  String get petMoodHappy => 'Di buon umore';
+
+  @override
+  String get petMoodOk => 'Tutto ok';
+
+  @override
+  String get petMoodSad => 'Un po\' giù';
+
+  @override
+  String get petEggName => 'Uovo misterioso';
+
+  @override
+  String petSemantics(String name, String stage, String mood) {
+    return '$name, $stage, $mood';
+  }
+
+  @override
+  String get petSadHint =>
+      'Non succede niente di grave: prenditene cura e tornerà di buon umore.';
+
+  @override
+  String get careFeed => 'Dai da mangiare';
+
+  @override
+  String get carePlay => 'Gioca insieme';
+
+  @override
+  String get careClean => 'Fai il bagnetto';
+
+  @override
+  String careFedMessage(String name) {
+    return 'Gnam! $name ha mangiato con gusto.';
+  }
+
+  @override
+  String carePlayedMessage(String name) {
+    return 'Che divertimento per $name!';
+  }
+
+  @override
+  String careCleanedMessage(String name) {
+    return 'Bagnetto fatto: $name ora profuma di fresco!';
+  }
+
+  @override
+  String careAlreadyFull(String name) {
+    return 'Già al massimo: $name sta benissimo così!';
+  }
+
+  @override
+  String eggHatchProgress(int level, int xp) {
+    return 'Si schiuderà al livello $level: ti mancano $xp XP.';
+  }
+
+  @override
+  String get eggHatchHint =>
+      'Completa i quiz in Impara per guadagnare XP e farlo schiudere!';
+
+  @override
+  String get eggStroke => 'Accarezza l\'uovo';
+
+  @override
+  String get eggStrokeMessage => 'L\'uovo si è mosso un pochino…';
+
+  @override
+  String get eggReady => 'L\'uovo si muove: è pronto a schiudersi!';
+
+  @override
+  String get eggHatchAction => 'Fai schiudere l\'uovo';
+
+  @override
+  String get hatchTitle => 'Il tuo cucciolo è nato!';
+
+  @override
+  String get hatchBody =>
+      'Scegli un nome (facoltativo). Crescerà insieme a te, quiz dopo quiz.';
+
+  @override
+  String get petNameLabel => 'Nome del cucciolo (facoltativo)';
+
+  @override
+  String get petNameHint => 'Es. Ecò';
+
+  @override
+  String get hatchConfirm => 'Fatto';
+
+  @override
+  String hatchedMessage(String name) {
+    return 'Ecco $name, il tuo nuovo cucciolo!';
+  }
+
+  @override
+  String growReady(String name) {
+    return 'È il momento di crescere per $name!';
+  }
+
+  @override
+  String get growAction => 'Fai crescere';
+
+  @override
+  String grownMessage(String name, String stage) {
+    return '$name ora è $stage!';
+  }
+
+  @override
+  String nextGrowth(int level) {
+    return 'Prossima crescita al livello $level.';
+  }
+
+  @override
+  String get quizPetHappier =>
+      'Anche il tuo cucciolo è più felice grazie al quiz!';
 
   @override
   String onboardingStep(int step, int total) {

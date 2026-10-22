@@ -77,11 +77,15 @@ void main() {
     final semantics = tester.ensureSemantics();
     await pumpEcoQuestApp(tester);
 
-    // A new player: 0 coins and 1 welcome ticket.
+    // A new player: 0 coins, 1 welcome ticket and an egg with its
+    // hatching progress (the need bars appear after hatching).
     expect(find.bySemanticsLabel('0 monete'), findsOneWidget);
     expect(find.bySemanticsLabel('1 biglietto premio'), findsOneWidget);
-    expect(find.bySemanticsLabel('Sazietà'), findsOneWidget);
-    expect(find.bySemanticsLabel('Il tuo cucciolo, ancora nell\'uovo'),
+    expect(find.bySemanticsLabel('Uovo misterioso, Uovo, Di buon umore'),
+        findsOneWidget);
+    expect(
+        find.bySemanticsLabel(
+            'Si schiuderà al livello 2: ti mancano 100 XP.'),
         findsOneWidget);
     semantics.dispose();
   });

@@ -13,6 +13,16 @@ class EconomyConfig {
     this.quizXpPerCorrectAnswer = 10,
     this.quizRepeatXp = 2,
     this.quizStreakBonusXp = 5,
+    this.quizPetHappinessBoost = 15,
+    this.petNeedFloor = 20,
+    this.satietyDecayPerHour = 4,
+    this.happinessDecayPerHour = 3,
+    this.cleanlinessDecayPerHour = 2,
+    this.petCareAmount = 30,
+    this.hatchLevel = 2,
+    this.youngLevel = 5,
+    this.adultLevel = 10,
+    this.levelsPerRoomPlant = 2,
     this.coinsPerCorrectSort = 2,
     this.sortComboLength = 3,
     this.sortComboBonusCoins = 3,
@@ -46,6 +56,29 @@ class EconomyConfig {
   /// Extra XP for each correct answer after the first one in a row
   /// (also for repeats: it rewards attention).
   final int quizStreakBonusXp;
+
+  /// Happiness the pet gains from every completed quiz (learning ↔ pet).
+  final int quizPetHappinessBoost;
+
+  // Virtual pet
+  /// Needs never drop below this: the pet is never punished hard.
+  final int petNeedFloor;
+
+  /// How much each need drops per hour while the app is closed.
+  final int satietyDecayPerHour;
+  final int happinessDecayPerHour;
+  final int cleanlinessDecayPerHour;
+
+  /// What one care action (feed, play, bath) adds to its need.
+  final int petCareAmount;
+
+  /// Player level needed for each stage: learning makes the pet grow.
+  final int hatchLevel;
+  final int youngLevel;
+  final int adultLevel;
+
+  /// The room gets one more plant every N levels (max 3).
+  final int levelsPerRoomPlant;
 
   // Room Cleanup (Mode 1) — used from the recycling milestone
   final int coinsPerCorrectSort;

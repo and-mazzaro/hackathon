@@ -178,12 +178,6 @@ abstract class AppLocalizations {
   /// **'In arrivo'**
   String get comingSoon;
 
-  /// No description provided for @homePetPreview.
-  ///
-  /// In it, this message translates to:
-  /// **'Il tuo cucciolo, ancora nell\'uovo'**
-  String get homePetPreview;
-
   /// No description provided for @homeActivitiesTitle.
   ///
   /// In it, this message translates to:
@@ -520,17 +514,209 @@ abstract class AppLocalizations {
   /// **'Chiudi'**
   String get quizClose;
 
-  /// No description provided for @petTitle.
+  /// No description provided for @petStageEgg.
   ///
   /// In it, this message translates to:
-  /// **'La stanza del tuo cucciolo'**
-  String get petTitle;
+  /// **'Uovo'**
+  String get petStageEgg;
 
-  /// No description provided for @petBody.
+  /// No description provided for @petStageBaby.
   ///
   /// In it, this message translates to:
-  /// **'Qui potrai prenderti cura del tuo compagno e riciclare i rifiuti della sua stanza.'**
-  String get petBody;
+  /// **'Cucciolo'**
+  String get petStageBaby;
+
+  /// No description provided for @petStageYoung.
+  ///
+  /// In it, this message translates to:
+  /// **'Giovane'**
+  String get petStageYoung;
+
+  /// No description provided for @petStageAdult.
+  ///
+  /// In it, this message translates to:
+  /// **'Adulto'**
+  String get petStageAdult;
+
+  /// No description provided for @petMoodHappy.
+  ///
+  /// In it, this message translates to:
+  /// **'Di buon umore'**
+  String get petMoodHappy;
+
+  /// No description provided for @petMoodOk.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutto ok'**
+  String get petMoodOk;
+
+  /// No description provided for @petMoodSad.
+  ///
+  /// In it, this message translates to:
+  /// **'Un po\' giù'**
+  String get petMoodSad;
+
+  /// No description provided for @petEggName.
+  ///
+  /// In it, this message translates to:
+  /// **'Uovo misterioso'**
+  String get petEggName;
+
+  /// No description provided for @petSemantics.
+  ///
+  /// In it, this message translates to:
+  /// **'{name}, {stage}, {mood}'**
+  String petSemantics(String name, String stage, String mood);
+
+  /// No description provided for @petSadHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Non succede niente di grave: prenditene cura e tornerà di buon umore.'**
+  String get petSadHint;
+
+  /// No description provided for @careFeed.
+  ///
+  /// In it, this message translates to:
+  /// **'Dai da mangiare'**
+  String get careFeed;
+
+  /// No description provided for @carePlay.
+  ///
+  /// In it, this message translates to:
+  /// **'Gioca insieme'**
+  String get carePlay;
+
+  /// No description provided for @careClean.
+  ///
+  /// In it, this message translates to:
+  /// **'Fai il bagnetto'**
+  String get careClean;
+
+  /// No description provided for @careFedMessage.
+  ///
+  /// In it, this message translates to:
+  /// **'Gnam! {name} ha mangiato con gusto.'**
+  String careFedMessage(String name);
+
+  /// No description provided for @carePlayedMessage.
+  ///
+  /// In it, this message translates to:
+  /// **'Che divertimento per {name}!'**
+  String carePlayedMessage(String name);
+
+  /// No description provided for @careCleanedMessage.
+  ///
+  /// In it, this message translates to:
+  /// **'Bagnetto fatto: {name} ora profuma di fresco!'**
+  String careCleanedMessage(String name);
+
+  /// No description provided for @careAlreadyFull.
+  ///
+  /// In it, this message translates to:
+  /// **'Già al massimo: {name} sta benissimo così!'**
+  String careAlreadyFull(String name);
+
+  /// No description provided for @eggHatchProgress.
+  ///
+  /// In it, this message translates to:
+  /// **'Si schiuderà al livello {level}: ti mancano {xp} XP.'**
+  String eggHatchProgress(int level, int xp);
+
+  /// No description provided for @eggHatchHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Completa i quiz in Impara per guadagnare XP e farlo schiudere!'**
+  String get eggHatchHint;
+
+  /// No description provided for @eggStroke.
+  ///
+  /// In it, this message translates to:
+  /// **'Accarezza l\'uovo'**
+  String get eggStroke;
+
+  /// No description provided for @eggStrokeMessage.
+  ///
+  /// In it, this message translates to:
+  /// **'L\'uovo si è mosso un pochino…'**
+  String get eggStrokeMessage;
+
+  /// No description provided for @eggReady.
+  ///
+  /// In it, this message translates to:
+  /// **'L\'uovo si muove: è pronto a schiudersi!'**
+  String get eggReady;
+
+  /// No description provided for @eggHatchAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Fai schiudere l\'uovo'**
+  String get eggHatchAction;
+
+  /// No description provided for @hatchTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tuo cucciolo è nato!'**
+  String get hatchTitle;
+
+  /// No description provided for @hatchBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Scegli un nome (facoltativo). Crescerà insieme a te, quiz dopo quiz.'**
+  String get hatchBody;
+
+  /// No description provided for @petNameLabel.
+  ///
+  /// In it, this message translates to:
+  /// **'Nome del cucciolo (facoltativo)'**
+  String get petNameLabel;
+
+  /// No description provided for @petNameHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Es. Ecò'**
+  String get petNameHint;
+
+  /// No description provided for @hatchConfirm.
+  ///
+  /// In it, this message translates to:
+  /// **'Fatto'**
+  String get hatchConfirm;
+
+  /// No description provided for @hatchedMessage.
+  ///
+  /// In it, this message translates to:
+  /// **'Ecco {name}, il tuo nuovo cucciolo!'**
+  String hatchedMessage(String name);
+
+  /// No description provided for @growReady.
+  ///
+  /// In it, this message translates to:
+  /// **'È il momento di crescere per {name}!'**
+  String growReady(String name);
+
+  /// No description provided for @growAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Fai crescere'**
+  String get growAction;
+
+  /// No description provided for @grownMessage.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} ora è {stage}!'**
+  String grownMessage(String name, String stage);
+
+  /// No description provided for @nextGrowth.
+  ///
+  /// In it, this message translates to:
+  /// **'Prossima crescita al livello {level}.'**
+  String nextGrowth(int level);
+
+  /// No description provided for @quizPetHappier.
+  ///
+  /// In it, this message translates to:
+  /// **'Anche il tuo cucciolo è più felice grazie al quiz!'**
+  String get quizPetHappier;
 
   /// No description provided for @onboardingStep.
   ///

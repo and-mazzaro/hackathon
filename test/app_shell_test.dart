@@ -29,7 +29,7 @@ void main() {
     expect(find.text('Impara giocando'), findsOneWidget);
 
     await tapTab(tester, 'Cucciolo');
-    expect(find.text('La stanza del tuo cucciolo'), findsOneWidget);
+    expect(find.text('Uovo misterioso'), findsOneWidget);
 
     await tapTab(tester, 'Profilo');
     expect(find.text('I tuoi interessi'), findsOneWidget);
@@ -44,7 +44,7 @@ void main() {
     await scrollTo(tester, find.text('Pulisci la stanza'));
     await tester.tap(find.text('Pulisci la stanza'));
     await tester.pumpAndSettle();
-    expect(find.text('La stanza del tuo cucciolo'), findsOneWidget);
+    expect(find.text('Uovo misterioso'), findsOneWidget);
 
     await tapTab(tester, 'Home');
     await scrollTo(tester, find.text('Quiz del giorno'));

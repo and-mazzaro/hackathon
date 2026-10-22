@@ -4,6 +4,8 @@ import 'package:ecoquest/domain/game_controller.dart';
 import 'package:ecoquest/domain/models/eco_topic.dart';
 import 'package:ecoquest/domain/models/game_state.dart';
 import 'package:ecoquest/domain/models/learning_progress.dart';
+import 'package:ecoquest/domain/models/pet_state.dart';
+import 'package:ecoquest/domain/rules/pet_rules.dart';
 import 'package:ecoquest/domain/models/player_profile.dart';
 import 'package:ecoquest/domain/models/reward.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -240,6 +242,80 @@ void main() {
 
       expect(outcome.claim.leveledUp, isTrue);
       expect(outcome.claim.levelAfter, 2);
+    });
+  });
+
+  group('pet', () {
+    test('the egg cannot hatch before level 2, nor be fed', () async {
+      final app = await startApp();
+
+      expect(await controller(app).evolvePet(name: 'Ecò'), isNull);
+      expect(await controller(app).careForPet(CareAction.feed), isFalse);
+      expect(game(app).pet.stage, PetStage.egg);
+      expect(repository.saveCount, 0);
+    });
+
+    test('at level 2 the egg hatches with the chosen name', () async {
+      final app = await startApp();
+      await controller(app).claimReward('xp', const Reward(xp: 100));
+
+      final stage = await controller(app).evolvePet(name: '  Foglia ');
+
+      expect(stage, PetStage.baby);
+      expect(game(app).pet.name, 'Foglia');
+      expect(game(app).pet.satiety, 80);
+      expect(game(app).pet.needsUpdatedAt, now);
+      expect(repository.saved!.pet.stage, PetStage.baby);
+    });
+
+    test('an empty name becomes the default name', () async {
+      final app = await startApp();
+      await controller(app).claimReward('xp', const Reward(xp: 100));
+      await controller(app).evolvePet(name: '');
+      expect(game(app).pet.name, defaultPetName);
+    });
+
+    test('care changes only the pet and gives no rewards', () async {
+      final app = await startApp();
+      await controller(app).claimReward('xp', const Reward(xp: 100));
+      await controller(app).evolvePet();
+
+      expect(await controller(app).careForPet(CareAction.play), isTrue);
+
+      expect(game(app).pet.happiness, 100); // 80 + 30, capped
+      expect(game(app).progress.totalXp, 100);
+      expect(game(app).progress.coins, 0);
+    });
+
+    test('a completed quiz makes the hatched pet happier', () async {
+      final app = await startApp();
+      await controller(app).claimReward('xp', const Reward(xp: 100));
+      await controller(app).evolvePet(); // happiness starts at 80
+
+      final outcome = await controller(app).completeQuiz(
+        sessionId: 's1',
+        answers: [
+          const AnsweredQuestion(
+              questionId: 'q1', topic: EcoTopic.water, correct: true),
+        ],
+      );
+
+      expect(outcome.petHappier, isTrue);
+      expect(game(app).pet.happiness, 95); // 80 + 15, same save as the XP
+      expect(repository.saved!.pet.happiness, 95);
+    });
+
+    test('a quiz does not change an egg', () async {
+      final app = await startApp();
+      final outcome = await controller(app).completeQuiz(
+        sessionId: 's1',
+        answers: [
+          const AnsweredQuestion(
+              questionId: 'q1', topic: EcoTopic.water, correct: true),
+        ],
+      );
+      expect(outcome.petHappier, isFalse);
+      expect(game(app).pet.stage, PetStage.egg);
     });
   });
 

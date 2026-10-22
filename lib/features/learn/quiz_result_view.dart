@@ -106,6 +106,22 @@ class QuizResultView extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ],
+              if (outcome.petHappier) ...[
+                const SizedBox(height: EcoSpacing.m),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.favorite_rounded,
+                        color: EcoColors.happiness),
+                    const SizedBox(width: EcoSpacing.s),
+                    Flexible(
+                      child: Text(l10n.quizPetHappier,
+                          style: textTheme.bodyLarge,
+                          textAlign: TextAlign.center),
+                    ),
+                  ],
+                ),
+              ],
               const SizedBox(height: EcoSpacing.xl),
               EcoButton(
                 label: l10n.quizPlayAgain,

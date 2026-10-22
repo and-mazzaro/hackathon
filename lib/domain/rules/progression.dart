@@ -40,3 +40,15 @@ LevelInfo levelForTotalXp(int totalXp, EconomyConfig economy) {
     xpForNextLevel: needed,
   );
 }
+
+/// Total XP needed to reach [level] from zero (level 1 → 0, level 2 → 100,
+/// level 3 → 250 with the default economy).
+int totalXpForLevel(int level, EconomyConfig economy) {
+  var total = 0;
+  var step = economy.xpForFirstLevelUp;
+  for (var l = 1; l < level; l++) {
+    total += step;
+    step += economy.xpIncreasePerLevel;
+  }
+  return total;
+}

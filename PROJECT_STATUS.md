@@ -1,9 +1,9 @@
 # EcoQuest — Project Status
 
-**Current milestone:** M5 — Topic Quiz → **done on Android** (iOS untested, no Mac)
-**Done before:** M1 app shell (`39e8b3d`) · M2 game state + saving (`d7c3454`) · M3 onboarding + profile (`6695199`)
-**Next milestone:** M6 — Virtual pet room (pet state, care interactions, visual feedback).
-Recycling (M7) can run in parallel. Read-aloud (flutter_tts) is a small follow-up for the quiz.
+**Current milestone:** M6 — Virtual pet room → **done on Android** (iOS untested, no Mac)
+**Done before:** M1 app shell (`39e8b3d`) · M2 saving (`d7c3454`) · M3 onboarding (`6695199`) · M5 quiz (`11f752a`)
+**Next milestone:** M7 — Recycling game (Room Cleanup): sorting, combos, coins via `claimReward`, cleans the room.
+Read-aloud (flutter_tts) is a small follow-up for the quiz.
 
 ## Environment (lead PC)
 | Item | Status |
@@ -57,7 +57,11 @@ Recycling (M7) can run in parallel. Read-aloud (flutter_tts) is a small follow-u
 | D28 | Quiz = 5 questions, easy → hard; topic quiz = only that topic; personal quiz prefers interests, avoids the last 20 questions shown | New (M5) |
 | D29 | Quiz XP: 10 per first-time correct answer, 2 for a question already learned, +5 for each correct answer in a row after the first; quizzes give XP only (coins come from recycling/games) | New (M5) |
 | D30 | `QuizSession` (plain Dart) runs a quiz; `completeQuiz` saves XP + learning stats in one write, once per session id | New (M5) |
-| D31 | Randomness through `randomProvider`, so tests use a fixed seed | New (M5) |
+| D31 | Randomness through `randomProvider`, so tests use a fixed seed | Accepted |
+| D32 | Pet needs drop per hour (4/3/2) but never below 20; the egg has no needs; decay is CALCULATED (`petNow`) when shown, never saved just by time passing; clock going backwards changes nothing | New (M6) |
+| D33 | Pet stages follow the player level (hatch 2, young 5, adult 10): learning makes the pet grow. Growing is a player action ("Fai schiudere" / "Fai crescere") | New (M6) |
+| D34 | Care (feed/play/bath, +30) is free and gives no XP/coins (cannot be farmed); each completed quiz gives the pet +15 happiness in the same save write | New (M6) |
+| D35 | Looping animations go through `animationsEnabledProvider` (off in tests) and respect the phone's "remove animations" setting | New (M6) |
 
 ## Implemented (M1)
 - App entry point, `ProviderScope`, router in a provider (fresh router per test)
@@ -104,6 +108,18 @@ Recycling (M7) can run in parallel. Read-aloud (flutter_tts) is a small follow-u
   EEA, OMS, IEA, IRENA, USGS, Water Footprint Network, Fraunhofer ISE, Normattiva, ...). Reviewed by the lead
   agent: one duplicate replaced; three extra explanation claims re-checked on the pages (all supported).
 
+## Implemented (M6)
+- Pet tab: name + stage/mood chips, animated room (idle bob, egg wobble, bounce + floating icon on care,
+  pop-in when hatching/growing), live message for screen readers, need bars, care buttons, kind hint when sad,
+  "next growth at level N"
+- Egg: hatch progress ("ti mancano N XP" / "è pronto a schiudersi"), "Accarezza l'uovo", hatch sheet with
+  optional name (default "Ecò")
+- Drawn pet (`PetArt`): face follows mood, dirt spots when cleanliness < 40, size/colour/leaves by stage
+- Room plants: 1 + one more every 2 levels (max 4 in total)
+- Home: same `PetView`, need bars after hatching, egg progress before; quiz result says when the pet got happier
+- `pet_rules.dart`: `petNow`, `moodOf`, `applyCare`, `petAfterQuiz`, `nextStage`, `roomPlants`;
+  `GameController.careForPet` / `evolvePet`; `totalXpForLevel` in progression
+
 ### Content still needing a human check (before the demo)
 - Excerpts were read through a summarising web tool: open a few source pages and compare the wording.
 - Dated figures that will age: biodiversity_005 (ISPRA bear estimate, summer 2025), transport_005 (EEA, 2023),
@@ -121,6 +137,8 @@ Recycling (M7) can run in parallel. Read-aloud (flutter_tts) is a small follow-u
 | `flutter test` after M3 — 75 tests (+ onboarding flow, profile editing, nickname rules, guidelines and 200% text on every onboarding step) | ✅ All pass (2026-10-22) |
 | M3 on the emulator: wiped data → onboarding (2 topics, nickname, age) → Home; restart skips onboarding; profile interest change saved at once and kept after restart; save file checked | ✅ Checked (2026-10-22) |
 | `flutter test` after M5 — 116 tests (+ quiz selection/scoring/session, learning stats, old saves without quiz data, completeQuiz pay-once and reduced repeat XP, full quiz UI flow, exit dialog, guidelines and 200% text on quiz + result, **content validation of the real 50-question file**) | ✅ All pass (2026-10-22) |
+| `flutter test` after M6 — 147 tests (+ decay/floor/30-day absence/clock backwards, mood, care cap, growth thresholds, plants, controller care/evolve/quiz happiness, Pet tab flows: egg progress, hatch with name, dismissed sheet, feed, already-full, sad hint, guidelines and 200% text in all three states) | ✅ All pass (2026-10-22) |
+| M6 visual check: pet art rendered for every stage/mood (test render), then on the emulator: Home with a hatched pet "Boss" (leaf, mood face, plants, needs 100%), save file shows stage baby + name + needs | ✅ Checked (2026-10-22); the emulator was again used by someone in parallel, so the hatch/care taps were done by hand, not by script |
 | M5 on the emulator: Learn hub with real content and "Per te" order; a personal quiz played (questions easy → hard, wrong-answer feedback with correct answer + explanation); save shows 1 quiz, claim id, XP 0 → 40 | ⚠️ Partly — the emulator was being used at the same time, so the scripted run was interrupted; a clean manual play-through is still worth doing |
 | `flutter build apk --debug` | ✅ Builds |
 | Android emulator (Pixel 7, Android 36): app starts, Home renders, tab switch, system Back from a tab returns to Home | ✅ Checked manually with screenshots (2026-10-22) |
@@ -149,6 +167,9 @@ Recycling (M7) can run in parallel. Read-aloud (flutter_tts) is a small follow-u
 2. Choice of Modes 2–4 (options in the Phase 0 plan)
 
 ## Remaining work
-- Commit M5 (after a quick human look at the content checklist above)
-- Parallel work, each building on `GameController` + `EconomyConfig`:
-  M6 pet room · M7 recycling (then M8 cosmetics, M9 recommendations) · quiz read-aloud
+- Commit M6
+- Pet needs are recalculated when a screen rebuilds (tab switch, any action), not every minute while the
+  app stays open on the same screen. Fine for the demo; a periodic refresh can be added later.
+- The pet's idle animation keeps Android's `uiautomator dump` from working (it waits for a still screen).
+  TalkBack is not affected; scripted device tests should use screenshots or turn animations off.
+- Next: M7 recycling (cleans the room) · M8 cosmetics · M9 recommendations · quiz read-aloud

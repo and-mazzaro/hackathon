@@ -1,14 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/save/save_repository.dart';
-import 'dart:math';
-
 import 'models/eco_topic.dart';
 import 'models/game_state.dart';
 import 'models/learning_progress.dart';
+import 'models/pet_state.dart';
 import 'models/player_profile.dart';
 import 'models/reward.dart';
 import 'rules/economy_config.dart';
+import 'rules/pet_rules.dart';
 import 'rules/profile_rules.dart';
 import 'rules/progression.dart';
 import 'rules/quiz_rules.dart';
@@ -47,10 +49,17 @@ class ClaimResult {
 
 /// The result of [GameController.completeQuiz], for the results screen.
 class QuizOutcome {
-  const QuizOutcome({required this.score, required this.claim});
+  const QuizOutcome({
+    required this.score,
+    required this.claim,
+    this.petHappier = false,
+  });
 
   final QuizScore score;
   final ClaimResult claim;
+
+  /// True when the quiz also made a hatched pet happier.
+  final bool petHappier;
 }
 
 /// The single place where the game state changes.
@@ -67,7 +76,7 @@ class QuizOutcome {
 /// | `claimMission` (missions)          | claimReward, `mission:missionId:day`|
 /// | `spendCoins` / `buyItem` (shop)    | new spend method, same pattern      |
 /// | `rollCosmetic`, `equip` (cosmetics)| inventory update                    |
-/// | `feedPet`, `cleanPet` (pet)        | pet update                          |
+/// | `careForPet`, `evolvePet` — DONE   | pet update (no rewards)             |
 class GameController extends AsyncNotifier<GameState> {
   SaveRepository get _repository => ref.read(saveRepositoryProvider);
   EconomyConfig get _economy => ref.read(economyProvider);
@@ -103,10 +112,52 @@ class GameController extends AsyncNotifier<GameState> {
     final (withXp, claim) = _applyReward(
         current, 'quiz:$sessionId', Reward(xp: score.xp));
 
-    if (claim.applied) {
-      await _commit(withXp.copyWith(learning: current.learning.record(answers)));
-    }
-    return QuizOutcome(score: score, claim: claim);
+    if (!claim.applied) return QuizOutcome(score: score, claim: claim);
+
+    // Learning makes the pet happier: same write as the XP.
+    final hatched = current.pet.stage != PetStage.egg;
+    await _commit(withXp.copyWith(
+      learning: current.learning.record(answers),
+      pet: petAfterQuiz(current.pet, _now(), _economy),
+    ));
+    return QuizOutcome(score: score, claim: claim, petHappier: hatched);
+  }
+
+  /// Feeds, plays with or bathes the pet. Free, and gives no XP or coins
+  /// (care cannot be farmed). Returns false for an egg.
+  Future<bool> careForPet(CareAction action) async {
+    final current = state.requireValue;
+    if (current.pet.stage == PetStage.egg) return false;
+    await _commit(current.copyWith(
+      pet: applyCare(current.pet, action, _now(), _economy),
+    ));
+    return true;
+  }
+
+  /// Hatches the egg or lets the pet grow, if the player's level allows
+  /// it. [name] is only used when hatching (empty → [defaultPetName]).
+  /// Returns the new stage, or null when the pet cannot grow yet.
+  Future<PetStage?> evolvePet({String? name}) async {
+    final current = state.requireValue;
+    final level = levelForTotalXp(current.progress.totalXp, _economy).level;
+    final next = nextStage(current.pet.stage, level, _economy);
+    if (next == null) return null;
+
+    final now = _now();
+    final start = _economy.startingPetNeed;
+    final pet = current.pet.stage == PetStage.egg
+        ? PetState(
+            name: normalizeNickname(name) ?? defaultPetName,
+            stage: next,
+            satiety: start,
+            happiness: start,
+            cleanliness: start,
+            needsUpdatedAt: now,
+          )
+        : petNow(current.pet, now, _economy)
+            .copyWith(stage: next, needsUpdatedAt: now);
+    await _commit(current.copyWith(pet: pet));
+    return next;
   }
 
   /// Pure calculation shared by every reward: no saving here.

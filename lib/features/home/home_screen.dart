@@ -10,15 +10,19 @@ import '../../app/theme/eco_colors.dart';
 import '../../app/theme/eco_spacing.dart';
 import '../../core/widgets/currency_chip.dart';
 import '../../core/widgets/eco_card.dart';
-import '../../core/widgets/egg_art.dart';
 import '../../core/widgets/game_state_view.dart';
 import '../../core/widgets/stat_bar.dart';
 import '../../domain/game_controller.dart';
 import '../../domain/models/game_state.dart';
 import '../../domain/models/pet_state.dart';
 import '../../domain/models/reward.dart';
+import '../../domain/rules/pet_rules.dart';
 import '../../domain/rules/progression.dart';
 import '../../l10n/app_localizations.dart';
+import '../pet/egg_progress.dart';
+import '../pet/pet_labels.dart';
+import '../pet/pet_need_bars.dart';
+import '../pet/pet_view.dart';
 
 /// Home: the pet room on top (about 60%), today's activities below.
 /// Shows the saved game; while it loads, a spinner; if it fails, an error.
@@ -36,15 +40,13 @@ class _HomeContent extends ConsumerWidget {
 
   final GameState game;
 
-  double _need(int value) => value / PetState.maxNeed;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
-    final level =
-        levelForTotalXp(game.progress.totalXp, ref.watch(economyProvider));
-    final pet = game.pet;
+    final economy = ref.watch(economyProvider);
+    final level = levelForTotalXp(game.progress.totalXp, economy);
+    final pet = petNow(game.pet, ref.watch(clockProvider)(), economy);
 
     return SafeArea(
       child: LayoutBuilder(
@@ -65,33 +67,21 @@ class _HomeContent extends ConsumerWidget {
                 tickets: game.progress.tickets,
               ),
               const SizedBox(height: EcoSpacing.m),
-              SizedBox(height: roomHeight, child: const _PetRoomPreview()),
-              const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
-              EcoCard(
-                child: Column(
-                  children: [
-                    StatBar(
-                      label: l10n.statSatiety,
-                      value: _need(pet.satiety),
-                      color: EcoColors.satiety,
-                      icon: Icons.restaurant_rounded,
-                    ),
-                    const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
-                    StatBar(
-                      label: l10n.statHappiness,
-                      value: _need(pet.happiness),
-                      color: EcoColors.happiness,
-                      icon: Icons.favorite_rounded,
-                    ),
-                    const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
-                    StatBar(
-                      label: l10n.statCleanliness,
-                      value: _need(pet.cleanliness),
-                      color: EcoColors.cleanliness,
-                      icon: Icons.water_drop_rounded,
-                    ),
-                  ],
+              SizedBox(
+                height: roomHeight,
+                child: PetView(
+                  pet: pet,
+                  plants: roomPlants(level.level, economy),
+                  semanticLabel: petSemanticLabel(pet, l10n),
                 ),
+              ),
+              const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
+              // Not tappable on purpose: each bar stays its own item for
+              // screen readers. Care happens in the Pet tab.
+              EcoCard(
+                child: pet.stage == PetStage.egg
+                    ? EggProgressBar(totalXp: game.progress.totalXp)
+                    : PetNeedBars(pet: pet),
               ),
               const SizedBox(height: EcoSpacing.l),
               Semantics(
@@ -241,64 +231,6 @@ class _LevelBadge extends StatelessWidget {
     );
   }
 }
-
-/// Temporary room artwork drawn with plain widgets (no image files).
-/// Phase 6 replaces it with the real animated pet and room.
-class _PetRoomPreview extends StatelessWidget {
-  const _PetRoomPreview();
-
-  @override
-  Widget build(BuildContext context) {
-    final radius = BorderRadius.circular(EcoSpacing.radiusCard + 8);
-
-    return Semantics(
-      container: true,
-      image: true,
-      label: AppLocalizations.of(context).homePetPreview,
-      child: ExcludeSemantics(
-        child: ClipRRect(
-          borderRadius: radius,
-          child: DecoratedBox(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Color(0xFFBFE6F2), EcoColors.primaryContainer],
-              ),
-            ),
-            child: Stack(
-              children: [
-                // Floor
-                const Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  height: 56,
-                  child: ColoredBox(color: Color(0xFFE3D3B0)),
-                ),
-                // Plant in the corner: the room will get greener over time.
-                const Positioned(
-                  right: EcoSpacing.m,
-                  bottom: 40,
-                  child: Icon(Icons.local_florist_rounded,
-                      size: 48, color: EcoColors.primary),
-                ),
-                Positioned.fill(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        top: EcoSpacing.l, bottom: EcoSpacing.m),
-                    child: const FittedBox(child: EggArt()),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 
 class _ActivityShortcut extends StatelessWidget {
   const _ActivityShortcut({
