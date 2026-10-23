@@ -14,13 +14,17 @@ import '../../core/audio/sound_id.dart';
 import '../../core/widgets/eco_button.dart';
 import '../../core/widgets/eco_card.dart';
 import '../../core/widgets/game_state_view.dart';
+import '../../data/content/quiz_content.dart';
 import '../../domain/game_controller.dart';
 import '../../domain/models/game_state.dart';
 import '../../domain/models/pet_state.dart';
+import '../../domain/models/quiz_question.dart';
 import '../../domain/rules/pet_rules.dart';
 import '../../domain/rules/progression.dart';
+import '../../domain/rules/quiz_rules.dart';
 import '../../l10n/app_localizations.dart';
 import 'egg_progress.dart';
+import 'feed_game_sheet.dart';
 import 'hatch_sheet.dart';
 import 'pet_labels.dart';
 import 'pet_need_bars.dart';
@@ -68,17 +72,49 @@ class _PetContentState extends ConsumerState<_PetContent> {
       audio.play(SoundId.uiUnavailable);
       return;
     }
+    // Feeding is a tiny quiz first ("Prepara la pappa"). It never blocks
+    // the meal: 0 right answers still feed the pet, kindly (D34).
+    var fedKindly = false;
+    if (action == CareAction.feed) {
+      final correct = await _playFeedGame(name);
+      if (!mounted || correct == null) return; // sheet closed: no meal
+      fedKindly = correct == 0;
+    }
     await ref.read(gameControllerProvider.notifier).careForPet(action);
     if (!mounted) return;
     audio.play(careSound(action));
     switch (action) {
       case CareAction.feed:
-        _show(Icons.restaurant_rounded, l10n.careFedMessage(name));
+        _show(
+          Icons.restaurant_rounded,
+          fedKindly ? l10n.feedGameKindMessage(name) : l10n.careFedMessage(name),
+        );
       case CareAction.play:
         _show(Icons.favorite_rounded, l10n.carePlayedMessage(name));
       case CareAction.clean:
         _show(Icons.bubble_chart_rounded, l10n.careCleanedMessage(name));
     }
+  }
+
+  /// Right answers in the feeding mini-game, null if it was closed.
+  /// Without questions (bank not loaded) the pet is simply fed.
+  Future<int?> _playFeedGame(String name) async {
+    final List<QuizQuestion> questions;
+    try {
+      final bank = await ref.read(quizBankProvider.future);
+      final game = ref.read(gameControllerProvider).requireValue;
+      questions = pickQuizQuestions(
+        bank: bank,
+        learning: game.learning,
+        interests: game.profile.interests,
+        random: ref.read(randomProvider),
+        count: 2,
+      );
+    } catch (_) {
+      return 1;
+    }
+    if (questions.isEmpty || !mounted) return mounted ? 1 : null;
+    return showFeedGameSheet(context, questions: questions, petName: name);
   }
 
   Future<void> _evolve(PetState pet) async {

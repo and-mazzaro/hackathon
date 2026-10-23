@@ -470,5 +470,12 @@
   "activityClearConfirmBody": "Cancelliamo il registro degli ultimi giorni e spegniamo il promemoria. Livello, monete, cucciolo e oggetti restano come sono.",
   "activityClearConfirm": "Cancella",
   "activityClearCancel": "Annulla",
-  "activityCleared": "Attività cancellata."
+  "activityCleared": "Attività cancellata.",
+  "feedGameTitle": "Prepara la pappa",
+  "feedGameIntro": "Rispondi a 2 domande veloci per preparare la pappa di {name}.",
+  "@feedGameIntro": { "placeholders": { "name": { "type": "String" } } },
+  "feedGameNext": "Prossima domanda",
+  "feedGameServe": "Servi la pappa",
+  "feedGameKindMessage": "Ci riproviamo! Intanto {name} ha fatto merenda.",
+  "@feedGameKindMessage": { "placeholders": { "name": { "type": "String" } } }
 }

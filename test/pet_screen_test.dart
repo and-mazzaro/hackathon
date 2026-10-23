@@ -33,6 +33,37 @@ Future<void> _tapButton(WidgetTester tester, String label) async {
   await tester.pumpAndSettle();
 }
 
+/// Taps something inside the "Prepara la pappa" sheet (it scrolls).
+Future<void> _tapInSheet(WidgetTester tester, Finder finder) async {
+  await tester.ensureVisible(finder);
+  await tester.pumpAndSettle();
+  await tester.tap(finder);
+  await tester.pumpAndSettle();
+}
+
+/// The fixture questions' right answer always starts with "Giusta".
+Finder _option({required bool right}) => find.byWidgetPredicate((w) =>
+    w is EcoButton && w.label.startsWith('Giusta') == right &&
+    (right || w.label.startsWith('Sbagliata A')));
+
+/// Plays the feeding mini-game: [rightAnswers] decides each answer.
+Future<void> _playFeedGame(
+    WidgetTester tester, List<bool> rightAnswers) async {
+  await _tapButton(tester, 'Dai da mangiare');
+  expect(find.text('Prepara la pappa'), findsOneWidget);
+  for (final (index, right) in rightAnswers.indexed) {
+    expect(find.text('Domanda ${index + 1} di 2'), findsOneWidget);
+    await _tapInSheet(tester, _option(right: right));
+    expect(find.text(right ? 'Corretto!' : 'Non proprio.'), findsOneWidget);
+    await _tapInSheet(
+        tester,
+        find.widgetWithText(EcoButton,
+            index == rightAnswers.length - 1
+                ? 'Servi la pappa'
+                : 'Prossima domanda'));
+  }
+}
+
 void main() {
   testWidgets('the egg shows how much XP is missing to hatch',
       (tester) async {
@@ -95,7 +126,7 @@ void main() {
     expect(find.text('Fai schiudere l\'uovo'), findsOneWidget); // still an egg
   });
 
-  testWidgets('feeding raises satiety, saves and says what happened',
+  testWidgets('feeding opens "Prepara la pappa" with 2 interest questions',
       (tester) async {
     final repository = InMemorySaveRepository(_hatched(satiety: 40));
     await pumpEcoQuestApp(tester, repository: repository);
@@ -103,9 +134,83 @@ void main() {
 
     await _tapButton(tester, 'Dai da mangiare');
 
+    expect(find.text('Prepara la pappa'), findsOneWidget);
+    expect(find.text('Domanda 1 di 2'), findsOneWidget);
+    // The player's interest is recycling: the question comes from there.
+    expect(find.textContaining('Domanda recycling'), findsOneWidget);
+    expect(find.textContaining('Giusta recycling'), findsOneWidget);
+    expect(find.textContaining('Sbagliata'), findsNWidgets(3));
+    expect(repository.saveCount, 0); // nothing happens until served
+  });
+
+  testWidgets('answering feeds the pet, saves and pays no XP',
+      (tester) async {
+    final start = _hatched(satiety: 40);
+    final repository = InMemorySaveRepository(start);
+    await pumpEcoQuestApp(tester, repository: repository);
+    await tapTab(tester, 'Cucciolo');
+
+    await _playFeedGame(tester, [true, false]);
+
+    expect(find.text('Prepara la pappa'), findsNothing);
     expect(repository.saved!.pet.satiety, 70);
+    expect(repository.saved!.progress.totalXp, start.progress.totalXp);
+    expect(repository.saved!.progress.coins, start.progress.coins);
+    expect(repository.saved!.learning.toJson(), start.learning.toJson());
     expect(find.text('Gnam! Foglia ha mangiato con gusto.'), findsOneWidget);
     expect(find.text('70%'), findsOneWidget);
+  });
+
+  testWidgets('0 right answers still feed the pet, kindly', (tester) async {
+    final repository = InMemorySaveRepository(_hatched(satiety: 40));
+    await pumpEcoQuestApp(tester, repository: repository);
+    await tapTab(tester, 'Cucciolo');
+
+    await _playFeedGame(tester, [false, false]);
+
+    expect(repository.saved!.pet.satiety, 70);
+    expect(find.text('Ci riproviamo! Intanto Foglia ha fatto merenda.'),
+        findsOneWidget);
+  });
+
+  testWidgets('Android back closes the pappa sheet without feeding',
+      (tester) async {
+    final repository = InMemorySaveRepository(_hatched(satiety: 40));
+    await pumpEcoQuestApp(tester, repository: repository);
+    await tapTab(tester, 'Cucciolo');
+
+    await _tapButton(tester, 'Dai da mangiare');
+    await pressAndroidBack(tester);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Prepara la pappa'), findsNothing);
+    expect(repository.saveCount, 0);
+  });
+
+  testWidgets('a full belly does not open the game', (tester) async {
+    final repository = InMemorySaveRepository(_hatched(satiety: 100));
+    await pumpEcoQuestApp(tester, repository: repository);
+    await tapTab(tester, 'Cucciolo');
+
+    await _tapButton(tester, 'Dai da mangiare');
+
+    expect(find.text('Prepara la pappa'), findsNothing);
+    expect(repository.saveCount, 0);
+    expect(find.text('Già al massimo: Foglia sta benissimo così!'),
+        findsOneWidget);
+  });
+
+  testWidgets('small phone with 200% text: the pappa sheet scrolls',
+      (tester) async {
+    useSmallPhoneWithLargeText(tester);
+    final repository = InMemorySaveRepository(_hatched(satiety: 40));
+    await pumpEcoQuestApp(tester, repository: repository);
+    await tapTab(tester, 'Cucciolo');
+
+    await _playFeedGame(tester, [true, true]);
+
+    expect(tester.takeException(), isNull);
+    expect(repository.saved!.pet.satiety, 70);
   });
 
   testWidgets('a full need is not "used up" again', (tester) async {

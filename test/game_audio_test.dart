@@ -181,12 +181,25 @@ void main() {
     final bath = find.widgetWithText(EcoButton, 'Fai il bagnetto');
     await scrollTo(tester, bath);
     await _tap(tester, feed);
+    // Feeding is a 2-question "Prepara la pappa" first.
+    for (final next in ['Prossima domanda', 'Servi la pappa']) {
+      await tester.ensureVisible(_rightAnswer.first);
+      await tester.pumpAndSettle();
+      await _tap(tester, _rightAnswer.first);
+      final button = find.widgetWithText(EcoButton, next);
+      await tester.ensureVisible(button);
+      await tester.pumpAndSettle();
+      await _tap(tester, button);
+    }
+    await scrollTo(tester, bath);
     await _tap(tester, bath);
     await _tap(tester, bath);
     await _tap(tester, bath);
 
     expect(audio.played, [
       'pet.hatch',
+      'quiz.streak.1', // right answers in the pappa game
+      'quiz.streak.2',
       'pet.feed',
       'pet.bath',
       'ui.unavailable', // already clean: no fake "care" sound
