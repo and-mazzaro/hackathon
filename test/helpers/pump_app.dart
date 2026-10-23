@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:ecoquest/app/app.dart';
 import 'package:ecoquest/app/theme/app_theme.dart';
+import 'package:ecoquest/core/activity_binding.dart';
 import 'package:ecoquest/core/animations.dart';
 import 'package:ecoquest/core/audio/audio_catalog.dart';
 import 'package:ecoquest/core/audio/audio_service.dart';
@@ -55,6 +56,8 @@ Future<void> pumpEcoQuestApp(
   WasteBank? wasteBank,
   CosmeticCatalog? cosmetics,
   FakeAudioBackend? audioBackend,
+  bool trackActivity = false,
+  List overrides = const [],
 }) async {
   await tester.pumpWidget(ProviderScope(
     retry: (retryCount, error) => null,
@@ -77,6 +80,10 @@ Future<void> pumpEcoQuestApp(
       // Test taps come faster than any finger: no repeat protection.
       audioTimingProvider
           .overrideWithValue(const AudioTiming(repeatCooldown: Duration.zero)),
+      // App starts write an activity-log entry (M10); off by default so
+      // tests can check that nothing else saved.
+      activityTrackingEnabledProvider.overrideWithValue(trackActivity),
+      ...overrides,
     ],
     child: const EcoQuestApp(),
   ));

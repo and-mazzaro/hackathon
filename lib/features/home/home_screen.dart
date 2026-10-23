@@ -16,6 +16,7 @@ import '../../domain/game_controller.dart';
 import '../../domain/models/game_state.dart';
 import '../../domain/models/pet_state.dart';
 import '../../domain/models/reward.dart';
+import '../../domain/rules/comeback_rules.dart';
 import '../../domain/rules/pet_rules.dart';
 import '../../domain/rules/progression.dart';
 import '../../l10n/app_localizations.dart';
@@ -46,7 +47,10 @@ class _HomeContent extends ConsumerWidget {
     final textTheme = Theme.of(context).textTheme;
     final economy = ref.watch(economyProvider);
     final level = levelForTotalXp(game.progress.totalXp, economy);
-    final pet = petNow(game.pet, ref.watch(clockProvider)(), economy);
+    final now = ref.watch(clockProvider)();
+    final pet = petNow(game.pet, now, economy);
+    final comebackLow =
+        isComebackScoreLow(comebackScore(game.activity, now), economy);
 
     return SafeArea(
       child: LayoutBuilder(
@@ -83,6 +87,16 @@ class _HomeContent extends ConsumerWidget {
                     ? EggProgressBar(totalXp: game.progress.totalXp)
                     : PetNeedBars(pet: pet),
               ),
+              if (comebackLow) ...[
+                const SizedBox(height: EcoSpacing.m),
+                _ComebackCard(
+                  game: game,
+                  petHatched: pet.stage != PetStage.egg,
+                  bonusClaimed: game.progress.claimedRewardIds
+                      .contains(comebackClaimId(now)),
+                  bonusCoins: economy.comebackBonusCoins,
+                ),
+              ],
               const SizedBox(height: EcoSpacing.l),
               Semantics(
                 header: true,
@@ -288,6 +302,81 @@ class _ActivityShortcut extends StatelessWidget {
             ),
           ),
           const Icon(Icons.chevron_right_rounded, color: EcoColors.inkMuted),
+        ],
+      ),
+    );
+  }
+}
+
+/// Shown on a low comeback-score day: a friendly pet message, an easier
+/// activity and a small once-per-day gift. Never blocks or takes anything.
+class _ComebackCard extends ConsumerWidget {
+  const _ComebackCard({
+    required this.game,
+    required this.petHatched,
+    required this.bonusClaimed,
+    required this.bonusCoins,
+  });
+
+  final GameState game;
+  final bool petHatched;
+  final bool bonusClaimed;
+  final int bonusCoins;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final textTheme = Theme.of(context).textTheme;
+    final suggestion = suggestEasierActivity(petHatched: petHatched);
+    final (suggestText, suggestIcon, suggestRoute) = switch (suggestion) {
+      ComebackSuggestion.petCare =>
+        (l10n.comebackSuggestCare, Icons.favorite_rounded, AppRoutes.pet),
+      ComebackSuggestion.cleanup => (
+          l10n.comebackSuggestCleanup,
+          Icons.recycling_rounded,
+          AppRoutes.cleanup
+        ),
+    };
+
+    return EcoCard(
+      color: EcoColors.primaryContainer,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Semantics(
+            header: true,
+            child: Text(l10n.comebackTitle, style: textTheme.titleLarge),
+          ),
+          const SizedBox(height: EcoSpacing.xs),
+          Text(
+            petHatched ? l10n.comebackBody : l10n.comebackEggBody,
+            style: textTheme.bodyMedium,
+          ),
+          const SizedBox(height: EcoSpacing.s),
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: TextButton.icon(
+              icon: Icon(suggestIcon),
+              label: Text(suggestText),
+              onPressed: () => suggestion == ComebackSuggestion.petCare
+                  ? context.go(suggestRoute)
+                  : context.push(suggestRoute),
+            ),
+          ),
+          const SizedBox(height: EcoSpacing.xs),
+          if (bonusClaimed)
+            Text(l10n.comebackBonusClaimed, style: textTheme.bodyMedium)
+          else
+            Align(
+              alignment: AlignmentDirectional.centerStart,
+              child: FilledButton.icon(
+                icon: const Icon(Icons.card_giftcard_rounded),
+                label: Text(l10n.comebackBonusAction(bonusCoins)),
+                onPressed: () => ref
+                    .read(gameControllerProvider.notifier)
+                    .claimComebackBonus(),
+              ),
+            ),
         ],
       ),
     );
