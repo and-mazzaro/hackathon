@@ -322,6 +322,42 @@ abstract class AppLocalizations {
   /// **'Non riesco a caricare le domande. Riavvia l\'app; se il problema continua, avvisa il team.'**
   String get learnContentError;
 
+  /// No description provided for @learnPlayNowTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Gioca subito'**
+  String get learnPlayNowTitle;
+
+  /// No description provided for @learnPlayNowBody.
+  ///
+  /// In it, this message translates to:
+  /// **'5 domande a sorpresa, prima i tuoi argomenti preferiti. Più risposte giuste di fila, più XP!'**
+  String get learnPlayNowBody;
+
+  /// No description provided for @learnPlayNowAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca per iniziare'**
+  String get learnPlayNowAction;
+
+  /// No description provided for @learnLearnedTotal.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =0{Nessuna domanda imparata} =1{1 domanda imparata} other{{count} domande imparate}}'**
+  String learnLearnedTotal(int count);
+
+  /// No description provided for @learnTopicLearned.
+  ///
+  /// In it, this message translates to:
+  /// **'{learned} su {total} imparate'**
+  String learnTopicLearned(int learned, int total);
+
+  /// No description provided for @learnTopicsHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Oppure scegli un argomento'**
+  String get learnTopicsHint;
+
   /// No description provided for @quizMixedTitle.
   ///
   /// In it, this message translates to:
