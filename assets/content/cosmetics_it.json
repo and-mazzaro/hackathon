@@ -1,19 +1,33 @@
 {
   "version": 1,
   "items": [
-    { "id": "head_flower", "name": "Fiore di campo", "slot": "head", "rarity": "common", "icon": "flower", "color": "FFE5578A" },
-    { "id": "head_straw_hat", "name": "Cappello di paglia", "slot": "head", "rarity": "common", "icon": "hat", "color": "FFD9A441" },
-    { "id": "head_party_hat", "name": "Cappellino da festa", "slot": "head", "rarity": "rare", "icon": "party", "color": "FF7B5CD6" },
-    { "id": "head_crown", "name": "Corona di rami", "slot": "head", "rarity": "epic", "icon": "crown", "color": "FFF2B705" },
+    { "id": "head_leaf_red", "name": "Foglia rossa", "slot": "head", "rarity": "common", "icon": "leaf", "color": "FFC8442F" },
+    { "id": "head_maple_leaf", "name": "Foglia d'acero", "slot": "head", "rarity": "uncommon", "icon": "maple_leaf", "color": "FFE07A2E" },
+    { "id": "head_flower", "name": "Fiore di campo", "slot": "head", "rarity": "uncommon", "icon": "flower", "color": "FFE5578A" },
+    { "id": "head_acorn_cap", "name": "Cappellino di ghianda", "slot": "head", "rarity": "rare", "icon": "acorn_cap", "color": "FF8B5A2B" },
+    { "id": "head_seaweed_crown", "name": "Corona di alghe", "slot": "head", "rarity": "epic", "icon": "seaweed_crown", "color": "FF2E8B6E" },
+    { "id": "head_twig_crown", "name": "Corona di rami d'oro", "slot": "head", "rarity": "legendary", "icon": "twig_crown", "color": "FFE0A526" },
+    { "id": "head_legendary_leaf", "name": "Foglia leggendaria", "slot": "head", "rarity": "mythic", "icon": "legendary_leaf", "color": "FFF2C230" },
 
-    { "id": "face_round_glasses", "name": "Occhiali tondi", "slot": "face", "rarity": "common", "icon": "glasses", "color": "FF173A2B" },
-    { "id": "face_sunglasses", "name": "Occhiali da sole", "slot": "face", "rarity": "common", "icon": "sunglasses", "color": "FF2A2A2A" },
-    { "id": "face_mask", "name": "Mascherina da supereroe", "slot": "face", "rarity": "rare", "icon": "mask", "color": "FFC2410C" },
+    { "id": "face_round_glasses", "name": "Occhiali tondi", "slot": "face", "rarity": "common", "icon": "round_glasses", "color": "FF3B2A20" },
+    { "id": "face_sunglasses", "name": "Occhiali da sole", "slot": "face", "rarity": "uncommon", "icon": "sunglasses", "color": "FF1F2A30" },
+    { "id": "face_swim_goggles", "name": "Occhialini da nuoto", "slot": "face", "rarity": "rare", "icon": "swim_goggles", "color": "FF2A9DD6" },
+    { "id": "face_hero_mask", "name": "Maschera da supereroe", "slot": "face", "rarity": "epic", "icon": "hero_mask", "color": "FFC2410C" },
+    { "id": "face_gold_monocle", "name": "Monocolo d'oro", "slot": "face", "rarity": "legendary", "icon": "monocle", "color": "FFE0A526" },
 
-    { "id": "neck_scarf", "name": "Sciarpa di lana", "slot": "neck", "rarity": "common", "icon": "scarf", "color": "FF3FA7D6" },
-    { "id": "neck_bow", "name": "Papillon", "slot": "neck", "rarity": "common", "icon": "bow", "color": "FFE5578A" },
-    { "id": "neck_bell", "name": "Campanellino", "slot": "neck", "rarity": "rare", "icon": "bell", "color": "FFF0A824" },
-    { "id": "neck_medal", "name": "Medaglia dell'eco-eroe", "slot": "neck", "rarity": "rare", "icon": "medal", "color": "FF2A7AB8" },
-    { "id": "neck_seed_necklace", "name": "Collana di semi", "slot": "neck", "rarity": "epic", "icon": "seeds", "color": "FF8B5A2B" }
+    { "id": "neck_bandana_red", "name": "Bandana rossa", "slot": "neck", "rarity": "common", "icon": "bandana", "color": "FFC8442F" },
+    { "id": "neck_bandana_blue", "name": "Bandana blu", "slot": "neck", "rarity": "common", "icon": "bandana", "color": "FF2F6FB3" },
+    { "id": "neck_bandana_dots", "name": "Bandana a pois", "slot": "neck", "rarity": "uncommon", "icon": "bandana_dots", "color": "FFF0B429" },
+    { "id": "neck_scarf", "name": "Sciarpa di lana", "slot": "neck", "rarity": "rare", "icon": "scarf", "color": "FF7B5CD6" },
+    { "id": "neck_bow_tie", "name": "Papillon", "slot": "neck", "rarity": "rare", "icon": "bow_tie", "color": "FFE5578A" },
+    { "id": "neck_shell_necklace", "name": "Collana di conchiglie", "slot": "neck", "rarity": "epic", "icon": "shell_necklace", "color": "FFF4C9B8" },
+    { "id": "neck_eco_medal", "name": "Medaglia dell'eco-eroe", "slot": "neck", "rarity": "legendary", "icon": "eco_medal", "color": "FFE0A526" },
+
+    { "id": "paws_pebble", "name": "Sassolino preferito", "slot": "paws", "rarity": "common", "icon": "pebble", "color": "FF9AA3A8" },
+    { "id": "paws_shell", "name": "Conchiglia", "slot": "paws", "rarity": "uncommon", "icon": "shell", "color": "FFF2B8A0" },
+    { "id": "paws_starfish", "name": "Stella marina", "slot": "paws", "rarity": "rare", "icon": "starfish", "color": "FFF07A4B" },
+    { "id": "paws_fish_toy", "name": "Pesciolino di pezza", "slot": "paws", "rarity": "epic", "icon": "fish_toy", "color": "FF3FA7D6" },
+    { "id": "paws_pearl", "name": "Perla luminosa", "slot": "paws", "rarity": "legendary", "icon": "pearl", "color": "FFF4EEF8" },
+    { "id": "paws_rainbow_pebble", "name": "Sasso arcobaleno", "slot": "paws", "rarity": "mythic", "icon": "rainbow_pebble", "color": "FF8E6CEF" }
   ]
 }
