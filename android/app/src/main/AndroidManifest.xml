@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- "Il mio territorio": live open data from Open-Meteo. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- Daily reminder (M10, opt-in): show it, and put it back after a
          reboot. Inexact timing on purpose: no exact-alarm permission. -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>

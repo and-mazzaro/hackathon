@@ -14,6 +14,7 @@ import 'models/pet_state.dart';
 import 'models/player_profile.dart';
 import 'models/recycling_progress.dart';
 import 'models/reward.dart';
+import 'models/territory.dart';
 import 'rules/cosmetic_rules.dart';
 import 'rules/comeback_rules.dart';
 import 'rules/economy_config.dart';
@@ -22,6 +23,7 @@ import 'rules/profile_rules.dart';
 import 'rules/progression.dart';
 import 'rules/quiz_rules.dart';
 import 'rules/recycling_rules.dart';
+import 'rules/territory_rules.dart';
 
 /// The balancing numbers. Tests can override this with other values.
 final economyProvider = Provider<EconomyConfig>((ref) => EconomyConfig.defaults);
@@ -265,6 +267,27 @@ class GameController extends AsyncNotifier<GameState> {
     if (!isComebackScoreLow(comebackScoreToday, _economy)) return null;
     return claimReward(
         comebackClaimId(_now()), Reward(coins: _economy.comebackBonusCoins));
+  }
+
+  /// Pays the daily "L'ho fatto!" for the territory tip, once per day
+  /// (`territory:YYYY-MM-DD`). Honour-based: nothing is ever taken away.
+  Future<ClaimResult> claimTerritoryAction() => claimReward(
+      territoryClaimId(_now()), Reward(coins: _economy.territoryActionCoins));
+
+  /// Saves the town shown by the territory card.
+  Future<void> selectTerritoryTown(TerritoryTown town) async {
+    final current = state.requireValue;
+    if (current.territory.town == town) return;
+    await _commit(current.copyWith(
+        territory: current.territory.copyWith(town: town)));
+  }
+
+  /// Keeps the last good live readings in the save (used offline).
+  Future<void> cacheTerritoryReadings(List<TownReading> readings) async {
+    final current = state.value;
+    if (current == null || readings.isEmpty) return;
+    await _commit(current.copyWith(
+        territory: current.territory.copyWith(cached: readings)));
   }
 
   /// Saves the reminder choice (the notification itself is scheduled by
