@@ -9,7 +9,7 @@ Teammates need to be added as collaborators by and-mazzaro before they can push.
 **Audio:** Milestones 1 (audit, `AUDIO_AUDIT.md`), 2 (infrastructure, `be6eace`) and 3 (game events wired) done.
 25 Kenney CC0 effects + the sea ambience are in; only background music is missing. Next: Milestone 4 (settings screen).
 **M11 (presentation, 2026-10-23):** Laiqua name + icon, intro + demo mode, feeding mini-game, day/afternoon/night room — done.
-**Next milestone:** M9 recommendations; trash items appearing in the room over time (see Remaining work). Read-aloud (flutter_tts) is a small follow-up.
+**Next milestone:** M9 recommendations. Read-aloud (flutter_tts) is a small follow-up.
 **Agent skills:** Matt Pocock's engineering + productivity skills (github.com/mattpocock/skills, MIT, commit `5beb35b`)
 are in `.claude/skills/` (commit `2b337f0`, on `main`, not pushed yet), e.g. `/grill-me`, `/to-spec`, `/to-tickets`,
 `/tdd`, `/diagnosing-bugs`, `/handoff`. Installed by copying, since this PC has no Node.js; update by re-copying.
@@ -104,6 +104,7 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 | D65 | Presentation: Pokémon-style intro at `/intro` (shooting stars + LAIQUA logo + "Tocca per iniziare", guide scene with typewriter speech box and the animated otter, finale burst) with "Salta" always visible; "Modalità demo" cycles Home → Impara → Cucciolo → Guardaroba every 6 s with captions and never saves. Both open from Profile; the demo also from the intro finale | New (M11) |
 | D66 | Feeding = mini-game "Prepara la pappa": 2 questions from the player's interests; ≥ 1 right or 0 right both feed the pet (never punish), no XP/coins, not recorded in learning stats; full belly → the old "already full" reply | New (M11) |
 | D67 | Room look by time of day: day 7–16, afternoon 16–20, night 20–7 (`timeOfDayFor`), or fixed by the player (Profile → Aspetto: Automatico/Giorno/Pomeriggio/Notte, saved as `lookMode`, default auto). Only the pet room changes: an app-wide dark theme was left out because ~47 widgets use the light colour constants directly | New (M11) |
+| D68 | Room trash: `roomTrashCount(lastCleanupAt, now, comebackScore)` = 0–3 items, one every 2 h (score < 45), 4 h (45–74) or 6 h (≥ 75) since the last cleanup (numbers in `EconomyConfig`); clock backwards → 0; no cleanup yet (new/old saves) → 2. Items picked from the waste bank seeded by the cleanup time, shown as badges on the room floor (tap → Room Cleanup) and in the room's screen-reader label. Clean room → Cleanup buttons disabled with "La stanza è pulita! Torna più tardi". `GameState.lastCleanupAt` set by `completeCleanup` | New (M11) |
 
 ## Implemented (M1)
 - App entry point, `ProviderScope`, router in a provider (fresh router per test)
@@ -222,6 +223,7 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
   Home, Impara, Cucciolo
 - "Prepara la pappa" feeding mini-game (D66), `lib/features/pet/feed_game_sheet.dart`
 - Day / afternoon / night pet room + Profile "Aspetto" card (D67); on the emulator at 20:29 the room was automatically night
+- Trash builds up in the pet room over time (D68), `lib/domain/rules/room_trash_rules.dart`, `lib/features/pet/room_trash.dart`; on the emulator 2 items (Buccia di banana, Vaschetta…) on the night room floor. 356 tests pass, analyze clean
 
 ## Implemented (M10 — Comeback Score) and quiz refresh (2026-10-23)
 - M10 as specified in `MILESTONE_10_RETENTION.md` (decisions D54–D60): activity log, daily comeback score, gentle Home card with
@@ -350,5 +352,5 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 - Cosmetics polish ideas: a small animation for the roll reveal, more items per slot, room decorations
   (left out of M8 on purpose), a "new" badge in "I miei oggetti", a dedicated reveal sound
 - Balancing: shop prices, odds and refunds are first guesses (D21); tune in play-tests
-- M11 not done: trash items that appear in the pet room over time (timing from the comeback score) instead of cleanup on demand; app-wide dark theme; more feeding mini-games
+- M11 not done: app-wide dark theme; more feeding mini-games. Known: the low-score Home card can still suggest Room Cleanup when the room is clean; trash badge labels are cut with "…"
 - Next (old line): M10 comeback score (renumber its decisions from D54) · M9 recommendations · quiz read-aloud
