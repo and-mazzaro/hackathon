@@ -10,6 +10,7 @@ import '../../core/widgets/egg_art.dart';
 import '../../domain/models/pet_state.dart';
 import '../../domain/rules/pet_rules.dart';
 import '../wardrobe/cosmetic_labels.dart';
+import 'otter_idle.dart';
 import 'pet_art.dart';
 
 /// A one-off reaction (bounce + floating icon). A new [id] plays it again.
@@ -49,6 +50,8 @@ class _PetViewState extends ConsumerState<PetView>
       vsync: this, duration: const Duration(milliseconds: 2400));
   late final _react = AnimationController(
       vsync: this, duration: const Duration(milliseconds: 900));
+  // Drives the otter's idle pose (blink, tail wag, head tilt).
+  late final _pose = AnimationController(vsync: this, duration: otterIdleLoop);
 
   @override
   void didChangeDependencies() {
@@ -57,8 +60,10 @@ class _PetViewState extends ConsumerState<PetView>
     // player disabled animations on the phone).
     if (loopingAnimationsAllowed(context, ref)) {
       if (!_idle.isAnimating) _idle.repeat(reverse: true);
+      if (!_pose.isAnimating) _pose.repeat();
     } else {
       _idle.stop();
+      _pose.value = 0; // the rest pose
     }
   }
 
@@ -74,6 +79,7 @@ class _PetViewState extends ConsumerState<PetView>
   void dispose() {
     _idle.dispose();
     _react.dispose();
+    _pose.dispose();
     super.dispose();
   }
 
@@ -83,11 +89,16 @@ class _PetViewState extends ConsumerState<PetView>
     final isEgg = pet.stage == PetStage.egg;
     final art = isEgg
         ? const EggArt()
-        : PetArt(
-            stage: pet.stage,
-            mood: moodOf(pet),
-            dirty: pet.cleanliness < 40,
-            outfit: ref.watch(petOutfitProvider),
+        : AnimatedBuilder(
+            animation: _pose,
+            builder: (context, _) => PetArt(
+              stage: pet.stage,
+              mood: moodOf(pet),
+              dirty: pet.cleanliness < 40,
+              outfit: ref.watch(petOutfitProvider),
+              pose: idleOtterPose(
+                  _pose.value * otterIdleLoop.inMilliseconds / 1000),
+            ),
           );
 
     return Semantics(
