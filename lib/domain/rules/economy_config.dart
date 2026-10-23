@@ -1,3 +1,5 @@
+import '../models/cosmetic_item.dart';
+
 /// Every number that balances the game, in one place.
 ///
 /// All values are FIRST GUESSES. Tune them while play-testing; never write
@@ -33,17 +35,29 @@ class EconomyConfig {
     this.cleanupPetCleanliness = 25,
     this.ticketPriceInCoins = 100,
     this.ticketsPerLevelUp = 1,
-    this.shopPriceCommon = 60,
-    this.shopPriceRare = 150,
-    this.rollOddsCommon = 60,
-    this.rollOddsRare = 30,
-    this.rollOddsEpic = 10,
-    this.duplicateRefundCommon = 20,
-    this.duplicateRefundRare = 40,
-    this.duplicateRefundEpic = 80,
+    this.shopPrices = const {
+      CosmeticRarity.common: 60,
+      CosmeticRarity.uncommon: 100,
+      CosmeticRarity.rare: 160,
+    },
+    this.rollOddsPercent = const {
+      CosmeticRarity.common: 40,
+      CosmeticRarity.uncommon: 25,
+      CosmeticRarity.rare: 17,
+      CosmeticRarity.epic: 10,
+      CosmeticRarity.legendary: 6,
+      CosmeticRarity.mythic: 2,
+    },
+    this.duplicateRefunds = const {
+      CosmeticRarity.common: 15,
+      CosmeticRarity.uncommon: 25,
+      CosmeticRarity.rare: 40,
+      CosmeticRarity.epic: 60,
+      CosmeticRarity.legendary: 90,
+      CosmeticRarity.mythic: 150,
+    },
   })  : assert(xpForFirstLevelUp > 0),
-        assert(xpIncreasePerLevel >= 0),
-        assert(rollOddsCommon + rollOddsRare + rollOddsEpic == 100);
+        assert(xpIncreasePerLevel >= 0);
 
   static const defaults = EconomyConfig();
 
@@ -121,17 +135,14 @@ class EconomyConfig {
   /// Tickets earned for every level gained (in the same claim).
   final int ticketsPerLevelUp;
 
-  /// Shop prices in coins. Epic items are not sold: roll only.
-  final int shopPriceCommon;
-  final int shopPriceRare;
+  /// Shop prices in coins. A rarity missing here is not sold (epic,
+  /// legendary and mythic items come only from the roll).
+  final Map<CosmeticRarity, int> shopPrices;
 
-  /// Roll odds in percent, shown to the player as they are. Sum = 100.
-  final int rollOddsCommon;
-  final int rollOddsRare;
-  final int rollOddsEpic;
+  /// Roll odds in percent, shown to the player as they are. Every rarity
+  /// has an entry and they add up to 100 (checked by a test).
+  final Map<CosmeticRarity, int> rollOddsPercent;
 
   /// Coins paid back when a roll lands on an item already owned.
-  final int duplicateRefundCommon;
-  final int duplicateRefundRare;
-  final int duplicateRefundEpic;
+  final Map<CosmeticRarity, int> duplicateRefunds;
 }

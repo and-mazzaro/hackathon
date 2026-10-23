@@ -12,21 +12,28 @@ extension CosmeticSlotLabels on CosmeticSlot {
         CosmeticSlot.head => l10n.slotHead,
         CosmeticSlot.face => l10n.slotFace,
         CosmeticSlot.neck => l10n.slotNeck,
+        CosmeticSlot.paws => l10n.slotPaws,
       };
 }
 
 extension CosmeticRarityLabels on CosmeticRarity {
   String label(AppLocalizations l10n) => switch (this) {
         CosmeticRarity.common => l10n.rarityCommon,
+        CosmeticRarity.uncommon => l10n.rarityUncommon,
         CosmeticRarity.rare => l10n.rarityRare,
         CosmeticRarity.epic => l10n.rarityEpic,
+        CosmeticRarity.legendary => l10n.rarityLegendary,
+        CosmeticRarity.mythic => l10n.rarityMythic,
       };
 
   /// Light tint behind dark text (contrast ≥ 4.5:1 with the ink colour).
   Color get tint => switch (this) {
         CosmeticRarity.common => const Color(0xFFE2E4E3),
+        CosmeticRarity.uncommon => const Color(0xFFD5EDC8),
         CosmeticRarity.rare => const Color(0xFFCFE3FA),
-        CosmeticRarity.epic => const Color(0xFFFFE9A8),
+        CosmeticRarity.epic => const Color(0xFFE6D6F7),
+        CosmeticRarity.legendary => const Color(0xFFFFE9A8),
+        CosmeticRarity.mythic => const Color(0xFFFAD2EC),
       };
 }
 

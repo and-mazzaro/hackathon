@@ -3,9 +3,15 @@ import 'json_utils.dart';
 /// Where an item sits on the pet. [id] is used in content files and in the
 /// save (`Inventory.equippedBySlot`): never change an id.
 enum CosmeticSlot {
+  /// Replaces the green leaf on the otter's head.
   head('head'),
   face('face'),
-  neck('neck');
+
+  /// Replaces the green bandana.
+  neck('neck'),
+
+  /// Something held between the front paws (otters keep a favourite pebble).
+  paws('paws');
 
   const CosmeticSlot(this.id);
 
@@ -19,12 +25,16 @@ enum CosmeticSlot {
   }
 }
 
-/// How rare an item is: decides its shop price, its roll odds and the
-/// coins paid back for a duplicate (all in `EconomyConfig`).
+/// How rare an item is, from the most to the least common: decides its
+/// shop price, its roll odds and the coins paid back for a duplicate (all
+/// in `EconomyConfig`). The order of the values matters for the roll.
 enum CosmeticRarity {
   common('common'),
+  uncommon('uncommon'),
   rare('rare'),
-  epic('epic');
+  epic('epic'),
+  legendary('legendary'),
+  mythic('mythic');
 
   const CosmeticRarity(this.id);
 

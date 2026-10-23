@@ -916,11 +916,23 @@ abstract class AppLocalizations {
   /// **'Collo'**
   String get slotNeck;
 
+  /// No description provided for @slotPaws.
+  ///
+  /// In it, this message translates to:
+  /// **'Zampe'**
+  String get slotPaws;
+
   /// No description provided for @rarityCommon.
   ///
   /// In it, this message translates to:
   /// **'Comune'**
   String get rarityCommon;
+
+  /// No description provided for @rarityUncommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Non comune'**
+  String get rarityUncommon;
 
   /// No description provided for @rarityRare.
   ///
@@ -933,6 +945,18 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Epico'**
   String get rarityEpic;
+
+  /// No description provided for @rarityLegendary.
+  ///
+  /// In it, this message translates to:
+  /// **'Leggendario'**
+  String get rarityLegendary;
+
+  /// No description provided for @rarityMythic.
+  ///
+  /// In it, this message translates to:
+  /// **'Mitico'**
+  String get rarityMythic;
 
   /// No description provided for @rollTitle.
   ///

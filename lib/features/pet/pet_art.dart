@@ -7,6 +7,7 @@ import '../../domain/models/cosmetic_item.dart';
 import '../../domain/models/pet_state.dart';
 import '../../domain/rules/pet_rules.dart';
 import '../wardrobe/cosmetic_art.dart';
+import 'otter_geometry.dart';
 
 /// Temporary pet artwork drawn with plain widgets: a round leafy creature.
 /// Its face follows the mood, dirt spots show when it needs a bath, and it
@@ -19,12 +20,16 @@ class PetArt extends StatelessWidget {
     required this.mood,
     this.dirty = false,
     this.outfit = const {},
+    this.pose = OtterPose.rest,
   });
 
   final PetStage stage;
   final PetMood mood;
   final bool dirty;
   final Map<CosmeticSlot, CosmeticItem> outfit;
+
+  /// For animations later; [OtterPose.rest] is the reference picture.
+  final OtterPose pose;
 
   @override
   Widget build(BuildContext context) {

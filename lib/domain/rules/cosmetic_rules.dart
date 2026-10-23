@@ -6,26 +6,15 @@ import 'economy_config.dart';
 /// Coins needed to buy [rarity] in the shop, or null when it is not sold
 /// (epic items come only from the reward roll).
 int? shopPrice(CosmeticRarity rarity, EconomyConfig economy) =>
-    switch (rarity) {
-      CosmeticRarity.common => economy.shopPriceCommon,
-      CosmeticRarity.rare => economy.shopPriceRare,
-      CosmeticRarity.epic => null,
-    };
+    economy.shopPrices[rarity];
 
 /// Chance in percent that a roll gives an item of [rarity].
-int rollOdds(CosmeticRarity rarity, EconomyConfig economy) => switch (rarity) {
-  CosmeticRarity.common => economy.rollOddsCommon,
-  CosmeticRarity.rare => economy.rollOddsRare,
-  CosmeticRarity.epic => economy.rollOddsEpic,
-};
+int rollOdds(CosmeticRarity rarity, EconomyConfig economy) =>
+    economy.rollOddsPercent[rarity] ?? 0;
 
 /// Coins paid back when a roll gives an item the player already owns.
 int duplicateRefund(CosmeticRarity rarity, EconomyConfig economy) =>
-    switch (rarity) {
-      CosmeticRarity.common => economy.duplicateRefundCommon,
-      CosmeticRarity.rare => economy.duplicateRefundRare,
-      CosmeticRarity.epic => economy.duplicateRefundEpic,
-    };
+    economy.duplicateRefunds[rarity] ?? 0;
 
 /// One reward roll: first the rarity, with exactly the odds shown to the
 /// player, then one item of that rarity, each equally likely. Owned items

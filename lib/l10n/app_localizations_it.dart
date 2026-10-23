@@ -556,13 +556,25 @@ class AppLocalizationsIt extends AppLocalizations {
   String get slotNeck => 'Collo';
 
   @override
+  String get slotPaws => 'Zampe';
+
+  @override
   String get rarityCommon => 'Comune';
+
+  @override
+  String get rarityUncommon => 'Non comune';
 
   @override
   String get rarityRare => 'Raro';
 
   @override
   String get rarityEpic => 'Epico';
+
+  @override
+  String get rarityLegendary => 'Leggendario';
+
+  @override
+  String get rarityMythic => 'Mitico';
 
   @override
   String get rollTitle => 'Ruota dei premi';
