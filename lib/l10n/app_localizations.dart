@@ -1521,6 +1521,156 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. EcoQuest non usa la tua posizione e non chiede la data di nascita.'**
   String get profileDataBody;
+
+  /// No description provided for @comebackTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Mi sei mancato!'**
+  String get comebackTitle;
+
+  /// No description provided for @comebackBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Che bello rivederti. Ripartiamo con calma, senza fretta.'**
+  String get comebackBody;
+
+  /// No description provided for @comebackEggBody.
+  ///
+  /// In it, this message translates to:
+  /// **'L\'uovo è rimasto al calduccio. Che bello rivederti: ripartiamo con calma.'**
+  String get comebackEggBody;
+
+  /// No description provided for @comebackSuggestCare.
+  ///
+  /// In it, this message translates to:
+  /// **'Idea facile: fai una coccola al cucciolo'**
+  String get comebackSuggestCare;
+
+  /// No description provided for @comebackSuggestCleanup.
+  ///
+  /// In it, this message translates to:
+  /// **'Idea facile: un giro di Pulisci la stanza'**
+  String get comebackSuggestCleanup;
+
+  /// No description provided for @comebackBonusAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Prendi il regalo: +{coins} monete'**
+  String comebackBonusAction(int coins);
+
+  /// No description provided for @comebackBonusClaimed.
+  ///
+  /// In it, this message translates to:
+  /// **'Regalo preso! Che bello giocare di nuovo insieme.'**
+  String get comebackBonusClaimed;
+
+  /// No description provided for @reminderTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Promemoria giornaliero'**
+  String get reminderTitle;
+
+  /// No description provided for @reminderBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Se vuoi, EcoQuest può mandarti un solo avviso al giorno, all\'ora che scegli tu. Il promemoria resta su questo telefono e puoi spegnerlo quando vuoi.'**
+  String get reminderBody;
+
+  /// No description provided for @reminderSwitch.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricordamelo ogni giorno'**
+  String get reminderSwitch;
+
+  /// No description provided for @reminderTime.
+  ///
+  /// In it, this message translates to:
+  /// **'Ora del promemoria: {time}'**
+  String reminderTime(String time);
+
+  /// No description provided for @reminderChangeTime.
+  ///
+  /// In it, this message translates to:
+  /// **'Cambia ora'**
+  String get reminderChangeTime;
+
+  /// No description provided for @reminderPermissionDenied.
+  ///
+  /// In it, this message translates to:
+  /// **'Le notifiche sono bloccate sul telefono, quindi il promemoria non arriverà. Il gioco funziona lo stesso.'**
+  String get reminderPermissionDenied;
+
+  /// No description provided for @reminderNotificationTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'{pet} ti aspetta!'**
+  String reminderNotificationTitle(String pet);
+
+  /// No description provided for @reminderNotificationBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai 2 minuti? C\'è una nuova scoperta su {topic}.'**
+  String reminderNotificationBody(String topic);
+
+  /// No description provided for @reminderNotificationBodyGeneric.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai 2 minuti? Vieni a scoprire qualcosa di nuovo sulla natura.'**
+  String get reminderNotificationBodyGeneric;
+
+  /// No description provided for @reminderPetFallback.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tuo cucciolo'**
+  String get reminderPetFallback;
+
+  /// No description provided for @activityDataTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'La tua attività'**
+  String get activityDataTitle;
+
+  /// No description provided for @activityDataBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Per capire quando darti una mano, EcoQuest conta sul telefono quante volte giochi e quante risposte indovini negli ultimi 14 giorni. Niente posizione, niente Wi-Fi, niente dati inviati.'**
+  String get activityDataBody;
+
+  /// No description provided for @activityClearAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Cancella la mia attività'**
+  String get activityClearAction;
+
+  /// No description provided for @activityClearConfirmTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Cancellare la tua attività?'**
+  String get activityClearConfirmTitle;
+
+  /// No description provided for @activityClearConfirmBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Cancelliamo il registro degli ultimi giorni e spegniamo il promemoria. Livello, monete, cucciolo e oggetti restano come sono.'**
+  String get activityClearConfirmBody;
+
+  /// No description provided for @activityClearConfirm.
+  ///
+  /// In it, this message translates to:
+  /// **'Cancella'**
+  String get activityClearConfirm;
+
+  /// No description provided for @activityClearCancel.
+  ///
+  /// In it, this message translates to:
+  /// **'Annulla'**
+  String get activityClearCancel;
+
+  /// No description provided for @activityCleared.
+  ///
+  /// In it, this message translates to:
+  /// **'Attività cancellata.'**
+  String get activityCleared;
 }
 
 class _AppLocalizationsDelegate

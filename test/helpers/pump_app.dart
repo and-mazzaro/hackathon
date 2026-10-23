@@ -2,9 +2,11 @@ import 'dart:math';
 
 import 'package:ecoquest/app/app.dart';
 import 'package:ecoquest/app/theme/app_theme.dart';
+import 'package:ecoquest/core/activity_binding.dart';
 import 'package:ecoquest/core/animations.dart';
 import 'package:ecoquest/core/audio/audio_catalog.dart';
 import 'package:ecoquest/core/audio/audio_service.dart';
+import 'package:ecoquest/core/notifications/reminder_scheduler.dart';
 import 'package:ecoquest/data/content/cosmetic_content.dart';
 import 'package:ecoquest/data/content/quiz_content.dart';
 import 'package:ecoquest/data/content/waste_content.dart';
@@ -25,6 +27,7 @@ import 'package:material_ui/material_ui.dart';
 
 import 'cosmetic_fixtures.dart';
 import 'fake_audio_backend.dart';
+import 'fake_reminder_scheduler.dart';
 import 'quiz_fixtures.dart';
 import 'waste_fixtures.dart';
 
@@ -55,6 +58,8 @@ Future<void> pumpEcoQuestApp(
   WasteBank? wasteBank,
   CosmeticCatalog? cosmetics,
   FakeAudioBackend? audioBackend,
+  bool trackActivity = false,
+  FakeReminderScheduler? reminders,
 }) async {
   await tester.pumpWidget(ProviderScope(
     retry: (retryCount, error) => null,
@@ -77,6 +82,12 @@ Future<void> pumpEcoQuestApp(
       // Test taps come faster than any finger: no repeat protection.
       audioTimingProvider
           .overrideWithValue(const AudioTiming(repeatCooldown: Duration.zero)),
+      // App starts write an activity-log entry (M10); off by default so
+      // tests can check that nothing else saved.
+      activityTrackingEnabledProvider.overrideWithValue(trackActivity),
+      // No real notifications in tests: calls are recorded instead.
+      reminderSchedulerProvider
+          .overrideWithValue(reminders ?? FakeReminderScheduler()),
     ],
     child: const EcoQuestApp(),
   ));

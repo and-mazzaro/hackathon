@@ -928,4 +928,96 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get profileDataBody =>
       'Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. EcoQuest non usa la tua posizione e non chiede la data di nascita.';
+
+  @override
+  String get comebackTitle => 'Mi sei mancato!';
+
+  @override
+  String get comebackBody =>
+      'Che bello rivederti. Ripartiamo con calma, senza fretta.';
+
+  @override
+  String get comebackEggBody =>
+      'L\'uovo è rimasto al calduccio. Che bello rivederti: ripartiamo con calma.';
+
+  @override
+  String get comebackSuggestCare => 'Idea facile: fai una coccola al cucciolo';
+
+  @override
+  String get comebackSuggestCleanup =>
+      'Idea facile: un giro di Pulisci la stanza';
+
+  @override
+  String comebackBonusAction(int coins) {
+    return 'Prendi il regalo: +$coins monete';
+  }
+
+  @override
+  String get comebackBonusClaimed =>
+      'Regalo preso! Che bello giocare di nuovo insieme.';
+
+  @override
+  String get reminderTitle => 'Promemoria giornaliero';
+
+  @override
+  String get reminderBody =>
+      'Se vuoi, EcoQuest può mandarti un solo avviso al giorno, all\'ora che scegli tu. Il promemoria resta su questo telefono e puoi spegnerlo quando vuoi.';
+
+  @override
+  String get reminderSwitch => 'Ricordamelo ogni giorno';
+
+  @override
+  String reminderTime(String time) {
+    return 'Ora del promemoria: $time';
+  }
+
+  @override
+  String get reminderChangeTime => 'Cambia ora';
+
+  @override
+  String get reminderPermissionDenied =>
+      'Le notifiche sono bloccate sul telefono, quindi il promemoria non arriverà. Il gioco funziona lo stesso.';
+
+  @override
+  String reminderNotificationTitle(String pet) {
+    return '$pet ti aspetta!';
+  }
+
+  @override
+  String reminderNotificationBody(String topic) {
+    return 'Hai 2 minuti? C\'è una nuova scoperta su $topic.';
+  }
+
+  @override
+  String get reminderNotificationBodyGeneric =>
+      'Hai 2 minuti? Vieni a scoprire qualcosa di nuovo sulla natura.';
+
+  @override
+  String get reminderPetFallback => 'Il tuo cucciolo';
+
+  @override
+  String get activityDataTitle => 'La tua attività';
+
+  @override
+  String get activityDataBody =>
+      'Per capire quando darti una mano, EcoQuest conta sul telefono quante volte giochi e quante risposte indovini negli ultimi 14 giorni. Niente posizione, niente Wi-Fi, niente dati inviati.';
+
+  @override
+  String get activityClearAction => 'Cancella la mia attività';
+
+  @override
+  String get activityClearConfirmTitle => 'Cancellare la tua attività?';
+
+  @override
+  String get activityClearConfirmBody =>
+      'Cancelliamo il registro degli ultimi giorni e spegniamo il promemoria. Livello, monete, cucciolo e oggetti restano come sono.';
+
+  @override
+  String get activityClearConfirm => 'Cancella';
+
+  @override
+  String get activityClearCancel => 'Annulla';
+
+  @override
+  String get activityCleared => 'Attività cancellata.';
 }

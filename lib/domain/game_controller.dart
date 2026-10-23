@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/save/save_repository.dart';
+import 'models/activity_log.dart';
 import 'models/audio_settings.dart';
 import 'models/cosmetic_item.dart';
 import 'models/eco_topic.dart';
@@ -13,6 +14,7 @@ import 'models/player_profile.dart';
 import 'models/recycling_progress.dart';
 import 'models/reward.dart';
 import 'rules/cosmetic_rules.dart';
+import 'rules/comeback_rules.dart';
 import 'rules/economy_config.dart';
 import 'rules/pet_rules.dart';
 import 'rules/profile_rules.dart';
@@ -116,6 +118,7 @@ class RollOutcome {
 /// | `rollCosmetic`, `equip` — DONE     | spend a ticket, inventory update    |
 /// | `careForPet`, `evolvePet` — DONE   | pet update (no rewards)             |
 /// | `updateAudioSettings` — DONE       | settings update (no rewards)        |
+/// | `claimComebackBonus` — DONE        | claimReward, `comeback:YYYY-MM-DD`  |
 class GameController extends AsyncNotifier<GameState> {
   SaveRepository get _repository => ref.read(saveRepositoryProvider);
   EconomyConfig get _economy => ref.read(economyProvider);
@@ -155,9 +158,12 @@ class GameController extends AsyncNotifier<GameState> {
 
     // Learning makes the pet happier: same write as the XP.
     final hatched = current.pet.stage != PetStage.egg;
+    final correct = answers.where((answer) => answer.correct).length;
     await _commit(withXp.copyWith(
       learning: current.learning.record(answers),
       pet: petAfterQuiz(current.pet, _now(), _economy),
+      activity: _logActivity(current.activity,
+          correct: correct, wrong: answers.length - correct),
     ));
     return QuizOutcome(score: score, claim: claim, petHappier: hatched);
   }
@@ -177,9 +183,12 @@ class GameController extends AsyncNotifier<GameState> {
     if (!claim.applied) return CleanupOutcome(score: score, claim: claim);
 
     final hatched = current.pet.stage != PetStage.egg;
+    final correct = sorted.where((item) => item.correct).length;
     await _commit(withReward.copyWith(
       recycling: current.recycling.record(sorted),
       pet: petAfterCleanup(current.pet, _now(), _economy),
+      activity: _logActivity(current.activity,
+          correct: correct, wrong: sorted.length - correct),
     ));
     return CleanupOutcome(score: score, claim: claim, petCleaner: hatched);
   }
@@ -191,8 +200,86 @@ class GameController extends AsyncNotifier<GameState> {
     if (current.pet.stage == PetStage.egg) return false;
     await _commit(current.copyWith(
       pet: applyCare(current.pet, action, _now(), _economy),
+      activity: _logActivity(current.activity),
     ));
     return true;
+  }
+
+  // ---- Comeback score (M10) ----
+
+  /// One more completed activity today in the local log.
+  ActivityLog _logActivity(ActivityLog log, {int correct = 0, int wrong = 0}) {
+    return log.updateDay(
+      _now(),
+      (today) => today.copyWith(
+        activities: today.activities + 1,
+        correctAnswers: today.correctAnswers + correct,
+        wrongAnswers: today.wrongAnswers + wrong,
+      ),
+    );
+  }
+
+  /// Records that the app was opened (or came back on screen).
+  /// [fromNotification] when the reminder notification was tapped.
+  /// [coldStart] also checks whether the previous session ended normally.
+  Future<void> recordAppOpen({
+    bool fromNotification = false,
+    bool coldStart = false,
+  }) async {
+    final current = state.requireValue;
+    final log = current.activity;
+    final crashed = coldStart && !log.lastSessionEndedCleanly;
+    await _commit(current.copyWith(
+      activity: log.updateDay(
+        _now(),
+        (today) => today.copyWith(
+          opens: today.opens + 1,
+          notificationOpens:
+              today.notificationOpens + (fromNotification ? 1 : 0),
+          uncleanExits: today.uncleanExits + (crashed ? 1 : 0),
+        ),
+        lastSessionEndedCleanly: false,
+      ),
+    ));
+  }
+
+  /// The app went to the background normally.
+  Future<void> recordSessionEnded() async {
+    final current = state.value;
+    if (current == null || current.activity.lastSessionEndedCleanly) return;
+    await _commit(current.copyWith(
+      activity: current.activity.withSessionEndedCleanly(true),
+    ));
+  }
+
+  /// Today's comeback score (0-100), see `comebackScore`.
+  int get comebackScoreToday =>
+      comebackScore(state.requireValue.activity, _now());
+
+  /// Pays the small comeback bonus, once per day, only on a low-score day.
+  /// Returns null when the score is not low.
+  Future<ClaimResult?> claimComebackBonus() async {
+    if (!isComebackScoreLow(comebackScoreToday, _economy)) return null;
+    return claimReward(
+        comebackClaimId(_now()), Reward(coins: _economy.comebackBonusCoins));
+  }
+
+  /// Saves the reminder choice (the notification itself is scheduled by
+  /// the reminder binding, outside the domain).
+  Future<void> updateReminder(ReminderSettings reminder) async {
+    final current = state.requireValue;
+    if (current.reminder == reminder) return;
+    await _commit(current.copyWith(reminder: reminder));
+  }
+
+  /// "Cancella la mia attività": empties the log and turns the reminder
+  /// off. Progress, pet and items stay as they are.
+  Future<void> clearActivity() async {
+    final current = state.requireValue;
+    await _commit(current.copyWith(
+      activity: const ActivityLog(lastSessionEndedCleanly: false),
+      reminder: current.reminder.copyWith(enabled: false),
+    ));
   }
 
   /// Hatches the egg or lets the pet grow, if the player's level allows

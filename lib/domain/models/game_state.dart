@@ -1,4 +1,5 @@
 import '../rules/economy_config.dart';
+import 'activity_log.dart';
 import 'audio_settings.dart';
 import 'inventory.dart';
 import 'json_utils.dart';
@@ -22,6 +23,8 @@ class GameState {
     this.learning = const LearningProgress(),
     this.recycling = const RecyclingProgress(),
     this.audio = AudioSettings.defaults,
+    this.activity = ActivityLog.empty,
+    this.reminder = ReminderSettings.defaults,
   });
 
   /// A brand-new player.
@@ -60,6 +63,13 @@ class GameState {
   /// Sound preferences. Added with audio: older saves get the defaults.
   final AudioSettings audio;
 
+  /// Local activity log for the comeback score. Added in M10: older saves
+  /// start with an empty log (neutral score).
+  final ActivityLog activity;
+
+  /// Optional daily reminder. Added in M10: older saves have it off.
+  final ReminderSettings reminder;
+
   GameState copyWith({
     PlayerProfile? profile,
     PlayerProgress? progress,
@@ -68,6 +78,8 @@ class GameState {
     LearningProgress? learning,
     RecyclingProgress? recycling,
     AudioSettings? audio,
+    ActivityLog? activity,
+    ReminderSettings? reminder,
   }) {
     return GameState(
       profile: profile ?? this.profile,
@@ -77,6 +89,8 @@ class GameState {
       learning: learning ?? this.learning,
       recycling: recycling ?? this.recycling,
       audio: audio ?? this.audio,
+      activity: activity ?? this.activity,
+      reminder: reminder ?? this.reminder,
     );
   }
 
@@ -88,6 +102,8 @@ class GameState {
         'learning': learning.toJson(),
         'recycling': recycling.toJson(),
         'audio': audio.toJson(),
+        'activity': activity.toJson(),
+        'reminder': reminder.toJson(),
       };
 
   /// [now] is only used for dates missing from an old or partial save.
@@ -100,6 +116,8 @@ class GameState {
       learning: LearningProgress.fromJson(readObject(json, 'learning')),
       recycling: RecyclingProgress.fromJson(readObject(json, 'recycling')),
       audio: AudioSettings.fromJson(readObject(json, 'audio')),
+      activity: ActivityLog.fromJson(readObject(json, 'activity')),
+      reminder: ReminderSettings.fromJson(readObject(json, 'reminder')),
     );
   }
 }

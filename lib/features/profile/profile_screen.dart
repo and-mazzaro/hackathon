@@ -13,6 +13,7 @@ import '../../l10n/app_localizations.dart';
 import 'interest_picker.dart';
 import 'profile_details_sheet.dart';
 import 'profile_labels.dart';
+import 'reminder_section.dart';
 
 /// Profile: who you are, your interests (editable, saved at once) and
 /// what data EcoQuest keeps.
@@ -136,6 +137,10 @@ class _ProfileContent extends ConsumerWidget {
             selected: profile.interests,
             onToggle: (topic) => _toggle(context, ref, topic),
           ),
+          const SizedBox(height: EcoSpacing.l),
+          ReminderCard(reminder: game.reminder),
+          const SizedBox(height: EcoSpacing.m),
+          const ActivityDataCard(),
           const SizedBox(height: EcoSpacing.l),
           EcoCard(
             color: EcoColors.primaryContainer,

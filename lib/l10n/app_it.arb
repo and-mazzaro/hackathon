@@ -432,5 +432,43 @@
   "profileInterestsBody": "Tocca un argomento per attivarlo o disattivarlo. Le modifiche vengono salvate subito e i tuoi progressi restano invariati.",
   "profileKeepOneInterest": "Tieni almeno un interesse.",
   "profileDataTitle": "I tuoi dati",
-  "profileDataBody": "Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. EcoQuest non usa la tua posizione e non chiede la data di nascita."
+  "profileDataBody": "Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. EcoQuest non usa la tua posizione e non chiede la data di nascita.",
+
+  "comebackTitle": "Mi sei mancato!",
+  "comebackBody": "Che bello rivederti. Ripartiamo con calma, senza fretta.",
+  "comebackEggBody": "L'uovo è rimasto al calduccio. Che bello rivederti: ripartiamo con calma.",
+  "comebackSuggestCare": "Idea facile: fai una coccola al cucciolo",
+  "comebackSuggestCleanup": "Idea facile: un giro di Pulisci la stanza",
+  "comebackBonusAction": "Prendi il regalo: +{coins} monete",
+  "@comebackBonusAction": {
+    "placeholders": { "coins": { "type": "int" } }
+  },
+  "comebackBonusClaimed": "Regalo preso! Che bello giocare di nuovo insieme.",
+  "reminderTitle": "Promemoria giornaliero",
+  "reminderBody": "Se vuoi, EcoQuest può mandarti un solo avviso al giorno, all'ora che scegli tu. Il promemoria resta su questo telefono e puoi spegnerlo quando vuoi.",
+  "reminderSwitch": "Ricordamelo ogni giorno",
+  "reminderTime": "Ora del promemoria: {time}",
+  "@reminderTime": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "reminderChangeTime": "Cambia ora",
+  "reminderPermissionDenied": "Le notifiche sono bloccate sul telefono, quindi il promemoria non arriverà. Il gioco funziona lo stesso.",
+  "reminderNotificationTitle": "{pet} ti aspetta!",
+  "@reminderNotificationTitle": {
+    "placeholders": { "pet": { "type": "String" } }
+  },
+  "reminderNotificationBody": "Hai 2 minuti? C'è una nuova scoperta su {topic}.",
+  "@reminderNotificationBody": {
+    "placeholders": { "topic": { "type": "String" } }
+  },
+  "reminderNotificationBodyGeneric": "Hai 2 minuti? Vieni a scoprire qualcosa di nuovo sulla natura.",
+  "reminderPetFallback": "Il tuo cucciolo",
+  "activityDataTitle": "La tua attività",
+  "activityDataBody": "Per capire quando darti una mano, EcoQuest conta sul telefono quante volte giochi e quante risposte indovini negli ultimi 14 giorni. Niente posizione, niente Wi-Fi, niente dati inviati.",
+  "activityClearAction": "Cancella la mia attività",
+  "activityClearConfirmTitle": "Cancellare la tua attività?",
+  "activityClearConfirmBody": "Cancelliamo il registro degli ultimi giorni e spegniamo il promemoria. Livello, monete, cucciolo e oggetti restano come sono.",
+  "activityClearConfirm": "Cancella",
+  "activityClearCancel": "Annulla",
+  "activityCleared": "Attività cancellata."
 }
