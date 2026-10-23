@@ -1,10 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'local_reminder_scheduler.dart';
 
 /// Local (on-phone) reminder notifications. No server, no push service.
 ///
-/// Screens never call this directly: the saved `ReminderSettings` are
-/// applied by `ActivityBinding`, which also asks [launchedFromNotification]
-/// once at start for the activity log.
+/// The saved `ReminderSettings` are applied only by `ActivityBinding`
+/// (which also asks [launchedFromNotification] once at start). Screens
+/// call only [requestPermission], when the player turns the reminder on.
 abstract interface class ReminderScheduler {
   /// True when this app start came from tapping our reminder.
   Future<bool> launchedFromNotification();
@@ -50,5 +53,7 @@ class NoReminderScheduler implements ReminderScheduler {
   Future<void> cancelAll() async {}
 }
 
-final reminderSchedulerProvider =
-    Provider<ReminderScheduler>((ref) => const NoReminderScheduler());
+/// The real phone notifications; nothing on the web preview (D13).
+/// Tests override it with a fake.
+final reminderSchedulerProvider = Provider<ReminderScheduler>((ref) =>
+    kIsWeb ? const NoReminderScheduler() : LocalReminderScheduler());
