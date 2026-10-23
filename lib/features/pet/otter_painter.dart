@@ -109,7 +109,7 @@ class OtterPainter extends CustomPainter {
       paintCosmetic(canvas, neck);
     } else {
       cosmeticDrawing('bandana', CosmeticSlot.neck)
-          .paint(canvas, OtterPalette.bandana);
+          .paintOnOtter(canvas, OtterPalette.bandana);
     }
 
     canvas.save();
@@ -184,7 +184,7 @@ class OtterPainter extends CustomPainter {
       paintCosmetic(canvas, head);
     } else {
       cosmeticDrawing('leaf', CosmeticSlot.head)
-          .paint(canvas, OtterPalette.leaf);
+          .paintOnOtter(canvas, OtterPalette.leaf);
     }
   }
 
