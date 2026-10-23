@@ -23,24 +23,37 @@ Note: è una build di prova per la presentazione, firmata con la chiave di svilu
 Pokémon del periodo DS): logo che "esplode" sui raggi, cartelli a schermo intero tra le scene, testi grandi gialli con bordo
 blu, tagli con flash bianco, musica chiptune.
 
-Scaletta:
+Scaletta (2:00):
 
 | Tempo | Scena |
 |---|---|
 | 0:00 | Titolo: icona e logo LAIQUA |
 | 0:04 | Introduzione in stile Pokémon con Laiqua che parla |
-| 0:16 | Cartello "IMPARA GIOCANDO!" · scelta dei temi |
-| 0:26 | "Gioca subito": quiz con fonti verificate, 5 su 5 |
-| 0:42 | Cartello "RICICLA!" · rifiuti nella stanza e pulizia, 8 su 8 |
-| 0:58 | Livello 2 e biglietto premio |
-| 1:04 | Cartello "SI SCHIUDE!" · nasce Laiqua |
-| 1:15 | "Prepara la pappa", il mini-quiz per dare da mangiare |
-| 1:25 | Cartello "ARMADIO!" · ruota dei premi, maschera e bandana |
-| 1:40 | Giorno, tramonto e notte nella stanza |
-| 1:48 | Finale con QR code per scaricare l'app |
+| 0:14 | Cartello "IMPARA GIOCANDO!" · scelta dei temi |
+| 0:23 | "Gioca subito": quiz con fonti verificate |
+| 0:35 | Cartello "IL MIO TERRITORIO!" · dati live di Schio (Open-Meteo / CAMS): quiz generato dal dato reale, 3 su 3, e azione del giorno "L'ho fatto!" |
+| 0:50 | Cartello "RICICLA!" · rifiuti nella stanza e pulizia, 8 su 8 |
+| 1:02 | Livello 2 e biglietto premio |
+| 1:08 | Cartello "SI SCHIUDE!" · nasce Laiqua |
+| 1:20 | "Prepara la pappa", il mini-quiz per dare da mangiare |
+| 1:30 | Cartello "ARMADIO!" · ruota dei premi, maschera e bandana |
+| 1:42 | Giorno, tramonto e notte nella stanza |
+| 1:49 | Finale con QR code per scaricare l'app |
 
 Il gameplay è registrato davvero sull'emulatore Android (Pixel 7) con la build di rilascio, partendo da un'installazione
 pulita, e accelerato in montaggio. La musica è stata generata da codice (`tools/music.py`), quindi non ha problemi di licenza.
+
+## Slide aggiornate
+
+`Laiqua_slide_aggiornate.pptx` (8 slide 16:9 con note per chi parla, in italiano) e le stesse slide come immagini in `slides/`,
+nello stile della presentazione (crema, titoli marroni, verde foglia):
+
+1. Laiqua — la promessa · 2. Dai dati del territorio alle azioni · 3. Il mio territorio in tempo reale (schermata vera) ·
+4. Domande generate dai dati, non inventate · 5. Dall'informazione all'azione · 6. Cosa funziona già ·
+7. Provala ora (QR) · 8. Cosa c'è dopo (territorio ovunque con la posizione, moda sostenibile, eventi a tempo, nuove modalità)
+
+Per aggiungerle alla presentazione su OneDrive: in PowerPoint **Inserisci → Immagini** e scegli i PNG di `slides/` (una per
+slide, a tutta pagina), oppure apri `Laiqua_slide_aggiornate.pptx` e copia le slide. Le note per chi parla sono nel .pptx.
 
 ## Altro materiale
 
@@ -49,8 +62,8 @@ pulita, e accelerato in montaggio. La musica è stata generata da codice (`tools
 - `art/laiqua_design_originale.jpg` — il disegno di partenza della lontra
 - `art/qr_download_laiqua.png` — QR code per scaricare l'app
 - `screenshots/` — schermate reali dall'emulatore (introduzione, Impara, stanza di notte con i rifiuti, armadio, risultati)
-- `tools/` — gli script usati per il video: `trailer.py` (montaggio con Pillow e ffmpeg), `music.py` (musica chiptune),
-  `answer.py` (risposte automatiche durante la registrazione)
+- `tools/` — gli script usati: `trailer.py` (montaggio video con Pillow e ffmpeg), `music.py` (musica chiptune),
+  `answer.py` (risposte automatiche durante la registrazione), `slides.py` (slide e .pptx)
 
 ## Rifare il video
 

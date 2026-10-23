@@ -233,20 +233,23 @@ def segment(name, src, start, end, dur, big, small):
     return out
 
 
+TERR = (float(os.environ.get('TERR_START', '0')), float(os.environ.get('TERR_END', '30')))
 parts = [title(4.0)]
-parts.append(segment('intro', 's1_intro', 0.5, 12.5, 12, "Un'avventura", 'per salvare il pianeta'))
+parts.append(segment('intro', 's1_intro', 0.5, 10.5, 10, "Un'avventura", 'per salvare il pianeta'))
 parts.append(card('c1', 'IMPARA GIOCANDO!', 1.5, (20, 110, 70, 255), (40, 150, 95, 255)))
-parts.append(segment('onb', 's2_onboarding', 2.0, 36.0, 9, 'Scegli i tuoi temi', 'riciclo, oceani, clima e altri 7'))
-parts.append(segment('quiz', 's3_quiz', 3.0, 69.0, 16, 'Quiz che fanno crescere', '100 domande con fonti verificate'))
+parts.append(segment('onb', 's2_onboarding', 2.0, 36.0, 8, 'Scegli i tuoi temi', 'riciclo, oceani, clima e altri 7'))
+parts.append(segment('quiz', 's3_quiz', 3.0, 69.0, 12, 'Quiz che fanno crescere', '100 domande con fonti verificate'))
+parts.append(card('c5', 'IL MIO TERRITORIO!', 1.5, (20, 90, 140, 255), (40, 130, 190, 255)))
+parts.append(segment('terr', 's10_territory', TERR[0], TERR[1], 13, 'Dati live di Schio', "aria e meteo: domande dal dato reale"))
 parts.append(card('c2', 'RICICLA!', 1.5, (190, 120, 20, 255), (230, 160, 40, 255)))
-parts.append(segment('clean', 's4_cleanup', 0.0, 54.0, 14, 'Rifiuti nella stanza', 'mettili nel bidone giusto'))
+parts.append(segment('clean', 's4_cleanup', 0.0, 54.0, 11, 'Rifiuti nella stanza', 'mettili nel bidone giusto'))
 parts.append(segment('level', 's5_levelup', 47.0, 61.0, 6, 'Sali di livello!', 'e vinci biglietti premio'))
 parts.append(card('c3', 'SI SCHIUDE!', 1.5, (160, 60, 110, 255), (210, 90, 150, 255)))
 parts.append(segment('hatch', 's6_hatch', 0.0, 19.0, 10, 'Ecco Laiqua!', 'la tua lontra da accudire'))
 parts.append(segment('feed', 's7_feed', 0.0, 34.5, 10, 'Prepara la pappa', 'un mini-quiz sui tuoi interessi'))
 parts.append(card('c4', 'ARMADIO!', 1.5, (70, 50, 150, 255), (110, 80, 200, 255)))
-parts.append(segment('ward', 's8_wardrobe', 0.0, 36.0, 13, 'Ruota dei premi', '25 accessori in 6 rarità'))
-parts.append(segment('night', 's9_daynight', 0.0, 31.5, 8, 'Giorno, tramonto, notte', "la stanza segue l'ora del telefono"))
+parts.append(segment('ward', 's8_wardrobe', 0.0, 36.0, 11, 'Ruota dei premi', '25 accessori in 6 rarità'))
+parts.append(segment('night', 's9_daynight', 0.0, 31.5, 7, 'Giorno, tramonto, notte', "la stanza segue l'ora del telefono"))
 parts.append(outro(11.0))
 with open(f'{B}/list.txt', 'w') as fh:
     for p in parts:
