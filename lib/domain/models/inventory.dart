@@ -15,6 +15,18 @@ class Inventory {
   /// Slot id (e.g. "head") → item id.
   final Map<String, String> equippedBySlot;
 
+  bool owns(String itemId) => ownedItemIds.contains(itemId);
+
+  Inventory add(String itemId) =>
+      copyWith(ownedItemIds: {...ownedItemIds, itemId});
+
+  /// Puts [itemId] in [slotId], replacing what was there.
+  Inventory equip(String slotId, String itemId) =>
+      copyWith(equippedBySlot: {...equippedBySlot, slotId: itemId});
+
+  Inventory unequip(String slotId) =>
+      copyWith(equippedBySlot: {...equippedBySlot}..remove(slotId));
+
   Inventory copyWith({
     Set<String>? ownedItemIds,
     Map<String, String>? equippedBySlot,

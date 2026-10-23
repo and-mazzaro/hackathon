@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/save/save_repository.dart';
 import 'models/audio_settings.dart';
+import 'models/cosmetic_item.dart';
 import 'models/eco_topic.dart';
 import 'models/game_state.dart';
 import 'models/learning_progress.dart';
@@ -11,6 +12,7 @@ import 'models/pet_state.dart';
 import 'models/player_profile.dart';
 import 'models/recycling_progress.dart';
 import 'models/reward.dart';
+import 'rules/cosmetic_rules.dart';
 import 'rules/economy_config.dart';
 import 'rules/pet_rules.dart';
 import 'rules/profile_rules.dart';
@@ -80,6 +82,24 @@ class CleanupOutcome {
   final bool petCleaner;
 }
 
+/// The answer of [GameController.buyItem] and [GameController.buyTicket].
+enum PurchaseResult { bought, notEnoughCoins, alreadyOwned, notForSale }
+
+/// The result of [GameController.rollCosmetic], for the reveal sheet.
+class RollOutcome {
+  const RollOutcome({
+    required this.item,
+    required this.isNew,
+    this.refundCoins = 0,
+  });
+
+  final CosmeticItem item;
+
+  /// False when the player already owned it: [refundCoins] were paid back.
+  final bool isNew;
+  final int refundCoins;
+}
+
 /// The single place where the game state changes.
 ///
 /// Every change: compute the new state → show it → save it.
@@ -92,8 +112,8 @@ class CleanupOutcome {
 /// | `completeQuiz` (quiz) — DONE       | claimReward, `quiz:sessionId`       |
 /// | `completeCleanup` — DONE           | claimReward, `sort:roundId`         |
 /// | `claimMission` (missions)          | claimReward, `mission:missionId:day`|
-/// | `spendCoins` / `buyItem` (shop)    | new spend method, same pattern      |
-/// | `rollCosmetic`, `equip` (cosmetics)| inventory update                    |
+/// | `buyTicket`, `buyItem` — DONE      | spend coins, inventory update       |
+/// | `rollCosmetic`, `equip` — DONE     | spend a ticket, inventory update    |
 /// | `careForPet`, `evolvePet` — DONE   | pet update (no rewards)             |
 /// | `updateAudioSettings` — DONE       | settings update (no rewards)        |
 class GameController extends AsyncNotifier<GameState> {
@@ -201,7 +221,78 @@ class GameController extends AsyncNotifier<GameState> {
     return next;
   }
 
+  /// Buys one reward ticket with coins.
+  Future<PurchaseResult> buyTicket() async {
+    final current = state.requireValue;
+    final progress = current.progress;
+    final price = _economy.ticketPriceInCoins;
+    if (progress.coins < price) return PurchaseResult.notEnoughCoins;
+    await _commit(current.copyWith(
+      progress: progress.copyWith(
+          coins: progress.coins - price, tickets: progress.tickets + 1),
+    ));
+    return PurchaseResult.bought;
+  }
+
+  /// Buys [item] in the shop. Epic items are not sold, and an item is
+  /// never bought twice.
+  Future<PurchaseResult> buyItem(CosmeticItem item) async {
+    final current = state.requireValue;
+    final progress = current.progress;
+    final price = shopPrice(item.rarity, _economy);
+    if (price == null) return PurchaseResult.notForSale;
+    if (current.inventory.owns(item.id)) return PurchaseResult.alreadyOwned;
+    if (progress.coins < price) return PurchaseResult.notEnoughCoins;
+    await _commit(current.copyWith(
+      progress: progress.copyWith(coins: progress.coins - price),
+      inventory: current.inventory.add(item.id),
+    ));
+    return PurchaseResult.bought;
+  }
+
+  /// Spends one ticket on a reward roll (odds in `pickRolledCosmetic`).
+  /// A new item goes into the inventory; a duplicate pays coins back.
+  /// Returns null when the player has no ticket.
+  Future<RollOutcome?> rollCosmetic(CosmeticCatalog catalog) async {
+    final current = state.requireValue;
+    final progress = current.progress;
+    if (progress.tickets < 1 || catalog.items.isEmpty) return null;
+
+    final item =
+        pickRolledCosmetic(catalog, ref.read(randomProvider), _economy);
+    final isNew = !current.inventory.owns(item.id);
+    final refund = isNew ? 0 : duplicateRefund(item.rarity, _economy);
+    await _commit(current.copyWith(
+      progress: progress.copyWith(
+          tickets: progress.tickets - 1, coins: progress.coins + refund),
+      inventory: isNew ? current.inventory.add(item.id) : null,
+    ));
+    return RollOutcome(item: item, isNew: isNew, refundCoins: refund);
+  }
+
+  /// Puts an owned [item] on the pet, in its own slot. Returns false when
+  /// the player does not own it.
+  Future<bool> equip(CosmeticItem item) async {
+    final current = state.requireValue;
+    if (!current.inventory.owns(item.id)) return false;
+    await _commit(current.copyWith(
+      inventory: current.inventory.equip(item.slot.id, item.id),
+    ));
+    return true;
+  }
+
+  /// Takes off whatever the pet wears in [slot].
+  Future<void> unequip(CosmeticSlot slot) async {
+    final current = state.requireValue;
+    if (!current.inventory.equippedBySlot.containsKey(slot.id)) return;
+    await _commit(current.copyWith(
+      inventory: current.inventory.unequip(slot.id),
+    ));
+  }
+
   /// Pure calculation shared by every reward: no saving here.
+  /// Every level gained also pays [EconomyConfig.ticketsPerLevelUp]
+  /// tickets, included in the returned reward.
   (GameState, ClaimResult) _applyReward(
       GameState current, String claimId, Reward reward) {
     final progress = current.progress;
@@ -219,19 +310,24 @@ class GameController extends AsyncNotifier<GameState> {
       );
     }
 
+    final levelAfter =
+        levelForTotalXp(progress.totalXp + reward.xp, _economy).level;
+    final paid = reward +
+        Reward(
+            tickets: (levelAfter - levelBefore) * _economy.ticketsPerLevelUp);
     final updated = progress.copyWith(
-      totalXp: progress.totalXp + reward.xp,
-      coins: progress.coins + reward.coins,
-      tickets: progress.tickets + reward.tickets,
+      totalXp: progress.totalXp + paid.xp,
+      coins: progress.coins + paid.coins,
+      tickets: progress.tickets + paid.tickets,
       claimedRewardIds: {...progress.claimedRewardIds, claimId},
     );
     return (
       current.copyWith(progress: updated),
       ClaimResult(
         applied: true,
-        reward: reward,
+        reward: paid,
         levelBefore: levelBefore,
-        levelAfter: levelForTotalXp(updated.totalXp, _economy).level,
+        levelAfter: levelAfter,
       ),
     );
   }

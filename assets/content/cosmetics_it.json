@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "items": [
+    { "id": "head_flower", "name": "Fiore di campo", "slot": "head", "rarity": "common", "icon": "flower", "color": "FFE5578A" },
+    { "id": "head_straw_hat", "name": "Cappello di paglia", "slot": "head", "rarity": "common", "icon": "hat", "color": "FFD9A441" },
+    { "id": "head_party_hat", "name": "Cappellino da festa", "slot": "head", "rarity": "rare", "icon": "party", "color": "FF7B5CD6" },
+    { "id": "head_crown", "name": "Corona di rami", "slot": "head", "rarity": "epic", "icon": "crown", "color": "FFF2B705" },
+
+    { "id": "face_round_glasses", "name": "Occhiali tondi", "slot": "face", "rarity": "common", "icon": "glasses", "color": "FF173A2B" },
+    { "id": "face_sunglasses", "name": "Occhiali da sole", "slot": "face", "rarity": "common", "icon": "sunglasses", "color": "FF2A2A2A" },
+    { "id": "face_mask", "name": "Mascherina da supereroe", "slot": "face", "rarity": "rare", "icon": "mask", "color": "FFC2410C" },
+
+    { "id": "neck_scarf", "name": "Sciarpa di lana", "slot": "neck", "rarity": "common", "icon": "scarf", "color": "FF3FA7D6" },
+    { "id": "neck_bow", "name": "Papillon", "slot": "neck", "rarity": "common", "icon": "bow", "color": "FFE5578A" },
+    { "id": "neck_bell", "name": "Campanellino", "slot": "neck", "rarity": "rare", "icon": "bell", "color": "FFF0A824" },
+    { "id": "neck_medal", "name": "Medaglia dell'eco-eroe", "slot": "neck", "rarity": "rare", "icon": "medal", "color": "FF2A7AB8" },
+    { "id": "neck_seed_necklace", "name": "Collana di semi", "slot": "neck", "rarity": "epic", "icon": "seeds", "color": "FF8B5A2B" }
+  ]
+}

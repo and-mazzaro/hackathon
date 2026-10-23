@@ -32,8 +32,18 @@ class EconomyConfig {
     this.cleanupGoodRoundPercent = 75,
     this.cleanupPetCleanliness = 25,
     this.ticketPriceInCoins = 100,
+    this.ticketsPerLevelUp = 1,
+    this.shopPriceCommon = 60,
+    this.shopPriceRare = 150,
+    this.rollOddsCommon = 60,
+    this.rollOddsRare = 30,
+    this.rollOddsEpic = 10,
+    this.duplicateRefundCommon = 20,
+    this.duplicateRefundRare = 40,
+    this.duplicateRefundEpic = 80,
   })  : assert(xpForFirstLevelUp > 0),
-        assert(xpIncreasePerLevel >= 0);
+        assert(xpIncreasePerLevel >= 0),
+        assert(rollOddsCommon + rollOddsRare + rollOddsEpic == 100);
 
   static const defaults = EconomyConfig();
 
@@ -105,6 +115,23 @@ class EconomyConfig {
   /// A clean room makes a hatched pet cleaner too.
   final int cleanupPetCleanliness;
 
-  // Shop — used from the cosmetics milestone
+  // Cosmetics: shop and reward roll
   final int ticketPriceInCoins;
+
+  /// Tickets earned for every level gained (in the same claim).
+  final int ticketsPerLevelUp;
+
+  /// Shop prices in coins. Epic items are not sold: roll only.
+  final int shopPriceCommon;
+  final int shopPriceRare;
+
+  /// Roll odds in percent, shown to the player as they are. Sum = 100.
+  final int rollOddsCommon;
+  final int rollOddsRare;
+  final int rollOddsEpic;
+
+  /// Coins paid back when a roll lands on an item already owned.
+  final int duplicateRefundCommon;
+  final int duplicateRefundRare;
+  final int duplicateRefundEpic;
 }
