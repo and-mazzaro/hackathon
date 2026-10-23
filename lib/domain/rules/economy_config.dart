@@ -35,6 +35,8 @@ class EconomyConfig {
     this.cleanupPetCleanliness = 25,
     this.ticketPriceInCoins = 100,
     this.ticketsPerLevelUp = 1,
+    this.comebackLowScore = 45,
+    this.comebackBonusCoins = 10,
     this.shopPrices = const {
       CosmeticRarity.common: 60,
       CosmeticRarity.uncommon: 100,
@@ -134,6 +136,13 @@ class EconomyConfig {
 
   /// Tickets earned for every level gained (in the same claim).
   final int ticketsPerLevelUp;
+
+  // Comeback score (M10)
+  /// A comeback score below this shows the gentle Home card and bonus.
+  final int comebackLowScore;
+
+  /// Coins paid once per day (`comeback:YYYY-MM-DD`) on a low-score day.
+  final int comebackBonusCoins;
 
   /// Shop prices in coins. A rarity missing here is not sold (epic,
   /// legendary and mythic items come only from the roll).
