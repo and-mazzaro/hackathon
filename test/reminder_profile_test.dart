@@ -9,9 +9,10 @@ import 'helpers/pump_app.dart';
 
 final _switch = find.text('Ricordamelo ogni giorno');
 
-Future<void> _openProfileReminder(WidgetTester tester) async {
+Future<void> _openProfileReminder(WidgetTester tester,
+    {Finder? target}) async {
   await tapTab(tester, 'Profilo');
-  await scrollTo(tester, find.text('Cancella la mia attività'));
+  await scrollTo(tester, target ?? find.text('Cancella la mia attività'));
 }
 
 void main() {
@@ -46,7 +47,7 @@ void main() {
     final repository = InMemorySaveRepository(onboardedState());
     await pumpEcoQuestApp(tester,
         repository: repository, reminders: reminders);
-    await _openProfileReminder(tester);
+    await _openProfileReminder(tester, target: _switch);
 
     await tester.ensureVisible(_switch);
     await tester.tap(_switch);
@@ -72,7 +73,7 @@ void main() {
     final repository = InMemorySaveRepository(onboardedState());
     await pumpEcoQuestApp(tester,
         repository: repository, reminders: reminders);
-    await _openProfileReminder(tester);
+    await _openProfileReminder(tester, target: _switch);
 
     await tester.ensureVisible(_switch);
     await tester.tap(_switch);

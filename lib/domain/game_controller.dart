@@ -9,6 +9,7 @@ import 'models/cosmetic_item.dart';
 import 'models/eco_topic.dart';
 import 'models/game_state.dart';
 import 'models/learning_progress.dart';
+import 'models/look_mode.dart';
 import 'models/pet_state.dart';
 import 'models/player_profile.dart';
 import 'models/recycling_progress.dart';
@@ -474,6 +475,13 @@ class GameController extends AsyncNotifier<GameState> {
     final current = state.requireValue;
     if (current.audio == audio) return;
     await _commit(current.copyWith(audio: audio));
+  }
+
+  /// Saves the room look chosen in Profile → "Aspetto".
+  Future<void> updateLookMode(LookMode mode) async {
+    final current = state.requireValue;
+    if (current.lookMode == mode) return;
+    await _commit(current.copyWith(lookMode: mode));
   }
 
   /// Starts a new game, replacing the saved one. Used by the "start over"

@@ -1827,6 +1827,42 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Guardaroba: premi e vestiti per il tuo cucciolo'**
   String get demoCaptionWardrobe;
+
+  /// No description provided for @lookTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Aspetto'**
+  String get lookTitle;
+
+  /// No description provided for @lookBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Come appare la stanza del cucciolo. Con Automatico segue l\'ora del telefono.'**
+  String get lookBody;
+
+  /// No description provided for @lookAuto.
+  ///
+  /// In it, this message translates to:
+  /// **'Automatico'**
+  String get lookAuto;
+
+  /// No description provided for @lookDay.
+  ///
+  /// In it, this message translates to:
+  /// **'Giorno'**
+  String get lookDay;
+
+  /// No description provided for @lookAfternoon.
+  ///
+  /// In it, this message translates to:
+  /// **'Pomeriggio'**
+  String get lookAfternoon;
+
+  /// No description provided for @lookNight.
+  ///
+  /// In it, this message translates to:
+  /// **'Notte'**
+  String get lookNight;
 }
 
 class _AppLocalizationsDelegate

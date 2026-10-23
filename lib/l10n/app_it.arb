@@ -498,5 +498,11 @@
   "demoCaptionHome": "Home: la missione del giorno e i tuoi progressi",
   "demoCaptionLearn": "Impara: quiz brevi sui temi che ti interessano",
   "demoCaptionPet": "Cucciolo: prenditi cura di Laiqua, la tua lontra",
-  "demoCaptionWardrobe": "Guardaroba: premi e vestiti per il tuo cucciolo"
+  "demoCaptionWardrobe": "Guardaroba: premi e vestiti per il tuo cucciolo",
+  "lookTitle": "Aspetto",
+  "lookBody": "Come appare la stanza del cucciolo. Con Automatico segue l'ora del telefono.",
+  "lookAuto": "Automatico",
+  "lookDay": "Giorno",
+  "lookAfternoon": "Pomeriggio",
+  "lookNight": "Notte"
 }
