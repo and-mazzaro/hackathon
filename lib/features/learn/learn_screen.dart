@@ -105,6 +105,8 @@ class _LearnContent extends StatelessWidget {
                 ? null
                 : () => context.push(AppRoutes.quiz()),
           ),
+          const SizedBox(height: EcoSpacing.s),
+          const _TerritoryTile(),
           const SizedBox(height: EcoSpacing.l),
           Semantics(
             header: true,
@@ -419,6 +421,40 @@ class _TopicTile extends StatelessWidget {
           ),
         ],
       ],
+    );
+  }
+}
+
+/// Opens the "Il mio territorio" quiz (questions from today's live data).
+class _TerritoryTile extends StatelessWidget {
+  const _TerritoryTile();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final textTheme = Theme.of(context).textTheme;
+    return EcoCard(
+      onTap: () => context.push(AppRoutes.territoryQuiz),
+      child: Row(
+        children: [
+          const Icon(Icons.location_city_rounded,
+              color: EcoColors.primary, size: 32),
+          const SizedBox(width: EcoSpacing.s + EcoSpacing.xs),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(l10n.territoryLearnTitle, style: textTheme.titleMedium),
+                const SizedBox(height: 2),
+                Text(l10n.territoryLearnSubtitle,
+                    style: textTheme.bodyMedium
+                        ?.copyWith(color: EcoColors.inkMuted)),
+              ],
+            ),
+          ),
+          const Icon(Icons.chevron_right_rounded, color: EcoColors.inkMuted),
+        ],
+      ),
     );
   }
 }

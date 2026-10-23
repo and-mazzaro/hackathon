@@ -43,6 +43,7 @@ class EconomyConfig {
     this.roomTrashHoursMidScore = 4,
     this.roomTrashHoursHighScore = 6,
     this.roomTrashHighScore = 75,
+    this.territoryActionCoins = 5,
     this.shopPrices = const {
       CosmeticRarity.common: 60,
       CosmeticRarity.uncommon: 100,
@@ -163,6 +164,10 @@ class EconomyConfig {
   final int roomTrashHoursMidScore;
   final int roomTrashHoursHighScore;
   final int roomTrashHighScore;
+
+  /// Coins for the daily territory tip ("L'ho fatto!"), paid once per
+  /// day (`territory:YYYY-MM-DD`). Honour-based, never taken away.
+  final int territoryActionCoins;
 
   /// Shop prices in coins. A rarity missing here is not sold (epic,
   /// legendary and mythic items come only from the roll).

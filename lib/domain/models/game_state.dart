@@ -9,6 +9,7 @@ import 'pet_state.dart';
 import 'player_profile.dart';
 import 'player_progress.dart';
 import 'recycling_progress.dart';
+import 'territory.dart';
 
 /// Everything that is saved. One object, saved as one JSON document, so a
 /// reward and the "already claimed" mark are always written together.
@@ -28,6 +29,7 @@ class GameState {
     this.reminder = ReminderSettings.defaults,
     this.lookMode = LookMode.auto,
     this.lastCleanupAt,
+    this.territory = TerritoryState.defaults,
   });
 
   /// A brand-new player.
@@ -81,6 +83,10 @@ class GameState {
   /// with room trash: older saves have none (see `roomTrashCount`).
   final DateTime? lastCleanupAt;
 
+  /// Chosen town and last good live readings ("Il mio territorio").
+  /// Older saves get Schio and no cached readings.
+  final TerritoryState territory;
+
   GameState copyWith({
     PlayerProfile? profile,
     PlayerProgress? progress,
@@ -93,6 +99,7 @@ class GameState {
     ReminderSettings? reminder,
     LookMode? lookMode,
     DateTime? lastCleanupAt,
+    TerritoryState? territory,
   }) {
     return GameState(
       profile: profile ?? this.profile,
@@ -106,6 +113,7 @@ class GameState {
       reminder: reminder ?? this.reminder,
       lookMode: lookMode ?? this.lookMode,
       lastCleanupAt: lastCleanupAt ?? this.lastCleanupAt,
+      territory: territory ?? this.territory,
     );
   }
 
@@ -122,6 +130,7 @@ class GameState {
         'lookMode': lookMode.id,
         if (lastCleanupAt != null)
           'lastCleanupAt': lastCleanupAt!.toIso8601String(),
+        'territory': territory.toJson(),
       };
 
   /// [now] is only used for dates missing from an old or partial save.
@@ -138,6 +147,7 @@ class GameState {
       reminder: ReminderSettings.fromJson(readObject(json, 'reminder')),
       lookMode: LookMode.fromId(json['lookMode']),
       lastCleanupAt: DateTime.tryParse(readString(json, 'lastCleanupAt') ?? ''),
+      territory: TerritoryState.fromJson(readObject(json, 'territory')),
     );
   }
 }

@@ -25,6 +25,7 @@ import '../pet/pet_labels.dart';
 import '../pet/pet_need_bars.dart';
 import '../pet/pet_view.dart';
 import '../pet/room_trash.dart';
+import '../territory/territory_card.dart';
 
 /// Home: the pet room on top (about 60%), today's activities below.
 /// Shows the saved game; while it loads, a spinner; if it fails, an error.
@@ -111,6 +112,8 @@ class _HomeContent extends ConsumerWidget {
                 child: Text(l10n.homeActivitiesTitle,
                     style: textTheme.titleLarge),
               ),
+              const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
+              TerritoryCard(game: game),
               const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
               _ActivityShortcut(
                 icon: Icons.quiz_rounded,

@@ -512,5 +512,49 @@
       "count": { "type": "int" },
       "names": { "type": "String" }
     }
+  },
+  "territoryTitle": "Il mio territorio · {town}",
+  "@territoryTitle": {
+    "description": "Home card title: live open environmental data for the chosen town.",
+    "placeholders": { "town": { "type": "String" } }
+  },
+  "territoryLearnTitle": "Il mio territorio (dati live)",
+  "territoryLearnSubtitle": "3 domande con i dati di oggi sull'aria del tuo comune",
+  "territoryLoading": "Carico i dati del territorio…",
+  "territoryUnavailable": "Dati non disponibili ora",
+  "territoryAqi": "Aria {band} · indice {aqi}",
+  "@territoryAqi": {
+    "placeholders": { "band": { "type": "String" }, "aqi": { "type": "int" } }
+  },
+  "territoryPm10": "PM10 {value} µg/m³",
+  "@territoryPm10": { "placeholders": { "value": { "type": "String" } } },
+  "territoryPm25": "PM2,5 {value} µg/m³",
+  "@territoryPm25": { "placeholders": { "value": { "type": "String" } } },
+  "territoryTemperature": "{value} °C",
+  "@territoryTemperature": { "placeholders": { "value": { "type": "String" } } },
+  "territoryUpdatedAt": "aggiornato alle {time}",
+  "@territoryUpdatedAt": { "placeholders": { "time": { "type": "String" } } },
+  "territoryCachedAt": "offline: ultimi dati delle {time}",
+  "@territoryCachedAt": { "placeholders": { "time": { "type": "String" } } },
+  "territoryTipTitle": "Azione di oggi: {tip}",
+  "@territoryTipTitle": { "placeholders": { "tip": { "type": "String" } } },
+  "territoryDidIt": "L'ho fatto!",
+  "territoryDidItReward": "Grazie! +{coins} monete",
+  "@territoryDidItReward": { "placeholders": { "coins": { "type": "int" } } },
+  "territoryDoneToday": "Fatto oggi, grazie! Domani una nuova azione.",
+  "territoryQuizAction": "Quiz del territorio",
+  "territoryAttribution": "Dati: Open-Meteo.com (CC BY 4.0), qualità dell'aria da CAMS Europe",
+  "territoryTownLabel": "Comune",
+  "territorySummary": "{title}. {aqi}. {pm10}, {pm25}, temperatura {temperature}. {updated}.",
+  "@territorySummary": {
+    "description": "One block for screen readers: the whole territory reading.",
+    "placeholders": {
+      "title": { "type": "String" },
+      "aqi": { "type": "String" },
+      "pm10": { "type": "String" },
+      "pm25": { "type": "String" },
+      "temperature": { "type": "String" },
+      "updated": { "type": "String" }
+    }
   }
 }

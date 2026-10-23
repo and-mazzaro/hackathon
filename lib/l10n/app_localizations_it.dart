@@ -1143,4 +1143,91 @@ class AppLocalizationsIt extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String territoryTitle(String town) {
+    return 'Il mio territorio · $town';
+  }
+
+  @override
+  String get territoryLearnTitle => 'Il mio territorio (dati live)';
+
+  @override
+  String get territoryLearnSubtitle =>
+      '3 domande con i dati di oggi sull\'aria del tuo comune';
+
+  @override
+  String get territoryLoading => 'Carico i dati del territorio…';
+
+  @override
+  String get territoryUnavailable => 'Dati non disponibili ora';
+
+  @override
+  String territoryAqi(String band, int aqi) {
+    return 'Aria $band · indice $aqi';
+  }
+
+  @override
+  String territoryPm10(String value) {
+    return 'PM10 $value µg/m³';
+  }
+
+  @override
+  String territoryPm25(String value) {
+    return 'PM2,5 $value µg/m³';
+  }
+
+  @override
+  String territoryTemperature(String value) {
+    return '$value °C';
+  }
+
+  @override
+  String territoryUpdatedAt(String time) {
+    return 'aggiornato alle $time';
+  }
+
+  @override
+  String territoryCachedAt(String time) {
+    return 'offline: ultimi dati delle $time';
+  }
+
+  @override
+  String territoryTipTitle(String tip) {
+    return 'Azione di oggi: $tip';
+  }
+
+  @override
+  String get territoryDidIt => 'L\'ho fatto!';
+
+  @override
+  String territoryDidItReward(int coins) {
+    return 'Grazie! +$coins monete';
+  }
+
+  @override
+  String get territoryDoneToday =>
+      'Fatto oggi, grazie! Domani una nuova azione.';
+
+  @override
+  String get territoryQuizAction => 'Quiz del territorio';
+
+  @override
+  String get territoryAttribution =>
+      'Dati: Open-Meteo.com (CC BY 4.0), qualità dell\'aria da CAMS Europe';
+
+  @override
+  String get territoryTownLabel => 'Comune';
+
+  @override
+  String territorySummary(
+    String title,
+    String aqi,
+    String pm10,
+    String pm25,
+    String temperature,
+    String updated,
+  ) {
+    return '$title. $aqi. $pm10, $pm25, temperatura $temperature. $updated.';
+  }
 }
