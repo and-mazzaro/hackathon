@@ -10,6 +10,7 @@ import '../../core/animations.dart';
 import '../../domain/models/pet_state.dart';
 import '../../domain/rules/pet_rules.dart';
 import '../../l10n/app_localizations.dart';
+import '../demo/demo_mode.dart';
 import '../pet/otter_geometry.dart';
 import '../pet/otter_idle.dart';
 import '../pet/pet_art.dart';
@@ -391,7 +392,14 @@ class _IntroScreenState extends ConsumerState<IntroScreen>
                         hint: l10n.introNext,
                         onTap: _advance,
                         excludeSemantics: true,
-                        child: _SpeechBox(
+                        // Large text on a small phone: the box scrolls
+                        // instead of pushing the otter off the screen.
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                              maxHeight:
+                                  MediaQuery.sizeOf(context).height * 0.5),
+                          child: SingleChildScrollView(
+                            child: _SpeechBox(
                           text: shown,
                           // Reserve the space of the whole line, so the box
                           // does not grow while typing.
@@ -399,6 +407,8 @@ class _IntroScreenState extends ConsumerState<IntroScreen>
                           showArrow: done && arrowOn,
                           step: '${_line + 1}/${lines.length}',
                           name: l10n.introLogo,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -470,6 +480,18 @@ class _IntroScreenState extends ConsumerState<IntroScreen>
                         icon: const Icon(Icons.play_arrow_rounded),
                         label: Text(l10n.introStart),
                       ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Opacity(
+                    opacity: button,
+                    child: TextButton.icon(
+                      style: TextButton.styleFrom(
+                          foregroundColor: Colors.white),
+                      onPressed: () =>
+                          ref.read(demoModeProvider.notifier).start(),
+                      icon: const Icon(Icons.slideshow_rounded),
+                      label: Text(l10n.demoStart),
                     ),
                   ),
                   const Spacer(),

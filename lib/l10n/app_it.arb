@@ -492,5 +492,11 @@
   "introLine5": "E prenditi cura di me: pappa, giochi e bagnetto. Insieme salveremo il pianeta!",
   "introOtterLabel": "Laiqua, la lontra, saluta felice",
   "introFinaleTitle": "Laiqua!",
-  "introStart": "Inizia l'avventura"
+  "introStart": "Inizia l'avventura",
+  "demoStart": "Modalità demo",
+  "demoStop": "Esci dalla demo",
+  "demoCaptionHome": "Home: la missione del giorno e i tuoi progressi",
+  "demoCaptionLearn": "Impara: quiz brevi sui temi che ti interessano",
+  "demoCaptionPet": "Cucciolo: prenditi cura di Laiqua, la tua lontra",
+  "demoCaptionWardrobe": "Guardaroba: premi e vestiti per il tuo cucciolo"
 }

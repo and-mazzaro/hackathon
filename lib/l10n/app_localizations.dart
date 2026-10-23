@@ -1791,6 +1791,42 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Inizia l\'avventura'**
   String get introStart;
+
+  /// No description provided for @demoStart.
+  ///
+  /// In it, this message translates to:
+  /// **'Modalità demo'**
+  String get demoStart;
+
+  /// No description provided for @demoStop.
+  ///
+  /// In it, this message translates to:
+  /// **'Esci dalla demo'**
+  String get demoStop;
+
+  /// No description provided for @demoCaptionHome.
+  ///
+  /// In it, this message translates to:
+  /// **'Home: la missione del giorno e i tuoi progressi'**
+  String get demoCaptionHome;
+
+  /// No description provided for @demoCaptionLearn.
+  ///
+  /// In it, this message translates to:
+  /// **'Impara: quiz brevi sui temi che ti interessano'**
+  String get demoCaptionLearn;
+
+  /// No description provided for @demoCaptionPet.
+  ///
+  /// In it, this message translates to:
+  /// **'Cucciolo: prenditi cura di Laiqua, la tua lontra'**
+  String get demoCaptionPet;
+
+  /// No description provided for @demoCaptionWardrobe.
+  ///
+  /// In it, this message translates to:
+  /// **'Guardaroba: premi e vestiti per il tuo cucciolo'**
+  String get demoCaptionWardrobe;
 }
 
 class _AppLocalizationsDelegate

@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 
 import '../core/activity_binding.dart';
 import '../core/audio/audio_binding.dart';
+import '../features/demo/demo_mode.dart';
 import '../l10n/app_localizations.dart';
 import 'router.dart';
 import 'theme/app_theme.dart';
@@ -18,9 +19,11 @@ class EcoQuestApp extends ConsumerWidget {
       theme: AppTheme.light(),
       routerConfig: ref.watch(routerProvider),
       // Sound settings and app lifecycle → audio service (no UI);
-      // app opens and clean exits → local activity log (M10).
+      // app opens and clean exits → local activity log (M10);
+      // the demo-mode caption over every screen.
       builder: (context, child) =>
-          ActivityBinding(child: AudioBinding(child: child!)),
+          ActivityBinding(
+              child: AudioBinding(child: DemoCaptionOverlay(child: child!))),
       // Our strings + Material/Cupertino strings from material_ui.
       // (AppLocalizations.localizationsDelegates still points at the old
       // framework Material library, so we do not use it.)
