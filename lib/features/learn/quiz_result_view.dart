@@ -92,6 +92,11 @@ class QuizResultView extends StatelessWidget {
                   ),
                 ),
               ],
+              if (claim.reward.tickets > 0) ...[
+                const SizedBox(height: EcoSpacing.s),
+                Text(l10n.levelUpTickets(claim.reward.tickets),
+                    style: textTheme.bodyLarge, textAlign: TextAlign.center),
+              ],
               const SizedBox(height: EcoSpacing.l),
               Text(l10n.quizResultBestStreak(score.bestStreak),
                   style: textTheme.bodyLarge, textAlign: TextAlign.center),

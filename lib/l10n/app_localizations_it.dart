@@ -515,6 +515,163 @@ class AppLocalizationsIt extends AppLocalizations {
   String get cleanupRoomClean => 'La stanza è pulita!';
 
   @override
+  String levelUpTickets(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Premio: $count biglietti per la ruota dell\'Armadio!',
+      one: 'Premio: 1 biglietto per la ruota dell\'Armadio!',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wardrobeTitle => 'Armadio';
+
+  @override
+  String get wardrobeOpenFromPet => 'Apri l\'armadio';
+
+  @override
+  String get homeWardrobeTitle => 'Armadio del cucciolo';
+
+  @override
+  String get homeWardrobeSubtitle =>
+      'Vestiti e accessori con monete e biglietti';
+
+  @override
+  String get wardrobeEggNote =>
+      'Gli oggetti si vedranno addosso al cucciolo quando l\'uovo si schiude. Puoi già raccoglierli!';
+
+  @override
+  String get wardrobeContentError =>
+      'Non riesco a caricare gli oggetti. Riprova più tardi.';
+
+  @override
+  String get slotHead => 'Testa';
+
+  @override
+  String get slotFace => 'Viso';
+
+  @override
+  String get slotNeck => 'Collo';
+
+  @override
+  String get rarityCommon => 'Comune';
+
+  @override
+  String get rarityRare => 'Raro';
+
+  @override
+  String get rarityEpic => 'Epico';
+
+  @override
+  String get rollTitle => 'Ruota dei premi';
+
+  @override
+  String get rollBody =>
+      'Usa un biglietto per ricevere un oggetto a sorpresa. Queste sono le probabilità:';
+
+  @override
+  String rollOddsLine(String rarity, int percent) {
+    return '$rarity: $percent%';
+  }
+
+  @override
+  String rollOddsSemantics(int common, int rare, int epic) {
+    return 'Probabilità: comune $common percento, raro $rare percento, epico $epic percento';
+  }
+
+  @override
+  String rollDuplicateRule(int common, int rare, int epic) {
+    return 'Se esce un oggetto che hai già, ricevi monete al suo posto: $common (comune), $rare (raro), $epic (epico).';
+  }
+
+  @override
+  String get rollAction => 'Usa 1 biglietto';
+
+  @override
+  String get rollNoTickets =>
+      'Non hai biglietti. Li guadagni salendo di livello, oppure puoi comprarne uno.';
+
+  @override
+  String buyTicketAction(int price) {
+    return 'Compra un biglietto ($price monete)';
+  }
+
+  @override
+  String get ticketBought => 'Hai comprato un biglietto premio!';
+
+  @override
+  String get rollRevealNew => 'Nuovo oggetto!';
+
+  @override
+  String get rollRevealDuplicate => 'Ce l\'hai già';
+
+  @override
+  String rollRefund(int coins) {
+    return 'Al suo posto ricevi $coins monete.';
+  }
+
+  @override
+  String get rollWearNow => 'Indossa ora';
+
+  @override
+  String get rollClose => 'Chiudi';
+
+  @override
+  String get shopTitle => 'Negozio';
+
+  @override
+  String get shopEpicNote =>
+      'Gli oggetti epici si trovano solo nella ruota dei premi.';
+
+  @override
+  String get shopAllOwned => 'Hai già tutti gli oggetti del negozio!';
+
+  @override
+  String shopBuyAction(int price) {
+    return 'Compra ($price monete)';
+  }
+
+  @override
+  String shopNotEnoughCoins(int missing) {
+    return 'Ti servono altre $missing monete. Le guadagni pulendo la stanza.';
+  }
+
+  @override
+  String itemBought(String name) {
+    return 'Hai comprato: $name!';
+  }
+
+  @override
+  String itemDetails(String rarity, String slot) {
+    return '$rarity · $slot';
+  }
+
+  @override
+  String get myItemsTitle => 'I miei oggetti';
+
+  @override
+  String get myItemsEmpty =>
+      'Non hai ancora oggetti. Prova la ruota o il negozio!';
+
+  @override
+  String get equipAction => 'Indossa';
+
+  @override
+  String get unequipAction => 'Togli';
+
+  @override
+  String petWearsItem(String pet, String item) {
+    return '$pet indossa: $item';
+  }
+
+  @override
+  String petTookOffItem(String pet, String item) {
+    return '$pet ha tolto: $item';
+  }
+
+  @override
   String get cleanupPetCleaner =>
       'La stanza è in ordine e anche il tuo cucciolo è più pulito!';
 

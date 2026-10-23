@@ -856,6 +856,246 @@ abstract class AppLocalizations {
   /// **'La stanza è pulita!'**
   String get cleanupRoomClean;
 
+  /// No description provided for @levelUpTickets.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{Premio: 1 biglietto per la ruota dell\'Armadio!} other{Premio: {count} biglietti per la ruota dell\'Armadio!}}'**
+  String levelUpTickets(int count);
+
+  /// No description provided for @wardrobeTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Armadio'**
+  String get wardrobeTitle;
+
+  /// No description provided for @wardrobeOpenFromPet.
+  ///
+  /// In it, this message translates to:
+  /// **'Apri l\'armadio'**
+  String get wardrobeOpenFromPet;
+
+  /// No description provided for @homeWardrobeTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Armadio del cucciolo'**
+  String get homeWardrobeTitle;
+
+  /// No description provided for @homeWardrobeSubtitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Vestiti e accessori con monete e biglietti'**
+  String get homeWardrobeSubtitle;
+
+  /// No description provided for @wardrobeEggNote.
+  ///
+  /// In it, this message translates to:
+  /// **'Gli oggetti si vedranno addosso al cucciolo quando l\'uovo si schiude. Puoi già raccoglierli!'**
+  String get wardrobeEggNote;
+
+  /// No description provided for @wardrobeContentError.
+  ///
+  /// In it, this message translates to:
+  /// **'Non riesco a caricare gli oggetti. Riprova più tardi.'**
+  String get wardrobeContentError;
+
+  /// No description provided for @slotHead.
+  ///
+  /// In it, this message translates to:
+  /// **'Testa'**
+  String get slotHead;
+
+  /// No description provided for @slotFace.
+  ///
+  /// In it, this message translates to:
+  /// **'Viso'**
+  String get slotFace;
+
+  /// No description provided for @slotNeck.
+  ///
+  /// In it, this message translates to:
+  /// **'Collo'**
+  String get slotNeck;
+
+  /// No description provided for @rarityCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Comune'**
+  String get rarityCommon;
+
+  /// No description provided for @rarityRare.
+  ///
+  /// In it, this message translates to:
+  /// **'Raro'**
+  String get rarityRare;
+
+  /// No description provided for @rarityEpic.
+  ///
+  /// In it, this message translates to:
+  /// **'Epico'**
+  String get rarityEpic;
+
+  /// No description provided for @rollTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Ruota dei premi'**
+  String get rollTitle;
+
+  /// No description provided for @rollBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Usa un biglietto per ricevere un oggetto a sorpresa. Queste sono le probabilità:'**
+  String get rollBody;
+
+  /// No description provided for @rollOddsLine.
+  ///
+  /// In it, this message translates to:
+  /// **'{rarity}: {percent}%'**
+  String rollOddsLine(String rarity, int percent);
+
+  /// No description provided for @rollOddsSemantics.
+  ///
+  /// In it, this message translates to:
+  /// **'Probabilità: comune {common} percento, raro {rare} percento, epico {epic} percento'**
+  String rollOddsSemantics(int common, int rare, int epic);
+
+  /// No description provided for @rollDuplicateRule.
+  ///
+  /// In it, this message translates to:
+  /// **'Se esce un oggetto che hai già, ricevi monete al suo posto: {common} (comune), {rare} (raro), {epic} (epico).'**
+  String rollDuplicateRule(int common, int rare, int epic);
+
+  /// No description provided for @rollAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Usa 1 biglietto'**
+  String get rollAction;
+
+  /// No description provided for @rollNoTickets.
+  ///
+  /// In it, this message translates to:
+  /// **'Non hai biglietti. Li guadagni salendo di livello, oppure puoi comprarne uno.'**
+  String get rollNoTickets;
+
+  /// No description provided for @buyTicketAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Compra un biglietto ({price} monete)'**
+  String buyTicketAction(int price);
+
+  /// No description provided for @ticketBought.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai comprato un biglietto premio!'**
+  String get ticketBought;
+
+  /// No description provided for @rollRevealNew.
+  ///
+  /// In it, this message translates to:
+  /// **'Nuovo oggetto!'**
+  String get rollRevealNew;
+
+  /// No description provided for @rollRevealDuplicate.
+  ///
+  /// In it, this message translates to:
+  /// **'Ce l\'hai già'**
+  String get rollRevealDuplicate;
+
+  /// No description provided for @rollRefund.
+  ///
+  /// In it, this message translates to:
+  /// **'Al suo posto ricevi {coins} monete.'**
+  String rollRefund(int coins);
+
+  /// No description provided for @rollWearNow.
+  ///
+  /// In it, this message translates to:
+  /// **'Indossa ora'**
+  String get rollWearNow;
+
+  /// No description provided for @rollClose.
+  ///
+  /// In it, this message translates to:
+  /// **'Chiudi'**
+  String get rollClose;
+
+  /// No description provided for @shopTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Negozio'**
+  String get shopTitle;
+
+  /// No description provided for @shopEpicNote.
+  ///
+  /// In it, this message translates to:
+  /// **'Gli oggetti epici si trovano solo nella ruota dei premi.'**
+  String get shopEpicNote;
+
+  /// No description provided for @shopAllOwned.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai già tutti gli oggetti del negozio!'**
+  String get shopAllOwned;
+
+  /// No description provided for @shopBuyAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Compra ({price} monete)'**
+  String shopBuyAction(int price);
+
+  /// No description provided for @shopNotEnoughCoins.
+  ///
+  /// In it, this message translates to:
+  /// **'Ti servono altre {missing} monete. Le guadagni pulendo la stanza.'**
+  String shopNotEnoughCoins(int missing);
+
+  /// No description provided for @itemBought.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai comprato: {name}!'**
+  String itemBought(String name);
+
+  /// No description provided for @itemDetails.
+  ///
+  /// In it, this message translates to:
+  /// **'{rarity} · {slot}'**
+  String itemDetails(String rarity, String slot);
+
+  /// No description provided for @myItemsTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'I miei oggetti'**
+  String get myItemsTitle;
+
+  /// No description provided for @myItemsEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Non hai ancora oggetti. Prova la ruota o il negozio!'**
+  String get myItemsEmpty;
+
+  /// No description provided for @equipAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Indossa'**
+  String get equipAction;
+
+  /// No description provided for @unequipAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Togli'**
+  String get unequipAction;
+
+  /// No description provided for @petWearsItem.
+  ///
+  /// In it, this message translates to:
+  /// **'{pet} indossa: {item}'**
+  String petWearsItem(String pet, String item);
+
+  /// No description provided for @petTookOffItem.
+  ///
+  /// In it, this message translates to:
+  /// **'{pet} ha tolto: {item}'**
+  String petTookOffItem(String pet, String item);
+
   /// No description provided for @cleanupPetCleaner.
   ///
   /// In it, this message translates to:

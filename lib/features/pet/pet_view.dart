@@ -9,6 +9,7 @@ import '../../core/animations.dart';
 import '../../core/widgets/egg_art.dart';
 import '../../domain/models/pet_state.dart';
 import '../../domain/rules/pet_rules.dart';
+import '../wardrobe/cosmetic_labels.dart';
 import 'pet_art.dart';
 
 /// A one-off reaction (bounce + floating icon). A new [id] plays it again.
@@ -23,6 +24,7 @@ class PetReaction {
 ///
 /// [pet] must already be the pet "now" (see `petNow`). The room shows
 /// [plants] decorations (0–3), which grow with the player's level.
+/// A hatched pet wears what is equipped in the wardrobe.
 class PetView extends ConsumerStatefulWidget {
   const PetView({
     super.key,
@@ -85,6 +87,7 @@ class _PetViewState extends ConsumerState<PetView>
             stage: pet.stage,
             mood: moodOf(pet),
             dirty: pet.cleanliness < 40,
+            outfit: ref.watch(petOutfitProvider),
           );
 
     return Semantics(

@@ -105,6 +105,14 @@ class _HomeContent extends ConsumerWidget {
                 subtitle: l10n.homeCleanupSubtitle,
                 onTap: () => context.push(AppRoutes.cleanup),
               ),
+              const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
+              _ActivityShortcut(
+                icon: Icons.checkroom_rounded,
+                color: EcoColors.happiness,
+                title: l10n.homeWardrobeTitle,
+                subtitle: l10n.homeWardrobeSubtitle,
+                onTap: () => context.push(AppRoutes.wardrobe),
+              ),
               // DEBUG ONLY (removed from release builds): earns a test
               // reward so we can check that saving works on a device.
               if (kDebugMode) ...[

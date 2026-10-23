@@ -11,6 +11,7 @@ import '../features/learn/quiz_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
 import '../features/pet/pet_screen.dart';
 import '../features/profile/profile_screen.dart';
+import '../features/wardrobe/wardrobe_screen.dart';
 import 'app_shell.dart';
 
 /// All route paths in one place, so features never hard-code strings.
@@ -24,6 +25,9 @@ abstract final class AppRoutes {
 
   /// Room Cleanup (open with `context.push`).
   static const cleanup = '/cleanup';
+
+  /// Wardrobe: reward roll, shop and items (open with `context.push`).
+  static const wardrobe = '/wardrobe';
 
   /// `/quiz` for the personal mixed quiz, `/quiz?topic=oceans` for a topic.
   /// Open it with `context.push(...)` so Back returns to where you were.
@@ -74,6 +78,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.cleanup,
         builder: (context, state) => const CleanupScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.wardrobe,
+        builder: (context, state) => const WardrobeScreen(),
       ),
       // One branch per bottom tab. "indexedStack" keeps each tab alive,
       // so switching tabs does not lose scroll position or state.

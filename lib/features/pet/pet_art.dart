@@ -3,23 +3,28 @@ import 'dart:math' as math;
 import 'package:material_ui/material_ui.dart';
 
 import '../../app/theme/eco_colors.dart';
+import '../../domain/models/cosmetic_item.dart';
 import '../../domain/models/pet_state.dart';
 import '../../domain/rules/pet_rules.dart';
+import '../wardrobe/cosmetic_art.dart';
 
 /// Temporary pet artwork drawn with plain widgets: a round leafy creature.
 /// Its face follows the mood, dirt spots show when it needs a bath, and it
-/// grows (size, colour, leaves) with each stage. Decorative only.
+/// grows (size, colour, leaves) with each stage. It wears the [outfit]
+/// (a head item replaces the leaves). Decorative only.
 class PetArt extends StatelessWidget {
   const PetArt({
     super.key,
     required this.stage,
     required this.mood,
     this.dirty = false,
+    this.outfit = const {},
   });
 
   final PetStage stage;
   final PetMood mood;
   final bool dirty;
+  final Map<CosmeticSlot, CosmeticItem> outfit;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +40,9 @@ class PetArt extends StatelessWidget {
     };
     final leaves = math.max(1, stage.index); // baby 1, young 2, adult 3
     final eyeHeight = mood == PetMood.sad ? size * 0.08 : size * 0.15;
+    final head = outfit[CosmeticSlot.head];
+    final face = outfit[CosmeticSlot.face];
+    final neck = outfit[CosmeticSlot.neck];
 
     return SizedBox(
       width: size,
@@ -42,21 +50,28 @@ class PetArt extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          // Leaves on the head
-          Positioned(
-            top: 0,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (var i = 0; i < leaves; i++)
-                  Transform.rotate(
-                    angle: (i - (leaves - 1) / 2) * 0.6,
-                    child: Icon(Icons.eco_rounded,
-                        size: size * 0.24, color: EcoColors.primary),
-                  ),
-              ],
+          // Leaves on the head, or the head item instead
+          if (head == null)
+            Positioned(
+              top: 0,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (var i = 0; i < leaves; i++)
+                    Transform.rotate(
+                      angle: (i - (leaves - 1) / 2) * 0.6,
+                      child: Icon(Icons.eco_rounded,
+                          size: size * 0.24, color: EcoColors.primary),
+                    ),
+                ],
+              ),
+            )
+          else
+            Positioned(
+              top: 0,
+              child: CosmeticArt(
+                  item: head, size: Size(size * 0.5, size * 0.3)),
             ),
-          ),
           // Body
           Container(
             width: size,
@@ -137,6 +152,19 @@ class PetArt extends StatelessWidget {
               ],
             ),
           ),
+          // Body top is at size * 0.2; eyes at body + 0.30 * size.
+          if (face != null)
+            Positioned(
+              top: size * 0.47,
+              child: CosmeticArt(
+                  item: face, size: Size(size * 0.6, size * 0.2)),
+            ),
+          if (neck != null)
+            Positioned(
+              top: size * 0.8,
+              child: CosmeticArt(
+                  item: neck, size: Size(size * 0.62, size * 0.18)),
+            ),
         ],
       ),
     );

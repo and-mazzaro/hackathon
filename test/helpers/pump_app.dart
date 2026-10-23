@@ -5,11 +5,13 @@ import 'package:ecoquest/app/theme/app_theme.dart';
 import 'package:ecoquest/core/animations.dart';
 import 'package:ecoquest/core/audio/audio_catalog.dart';
 import 'package:ecoquest/core/audio/audio_service.dart';
+import 'package:ecoquest/data/content/cosmetic_content.dart';
 import 'package:ecoquest/data/content/quiz_content.dart';
 import 'package:ecoquest/data/content/waste_content.dart';
 import 'package:ecoquest/data/save/in_memory_save_repository.dart';
 import 'package:ecoquest/data/save/save_repository.dart';
 import 'package:ecoquest/domain/game_controller.dart';
+import 'package:ecoquest/domain/models/cosmetic_item.dart';
 import 'package:ecoquest/domain/models/eco_topic.dart';
 import 'package:ecoquest/domain/models/game_state.dart';
 import 'package:ecoquest/domain/models/player_profile.dart';
@@ -21,6 +23,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
+import 'cosmetic_fixtures.dart';
 import 'fake_audio_backend.dart';
 import 'quiz_fixtures.dart';
 import 'waste_fixtures.dart';
@@ -50,6 +53,7 @@ Future<void> pumpEcoQuestApp(
   SaveRepository? repository,
   QuizBank? quizBank,
   WasteBank? wasteBank,
+  CosmeticCatalog? cosmetics,
   FakeAudioBackend? audioBackend,
 }) async {
   await tester.pumpWidget(ProviderScope(
@@ -62,6 +66,8 @@ Future<void> pumpEcoQuestApp(
       quizBankProvider.overrideWith((ref) async => quizBank ?? testQuizBank()),
       wasteBankProvider
           .overrideWith((ref) async => wasteBank ?? testWasteBank()),
+      cosmeticCatalogProvider
+          .overrideWith((ref) async => cosmetics ?? testCosmeticCatalog()),
       // Endless idle animations would keep pumpAndSettle waiting forever.
       animationsEnabledProvider.overrideWithValue(false),
       // No real audio in tests: calls are recorded instead. Every sound id

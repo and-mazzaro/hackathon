@@ -85,6 +85,11 @@ class CleanupResultView extends StatelessWidget {
                 Text(l10n.quizLevelUp(outcome.claim.levelAfter),
                     style: textTheme.titleMedium, textAlign: TextAlign.center),
               ],
+              if (reward.tickets > 0) ...[
+                const SizedBox(height: EcoSpacing.s),
+                Text(l10n.levelUpTickets(reward.tickets),
+                    style: textTheme.bodyLarge, textAlign: TextAlign.center),
+              ],
               const SizedBox(height: EcoSpacing.l),
               Text(l10n.cleanupResultBestCombo(score.bestCombo),
                   style: textTheme.bodyLarge, textAlign: TextAlign.center),

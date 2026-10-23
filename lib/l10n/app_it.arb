@@ -257,6 +257,79 @@
   "cleanupResultBestCombo": "Combo migliore: {count}",
   "@cleanupResultBestCombo": { "placeholders": { "count": { "type": "int" } } },
   "cleanupRoomClean": "La stanza è pulita!",
+  "levelUpTickets": "{count, plural, =1{Premio: 1 biglietto per la ruota dell'Armadio!} other{Premio: {count} biglietti per la ruota dell'Armadio!}}",
+  "@levelUpTickets": { "placeholders": { "count": { "type": "int" } } },
+
+  "wardrobeTitle": "Armadio",
+  "wardrobeOpenFromPet": "Apri l'armadio",
+  "homeWardrobeTitle": "Armadio del cucciolo",
+  "homeWardrobeSubtitle": "Vestiti e accessori con monete e biglietti",
+  "wardrobeEggNote": "Gli oggetti si vedranno addosso al cucciolo quando l'uovo si schiude. Puoi già raccoglierli!",
+  "wardrobeContentError": "Non riesco a caricare gli oggetti. Riprova più tardi.",
+  "slotHead": "Testa",
+  "slotFace": "Viso",
+  "slotNeck": "Collo",
+  "rarityCommon": "Comune",
+  "rarityRare": "Raro",
+  "rarityEpic": "Epico",
+  "rollTitle": "Ruota dei premi",
+  "rollBody": "Usa un biglietto per ricevere un oggetto a sorpresa. Queste sono le probabilità:",
+  "rollOddsLine": "{rarity}: {percent}%",
+  "@rollOddsLine": {
+    "placeholders": { "rarity": { "type": "String" }, "percent": { "type": "int" } }
+  },
+  "rollOddsSemantics": "Probabilità: comune {common} percento, raro {rare} percento, epico {epic} percento",
+  "@rollOddsSemantics": {
+    "placeholders": {
+      "common": { "type": "int" },
+      "rare": { "type": "int" },
+      "epic": { "type": "int" }
+    }
+  },
+  "rollDuplicateRule": "Se esce un oggetto che hai già, ricevi monete al suo posto: {common} (comune), {rare} (raro), {epic} (epico).",
+  "@rollDuplicateRule": {
+    "placeholders": {
+      "common": { "type": "int" },
+      "rare": { "type": "int" },
+      "epic": { "type": "int" }
+    }
+  },
+  "rollAction": "Usa 1 biglietto",
+  "rollNoTickets": "Non hai biglietti. Li guadagni salendo di livello, oppure puoi comprarne uno.",
+  "buyTicketAction": "Compra un biglietto ({price} monete)",
+  "@buyTicketAction": { "placeholders": { "price": { "type": "int" } } },
+  "ticketBought": "Hai comprato un biglietto premio!",
+  "rollRevealNew": "Nuovo oggetto!",
+  "rollRevealDuplicate": "Ce l'hai già",
+  "rollRefund": "Al suo posto ricevi {coins} monete.",
+  "@rollRefund": { "placeholders": { "coins": { "type": "int" } } },
+  "rollWearNow": "Indossa ora",
+  "rollClose": "Chiudi",
+  "shopTitle": "Negozio",
+  "shopEpicNote": "Gli oggetti epici si trovano solo nella ruota dei premi.",
+  "shopAllOwned": "Hai già tutti gli oggetti del negozio!",
+  "shopBuyAction": "Compra ({price} monete)",
+  "@shopBuyAction": { "placeholders": { "price": { "type": "int" } } },
+  "shopNotEnoughCoins": "Ti servono altre {missing} monete. Le guadagni pulendo la stanza.",
+  "@shopNotEnoughCoins": { "placeholders": { "missing": { "type": "int" } } },
+  "itemBought": "Hai comprato: {name}!",
+  "@itemBought": { "placeholders": { "name": { "type": "String" } } },
+  "itemDetails": "{rarity} · {slot}",
+  "@itemDetails": {
+    "placeholders": { "rarity": { "type": "String" }, "slot": { "type": "String" } }
+  },
+  "myItemsTitle": "I miei oggetti",
+  "myItemsEmpty": "Non hai ancora oggetti. Prova la ruota o il negozio!",
+  "equipAction": "Indossa",
+  "unequipAction": "Togli",
+  "petWearsItem": "{pet} indossa: {item}",
+  "@petWearsItem": {
+    "placeholders": { "pet": { "type": "String" }, "item": { "type": "String" } }
+  },
+  "petTookOffItem": "{pet} ha tolto: {item}",
+  "@petTookOffItem": {
+    "placeholders": { "pet": { "type": "String" }, "item": { "type": "String" } }
+  },
   "cleanupPetCleaner": "La stanza è in ordine e anche il tuo cucciolo è più pulito!",
   "cleanupRepeatNote": "I rifiuti che sapevi già sistemare valgono meno monete: le combo invece valgono sempre!",
   "cleanupOpenFromPet": "Pulisci la stanza",

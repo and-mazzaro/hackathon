@@ -143,11 +143,29 @@ class _PetContentState extends ConsumerState<_PetContent> {
             const SizedBox(height: EcoSpacing.s),
             SizedBox(
               height: math.max(220.0, constraints.maxHeight * 0.42),
-              child: PetView(
-                pet: pet,
-                plants: roomPlants(level, economy),
-                semanticLabel: petSemanticLabel(pet, l10n),
-                reaction: _reaction,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: PetView(
+                      pet: pet,
+                      plants: roomPlants(level, economy),
+                      semanticLabel: petSemanticLabel(pet, l10n),
+                      reaction: _reaction,
+                    ),
+                  ),
+                  // The wardrobe sits in the room: no extra row pushes
+                  // the care buttons away from the pet.
+                  Positioned(
+                    top: EcoSpacing.s,
+                    right: EcoSpacing.s,
+                    child: IconButton.filledTonal(
+                      onPressed: () => context.push(AppRoutes.wardrobe),
+                      tooltip: l10n.wardrobeOpenFromPet,
+                      iconSize: 28,
+                      icon: const Icon(Icons.checkroom_rounded),
+                    ),
+                  ),
+                ],
               ),
             ),
             // Read aloud by screen readers whenever it changes.
