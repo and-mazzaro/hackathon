@@ -11,7 +11,8 @@ CosmeticItem testCosmetic(CosmeticSlot slot, CosmeticRarity rarity) =>
       color: 0xFFE5578A,
     );
 
-/// One item per slot and rarity (9 in total).
+/// One item per slot and rarity (4 slots x 6 rarities = 24), in slot
+/// order, commons first.
 CosmeticCatalog testCosmeticCatalog() => CosmeticCatalog([
       for (final slot in CosmeticSlot.values)
         for (final rarity in CosmeticRarity.values) testCosmetic(slot, rarity),
