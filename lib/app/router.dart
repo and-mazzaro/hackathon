@@ -37,6 +37,9 @@ abstract final class AppRoutes {
   /// Open it with `context.push(...)` so Back returns to where you were.
   static String quiz([EcoTopic? topic]) =>
       topic == null ? quizPath : '$quizPath?topic=${topic.id}';
+
+  /// The "Il mio territorio" quiz, built from today's live data.
+  static const territoryQuiz = '$quizPath?territory=1';
 }
 
 /// The router lives in a provider: every ProviderScope (the app, or each
@@ -76,6 +79,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           final topicId = state.uri.queryParameters['topic'];
           return QuizScreen(
             topic: topicId == null ? null : EcoTopic.fromId(topicId),
+            territory: state.uri.queryParameters['territory'] == '1',
           );
         },
       ),

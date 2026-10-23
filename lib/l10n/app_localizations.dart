@@ -1875,6 +1875,127 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'{count, plural, =1{Nella stanza c\'è 1 rifiuto: {names}.} other{Nella stanza ci sono {count} rifiuti: {names}.}}'**
   String roomTrashSemantics(int count, String names);
+
+  /// Home card title: live open environmental data for the chosen town.
+  ///
+  /// In it, this message translates to:
+  /// **'Il mio territorio · {town}'**
+  String territoryTitle(String town);
+
+  /// No description provided for @territoryLearnTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Il mio territorio (dati live)'**
+  String get territoryLearnTitle;
+
+  /// No description provided for @territoryLearnSubtitle.
+  ///
+  /// In it, this message translates to:
+  /// **'3 domande con i dati di oggi sull\'aria del tuo comune'**
+  String get territoryLearnSubtitle;
+
+  /// No description provided for @territoryLoading.
+  ///
+  /// In it, this message translates to:
+  /// **'Carico i dati del territorio…'**
+  String get territoryLoading;
+
+  /// No description provided for @territoryUnavailable.
+  ///
+  /// In it, this message translates to:
+  /// **'Dati non disponibili ora'**
+  String get territoryUnavailable;
+
+  /// No description provided for @territoryAqi.
+  ///
+  /// In it, this message translates to:
+  /// **'Aria {band} · indice {aqi}'**
+  String territoryAqi(String band, int aqi);
+
+  /// No description provided for @territoryPm10.
+  ///
+  /// In it, this message translates to:
+  /// **'PM10 {value} µg/m³'**
+  String territoryPm10(String value);
+
+  /// No description provided for @territoryPm25.
+  ///
+  /// In it, this message translates to:
+  /// **'PM2,5 {value} µg/m³'**
+  String territoryPm25(String value);
+
+  /// No description provided for @territoryTemperature.
+  ///
+  /// In it, this message translates to:
+  /// **'{value} °C'**
+  String territoryTemperature(String value);
+
+  /// No description provided for @territoryUpdatedAt.
+  ///
+  /// In it, this message translates to:
+  /// **'aggiornato alle {time}'**
+  String territoryUpdatedAt(String time);
+
+  /// No description provided for @territoryCachedAt.
+  ///
+  /// In it, this message translates to:
+  /// **'offline: ultimi dati delle {time}'**
+  String territoryCachedAt(String time);
+
+  /// No description provided for @territoryTipTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Azione di oggi: {tip}'**
+  String territoryTipTitle(String tip);
+
+  /// No description provided for @territoryDidIt.
+  ///
+  /// In it, this message translates to:
+  /// **'L\'ho fatto!'**
+  String get territoryDidIt;
+
+  /// No description provided for @territoryDidItReward.
+  ///
+  /// In it, this message translates to:
+  /// **'Grazie! +{coins} monete'**
+  String territoryDidItReward(int coins);
+
+  /// No description provided for @territoryDoneToday.
+  ///
+  /// In it, this message translates to:
+  /// **'Fatto oggi, grazie! Domani una nuova azione.'**
+  String get territoryDoneToday;
+
+  /// No description provided for @territoryQuizAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Quiz del territorio'**
+  String get territoryQuizAction;
+
+  /// No description provided for @territoryAttribution.
+  ///
+  /// In it, this message translates to:
+  /// **'Dati: Open-Meteo.com (CC BY 4.0), qualità dell\'aria da CAMS Europe'**
+  String get territoryAttribution;
+
+  /// No description provided for @territoryTownLabel.
+  ///
+  /// In it, this message translates to:
+  /// **'Comune'**
+  String get territoryTownLabel;
+
+  /// One block for screen readers: the whole territory reading.
+  ///
+  /// In it, this message translates to:
+  /// **'{title}. {aqi}. {pm10}, {pm25}, temperatura {temperature}. {updated}.'**
+  String territorySummary(
+    String title,
+    String aqi,
+    String pm10,
+    String pm25,
+    String temperature,
+    String updated,
+  );
 }
 
 class _AppLocalizationsDelegate

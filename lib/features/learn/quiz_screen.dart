@@ -9,12 +9,14 @@ import '../../core/audio/sound_id.dart';
 import '../../core/widgets/eco_button.dart';
 import '../../core/widgets/source_sheet.dart';
 import '../../data/content/quiz_content.dart';
+import '../../data/territory/territory_client.dart';
 import '../../domain/game_controller.dart';
 import '../../domain/models/eco_topic.dart';
 import '../../domain/models/game_state.dart';
 import '../../domain/models/quiz_question.dart';
 import '../../domain/quiz_session.dart';
 import '../../domain/rules/quiz_rules.dart';
+import '../../domain/rules/territory_rules.dart';
 import '../../l10n/app_localizations.dart';
 import '../profile/profile_labels.dart';
 import 'quiz_result_view.dart';
@@ -22,10 +24,12 @@ import 'quiz_result_view.dart';
 /// Plays one quiz of 5 questions, then shows the result.
 ///
 /// [topic] null = personal mixed quiz based on the player's interests.
+/// [territory] true = the "Il mio territorio" quiz built from live data.
 class QuizScreen extends ConsumerStatefulWidget {
-  const QuizScreen({super.key, this.topic});
+  const QuizScreen({super.key, this.topic, this.territory = false});
 
   final EcoTopic? topic;
+  final bool territory;
 
   @override
   ConsumerState<QuizScreen> createState() => _QuizScreenState();
@@ -37,18 +41,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   bool _finishing = false;
   final _feedbackKey = GlobalKey();
 
-  QuizSession? _newSession(QuizBank bank, GameState game) {
+  QuizSession? _newSession(
+      QuizBank? bank, TerritoryData? territory, GameState game) {
     final random = ref.read(randomProvider);
-    final questions = pickQuizQuestions(
-      bank: bank,
-      learning: game.learning,
-      interests: game.profile.interests,
-      topic: widget.topic,
-      random: random,
-      count: ref.read(economyProvider).quizQuestionCount,
-    );
-    if (questions.isEmpty) return null;
     final now = ref.read(clockProvider)();
+    final questions = widget.territory
+        ? territoryQuestions(territory?.readings ?? const [],
+            game.territory.town, now, random)
+        : pickQuizQuestions(
+            bank: bank!,
+            learning: game.learning,
+            interests: game.profile.interests,
+            topic: widget.topic,
+            random: random,
+            count: ref.read(economyProvider).quizQuestionCount,
+          );
+    if (questions.isEmpty) return null;
     return QuizSession(
       questions: questions,
       random: random,
@@ -141,8 +149,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     final bankAsync = ref.watch(quizBankProvider);
     final bank = bankAsync.value;
     final game = ref.watch(gameControllerProvider).value;
+    // The territory quiz needs today's live data instead of the bank.
+    final territoryAsync =
+        widget.territory ? ref.watch(territoryProvider) : null;
+    final contentReady = widget.territory
+        ? territoryAsync!.hasValue || territoryAsync.hasError
+        : bank != null;
 
-    if (bank == null || game == null) {
+    if (!contentReady || game == null) {
       return Scaffold(
         appBar: AppBar(),
         body: Center(
@@ -157,11 +171,16 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       );
     }
 
-    final session = _session ??= _newSession(bank, game);
+    final session =
+        _session ??= _newSession(bank, territoryAsync?.value, game);
     if (session == null) {
       return Scaffold(
         appBar: AppBar(),
-        body: Center(child: Text(l10n.quizNotEnough)),
+        body: Center(
+          child: Text(widget.territory
+              ? l10n.territoryUnavailable
+              : l10n.quizNotEnough),
+        ),
       );
     }
 
@@ -176,7 +195,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
 
     final shown = session.current;
     final chosen = session.chosenForCurrent;
-    final title = widget.topic?.label(l10n) ?? l10n.quizMixedTitle;
+    final title = widget.territory
+        ? l10n.territoryQuizAction
+        : widget.topic?.label(l10n) ?? l10n.quizMixedTitle;
 
     // Back button / swipe: ask before throwing away answers.
     return PopScope(

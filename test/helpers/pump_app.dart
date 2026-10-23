@@ -12,6 +12,7 @@ import 'package:ecoquest/data/content/quiz_content.dart';
 import 'package:ecoquest/data/content/waste_content.dart';
 import 'package:ecoquest/data/save/in_memory_save_repository.dart';
 import 'package:ecoquest/data/save/save_repository.dart';
+import 'package:ecoquest/data/territory/territory_client.dart';
 import 'package:ecoquest/domain/game_controller.dart';
 import 'package:ecoquest/domain/models/cosmetic_item.dart';
 import 'package:ecoquest/domain/models/eco_topic.dart';
@@ -23,12 +24,15 @@ import 'package:ecoquest/l10n/app_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/testing.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'cosmetic_fixtures.dart';
 import 'fake_audio_backend.dart';
 import 'fake_reminder_scheduler.dart';
 import 'quiz_fixtures.dart';
+import 'territory_fixtures.dart';
 import 'waste_fixtures.dart';
 
 const tabLabels = ['Home', 'Impara', 'Cucciolo', 'Profilo'];
@@ -60,6 +64,8 @@ Future<void> pumpEcoQuestApp(
   FakeAudioBackend? audioBackend,
   bool trackActivity = false,
   FakeReminderScheduler? reminders,
+  TerritoryData? territory,
+  bool territoryAvailable = true,
 }) async {
   await tester.pumpWidget(ProviderScope(
     retry: (retryCount, error) => null,
@@ -88,6 +94,14 @@ Future<void> pumpEcoQuestApp(
       // No real notifications in tests: calls are recorded instead.
       reminderSchedulerProvider
           .overrideWithValue(reminders ?? FakeReminderScheduler()),
+      // No network in tests: fixed territory readings (Schio "Buona"),
+      // or none at all with territoryAvailable: false.
+      territoryProvider.overrideWith((ref) async => territoryAvailable
+          ? territory ??
+              TerritoryData(readings: testTerritoryReadings(), live: true)
+          : null),
+      httpClientProvider.overrideWithValue(MockClient((request) async =>
+          throw http.ClientException('No network in tests'))),
     ],
     child: const EcoQuestApp(),
   ));
