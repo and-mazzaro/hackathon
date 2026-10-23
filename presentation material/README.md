@@ -19,7 +19,7 @@ Note: è una build di prova per la presentazione, firmata con la chiave di svilu
 
 ## Video di gameplay (2 minuti)
 
-`Laiqua_gameplay_trailer.mp4` — 1920×1080, 30 fps, 1:59, con musica. Stile trailer da console portatile (ispirato ai trailer
+`Laiqua_gameplay_trailer.mp4` — 1920×1080, 30 fps, 2:00, con musica. Stile trailer da console portatile (ispirato ai trailer
 Pokémon del periodo DS): logo che "esplode" sui raggi, cartelli a schermo intero tra le scene, testi grandi gialli con bordo
 blu, tagli con flash bianco, musica chiptune.
 
@@ -41,7 +41,7 @@ Scaletta (2:00):
 | 1:49 | Finale con QR code per scaricare l'app |
 
 Il gameplay è registrato davvero sull'emulatore Android (Pixel 7) con la build di rilascio, partendo da un'installazione
-pulita, e accelerato in montaggio. La musica è stata generata da codice (`tools/music.py`), quindi non ha problemi di licenza.
+pulita (la scena del territorio mostra i dati reali di Schio del 24/10/2026 alle 01:00), e accelerato in montaggio. La musica è stata generata da codice (`tools/music.py`), quindi non ha problemi di licenza.
 
 ## Slide aggiornate
 
