@@ -27,6 +27,7 @@ class GameState {
     this.activity = ActivityLog.empty,
     this.reminder = ReminderSettings.defaults,
     this.lookMode = LookMode.auto,
+    this.lastCleanupAt,
   });
 
   /// A brand-new player.
@@ -76,6 +77,10 @@ class GameState {
   /// time-of-day look: older saves get [LookMode.auto].
   final LookMode lookMode;
 
+  /// When the room was last cleaned (trash builds up after it). Added
+  /// with room trash: older saves have none (see `roomTrashCount`).
+  final DateTime? lastCleanupAt;
+
   GameState copyWith({
     PlayerProfile? profile,
     PlayerProgress? progress,
@@ -87,6 +92,7 @@ class GameState {
     ActivityLog? activity,
     ReminderSettings? reminder,
     LookMode? lookMode,
+    DateTime? lastCleanupAt,
   }) {
     return GameState(
       profile: profile ?? this.profile,
@@ -99,6 +105,7 @@ class GameState {
       activity: activity ?? this.activity,
       reminder: reminder ?? this.reminder,
       lookMode: lookMode ?? this.lookMode,
+      lastCleanupAt: lastCleanupAt ?? this.lastCleanupAt,
     );
   }
 
@@ -113,6 +120,8 @@ class GameState {
         'activity': activity.toJson(),
         'reminder': reminder.toJson(),
         'lookMode': lookMode.id,
+        if (lastCleanupAt != null)
+          'lastCleanupAt': lastCleanupAt!.toIso8601String(),
       };
 
   /// [now] is only used for dates missing from an old or partial save.
@@ -128,6 +137,7 @@ class GameState {
       activity: ActivityLog.fromJson(readObject(json, 'activity')),
       reminder: ReminderSettings.fromJson(readObject(json, 'reminder')),
       lookMode: LookMode.fromId(json['lookMode']),
+      lastCleanupAt: DateTime.tryParse(readString(json, 'lastCleanupAt') ?? ''),
     );
   }
 }

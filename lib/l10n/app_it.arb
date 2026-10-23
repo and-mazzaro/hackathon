@@ -504,5 +504,13 @@
   "lookAuto": "Automatico",
   "lookDay": "Giorno",
   "lookAfternoon": "Pomeriggio",
-  "lookNight": "Notte"
+  "lookNight": "Notte",
+  "roomTrashClean": "La stanza è pulita! Torna più tardi",
+  "roomTrashSemantics": "{count, plural, =1{Nella stanza c'è 1 rifiuto: {names}.} other{Nella stanza ci sono {count} rifiuti: {names}.}}",
+  "@roomTrashSemantics": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "names": { "type": "String" }
+    }
+  }
 }

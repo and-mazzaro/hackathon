@@ -190,6 +190,8 @@ class GameController extends AsyncNotifier<GameState> {
       pet: petAfterCleanup(current.pet, _now(), _economy),
       activity: _logActivity(current.activity,
           correct: correct, wrong: sorted.length - correct),
+      // The room is clean now: new trash builds up from here.
+      lastCleanupAt: _now(),
     ));
     return CleanupOutcome(score: score, claim: claim, petCleaner: hatched);
   }

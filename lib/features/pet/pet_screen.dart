@@ -29,6 +29,7 @@ import 'hatch_sheet.dart';
 import 'pet_labels.dart';
 import 'pet_need_bars.dart';
 import 'pet_view.dart';
+import 'room_trash.dart';
 
 /// PET tab: the room, the pet's needs and the care buttons.
 class PetScreen extends StatelessWidget {
@@ -155,6 +156,9 @@ class _PetContentState extends ConsumerState<_PetContent> {
     final canGrow = nextStage(pet.stage, level, economy) != null;
     final isEgg = pet.stage == PetStage.egg;
     final mood = moodOf(pet);
+    // Room Cleanup opens only when there is trash in the room.
+    final roomDirty = ref.watch(roomTrashCountProvider) > 0;
+    final trash = ref.watch(roomTrashProvider);
 
     return SafeArea(
       child: LayoutBuilder(
@@ -185,8 +189,11 @@ class _PetContentState extends ConsumerState<_PetContent> {
                     child: PetView(
                       pet: pet,
                       plants: roomPlants(level, economy),
-                      semanticLabel: petSemanticLabel(pet, l10n),
+                      semanticLabel: roomLabelWithTrash(
+                          petSemanticLabel(pet, l10n), trash, l10n),
                       reaction: _reaction,
+                      trash: trash,
+                      onTrashTap: () => context.push(AppRoutes.cleanup),
                     ),
                   ),
                   // The wardrobe sits in the room: no extra row pushes
@@ -229,10 +236,11 @@ class _PetContentState extends ConsumerState<_PetContent> {
             const SizedBox(height: EcoSpacing.m),
             // Room Cleanup: sorting waste here also cleans the pet.
             EcoButton(
-              label: l10n.cleanupOpenFromPet,
+              label: roomDirty ? l10n.cleanupOpenFromPet : l10n.roomTrashClean,
               icon: Icons.recycling_rounded,
               expand: true,
-              onPressed: () => context.push(AppRoutes.cleanup),
+              onPressed:
+                  roomDirty ? () => context.push(AppRoutes.cleanup) : null,
             ),
             const SizedBox(height: EcoSpacing.m),
             if (!isEgg) ...[
