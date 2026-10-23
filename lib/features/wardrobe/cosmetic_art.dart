@@ -4,6 +4,13 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../domain/models/cosmetic_item.dart';
 
+/// The "icon" keys [CosmeticArt] knows how to draw. Checked against the
+/// content file by `test/content/cosmetic_content_test.dart`.
+const cosmeticArtKeys = {
+  'flower', 'hat', 'party', 'crown', 'glasses', 'sunglasses', 'mask', //
+  'scarf', 'bow', 'bell', 'medal', 'seeds',
+};
+
 /// Draws one cosmetic item from its content-file "icon" key, in the item's
 /// colour. Used on the pet (sized by `PetArt`) and in the wardrobe lists.
 /// Unknown keys draw a simple star, so new content never breaks.
