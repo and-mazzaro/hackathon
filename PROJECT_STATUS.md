@@ -8,7 +8,8 @@ M6 pet (`e7b7281`) · M7 cleanup (`8be652d`) · M8 cosmetics (`1d36120`, `686dfa
 Teammates need to be added as collaborators by and-mazzaro before they can push.
 **Audio:** Milestones 1 (audit, `AUDIO_AUDIT.md`), 2 (infrastructure, `be6eace`) and 3 (game events wired) done.
 25 Kenney CC0 effects + the sea ambience are in; only background music is missing. Next: Milestone 4 (settings screen).
-**Next milestone:** M9 recommendations (M10 used D54–D60, quiz refresh D61–D62). Read-aloud (flutter_tts) is a small follow-up.
+**M11 (presentation, 2026-10-23):** Laiqua name + icon, intro + demo mode, feeding mini-game, day/afternoon/night room — done.
+**Next milestone:** M9 recommendations; trash items appearing in the room over time (see Remaining work). Read-aloud (flutter_tts) is a small follow-up.
 **Agent skills:** Matt Pocock's engineering + productivity skills (github.com/mattpocock/skills, MIT, commit `5beb35b`)
 are in `.claude/skills/` (commit `2b337f0`, on `main`, not pushed yet), e.g. `/grill-me`, `/to-spec`, `/to-tickets`,
 `/tdd`, `/diagnosing-bugs`, `/handoff`. Installed by copying, since this PC has no Node.js; update by re-copying.
@@ -98,6 +99,11 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 | D60 | Widget tests run with activity tracking off by default (`pumpEcoQuestApp(trackActivity: false)`) | New (M10) |
 | D61 | Quiz selection rotates: unseen questions first (interests first), then seen ones oldest-first; `recentMemory` 30. With 10 questions per topic two topic quizzes in a row never share a question. Content is now 100 questions (10 per topic) | New (quiz refresh) |
 | D62 | Learn tab = one-tap "Gioca subito" card (personal mixed quiz) + colourful topic grid (colour/icon per topic in `topic_colors.dart`, "Per te" first, learned/total progress); 1 column on small phones with large text | New (quiz refresh) |
+| D63 | The app and the pet are called **Laiqua** (Android label, iOS display name, Italian texts, default pet name). Internal package/class names (`ecoquest`, `EcoQuestApp`) stay, to avoid a risky rename before the demo | New (M11) |
+| D64 | App icon = the otter's face rendered by the app's own painter (`test/tools/render_app_icon_test.dart`) on a teal-green gradient with sparkles, composed by `docs/art/make_icon.py`; Android adaptive icon (background + foreground layers) + legacy PNGs + all iOS sizes; master `docs/art/laiqua_icon_1024.png` | New (M11) |
+| D65 | Presentation: Pokémon-style intro at `/intro` (shooting stars + LAIQUA logo + "Tocca per iniziare", guide scene with typewriter speech box and the animated otter, finale burst) with "Salta" always visible; "Modalità demo" cycles Home → Impara → Cucciolo → Guardaroba every 6 s with captions and never saves. Both open from Profile; the demo also from the intro finale | New (M11) |
+| D66 | Feeding = mini-game "Prepara la pappa": 2 questions from the player's interests; ≥ 1 right or 0 right both feed the pet (never punish), no XP/coins, not recorded in learning stats; full belly → the old "already full" reply | New (M11) |
+| D67 | Room look by time of day: day 7–16, afternoon 16–20, night 20–7 (`timeOfDayFor`), or fixed by the player (Profile → Aspetto: Automatico/Giorno/Pomeriggio/Notte, saved as `lookMode`, default auto). Only the pet room changes: an app-wide dark theme was left out because ~47 widgets use the light colour constants directly | New (M11) |
 
 ## Implemented (M1)
 - App entry point, `ProviderScope`, router in a provider (fresh router per test)
@@ -208,6 +214,14 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
   per sound, streak notes pitch-shifted to C D E G A, a few mixed (sort = thud + ding, hatch = crack + crack +
   chirp). 1.1 MB in total; every file, source and processing step in `assets/audio/ATTRIBUTION.md`
 - Every sound id now has a file except `music.main` (no CC0 music loop yet → no background music)
+
+## Implemented (M11 — presentation, 2026-10-23)
+- Rename to **Laiqua** and otter-face launcher icon (D63, D64); checked on the emulator launcher
+- Pokémon-style intro `/intro` + demo mode (D65), `lib/features/intro/`, `lib/features/demo/`; checked on the emulator: stars and
+  logo, guide scene with speech box 1/5…5/5, finale "Laiqua!" with "Inizia l'avventura" / "Modalità demo", demo captions on
+  Home, Impara, Cucciolo
+- "Prepara la pappa" feeding mini-game (D66), `lib/features/pet/feed_game_sheet.dart`
+- Day / afternoon / night pet room + Profile "Aspetto" card (D67); on the emulator at 20:29 the room was automatically night
 
 ## Implemented (M10 — Comeback Score) and quiz refresh (2026-10-23)
 - M10 as specified in `MILESTONE_10_RETENTION.md` (decisions D54–D60): activity log, daily comeback score, gentle Home card with
@@ -336,4 +350,5 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 - Cosmetics polish ideas: a small animation for the roll reveal, more items per slot, room decorations
   (left out of M8 on purpose), a "new" badge in "I miei oggetti", a dedicated reveal sound
 - Balancing: shop prices, odds and refunds are first guesses (D21); tune in play-tests
-- Next: M10 comeback score (renumber its decisions from D54) · M9 recommendations · quiz read-aloud
+- M11 not done: trash items that appear in the pet room over time (timing from the comeback score) instead of cleanup on demand; app-wide dark theme; more feeding mini-games
+- Next (old line): M10 comeback score (renumber its decisions from D54) · M9 recommendations · quiz read-aloud
