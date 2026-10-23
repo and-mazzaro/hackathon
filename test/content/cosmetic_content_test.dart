@@ -45,4 +45,13 @@ void main() {
       expect(item.color >> 24, 0xFF, reason: item.id);
     }
   });
+
+  test('names are filled in and all different', () {
+    final names = <String>{};
+    for (final item in catalog.items) {
+      expect(item.name.trim(), isNotEmpty, reason: item.id);
+      expect(names.add(item.name.trim().toLowerCase()), isTrue,
+          reason: 'name "${item.name}" used twice');
+    }
+  });
 }
