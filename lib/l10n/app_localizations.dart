@@ -1671,6 +1671,96 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Attività cancellata.'**
   String get activityCleared;
+
+  /// No description provided for @introProfileButton.
+  ///
+  /// In it, this message translates to:
+  /// **'Guarda l\'introduzione'**
+  String get introProfileButton;
+
+  /// No description provided for @introSkip.
+  ///
+  /// In it, this message translates to:
+  /// **'Salta'**
+  String get introSkip;
+
+  /// No description provided for @introSkipLabel.
+  ///
+  /// In it, this message translates to:
+  /// **'Salta l\'introduzione'**
+  String get introSkipLabel;
+
+  /// No description provided for @introLogo.
+  ///
+  /// In it, this message translates to:
+  /// **'LAIQUA'**
+  String get introLogo;
+
+  /// No description provided for @introSubtitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Salva il pianeta, un gioco alla volta'**
+  String get introSubtitle;
+
+  /// No description provided for @introPressStart.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca per iniziare'**
+  String get introPressStart;
+
+  /// No description provided for @introNext.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca per continuare'**
+  String get introNext;
+
+  /// No description provided for @introLine1.
+  ///
+  /// In it, this message translates to:
+  /// **'Ciao! Benvenuto nel mondo di Laiqua!'**
+  String get introLine1;
+
+  /// No description provided for @introLine2.
+  ///
+  /// In it, this message translates to:
+  /// **'Io sono Laiqua, una lontra. Il nostro pianeta ha bisogno di aiuto!'**
+  String get introLine2;
+
+  /// No description provided for @introLine3.
+  ///
+  /// In it, this message translates to:
+  /// **'Rispondi ai quiz e scopri come proteggere la natura.'**
+  String get introLine3;
+
+  /// No description provided for @introLine4.
+  ///
+  /// In it, this message translates to:
+  /// **'Impara a dividere i rifiuti e rimetti in ordine la stanza.'**
+  String get introLine4;
+
+  /// No description provided for @introLine5.
+  ///
+  /// In it, this message translates to:
+  /// **'E prenditi cura di me: pappa, giochi e bagnetto. Insieme salveremo il pianeta!'**
+  String get introLine5;
+
+  /// No description provided for @introOtterLabel.
+  ///
+  /// In it, this message translates to:
+  /// **'Laiqua, la lontra, saluta felice'**
+  String get introOtterLabel;
+
+  /// No description provided for @introFinaleTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Laiqua!'**
+  String get introFinaleTitle;
+
+  /// No description provided for @introStart.
+  ///
+  /// In it, this message translates to:
+  /// **'Inizia l\'avventura'**
+  String get introStart;
 }
 
 class _AppLocalizationsDelegate

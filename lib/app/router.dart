@@ -6,6 +6,7 @@ import '../domain/game_controller.dart';
 import '../domain/models/eco_topic.dart';
 import '../features/cleanup/cleanup_screen.dart';
 import '../features/home/home_screen.dart';
+import '../features/intro/intro_screen.dart';
 import '../features/learn/learn_screen.dart';
 import '../features/learn/quiz_screen.dart';
 import '../features/onboarding/onboarding_screen.dart';
@@ -25,6 +26,9 @@ abstract final class AppRoutes {
 
   /// Room Cleanup (open with `context.push`).
   static const cleanup = '/cleanup';
+
+  /// The presentation intro (open with `context.push`).
+  static const intro = '/intro';
 
   /// Wardrobe: reward roll, shop and items (open with `context.push`).
   static const wardrobe = '/wardrobe';
@@ -78,6 +82,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.cleanup,
         builder: (context, state) => const CleanupScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.intro,
+        builder: (context, state) => const IntroScreen(),
       ),
       GoRoute(
         path: AppRoutes.wardrobe,

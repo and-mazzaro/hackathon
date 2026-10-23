@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
+import '../../app/router.dart';
 import '../../app/theme/eco_colors.dart';
 import '../../app/theme/eco_spacing.dart';
 import '../../core/widgets/eco_card.dart';
@@ -120,6 +122,12 @@ class _ProfileContent extends ConsumerWidget {
                 ),
               ],
             ),
+          ),
+          const SizedBox(height: EcoSpacing.m),
+          FilledButton.tonalIcon(
+            icon: const Icon(Icons.auto_awesome_rounded),
+            label: Text(l10n.introProfileButton),
+            onPressed: () => context.push(AppRoutes.intro),
           ),
           const SizedBox(height: EcoSpacing.l),
           Semantics(
