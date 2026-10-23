@@ -1,15 +1,14 @@
 # EcoQuest — Project Status
 
-**Current milestone:** M8 — Cosmetics (shop, reward roll, wardrobe) → **done on Android**, on branch `m8-cosmetics`,
-not merged/pushed yet (iOS untested, no Mac)
+**Current milestone:** M10 — Comeback Score + quiz refresh (100 questions, rotation, new Learn tab) → **done on Android**
+(iOS untested, no Mac). M8 cosmetics + otter merged and pushed earlier on 2026-10-23
 **Done before:** M1 shell (`39e8b3d`) · M2 saving (`d7c3454`) · M3 onboarding (`6695199`) · M5 quiz (`11f752a`) ·
 M6 pet (`e7b7281`) · M7 cleanup (`8be652d`) · M8 cosmetics (`1d36120`, `686dfac`, `0ca3b01`)
 **Repository:** https://github.com/and-mazzaro/hackathon (`origin`, branch `main`; pushed up to M7 on 2026-10-22).
 Teammates need to be added as collaborators by and-mazzaro before they can push.
 **Audio:** Milestones 1 (audit, `AUDIO_AUDIT.md`), 2 (infrastructure, `be6eace`) and 3 (game events wired) done.
 25 Kenney CC0 effects + the sea ambience are in; only background music is missing. Next: Milestone 4 (settings screen).
-**Next milestone:** M10 — Comeback Score (spec in `MILESTONE_10_RETENTION.md`; its decisions start at D54 now, since
-M8 and the otter used D45–D53) or M9 recommendations. Read-aloud (flutter_tts) is a small follow-up.
+**Next milestone:** M9 recommendations (M10 used D54–D60, quiz refresh D61–D62). Read-aloud (flutter_tts) is a small follow-up.
 **Agent skills:** Matt Pocock's engineering + productivity skills (github.com/mattpocock/skills, MIT, commit `5beb35b`)
 are in `.claude/skills/` (commit `2b337f0`, on `main`, not pushed yet), e.g. `/grill-me`, `/to-spec`, `/to-tickets`,
 `/tdd`, `/diagnosing-bugs`, `/handoff`. Installed by copying, since this PC has no Node.js; update by re-copying.
@@ -90,6 +89,15 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 | D51 | One item per slot (`Inventory.equippedBySlot`). Head items replace the green leaf, neck items the green bandana, face items sit on the eyes, paws items are held between the front paws. Ids not in the content any more are ignored when drawing (`petOutfitProvider`). The egg can own items but shows them only after hatching | Updated (otter) |
 | D52 | Wardrobe = full-screen route `/wardrobe`, opened from a hanger button in the Pet room (no extra row above the care buttons) and from a Home card; bottom tabs unchanged (D3) | New (M8) |
 | D53 | The pet is an otter (design: `docs/art/otter_reference.jpg`), drawn in code by `OtterPainter` in the reference picture's pixel coordinates (`OtterGeometry`: anchors per slot, pivots; `OtterPalette`). Separate layers (tail, body, paws, neck, head group) and an `OtterPose` (headTilt, tailSwing, eyesOpen, earTwitch, bodyLift) so it can be animated later; cosmetics are drawn in the same coordinates | New (otter) |
+| D54 | Activity log = `GameState.activity`: per local day opens, notification opens, activities, correct, wrong, unclean exits, plus `lastSessionEndedCleanly`; at most 14 days; only counts and dates (no location, Wi-Fi, silent mode, device ids). Old saves → empty log | New (M10) |
+| D55 | Comeback score (`comeback_rules.dart`) is a pure daily number from the days before today: 50 + 5 per active day in the last 7 (max +35), last active yesterday +10 / 3–6 days ago −15 / 7+ days −30, accuracy ±, reminder open +5, crash −10, clamped 0–100; neutral 50 on day 1; future days ignored. Low below `comebackLowScore` 45; bonus 10 coins (`EconomyConfig`) | New (M10) |
+| D56 | Quiz, cleanup and care are logged inside `completeQuiz`/`completeCleanup`/`careForPet` (same write); app opens and clean exits by `ActivityBinding` (wraps `AudioBinding`) | New (M10) |
+| D57 | Low-score day → Home card "Mi sei mancato!", one easier activity and "Prendi il regalo", paid once per day via `claimReward('comeback:YYYY-MM-DD')`. Nothing blocked, no guilt | New (M10) |
+| D58 | Reminders through a `ReminderScheduler` interface (`flutter_local_notifications` + `timezone` + `flutter_timezone`): one inexact daily notification at the chosen time (default 18:00, off by default). Permission asked only when the switch is turned on; refused → switch stays off with one calm note | New (M10) |
+| D59 | "Cancella la mia attività" (with confirmation) empties the log, turns the reminder off and cancels notifications; progress, pet and items stay | New (M10) |
+| D60 | Widget tests run with activity tracking off by default (`pumpEcoQuestApp(trackActivity: false)`) | New (M10) |
+| D61 | Quiz selection rotates: unseen questions first (interests first), then seen ones oldest-first; `recentMemory` 30. With 10 questions per topic two topic quizzes in a row never share a question. Content is now 100 questions (10 per topic) | New (quiz refresh) |
+| D62 | Learn tab = one-tap "Gioca subito" card (personal mixed quiz) + colourful topic grid (colour/icon per topic in `topic_colors.dart`, "Per te" first, learned/total progress); 1 column on small phones with large text | New (quiz refresh) |
 
 ## Implemented (M1)
 - App entry point, `ProviderScope`, router in a provider (fresh router per test)
@@ -201,6 +209,14 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
   chirp). 1.1 MB in total; every file, source and processing step in `assets/audio/ATTRIBUTION.md`
 - Every sound id now has a file except `music.main` (no CC0 music loop yet → no background music)
 
+## Implemented (M10 — Comeback Score) and quiz refresh (2026-10-23)
+- M10 as specified in `MILESTONE_10_RETENTION.md` (decisions D54–D60): activity log, daily comeback score, gentle Home card with
+  an easier activity and a once-a-day gift, daily reminder opt-in in Profile (time picker, one notification a day), "Cancella la
+  mia attività". New files: `activity_log.dart`, `comeback_rules.dart`, `core/activity_binding.dart`, `core/notifications/`,
+  `profile/reminder_section.dart`, `profile/reminder_text.dart`
+- Quiz refresh: 50 new questions (10 per topic, every source page opened by research agents, short excerpts, validated by
+  script); question rotation (D61); new Learn tab with one-tap "Gioca subito" (D62)
+
 ## Implemented (M8 — Cosmetics)
 - **Otter redesign (2026-10-23):** the pet is now the otter from `docs/art/otter_reference.jpg`, redrawn in code
   (`lib/features/pet/otter_painter.dart`, `otter_geometry.dart`); outline, eyes, nose, ears, belly, paws and tail line up
@@ -278,6 +294,8 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 | `flutter build apk --debug` | ✅ Builds (again after the otter redesign, 2026-10-23) |
 | Otter idle animation (`otter_idle.dart`: 12 s loop of tail wag, head tilt, two blinks, one ear flick; off in tests and with "remove animations"): unit tests for the pose loop; on the emulator, consecutive screenshots of the Pet room differ (it moves) | ✅ Checked (2026-10-23) |
 | `flutter build apk --release` (signed with the debug key, for demo installs) | ✅ Builds, 53 MB (2026-10-23) |
+| `flutter test` after M10 + quiz refresh — 323 tests (+ comeback score table, activity log and old saves, bonus paid once, Home card, reminder on/off/denied with a fake scheduler, onboarding never asks permission, quiz rotation: consecutive topic quizzes share nothing, mixed quizzes rotate, one tap on "Gioca subito" opens a quiz, Learn tab guidelines and 200% text) · `flutter analyze` clean · release and debug APKs build | ✅ All pass (2026-10-23) |
+| M10 + quiz refresh on the emulator (release APK, tester's save backed up and restored): new Learn tab with 10 questions per topic; "Clima" played twice in a row → 10 different questions; Profile reminder switch → Android notification permission dialog only then → one alarm scheduled for 18:00 (inexact, 1 h window) → switch off → alarm cancelled; permission revoked again afterwards. The Home comeback card needs several days of absence, so it was checked only by widget tests | ✅ Checked by script + screenshots (2026-10-23) |
 | **Full play-through on the emulator with the release APK, fresh data**: onboarding (2 interests, nickname, age) → Home without the debug button → Quiz del giorno 5/5, +70 XP, streak 5 → Room Cleanup 8/8, +22 coins, +10 XP, combo 8 → Clima quiz 5/5 → "Hai raggiunto il livello 2!" + "Premio: 1 biglietto…" → Pet tab: egg ready, hatched and named "Ondina" (otter appears, idle animation runs) → wardrobe with 2 tickets: Maschera da supereroe (Epico) worn, Sciarpa di lana (Raro) worn → force-stop + relaunch: Level 2, 50/150 XP, 22 coins, 0 tickets, both items saved and equipped. The tester's save was backed up first and restored afterwards (the debug build is installed again) | ✅ Checked by script + screenshots (2026-10-23) |
 | Android emulator (Pixel 7, Android 36): app starts, Home renders, tab switch, system Back from a tab returns to Home | ✅ Checked manually with screenshots (2026-10-22) |
 | Android accessibility tree (uiautomator dump): every stat, balance, image, card and tab has an Italian label | ✅ Checked (2026-10-22) |
