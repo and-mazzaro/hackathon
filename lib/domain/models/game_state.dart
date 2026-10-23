@@ -4,6 +4,7 @@ import 'audio_settings.dart';
 import 'inventory.dart';
 import 'json_utils.dart';
 import 'learning_progress.dart';
+import 'look_mode.dart';
 import 'pet_state.dart';
 import 'player_profile.dart';
 import 'player_progress.dart';
@@ -25,6 +26,7 @@ class GameState {
     this.audio = AudioSettings.defaults,
     this.activity = ActivityLog.empty,
     this.reminder = ReminderSettings.defaults,
+    this.lookMode = LookMode.auto,
   });
 
   /// A brand-new player.
@@ -70,6 +72,10 @@ class GameState {
   /// Optional daily reminder. Added in M10: older saves have it off.
   final ReminderSettings reminder;
 
+  /// Room look (automatic or day / afternoon / night). Added with the
+  /// time-of-day look: older saves get [LookMode.auto].
+  final LookMode lookMode;
+
   GameState copyWith({
     PlayerProfile? profile,
     PlayerProgress? progress,
@@ -80,6 +86,7 @@ class GameState {
     AudioSettings? audio,
     ActivityLog? activity,
     ReminderSettings? reminder,
+    LookMode? lookMode,
   }) {
     return GameState(
       profile: profile ?? this.profile,
@@ -91,6 +98,7 @@ class GameState {
       audio: audio ?? this.audio,
       activity: activity ?? this.activity,
       reminder: reminder ?? this.reminder,
+      lookMode: lookMode ?? this.lookMode,
     );
   }
 
@@ -104,6 +112,7 @@ class GameState {
         'audio': audio.toJson(),
         'activity': activity.toJson(),
         'reminder': reminder.toJson(),
+        'lookMode': lookMode.id,
       };
 
   /// [now] is only used for dates missing from an old or partial save.
@@ -118,6 +127,7 @@ class GameState {
       audio: AudioSettings.fromJson(readObject(json, 'audio')),
       activity: ActivityLog.fromJson(readObject(json, 'activity')),
       reminder: ReminderSettings.fromJson(readObject(json, 'reminder')),
+      lookMode: LookMode.fromId(json['lookMode']),
     );
   }
 }

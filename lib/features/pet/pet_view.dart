@@ -7,8 +7,11 @@ import '../../app/theme/eco_colors.dart';
 import '../../app/theme/eco_spacing.dart';
 import '../../core/animations.dart';
 import '../../core/widgets/egg_art.dart';
+import '../../domain/game_controller.dart';
+import '../../domain/models/look_mode.dart';
 import '../../domain/models/pet_state.dart';
 import '../../domain/rules/pet_rules.dart';
+import '../../domain/rules/time_of_day_rules.dart';
 import '../wardrobe/cosmetic_labels.dart';
 import 'otter_idle.dart';
 import 'pet_art.dart';
@@ -87,6 +90,12 @@ class _PetViewState extends ConsumerState<PetView>
   Widget build(BuildContext context) {
     final pet = widget.pet;
     final isEgg = pet.stage == PetStage.egg;
+    final look = lookFor(
+      ref.watch(gameControllerProvider
+              .select((game) => game.value?.lookMode)) ??
+          LookMode.auto,
+      ref.watch(clockProvider)(),
+    );
     final art = isEgg
         ? const EggArt()
         : AnimatedBuilder(
@@ -109,23 +118,27 @@ class _PetViewState extends ConsumerState<PetView>
         child: ClipRRect(
           borderRadius: BorderRadius.circular(EcoSpacing.radiusCard + 8),
           child: DecoratedBox(
-            decoration: const BoxDecoration(
+            key: ValueKey('room-${look.name}'),
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Color(0xFFBFE6F2), EcoColors.primaryContainer],
+                colors: _skyColors(look),
               ),
             ),
             child: Stack(
               children: [
-                const Positioned(
+                Positioned.fill(
+                  child: CustomPaint(painter: _SkyPainter(look)),
+                ),
+                Positioned(
                   left: 0,
                   right: 0,
                   bottom: 0,
                   height: 56,
-                  child: ColoredBox(color: Color(0xFFE3D3B0)),
+                  child: ColoredBox(color: _floorColor(look)),
                 ),
-                ..._plants(widget.plants),
+                ..._plants(widget.plants, look),
                 Positioned.fill(
                   child: Padding(
                     padding: const EdgeInsets.only(
@@ -188,7 +201,36 @@ class _PetViewState extends ConsumerState<PetView>
     );
   }
 
-  List<Widget> _plants(int count) {
+  static List<Color> _skyColors(TimeOfDayLook look) => switch (look) {
+        TimeOfDayLook.day => const [
+            Color(0xFFBFE6F2),
+            EcoColors.primaryContainer,
+          ],
+        // Warm sunset: orange-pink sky fading to a soft peach.
+        TimeOfDayLook.afternoon => const [
+            Color(0xFFF79A6B),
+            Color(0xFFF9C0A8),
+            Color(0xFFFCE3C4),
+          ],
+        // Deep blue night, a bit lighter near the floor.
+        TimeOfDayLook.night => const [
+            Color(0xFF14204A),
+            Color(0xFF2C3E73),
+          ],
+      };
+
+  static Color _floorColor(TimeOfDayLook look) => switch (look) {
+        TimeOfDayLook.day => const Color(0xFFE3D3B0),
+        TimeOfDayLook.afternoon => const Color(0xFFD9BE96),
+        TimeOfDayLook.night => const Color(0xFF8C7C62),
+      };
+
+  List<Widget> _plants(int count, TimeOfDayLook look) {
+    // At night the leaf green would sink into the dark sky: use a lighter
+    // green so the plants stay visible.
+    final color = look == TimeOfDayLook.night
+        ? const Color(0xFF7FD6A0)
+        : EcoColors.primary;
     const spots = [
       (Alignment(0.88, 0.55), Icons.local_florist_rounded, 48.0),
       (Alignment(-0.88, 0.55), Icons.spa_rounded, 44.0),
@@ -199,8 +241,59 @@ class _PetViewState extends ConsumerState<PetView>
       for (final (alignment, icon, size) in spots.take(1 + count))
         Align(
           alignment: alignment,
-          child: Icon(icon, size: size, color: EcoColors.primary),
+          child: Icon(icon, size: size, color: color),
         ),
     ];
   }
+}
+
+/// Sun, low sunset sun, or moon and stars behind the pet.
+class _SkyPainter extends CustomPainter {
+  const _SkyPainter(this.look);
+
+  final TimeOfDayLook look;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    switch (look) {
+      case TimeOfDayLook.day:
+        return; // the day sky stays as it always was
+      case TimeOfDayLook.afternoon:
+        // A big, low sun just above the floor, with a soft glow.
+        final center = Offset(size.width * 0.22, size.height - 70);
+        canvas.drawCircle(
+            center, 46, Paint()..color = const Color(0x55FFE08A));
+        canvas.drawCircle(
+            center, 30, Paint()..color = const Color(0xFFFFB347));
+      case TimeOfDayLook.night:
+        final star = Paint()..color = const Color(0xDDFFFFFF);
+        const stars = [
+          (0.12, 0.10, 2.0),
+          (0.30, 0.22, 1.5),
+          (0.48, 0.08, 2.2),
+          (0.64, 0.30, 1.4),
+          (0.90, 0.20, 1.8),
+          (0.40, 0.42, 1.2),
+          (0.08, 0.36, 1.5),
+        ];
+        for (final (x, y, r) in stars) {
+          canvas.drawCircle(
+              Offset(size.width * x, size.height * y), r, star);
+        }
+        // A crescent moon: a pale disc minus a smaller offset one. Placed
+        // mid-right, clear of the otter and of buttons in the corners.
+        final moon = Offset(size.width * 0.86, size.height * 0.42);
+        final crescent = Path.combine(
+          PathOperation.difference,
+          Path()..addOval(Rect.fromCircle(center: moon, radius: 20)),
+          Path()
+            ..addOval(Rect.fromCircle(
+                center: moon.translate(9, -6), radius: 17)),
+        );
+        canvas.drawPath(crescent, Paint()..color = const Color(0xFFF4EBC8));
+    }
+  }
+
+  @override
+  bool shouldRepaint(_SkyPainter old) => old.look != look;
 }

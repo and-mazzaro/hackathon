@@ -470,5 +470,11 @@
   "activityClearConfirmBody": "Cancelliamo il registro degli ultimi giorni e spegniamo il promemoria. Livello, monete, cucciolo e oggetti restano come sono.",
   "activityClearConfirm": "Cancella",
   "activityClearCancel": "Annulla",
-  "activityCleared": "Attività cancellata."
+  "activityCleared": "Attività cancellata.",
+  "lookTitle": "Aspetto",
+  "lookBody": "Come appare la stanza del cucciolo. Con Automatico segue l'ora del telefono.",
+  "lookAuto": "Automatico",
+  "lookDay": "Giorno",
+  "lookAfternoon": "Pomeriggio",
+  "lookNight": "Notte"
 }

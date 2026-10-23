@@ -1020,4 +1020,23 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get activityCleared => 'Attività cancellata.';
+
+  @override
+  String get lookTitle => 'Aspetto';
+
+  @override
+  String get lookBody =>
+      'Come appare la stanza del cucciolo. Con Automatico segue l\'ora del telefono.';
+
+  @override
+  String get lookAuto => 'Automatico';
+
+  @override
+  String get lookDay => 'Giorno';
+
+  @override
+  String get lookAfternoon => 'Pomeriggio';
+
+  @override
+  String get lookNight => 'Notte';
 }

@@ -11,6 +11,7 @@ import '../../domain/models/game_state.dart';
 import '../../domain/rules/progression.dart';
 import '../../l10n/app_localizations.dart';
 import 'interest_picker.dart';
+import 'look_card.dart';
 import 'profile_details_sheet.dart';
 import 'profile_labels.dart';
 import 'reminder_section.dart';
@@ -166,6 +167,8 @@ class _ProfileContent extends ConsumerWidget {
               ],
             ),
           ),
+          const SizedBox(height: EcoSpacing.m),
+          LookCard(mode: game.lookMode),
         ],
       ),
     );
