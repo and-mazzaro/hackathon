@@ -37,3 +37,4 @@ bg.alpha_composite(head, (px, py))
 master = bg.convert("RGB")
 master.save(f"{S}/icon/laiqua_icon_1024.png")
 print("ok", head.size, (px, py))
+
