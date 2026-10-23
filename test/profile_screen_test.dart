@@ -62,7 +62,7 @@ void main() {
     expect(saved.profile.onboardingCompleted, isTrue);
     expect(saved.profile.nickname, 'EcoAle');
     // Still on the profile tab, not sent back to onboarding.
-    expect(find.text('Ti diamo il benvenuto in EcoQuest!'), findsNothing);
+    expect(find.text('Ti diamo il benvenuto in Laiqua!'), findsNothing);
     final bar = tester.widget<NavigationBar>(find.byType(NavigationBar));
     expect(bar.selectedIndex, 3);
   });

@@ -7,7 +7,7 @@ import 'package:material_ui/material_ui.dart';
 
 import 'helpers/pump_app.dart';
 
-final _welcome = find.text('Ti diamo il benvenuto in EcoQuest!');
+final _welcome = find.text('Ti diamo il benvenuto in Laiqua!');
 final _interests = find.text('Cosa ti interessa?');
 final _about = find.text("Parlaci un po' di te");
 

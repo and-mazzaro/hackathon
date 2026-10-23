@@ -52,7 +52,7 @@ void main() {
     await tester.tap(find.text('Ricomincia da capo'));
     await tester.pumpAndSettle();
     // A fresh game starts with onboarding.
-    expect(find.text('Ti diamo il benvenuto in EcoQuest!'), findsOneWidget);
+    expect(find.text('Ti diamo il benvenuto in Laiqua!'), findsOneWidget);
   });
 
   testWidgets('a save from a newer app cannot be overwritten from the UI',

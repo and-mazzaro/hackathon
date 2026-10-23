@@ -24,7 +24,7 @@ extension PetMoodLabels on PetMood {
 String petDisplayName(PetState pet, AppLocalizations l10n) =>
     pet.stage == PetStage.egg ? l10n.petEggName : (pet.name ?? defaultPetName);
 
-/// What screen readers say about the pet: "Ecò, Cucciolo, Di buon umore".
+/// What screen readers say about the pet: "Laiqua, Cucciolo, Di buon umore".
 String petSemanticLabel(PetState pet, AppLocalizations l10n) =>
     l10n.petSemantics(
       petDisplayName(pet, l10n),

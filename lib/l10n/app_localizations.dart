@@ -97,7 +97,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In it, this message translates to:
-  /// **'EcoQuest'**
+  /// **'Laiqua'**
   String get appTitle;
 
   /// No description provided for @navHome.
@@ -229,7 +229,7 @@ abstract class AppLocalizations {
   /// No description provided for @saveNewerAppBody.
   ///
   /// In it, this message translates to:
-  /// **'Questi progressi sono stati salvati da una versione più recente di EcoQuest. Aggiorna l\'app per continuare.'**
+  /// **'Questi progressi sono stati salvati da una versione più recente di Laiqua. Aggiorna l\'app per continuare.'**
   String get saveNewerAppBody;
 
   /// No description provided for @saveUnknownErrorBody.
@@ -709,7 +709,7 @@ abstract class AppLocalizations {
   /// No description provided for @petNameHint.
   ///
   /// In it, this message translates to:
-  /// **'Es. Ecò'**
+  /// **'Es. Laiqua'**
   String get petNameHint;
 
   /// No description provided for @hatchConfirm.
@@ -1279,7 +1279,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeTitle.
   ///
   /// In it, this message translates to:
-  /// **'Ti diamo il benvenuto in EcoQuest!'**
+  /// **'Ti diamo il benvenuto in Laiqua!'**
   String get welcomeTitle;
 
   /// No description provided for @welcomeBody.
@@ -1519,7 +1519,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileDataBody.
   ///
   /// In it, this message translates to:
-  /// **'Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. EcoQuest non usa la tua posizione e non chiede la data di nascita.'**
+  /// **'Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. Laiqua non usa la tua posizione e non chiede la data di nascita.'**
   String get profileDataBody;
 
   /// No description provided for @comebackTitle.
@@ -1573,7 +1573,7 @@ abstract class AppLocalizations {
   /// No description provided for @reminderBody.
   ///
   /// In it, this message translates to:
-  /// **'Se vuoi, EcoQuest può mandarti un solo avviso al giorno, all\'ora che scegli tu. Il promemoria resta su questo telefono e puoi spegnerlo quando vuoi.'**
+  /// **'Se vuoi, Laiqua può mandarti un solo avviso al giorno, all\'ora che scegli tu. Il promemoria resta su questo telefono e puoi spegnerlo quando vuoi.'**
   String get reminderBody;
 
   /// No description provided for @reminderSwitch.
@@ -1633,7 +1633,7 @@ abstract class AppLocalizations {
   /// No description provided for @activityDataBody.
   ///
   /// In it, this message translates to:
-  /// **'Per capire quando darti una mano, EcoQuest conta sul telefono quante volte giochi e quante risposte indovini negli ultimi 14 giorni. Niente posizione, niente Wi-Fi, niente dati inviati.'**
+  /// **'Per capire quando darti una mano, Laiqua conta sul telefono quante volte giochi e quante risposte indovini negli ultimi 14 giorni. Niente posizione, niente Wi-Fi, niente dati inviati.'**
   String get activityDataBody;
 
   /// No description provided for @activityClearAction.

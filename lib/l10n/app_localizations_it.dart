@@ -10,7 +10,7 @@ class AppLocalizationsIt extends AppLocalizations {
   AppLocalizationsIt([String locale = 'it']) : super(locale);
 
   @override
-  String get appTitle => 'EcoQuest';
+  String get appTitle => 'Laiqua';
 
   @override
   String get navHome => 'Home';
@@ -108,7 +108,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get saveNewerAppBody =>
-      'Questi progressi sono stati salvati da una versione più recente di EcoQuest. Aggiorna l\'app per continuare.';
+      'Questi progressi sono stati salvati da una versione più recente di Laiqua. Aggiorna l\'app per continuare.';
 
   @override
   String get saveUnknownErrorBody =>
@@ -422,7 +422,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get petNameLabel => 'Nome del cucciolo (facoltativo)';
 
   @override
-  String get petNameHint => 'Es. Ecò';
+  String get petNameHint => 'Es. Laiqua';
 
   @override
   String get hatchConfirm => 'Fatto';
@@ -787,7 +787,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get cancelAction => 'Annulla';
 
   @override
-  String get welcomeTitle => 'Ti diamo il benvenuto in EcoQuest!';
+  String get welcomeTitle => 'Ti diamo il benvenuto in Laiqua!';
 
   @override
   String get welcomeBody =>
@@ -927,7 +927,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get profileDataBody =>
-      'Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. EcoQuest non usa la tua posizione e non chiede la data di nascita.';
+      'Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. Laiqua non usa la tua posizione e non chiede la data di nascita.';
 
   @override
   String get comebackTitle => 'Mi sei mancato!';
@@ -961,7 +961,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get reminderBody =>
-      'Se vuoi, EcoQuest può mandarti un solo avviso al giorno, all\'ora che scegli tu. Il promemoria resta su questo telefono e puoi spegnerlo quando vuoi.';
+      'Se vuoi, Laiqua può mandarti un solo avviso al giorno, all\'ora che scegli tu. Il promemoria resta su questo telefono e puoi spegnerlo quando vuoi.';
 
   @override
   String get reminderSwitch => 'Ricordamelo ogni giorno';
@@ -1000,7 +1000,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get activityDataBody =>
-      'Per capire quando darti una mano, EcoQuest conta sul telefono quante volte giochi e quante risposte indovini negli ultimi 14 giorni. Niente posizione, niente Wi-Fi, niente dati inviati.';
+      'Per capire quando darti una mano, Laiqua conta sul telefono quante volte giochi e quante risposte indovini negli ultimi 14 giorni. Niente posizione, niente Wi-Fi, niente dati inviati.';
 
   @override
   String get activityClearAction => 'Cancella la mia attività';

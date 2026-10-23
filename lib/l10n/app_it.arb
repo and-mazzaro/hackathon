@@ -1,6 +1,6 @@
 {
   "@@locale": "it",
-  "appTitle": "EcoQuest",
+  "appTitle": "Laiqua",
 
   "navHome": "Home",
   "navLearn": "Impara",
@@ -45,7 +45,7 @@
   "loadingProgress": "Carico i tuoi progressi…",
   "saveErrorTitle": "Non riesco a leggere i tuoi progressi",
   "saveCorruptedBody": "Il salvataggio sembra danneggiato. Puoi riprovare oppure ricominciare da capo.",
-  "saveNewerAppBody": "Questi progressi sono stati salvati da una versione più recente di EcoQuest. Aggiorna l'app per continuare.",
+  "saveNewerAppBody": "Questi progressi sono stati salvati da una versione più recente di Laiqua. Aggiorna l'app per continuare.",
   "saveUnknownErrorBody": "Si è verificato un problema imprevisto. Riprova tra poco.",
   "retryAction": "Riprova",
   "startFreshAction": "Ricomincia da capo",
@@ -202,7 +202,7 @@
   "hatchTitle": "Il tuo cucciolo è nato!",
   "hatchBody": "Scegli un nome (facoltativo). Crescerà insieme a te, quiz dopo quiz.",
   "petNameLabel": "Nome del cucciolo (facoltativo)",
-  "petNameHint": "Es. Ecò",
+  "petNameHint": "Es. Laiqua",
   "hatchConfirm": "Fatto",
   "hatchedMessage": "Ecco {name}, il tuo nuovo cucciolo!",
   "@hatchedMessage": { "placeholders": { "name": { "type": "String" } } },
@@ -379,7 +379,7 @@
   "saveAction": "Salva",
   "cancelAction": "Annulla",
 
-  "welcomeTitle": "Ti diamo il benvenuto in EcoQuest!",
+  "welcomeTitle": "Ti diamo il benvenuto in Laiqua!",
   "welcomeBody": "Impara a proteggere l'ambiente giocando. Ogni quiz e ogni rifiuto riciclato aiutano il tuo cucciolo a schiudersi e a vivere in una stanza sempre più verde.",
   "welcomePrivacy": "Non serve un account: i tuoi progressi vengono salvati su questo telefono.",
   "welcomeStartAction": "Iniziamo",
@@ -432,7 +432,7 @@
   "profileInterestsBody": "Tocca un argomento per attivarlo o disattivarlo. Le modifiche vengono salvate subito e i tuoi progressi restano invariati.",
   "profileKeepOneInterest": "Tieni almeno un interesse.",
   "profileDataTitle": "I tuoi dati",
-  "profileDataBody": "Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. EcoQuest non usa la tua posizione e non chiede la data di nascita.",
+  "profileDataBody": "Non serve un account. Soprannome, età, interessi e progressi sono salvati su questo telefono. Laiqua non usa la tua posizione e non chiede la data di nascita.",
 
   "comebackTitle": "Mi sei mancato!",
   "comebackBody": "Che bello rivederti. Ripartiamo con calma, senza fretta.",
@@ -445,7 +445,7 @@
   },
   "comebackBonusClaimed": "Regalo preso! Che bello giocare di nuovo insieme.",
   "reminderTitle": "Promemoria giornaliero",
-  "reminderBody": "Se vuoi, EcoQuest può mandarti un solo avviso al giorno, all'ora che scegli tu. Il promemoria resta su questo telefono e puoi spegnerlo quando vuoi.",
+  "reminderBody": "Se vuoi, Laiqua può mandarti un solo avviso al giorno, all'ora che scegli tu. Il promemoria resta su questo telefono e puoi spegnerlo quando vuoi.",
   "reminderSwitch": "Ricordamelo ogni giorno",
   "reminderTime": "Ora del promemoria: {time}",
   "@reminderTime": {
@@ -464,7 +464,7 @@
   "reminderNotificationBodyGeneric": "Hai 2 minuti? Vieni a scoprire qualcosa di nuovo sulla natura.",
   "reminderPetFallback": "Il tuo cucciolo",
   "activityDataTitle": "La tua attività",
-  "activityDataBody": "Per capire quando darti una mano, EcoQuest conta sul telefono quante volte giochi e quante risposte indovini negli ultimi 14 giorni. Niente posizione, niente Wi-Fi, niente dati inviati.",
+  "activityDataBody": "Per capire quando darti una mano, Laiqua conta sul telefono quante volte giochi e quante risposte indovini negli ultimi 14 giorni. Niente posizione, niente Wi-Fi, niente dati inviati.",
   "activityClearAction": "Cancella la mia attività",
   "activityClearConfirmTitle": "Cancellare la tua attività?",
   "activityClearConfirmBody": "Cancelliamo il registro degli ultimi giorni e spegniamo il promemoria. Livello, monete, cucciolo e oggetti restano come sono.",

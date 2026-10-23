@@ -4,7 +4,7 @@ import '../models/pet_state.dart';
 import 'economy_config.dart';
 
 /// Name used when the player does not choose one at hatching.
-const defaultPetName = 'Ecò';
+const defaultPetName = 'Laiqua';
 
 enum PetMood { happy, ok, sad }
 
