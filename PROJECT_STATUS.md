@@ -276,6 +276,9 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 | `flutter test` after the otter redesign — 275 tests, 2 dev-tool tests skipped (+ otter painter sizes/moods/poses/shouldRepaint, six-rarity prices/odds/refunds, 20 000 seeded rolls within ±1.5 points, real 25-item content file, wardrobe odds/refunds/reveal) · `flutter analyze` clean | ✅ All pass (2026-10-23) |
 | Otter visual check: render of the default otter overlaid on the reference picture, every mood × stage, every item worn, full outfits per rarity, thumbnails; on the emulator the Pet tab shows the otter (sad mood from the saved needs) and the wardrobe shows six odds, six refunds and the computed shop note. Tester save backed up and restored | ✅ Looked at (2026-10-23) |
 | `flutter build apk --debug` | ✅ Builds (again after the otter redesign, 2026-10-23) |
+| Otter idle animation (`otter_idle.dart`: 12 s loop of tail wag, head tilt, two blinks, one ear flick; off in tests and with "remove animations"): unit tests for the pose loop; on the emulator, consecutive screenshots of the Pet room differ (it moves) | ✅ Checked (2026-10-23) |
+| `flutter build apk --release` (signed with the debug key, for demo installs) | ✅ Builds, 53 MB (2026-10-23) |
+| **Full play-through on the emulator with the release APK, fresh data**: onboarding (2 interests, nickname, age) → Home without the debug button → Quiz del giorno 5/5, +70 XP, streak 5 → Room Cleanup 8/8, +22 coins, +10 XP, combo 8 → Clima quiz 5/5 → "Hai raggiunto il livello 2!" + "Premio: 1 biglietto…" → Pet tab: egg ready, hatched and named "Ondina" (otter appears, idle animation runs) → wardrobe with 2 tickets: Maschera da supereroe (Epico) worn, Sciarpa di lana (Raro) worn → force-stop + relaunch: Level 2, 50/150 XP, 22 coins, 0 tickets, both items saved and equipped. The tester's save was backed up first and restored afterwards (the debug build is installed again) | ✅ Checked by script + screenshots (2026-10-23) |
 | Android emulator (Pixel 7, Android 36): app starts, Home renders, tab switch, system Back from a tab returns to Home | ✅ Checked manually with screenshots (2026-10-22) |
 | Android accessibility tree (uiautomator dump): every stat, balance, image, card and tab has an Italian label | ✅ Checked (2026-10-22) |
 | Listening to TalkBack live | ⏳ Not done yet (optional, by a team member) |
@@ -288,6 +291,7 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 - Android Auto Backup (on by default) can copy the save to the user's own Google account backup. Decide before
   release whether to keep it (restores progress on a new phone) or turn it off in `AndroidManifest.xml`.
 - Web preview keeps progress in memory only.
+- Home egg card: "Si schiuderà al livello 2: ti mancano 100 XP" is cut with "…" on a Pixel 7 (seen in the play-through); fine for the demo, could wrap to two lines
 - Polish idea: on onboarding step 3 the open keyboard pushes "Fine/Salta" up so they cover the last age chips
   (still scrollable; the keyboard ✓ closes it). Consider moving the buttons into the scroll area on that step.
 - Interests now drive the quiz ("Per te" order and the personal quiz). Facts, missions and other activities
