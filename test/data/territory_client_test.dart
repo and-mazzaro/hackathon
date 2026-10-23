@@ -1,7 +1,12 @@
 import 'dart:convert';
 
+import 'package:ecoquest/data/save/in_memory_save_repository.dart';
+import 'package:ecoquest/data/save/save_repository.dart';
 import 'package:ecoquest/data/territory/territory_client.dart';
+import 'package:ecoquest/domain/game_controller.dart';
+import 'package:ecoquest/domain/models/game_state.dart';
 import 'package:ecoquest/domain/models/territory.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -115,6 +120,41 @@ void main() {
         timeout: const Duration(milliseconds: 10),
       );
       expect(await loadTerritory(slow, const []), isNull);
+    });
+  });
+
+  group('territoryProvider', () {
+    final now = DateTime(2026, 10, 24, 1, 30);
+
+    ProviderContainer container(http.Client client, InMemorySaveRepository repo) {
+      final c = ProviderContainer(overrides: [
+        saveRepositoryProvider.overrideWithValue(repo),
+        clockProvider.overrideWithValue(() => now),
+        httpClientProvider.overrideWithValue(client),
+      ]);
+      addTearDown(c.dispose);
+      return c;
+    }
+
+    test('live readings are kept in the save for offline use', () async {
+      final repo = InMemorySaveRepository(GameState.initial(now: now));
+      final data =
+          await container(_openMeteo(), repo).read(territoryProvider.future);
+      expect(data!.live, isTrue);
+      expect(repo.saved!.territory.cached, hasLength(3));
+      expect(repo.saved!.territory.cached.first.aqi, 20);
+    });
+
+    test('offline: the readings saved last time', () async {
+      final saved = GameState.initial(now: now);
+      final repo = InMemorySaveRepository(saved.copyWith(
+          territory: saved.territory.copyWith(cached: testTerritoryReadings())));
+      final offline = MockClient(
+          (request) async => throw http.ClientException('offline'));
+      final data =
+          await container(offline, repo).read(territoryProvider.future);
+      expect(data!.live, isFalse);
+      expect(data.readings[1].aqi, 35);
     });
   });
 }
