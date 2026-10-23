@@ -1,14 +1,19 @@
 # EcoQuest — Project Status
 
-**Current milestone:** M7 — Room Cleanup (recycling game) → **done on Android** (iOS untested, no Mac)
+**Current milestone:** M8 — Cosmetics (shop, reward roll, wardrobe) → **done on Android**, on branch `m8-cosmetics`,
+not merged/pushed yet (iOS untested, no Mac)
 **Done before:** M1 shell (`39e8b3d`) · M2 saving (`d7c3454`) · M3 onboarding (`6695199`) · M5 quiz (`11f752a`) ·
-M6 pet (`e7b7281`) · M7 cleanup (`8be652d`)
+M6 pet (`e7b7281`) · M7 cleanup (`8be652d`) · M8 cosmetics (`1d36120`, `686dfac`, `0ca3b01`)
 **Repository:** https://github.com/and-mazzaro/hackathon (`origin`, branch `main`; pushed up to M7 on 2026-10-22).
 Teammates need to be added as collaborators by and-mazzaro before they can push.
 **Audio:** Milestones 1 (audit, `AUDIO_AUDIT.md`), 2 (infrastructure, `be6eace`) and 3 (game events wired) done.
 25 Kenney CC0 effects + the sea ambience are in; only background music is missing. Next: Milestone 4 (settings screen).
-**Next milestone:** M8 — Cosmetics: shop (coins), reward roll (tickets, visible odds, duplicates rule), inventory,
-equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a small follow-up.
+**Next milestone:** M10 — Comeback Score (spec in `MILESTONE_10_RETENTION.md`; its decisions start at D53 now, since
+M8 used D45–D52) or M9 recommendations. Read-aloud (flutter_tts) is a small follow-up.
+**Agent skills:** Matt Pocock's engineering + productivity skills (github.com/mattpocock/skills, MIT, commit `5beb35b`)
+are in `.claude/skills/` (commit `2b337f0`, on `main`, not pushed yet), e.g. `/grill-me`, `/to-spec`, `/to-tickets`,
+`/tdd`, `/diagnosing-bugs`, `/handoff`. Installed by copying, since this PC has no Node.js; update by re-copying.
+Their `code-review` skill has the same name as Claude Code's built-in one.
 
 ## Environment (lead PC)
 | Item | Status |
@@ -76,6 +81,14 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
 | D42 | 3 channels (music / effects / pet + ambience) with volumes 0–100 + master mute, saved in `GameState.audio` (defaults 35 / 80 / 60 for old saves) via `GameController.updateAudioSettings` | New (Audio 2) |
 | D43 | "Ambient" audio session: mixes with the player's own music (no audio focus on Android), follows the iOS silent switch. Loops pause in the background and resume on return (unless muted); short sounds are never replayed later | New (Audio 2) |
 | D44 | Important sounds (level-up, hatch/grow, quiz/cleanup complete) duck the music to 30% for 0.5 s, back in 0.3 s; the same sound within 80 ms plays once; a failing file is logged and skipped, never crashes (`AudioTiming` holds the numbers) | New (Audio 2) |
+| D45 | Cosmetics = data: `assets/content/cosmetics_it.json` (id, name, slot `head`/`face`/`neck`, rarity `common`/`rare`/`epic`, icon key, ARGB colour), checked by `test/content/cosmetic_content_test.dart`. Items are drawn with `CustomPaint` (`CosmeticArt`), no image files | New (M8) |
+| D46 | Shop sells commons (60 coins) and rares (150) and reward tickets (100 coins); epics only from the roll. All prices/odds/refunds in `EconomyConfig` | New (M8) |
+| D47 | Reward roll: rarity first with the odds shown on screen (60/30/10 %), then one item of that rarity, equally likely (`pickRolledCosmetic`, `randomProvider`). A rarity with no items falls back to a more common one | New (M8) |
+| D48 | Duplicates can come out of the roll and are paid back in coins (20/40/80 by rarity); the rule is written on the roll card before rolling | New (M8) |
+| D49 | Every level gained pays `ticketsPerLevelUp` (1) ticket inside `claimReward`, in the same write, and is part of `ClaimResult.reward` (result screens say so); a re-claimed id pays nothing | New (M8) |
+| D50 | Spending (`buyTicket`, `buyItem`, `rollCosmetic`) and `equip`/`unequip` go through `GameController`; the screen passes the catalog/item in, the controller never loads content. Not enough coins / not for sale / already owned → nothing saved | New (M8) |
+| D51 | One item per slot (`Inventory.equippedBySlot`); a head item replaces the leaves. Ids not in the content any more are ignored when drawing (`petOutfitProvider`). The egg can own items but shows them only after hatching | New (M8) |
+| D52 | Wardrobe = full-screen route `/wardrobe`, opened from a hanger button in the Pet room (no extra row above the care buttons) and from a Home card; bottom tabs unchanged (D3) | New (M8) |
 
 ## Implemented (M1)
 - App entry point, `ProviderScope`, router in a provider (fresh router per test)
@@ -187,6 +200,24 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
   chirp). 1.1 MB in total; every file, source and processing step in `assets/audio/ATTRIBUTION.md`
 - Every sound id now has a file except `music.main` (no CC0 music loop yet → no background music)
 
+## Implemented (M8 — Cosmetics)
+- Content: 12 items (head 4, face 3, neck 5; 6 common, 4 rare, 2 epic), Italian names, each drawn in code
+  (flower, straw hat, party hat, crown of twigs, round glasses, sunglasses, hero mask, scarf, bow tie, bell,
+  eco-hero medal, seed necklace)
+- `CosmeticItem`/`CosmeticCatalog` (`lib/domain/models/cosmetic_item.dart`), `cosmetic_rules.dart` (`shopPrice`,
+  `rollOdds`, `duplicateRefund`, `pickRolledCosmetic`), `Inventory.owns/add/equip/unequip`,
+  `cosmeticCatalogProvider` (`lib/data/content/cosmetic_content.dart`)
+- `GameController.buyTicket`, `buyItem`, `rollCosmetic`, `equip`, `unequip` (+ `PurchaseResult`, `RollOutcome`);
+  level-up tickets in `_applyReward`
+- Wardrobe screen (`lib/features/wardrobe/`): balances, pet preview, roll card with odds chips (one screen-reader
+  item: "Probabilità: comune 60 percento, …"), duplicate rule, "Usa 1 biglietto" (disabled + reason with 0 tickets),
+  "Compra un biglietto (100 monete)"; reveal sheet ("Nuovo oggetto!" / "Ce l'hai già" + refund, "Indossa ora");
+  shop tiles with price and "Ti servono altre N monete"; "I miei oggetti" by slot with Indossa/Togli (toggle
+  semantics); snackbars for bought / worn / taken off
+- `PetArt` draws the outfit (`PetView` reads `petOutfitProvider`), so Home, Pet tab and wardrobe all show it
+- Quiz and cleanup result screens add "Premio: 1 biglietto per la ruota dell'Armadio!" after a level-up
+- Sounds reuse existing ids: coins on buy/refund, `reward.xp` on a new item, soft "unavailable", tap on equip
+
 ### Waste content still needing a human check
 - waste_016 toothbrush, waste_017 pen, waste_023 toy cite a single municipal dictionary (Gaeta). Common practice,
   but a national or big-city source would be better. The same dictionary disagrees with Comieco on receipts and
@@ -226,7 +257,9 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
 | Kenney sounds on the emulator: tab tap → SoundPool effect player `event:started`; Pet tab → sea loop player created; no audio errors in the log | ✅ Checked (2026-10-22) — not listened to by ear; the team should listen to every sound |
 | Audio 3 on the emulator: Home → 0 active audio tracks; Pet tab → 1 (sea loop); Home → 0; Pet → 1; app in background → 0; back → 1; no audio errors in the log for the silent ids | ✅ Checked (2026-10-22) |
 | M7 drag fix on the emulator: the old version ignored a plain drag (only a ~1 s hold worked); now a quick swipe from an item to a bin sorts it, tap-then-bin still works, swiping on the feedback card scrolls | ✅ Checked by script (2026-10-22) |
-| `flutter build apk --debug` | ✅ Builds |
+| `flutter test` after M8 — 255 tests (+ shop prices, odds sum, 10 000 seeded rolls within ±2 % of the shown odds, rarity fallback, inventory JSON + old save without inventory, level-up tickets (one/two levels, none on repeat), buy ticket/item incl. not enough coins / epic / already owned, roll new vs duplicate refund, no ticket, equip only owned + one per slot + kept after restart, real cosmetics file, wardrobe flow from Pet room and Home, roll → wear → pet shows it, shop buy/wear/take off, disabled buttons, guidelines, 200% text on a small phone) · `flutter analyze` clean | ✅ All pass (2026-10-23, on the M8 branch) |
+| M8 on the emulator (Pixel_7, existing save from M7 testing: level 2, 26 coins, 1 ticket): new build loaded the old save; hanger button → wardrobe; roll → "Fiore di campo" (common) → "Indossa ora" → flower replaces the leaf, snackbar "Ecò indossa: Fiore di campo"; force-stop + relaunch → Home pet still wears it, save shows `head_flower` owned + equipped, 0 tickets. The tester's save was backed up first and restored afterwards | ✅ Checked by script + screenshots (2026-10-23). Shop purchase on the device not tried (26 coins); covered by widget tests |
+| `flutter build apk --debug` | ✅ Builds (again after M8, 2026-10-23) |
 | Android emulator (Pixel 7, Android 36): app starts, Home renders, tab switch, system Back from a tab returns to Home | ✅ Checked manually with screenshots (2026-10-22) |
 | Android accessibility tree (uiautomator dump): every stat, balance, image, card and tab has an Italian label | ✅ Checked (2026-10-22) |
 | Listening to TalkBack live | ⏳ Not done yet (optional, by a team member) |
@@ -262,4 +295,7 @@ equip on the pet. That completes the MVP journey. Read-aloud (flutter_tts) is a 
 - Audio: Milestone 4 (settings screen: master mute, 3 sliders, reset) · listen to every sound on a real phone and
   swap any that feel wrong (alternatives in the same Kenney packs) · background music (`music.main`) is wired in
   the service but not started anywhere until a CC0 music loop is found · iOS audio untested (no Mac)
-- Next: M8 cosmetics · M9 recommendations · quiz read-aloud
+- Cosmetics polish ideas: a small animation for the roll reveal, more items per slot, room decorations
+  (left out of M8 on purpose), a "new" badge in "I miei oggetti", a dedicated reveal sound
+- Balancing: shop prices, odds and refunds are first guesses (D21); tune in play-tests
+- Next: M10 comeback score (renumber its decisions from D53) · M9 recommendations · quiz read-aloud
