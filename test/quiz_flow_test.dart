@@ -2,10 +2,12 @@ import 'package:ecoquest/core/widgets/eco_button.dart';
 import 'package:ecoquest/data/save/in_memory_save_repository.dart';
 import 'package:ecoquest/domain/models/eco_topic.dart';
 import 'package:ecoquest/domain/models/player_profile.dart';
+import 'package:ecoquest/domain/models/quiz_question.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'helpers/pump_app.dart';
+import 'helpers/quiz_fixtures.dart';
 
 /// The right answer of every fixture question starts with "Giusta".
 final _rightAnswer = find.textContaining(RegExp(r'^Giusta'));
@@ -46,6 +48,63 @@ void main() {
     final oceans = tester.getTopLeft(find.text('Oceani e vita marina'));
     expect(recycling.dy, lessThan(oceans.dy));
     expect(find.text('Per te'), findsWidgets);
+  });
+
+  testWidgets('one tap on "Gioca subito" opens the personal quiz',
+      (tester) async {
+    await pumpEcoQuestApp(tester); // interested in recycling
+    await tapTab(tester, 'Impara');
+
+    await tester.tap(find.text('Gioca subito'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Quiz misto'), findsOneWidget);
+    expect(find.text('Domanda 1 di 5'), findsOneWidget);
+    expect(find.textContaining('Domanda recycling'), findsOneWidget);
+  });
+
+  testWidgets('every topic tile is one button with a clear label',
+      (tester) async {
+    final semantics = tester.ensureSemantics();
+    await pumpEcoQuestApp(tester);
+    await tapTab(tester, 'Impara');
+
+    expect(
+        find.bySemanticsLabel(
+            RegExp(r'^Riciclo e rifiuti\s+Per te\s+5 domande\s+0 su 5 imparate$')),
+        findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp(r'^Gioca subito\b')), findsOneWidget);
+    final tile = tester.getSemantics(find.text('Riciclo e rifiuti'));
+    expect(tile.flagsCollection.isButton, isTrue);
+    semantics.dispose();
+  });
+
+  testWidgets('Learn tab meets the accessibility guidelines', (tester) async {
+    final semantics = tester.ensureSemantics();
+    await pumpEcoQuestApp(tester);
+    await tapTab(tester, 'Impara');
+    await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+    await expectLater(tester, meetsGuideline(iOSTapTargetGuideline));
+    await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+    await expectLater(tester, meetsGuideline(textContrastGuideline));
+    semantics.dispose();
+  });
+
+  testWidgets('small phone with 200% text: Learn tab fits, one column',
+      (tester) async {
+    useSmallPhoneWithLargeText(tester);
+    await pumpEcoQuestApp(tester);
+    await tapTab(tester, 'Impara');
+    await scrollTo(tester, find.text('Gioca subito'));
+    expect(find.text('Gioca subito'), findsOneWidget);
+
+    await scrollTo(tester, find.text('Clima'));
+    // One column: the second topic is below the first, not beside it.
+    await scrollTo(tester, find.text('Riciclo e rifiuti'));
+    expect(tester.getTopLeft(find.text('Clima')).dy,
+        greaterThan(tester.getTopLeft(find.text('Riciclo e rifiuti')).dy));
+    await scrollTo(tester, find.text('Innovazione green'));
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('a whole topic quiz: feedback, explanation, result, XP saved',
@@ -162,10 +221,21 @@ void main() {
     expect(find.textContaining('Domanda climate'), findsOneWidget);
   });
 
-  testWidgets('"Gioca ancora" starts a fresh quiz', (tester) async {
-    await pumpEcoQuestApp(tester);
+  testWidgets('"Gioca ancora" starts a fresh quiz with new questions',
+      (tester) async {
+    // 10 climate questions: the second quiz must use the other 5.
+    final bank = QuizBank([
+      for (var n = 1; n <= 10; n++) testQuestion(EcoTopic.climate, n),
+    ]);
+    await pumpEcoQuestApp(tester, quizBank: bank);
     await _openTopicQuiz(tester, 'Clima');
+
+    final question = find.textContaining(RegExp(r'^Domanda climate'));
+    String current() => tester.widget<Text>(question).data!;
+
+    final first = <String>{};
     for (var i = 1; i <= 5; i++) {
+      first.add(current());
       await _answer(tester, right: true);
       await _tapButton(tester, i == 5 ? 'Vedi il risultato' : 'Avanti');
     }
@@ -175,6 +245,13 @@ void main() {
 
     expect(find.text('Domanda 1 di 5'), findsOneWidget);
     expect(find.text('Corretto!'), findsNothing);
+    final second = <String>{};
+    for (var i = 1; i <= 5; i++) {
+      second.add(current());
+      await _answer(tester, right: true);
+      await _tapButton(tester, i == 5 ? 'Vedi il risultato' : 'Avanti');
+    }
+    expect(first.intersection(second), isEmpty);
   });
 
   testWidgets('quiz screen meets the accessibility guidelines',

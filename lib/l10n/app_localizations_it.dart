@@ -180,6 +180,36 @@ class AppLocalizationsIt extends AppLocalizations {
       'Non riesco a caricare le domande. Riavvia l\'app; se il problema continua, avvisa il team.';
 
   @override
+  String get learnPlayNowTitle => 'Gioca subito';
+
+  @override
+  String get learnPlayNowBody =>
+      '5 domande a sorpresa, prima i tuoi argomenti preferiti. Più risposte giuste di fila, più XP!';
+
+  @override
+  String get learnPlayNowAction => 'Tocca per iniziare';
+
+  @override
+  String learnLearnedTotal(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count domande imparate',
+      one: '1 domanda imparata',
+      zero: 'Nessuna domanda imparata',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String learnTopicLearned(int learned, int total) {
+    return '$learned su $total imparate';
+  }
+
+  @override
+  String get learnTopicsHint => 'Oppure scegli un argomento';
+
+  @override
   String get quizMixedTitle => 'Quiz misto';
 
   @override

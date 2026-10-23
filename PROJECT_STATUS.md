@@ -64,7 +64,7 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 | D25 | Nickname cleaned in one place (`normalizeNickname`, max 20 visible characters), applied inside `GameController` | New (M3) |
 | D26 | Topic/age labels and icons live in the UI layer (`profile_labels.dart`); the domain only knows stable ids | Accepted |
 | D27 | Quiz content = data: `assets/content/quiz_questions_it.json`, every question with source name, URL, `verifiedOn` and a short `sourceExcerpt` for reviewers; checked by `test/content/quiz_content_test.dart` | New (M5) |
-| D28 | Quiz = 5 questions, easy → hard; topic quiz = only that topic; personal quiz prefers interests, avoids the last 20 questions shown | New (M5) |
+| D28 | Quiz = 5 questions, easy → hard; topic quiz = only that topic; personal quiz prefers interests, avoids the last 30 questions shown; when it must repeat, it takes the ones seen longest ago (rotation), and shuffles within each difficulty | New (M5), rotation added |
 | D29 | Quiz XP: 10 per first-time correct answer, 2 for a question already learned, +5 for each correct answer in a row after the first; quizzes give XP only (coins come from recycling/games) | New (M5) |
 | D30 | `QuizSession` (plain Dart) runs a quiz; `completeQuiz` saves XP + learning stats in one write, once per session id | New (M5) |
 | D31 | Randomness through `randomProvider`, so tests use a fixed seed | Accepted |

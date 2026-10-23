@@ -74,6 +74,21 @@
     "placeholders": { "count": { "type": "int" } }
   },
   "learnContentError": "Non riesco a caricare le domande. Riavvia l'app; se il problema continua, avvisa il team.",
+  "learnPlayNowTitle": "Gioca subito",
+  "learnPlayNowBody": "5 domande a sorpresa, prima i tuoi argomenti preferiti. Più risposte giuste di fila, più XP!",
+  "learnPlayNowAction": "Tocca per iniziare",
+  "learnLearnedTotal": "{count, plural, =0{Nessuna domanda imparata} =1{1 domanda imparata} other{{count} domande imparate}}",
+  "@learnLearnedTotal": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "learnTopicLearned": "{learned} su {total} imparate",
+  "@learnTopicLearned": {
+    "placeholders": {
+      "learned": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "learnTopicsHint": "Oppure scegli un argomento",
 
   "quizMixedTitle": "Quiz misto",
   "quizQuestionOf": "Domanda {current} di {total}",
