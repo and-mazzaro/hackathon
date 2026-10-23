@@ -153,6 +153,12 @@ class _WardrobeContent extends ConsumerWidget {
       for (final item in catalog.items)
         if (inventory.owns(item.id)) item,
     ];
+    // "epici, leggendari e mitici": the rarities the shop does not sell.
+    final rollOnly = [
+      for (final rarity in CosmeticRarity.values)
+        if (shopPrice(rarity, economy) == null && rollOdds(rarity, economy) > 0)
+          rarity.pluralLabel(l10n),
+    ];
 
     return SafeArea(
       top: false,
@@ -196,10 +202,12 @@ class _WardrobeContent extends ConsumerWidget {
             ),
             const SizedBox(height: EcoSpacing.l),
             _SectionTitle(l10n.shopTitle),
-            Text(l10n.shopEpicNote,
-                style:
-                    textTheme.bodyMedium?.copyWith(color: EcoColors.inkMuted)),
-            const SizedBox(height: EcoSpacing.s),
+            if (rollOnly.isNotEmpty) ...[
+              Text(l10n.shopRollOnlyNote(_listInWords(rollOnly, l10n)),
+                  style: textTheme.bodyMedium
+                      ?.copyWith(color: EcoColors.inkMuted)),
+              const SizedBox(height: EcoSpacing.s),
+            ],
             if (forSale.isEmpty) Text(l10n.shopAllOwned),
             for (final item in forSale) ...[
               _ShopTile(
@@ -238,8 +246,14 @@ class _WardrobeContent extends ConsumerWidget {
 }
 
 /// Shows what came out of the roll. Returns true for "wear it now".
+///
+/// Legendary and mythic items get their own heading ("Leggendario!") and a
+/// bigger picture with a ring and sparkles: special, but calm (nothing
+/// moves or flashes). The heading is one live region, so screen readers
+/// announce it as soon as the sheet opens.
 Future<bool?> _showReveal(BuildContext context, RollOutcome outcome) {
   final item = outcome.item;
+  final special = item.rarity.isSpecial;
   return showModalBottomSheet<bool>(
     context: context,
     showDragHandle: true,
@@ -255,16 +269,32 @@ Future<bool?> _showReveal(BuildContext context, RollOutcome outcome) {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Semantics(
+                container: true,
                 header: true,
                 liveRegion: true,
-                child: Text(
-                  outcome.isNew ? l10n.rollRevealNew : l10n.rollRevealDuplicate,
-                  style: textTheme.headlineSmall,
-                  textAlign: TextAlign.center,
+                child: Column(
+                  children: [
+                    if (special)
+                      Text(
+                        l10n.rollRevealSpecial(item.rarity.label(l10n)),
+                        style: textTheme.headlineMedium
+                            ?.copyWith(fontWeight: FontWeight.w800),
+                        textAlign: TextAlign.center,
+                      ),
+                    Text(
+                      outcome.isNew
+                          ? l10n.rollRevealNew
+                          : l10n.rollRevealDuplicate,
+                      style: special
+                          ? textTheme.titleLarge
+                          : textTheme.headlineSmall,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: EcoSpacing.m),
-              Center(child: CosmeticThumbnail(item: item, size: 120)),
+              Center(child: _RevealPicture(item: item)),
               const SizedBox(height: EcoSpacing.m),
               Text(item.name,
                   style: textTheme.titleLarge, textAlign: TextAlign.center),
@@ -297,6 +327,84 @@ Future<bool?> _showReveal(BuildContext context, RollOutcome outcome) {
       );
     },
   );
+}
+
+/// The rolled item on a disc in its rarity tint. Legendary and mythic
+/// items get a bigger disc, a ring and a few still sparkles. Decorative
+/// only: the name and rarity are written below it.
+class _RevealPicture extends StatelessWidget {
+  const _RevealPicture({required this.item});
+
+  final CosmeticItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    final special = item.rarity.isSpecial;
+    final disc = special ? 172.0 : 140.0;
+    // Room around the disc for the sparkles, so they never cover the ring.
+    final side = special ? disc + 44 : disc;
+    final tint = item.rarity.tint;
+    // A deeper shade of the tint (gold for legendary, pink for mythic).
+    final accent = HSLColor.fromColor(tint).withLightness(0.5).toColor();
+    return ExcludeSemantics(
+      child: SizedBox.square(
+        dimension: side,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              width: disc,
+              height: disc,
+              decoration: BoxDecoration(
+                color: tint,
+                shape: BoxShape.circle,
+                border: special ? Border.all(color: accent, width: 4) : null,
+              ),
+            ),
+            CosmeticArt(item: item, size: Size.square(disc * 0.62)),
+            if (special)
+              for (final (x, y, size) in [
+                (-1.0, -0.86, 30.0),
+                (1.0, -0.52, 22.0),
+                (0.84, 1.0, 26.0),
+              ])
+                Align(
+                  alignment: Alignment(x, y),
+                  child: Icon(Icons.auto_awesome_rounded,
+                      size: size, color: accent),
+                ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Rarity words for sentences on this screen. UI layer only, like the
+/// labels in `cosmetic_labels.dart`.
+extension _RarityWords on CosmeticRarity {
+  /// Lowercase plural adjective for "oggetti": "Gli oggetti epici ...".
+  String pluralLabel(AppLocalizations l10n) => switch (this) {
+        CosmeticRarity.common => l10n.rarityCommonPlural,
+        CosmeticRarity.uncommon => l10n.rarityUncommonPlural,
+        CosmeticRarity.rare => l10n.rarityRarePlural,
+        CosmeticRarity.epic => l10n.rarityEpicPlural,
+        CosmeticRarity.legendary => l10n.rarityLegendaryPlural,
+        CosmeticRarity.mythic => l10n.rarityMythicPlural,
+      };
+
+  /// The name inside a sentence ("non comune 25 percento").
+  String spokenLabel(AppLocalizations l10n) => label(l10n).toLowerCase();
+
+  /// Legendary and mythic: the reveal makes a little more of them.
+  bool get isSpecial => index >= CosmeticRarity.legendary.index;
+}
+
+/// "a, b e c": a list in plain words, with "e" before the last part.
+String _listInWords(List<String> parts, AppLocalizations l10n) {
+  if (parts.length < 2) return parts.join();
+  return l10n.listLastItem(
+      parts.sublist(0, parts.length - 1).join(', '), parts.last);
 }
 
 class _SectionTitle extends StatelessWidget {
@@ -336,8 +444,19 @@ class _RollCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final textTheme = Theme.of(context).textTheme;
+    const rarities = CosmeticRarity.values;
     int odds(CosmeticRarity r) => rollOdds(r, economy);
-    int refund(CosmeticRarity r) => duplicateRefund(r, economy);
+    // "comune 40 percento, non comune 25 percento, ..."
+    final spokenOdds = [
+      for (final rarity in rarities)
+        l10n.rollOddsSpokenItem(rarity.spokenLabel(l10n), odds(rarity)),
+    ].join(', ');
+    // "comune 15, non comune 25, ..."
+    final refunds = [
+      for (final rarity in rarities)
+        l10n.rollRefundItem(
+            rarity.spokenLabel(l10n), duplicateRefund(rarity, economy)),
+    ].join(', ');
 
     return EcoCard(
       color: EcoColors.coin.withValues(alpha: 0.25),
@@ -351,20 +470,16 @@ class _RollCard extends StatelessWidget {
           const SizedBox(height: EcoSpacing.xs),
           Text(l10n.rollBody, style: textTheme.bodyMedium),
           const SizedBox(height: EcoSpacing.s),
-          // One screen-reader item with all three odds.
+          // One screen-reader item with all the odds (the chips say "%").
           Semantics(
             container: true,
-            label: l10n.rollOddsSemantics(
-              odds(CosmeticRarity.common),
-              odds(CosmeticRarity.rare),
-              odds(CosmeticRarity.epic),
-            ),
+            label: l10n.rollOddsSemantics(spokenOdds),
             child: ExcludeSemantics(
               child: Wrap(
                 spacing: EcoSpacing.s,
                 runSpacing: EcoSpacing.s,
                 children: [
-                  for (final rarity in CosmeticRarity.values)
+                  for (final rarity in rarities)
                     _RarityChip(
                       rarity: rarity,
                       text: l10n.rollOddsLine(
@@ -375,14 +490,7 @@ class _RollCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: EcoSpacing.s),
-          Text(
-            l10n.rollDuplicateRule(
-              refund(CosmeticRarity.common),
-              refund(CosmeticRarity.rare),
-              refund(CosmeticRarity.epic),
-            ),
-            style: textTheme.bodyMedium,
-          ),
+          Text(l10n.rollDuplicateRule(refunds), style: textTheme.bodyMedium),
           const SizedBox(height: EcoSpacing.m),
           EcoButton(
             label: l10n.rollAction,

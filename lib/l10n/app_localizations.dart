@@ -958,6 +958,48 @@ abstract class AppLocalizations {
   /// **'Mitico'**
   String get rarityMythic;
 
+  /// No description provided for @rarityCommonPlural.
+  ///
+  /// In it, this message translates to:
+  /// **'comuni'**
+  String get rarityCommonPlural;
+
+  /// No description provided for @rarityUncommonPlural.
+  ///
+  /// In it, this message translates to:
+  /// **'non comuni'**
+  String get rarityUncommonPlural;
+
+  /// No description provided for @rarityRarePlural.
+  ///
+  /// In it, this message translates to:
+  /// **'rari'**
+  String get rarityRarePlural;
+
+  /// No description provided for @rarityEpicPlural.
+  ///
+  /// In it, this message translates to:
+  /// **'epici'**
+  String get rarityEpicPlural;
+
+  /// No description provided for @rarityLegendaryPlural.
+  ///
+  /// In it, this message translates to:
+  /// **'leggendari'**
+  String get rarityLegendaryPlural;
+
+  /// No description provided for @rarityMythicPlural.
+  ///
+  /// In it, this message translates to:
+  /// **'mitici'**
+  String get rarityMythicPlural;
+
+  /// No description provided for @listLastItem.
+  ///
+  /// In it, this message translates to:
+  /// **'{items} e {last}'**
+  String listLastItem(String items, String last);
+
   /// No description provided for @rollTitle.
   ///
   /// In it, this message translates to:
@@ -979,14 +1021,26 @@ abstract class AppLocalizations {
   /// No description provided for @rollOddsSemantics.
   ///
   /// In it, this message translates to:
-  /// **'Probabilità: comune {common} percento, raro {rare} percento, epico {epic} percento'**
-  String rollOddsSemantics(int common, int rare, int epic);
+  /// **'Probabilità: {odds}'**
+  String rollOddsSemantics(String odds);
+
+  /// No description provided for @rollOddsSpokenItem.
+  ///
+  /// In it, this message translates to:
+  /// **'{rarity} {percent} percento'**
+  String rollOddsSpokenItem(String rarity, int percent);
 
   /// No description provided for @rollDuplicateRule.
   ///
   /// In it, this message translates to:
-  /// **'Se esce un oggetto che hai già, ricevi monete al suo posto: {common} (comune), {rare} (raro), {epic} (epico).'**
-  String rollDuplicateRule(int common, int rare, int epic);
+  /// **'Se esce un oggetto che hai già, ricevi monete al suo posto: {refunds}.'**
+  String rollDuplicateRule(String refunds);
+
+  /// No description provided for @rollRefundItem.
+  ///
+  /// In it, this message translates to:
+  /// **'{rarity} {coins}'**
+  String rollRefundItem(String rarity, int coins);
 
   /// No description provided for @rollAction.
   ///
@@ -1024,6 +1078,12 @@ abstract class AppLocalizations {
   /// **'Ce l\'hai già'**
   String get rollRevealDuplicate;
 
+  /// No description provided for @rollRevealSpecial.
+  ///
+  /// In it, this message translates to:
+  /// **'{rarity}!'**
+  String rollRevealSpecial(String rarity);
+
   /// No description provided for @rollRefund.
   ///
   /// In it, this message translates to:
@@ -1048,11 +1108,11 @@ abstract class AppLocalizations {
   /// **'Negozio'**
   String get shopTitle;
 
-  /// No description provided for @shopEpicNote.
+  /// No description provided for @shopRollOnlyNote.
   ///
   /// In it, this message translates to:
-  /// **'Gli oggetti epici si trovano solo nella ruota dei premi.'**
-  String get shopEpicNote;
+  /// **'Gli oggetti {rarities} si trovano solo nella ruota dei premi.'**
+  String shopRollOnlyNote(String rarities);
 
   /// No description provided for @shopAllOwned.
   ///

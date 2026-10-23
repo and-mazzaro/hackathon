@@ -577,6 +577,29 @@ class AppLocalizationsIt extends AppLocalizations {
   String get rarityMythic => 'Mitico';
 
   @override
+  String get rarityCommonPlural => 'comuni';
+
+  @override
+  String get rarityUncommonPlural => 'non comuni';
+
+  @override
+  String get rarityRarePlural => 'rari';
+
+  @override
+  String get rarityEpicPlural => 'epici';
+
+  @override
+  String get rarityLegendaryPlural => 'leggendari';
+
+  @override
+  String get rarityMythicPlural => 'mitici';
+
+  @override
+  String listLastItem(String items, String last) {
+    return '$items e $last';
+  }
+
+  @override
   String get rollTitle => 'Ruota dei premi';
 
   @override
@@ -589,13 +612,23 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String rollOddsSemantics(int common, int rare, int epic) {
-    return 'Probabilità: comune $common percento, raro $rare percento, epico $epic percento';
+  String rollOddsSemantics(String odds) {
+    return 'Probabilità: $odds';
   }
 
   @override
-  String rollDuplicateRule(int common, int rare, int epic) {
-    return 'Se esce un oggetto che hai già, ricevi monete al suo posto: $common (comune), $rare (raro), $epic (epico).';
+  String rollOddsSpokenItem(String rarity, int percent) {
+    return '$rarity $percent percento';
+  }
+
+  @override
+  String rollDuplicateRule(String refunds) {
+    return 'Se esce un oggetto che hai già, ricevi monete al suo posto: $refunds.';
+  }
+
+  @override
+  String rollRefundItem(String rarity, int coins) {
+    return '$rarity $coins';
   }
 
   @override
@@ -620,6 +653,11 @@ class AppLocalizationsIt extends AppLocalizations {
   String get rollRevealDuplicate => 'Ce l\'hai già';
 
   @override
+  String rollRevealSpecial(String rarity) {
+    return '$rarity!';
+  }
+
+  @override
   String rollRefund(int coins) {
     return 'Al suo posto ricevi $coins monete.';
   }
@@ -634,8 +672,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get shopTitle => 'Negozio';
 
   @override
-  String get shopEpicNote =>
-      'Gli oggetti epici si trovano solo nella ruota dei premi.';
+  String shopRollOnlyNote(String rarities) {
+    return 'Gli oggetti $rarities si trovano solo nella ruota dei premi.';
+  }
 
   @override
   String get shopAllOwned => 'Hai già tutti gli oggetti del negozio!';

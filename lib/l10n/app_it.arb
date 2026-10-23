@@ -276,27 +276,37 @@
   "rarityEpic": "Epico",
   "rarityLegendary": "Leggendario",
   "rarityMythic": "Mitico",
+  "rarityCommonPlural": "comuni",
+  "rarityUncommonPlural": "non comuni",
+  "rarityRarePlural": "rari",
+  "rarityEpicPlural": "epici",
+  "rarityLegendaryPlural": "leggendari",
+  "rarityMythicPlural": "mitici",
+  "listLastItem": "{items} e {last}",
+  "@listLastItem": {
+    "placeholders": { "items": { "type": "String" }, "last": { "type": "String" } }
+  },
   "rollTitle": "Ruota dei premi",
   "rollBody": "Usa un biglietto per ricevere un oggetto a sorpresa. Queste sono le probabilità:",
   "rollOddsLine": "{rarity}: {percent}%",
   "@rollOddsLine": {
     "placeholders": { "rarity": { "type": "String" }, "percent": { "type": "int" } }
   },
-  "rollOddsSemantics": "Probabilità: comune {common} percento, raro {rare} percento, epico {epic} percento",
+  "rollOddsSemantics": "Probabilità: {odds}",
   "@rollOddsSemantics": {
-    "placeholders": {
-      "common": { "type": "int" },
-      "rare": { "type": "int" },
-      "epic": { "type": "int" }
-    }
+    "placeholders": { "odds": { "type": "String" } }
   },
-  "rollDuplicateRule": "Se esce un oggetto che hai già, ricevi monete al suo posto: {common} (comune), {rare} (raro), {epic} (epico).",
+  "rollOddsSpokenItem": "{rarity} {percent} percento",
+  "@rollOddsSpokenItem": {
+    "placeholders": { "rarity": { "type": "String" }, "percent": { "type": "int" } }
+  },
+  "rollDuplicateRule": "Se esce un oggetto che hai già, ricevi monete al suo posto: {refunds}.",
   "@rollDuplicateRule": {
-    "placeholders": {
-      "common": { "type": "int" },
-      "rare": { "type": "int" },
-      "epic": { "type": "int" }
-    }
+    "placeholders": { "refunds": { "type": "String" } }
+  },
+  "rollRefundItem": "{rarity} {coins}",
+  "@rollRefundItem": {
+    "placeholders": { "rarity": { "type": "String" }, "coins": { "type": "int" } }
   },
   "rollAction": "Usa 1 biglietto",
   "rollNoTickets": "Non hai biglietti. Li guadagni salendo di livello, oppure puoi comprarne uno.",
@@ -305,12 +315,15 @@
   "ticketBought": "Hai comprato un biglietto premio!",
   "rollRevealNew": "Nuovo oggetto!",
   "rollRevealDuplicate": "Ce l'hai già",
+  "rollRevealSpecial": "{rarity}!",
+  "@rollRevealSpecial": { "placeholders": { "rarity": { "type": "String" } } },
   "rollRefund": "Al suo posto ricevi {coins} monete.",
   "@rollRefund": { "placeholders": { "coins": { "type": "int" } } },
   "rollWearNow": "Indossa ora",
   "rollClose": "Chiudi",
   "shopTitle": "Negozio",
-  "shopEpicNote": "Gli oggetti epici si trovano solo nella ruota dei premi.",
+  "shopRollOnlyNote": "Gli oggetti {rarities} si trovano solo nella ruota dei premi.",
+  "@shopRollOnlyNote": { "placeholders": { "rarities": { "type": "String" } } },
   "shopAllOwned": "Hai già tutti gli oggetti del negozio!",
   "shopBuyAction": "Compra ({price} monete)",
   "@shopBuyAction": { "placeholders": { "price": { "type": "int" } } },
