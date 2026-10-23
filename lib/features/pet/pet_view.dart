@@ -10,8 +10,10 @@ import '../../core/widgets/egg_art.dart';
 import '../../domain/game_controller.dart';
 import '../../domain/models/look_mode.dart';
 import '../../domain/models/pet_state.dart';
+import '../../domain/models/waste_item.dart';
 import '../../domain/rules/pet_rules.dart';
 import '../../domain/rules/time_of_day_rules.dart';
+import '../cleanup/waste_labels.dart';
 import '../wardrobe/cosmetic_labels.dart';
 import 'otter_idle.dart';
 import 'pet_art.dart';
@@ -36,12 +38,18 @@ class PetView extends ConsumerStatefulWidget {
     required this.plants,
     required this.semanticLabel,
     this.reaction,
+    this.trash = const [],
+    this.onTrashTap,
   });
 
   final PetState pet;
   final int plants;
   final String semanticLabel;
   final PetReaction? reaction;
+
+  /// Waste lying on the floor (0-3 items). Tapping one calls [onTrashTap].
+  final List<WasteItem> trash;
+  final VoidCallback? onTrashTap;
 
   @override
   ConsumerState<PetView> createState() => _PetViewState();
@@ -175,6 +183,7 @@ class _PetViewState extends ConsumerState<PetView>
                     ),
                   ),
                 ),
+                ..._trash(widget.trash, widget.onTrashTap),
                 if (widget.reaction != null)
                   Positioned.fill(
                     child: AnimatedBuilder(
@@ -224,6 +233,57 @@ class _PetViewState extends ConsumerState<PetView>
         TimeOfDayLook.afternoon => const Color(0xFFD9BE96),
         TimeOfDayLook.night => const Color(0xFF8C7C62),
       };
+
+  List<Widget> _trash(List<WasteItem> trash, VoidCallback? onTap) {
+    // On the floor, in front of the pet: left, right, then middle-left.
+    const spots = [-0.62, 0.62, -0.2];
+    return [
+      for (var i = 0; i < trash.length && i < spots.length; i++)
+        Align(
+          alignment: Alignment(spots[i], 0.96),
+          child: GestureDetector(
+            key: ValueKey('room-trash-${trash[i].id}'),
+            onTap: onTap,
+            behavior: HitTestBehavior.opaque,
+            child: SizedBox(
+              width: 76,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 36,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      color: trash[i].category.tint,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: EcoColors.inkMuted),
+                    ),
+                    child: Icon(wasteIcon(trash[i].icon),
+                        size: 22, color: EcoColors.ink),
+                  ),
+                  const SizedBox(height: 2),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0xE6FFFFFF),
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Text(
+                      trash[i].name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textScaler: TextScaler.noScaling,
+                      style: const TextStyle(
+                          fontSize: 10, color: EcoColors.ink),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+    ];
+  }
 
   List<Widget> _plants(int count, TimeOfDayLook look) {
     // At night the leaf green would sink into the dark sky: use a lighter

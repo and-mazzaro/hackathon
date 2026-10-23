@@ -81,7 +81,10 @@ void main() {
     // hatching progress (the need bars appear after hatching).
     expect(find.bySemanticsLabel('0 monete'), findsOneWidget);
     expect(find.bySemanticsLabel('1 biglietto premio'), findsOneWidget);
-    expect(find.bySemanticsLabel('Uovo misterioso, Uovo, Di buon umore'),
+    // The room also lists its trash (an old save starts with 2 items).
+    expect(
+        find.bySemanticsLabel(RegExp(r'^Uovo misterioso, Uovo, Di buon umore'
+            r'\. Nella stanza ci sono 2 rifiuti: ')),
         findsOneWidget);
     expect(
         find.bySemanticsLabel(

@@ -1129,4 +1129,18 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get lookNight => 'Notte';
+
+  @override
+  String get roomTrashClean => 'La stanza è pulita! Torna più tardi';
+
+  @override
+  String roomTrashSemantics(int count, String names) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Nella stanza ci sono $count rifiuti: $names.',
+      one: 'Nella stanza c\'è 1 rifiuto: $names.',
+    );
+    return '$_temp0';
+  }
 }

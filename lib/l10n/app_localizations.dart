@@ -1863,6 +1863,18 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Notte'**
   String get lookNight;
+
+  /// No description provided for @roomTrashClean.
+  ///
+  /// In it, this message translates to:
+  /// **'La stanza è pulita! Torna più tardi'**
+  String get roomTrashClean;
+
+  /// No description provided for @roomTrashSemantics.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{Nella stanza c\'è 1 rifiuto: {names}.} other{Nella stanza ci sono {count} rifiuti: {names}.}}'**
+  String roomTrashSemantics(int count, String names);
 }
 
 class _AppLocalizationsDelegate

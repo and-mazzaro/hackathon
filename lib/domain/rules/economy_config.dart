@@ -37,6 +37,12 @@ class EconomyConfig {
     this.ticketsPerLevelUp = 1,
     this.comebackLowScore = 45,
     this.comebackBonusCoins = 10,
+    this.roomTrashMax = 3,
+    this.roomTrashWithoutCleanup = 2,
+    this.roomTrashHoursLowScore = 2,
+    this.roomTrashHoursMidScore = 4,
+    this.roomTrashHoursHighScore = 6,
+    this.roomTrashHighScore = 75,
     this.shopPrices = const {
       CosmeticRarity.common: 60,
       CosmeticRarity.uncommon: 100,
@@ -143,6 +149,20 @@ class EconomyConfig {
 
   /// Coins paid once per day (`comeback:YYYY-MM-DD`) on a low-score day.
   final int comebackBonusCoins;
+
+  // Room trash: Room Cleanup opens only when there is trash in the room.
+  /// Never more than this many pieces of trash in the room.
+  final int roomTrashMax;
+
+  /// Trash in the room when no cleanup was ever saved (new or old save).
+  final int roomTrashWithoutCleanup;
+
+  /// Hours for one new piece of trash: comeback score below
+  /// [comebackLowScore] / in between / at least [roomTrashHighScore].
+  final int roomTrashHoursLowScore;
+  final int roomTrashHoursMidScore;
+  final int roomTrashHoursHighScore;
+  final int roomTrashHighScore;
 
   /// Shop prices in coins. A rarity missing here is not sold (epic,
   /// legendary and mythic items come only from the roll).

@@ -24,6 +24,7 @@ import '../pet/egg_progress.dart';
 import '../pet/pet_labels.dart';
 import '../pet/pet_need_bars.dart';
 import '../pet/pet_view.dart';
+import '../pet/room_trash.dart';
 
 /// Home: the pet room on top (about 60%), today's activities below.
 /// Shows the saved game; while it loads, a spinner; if it fails, an error.
@@ -51,6 +52,10 @@ class _HomeContent extends ConsumerWidget {
     final pet = petNow(game.pet, now, economy);
     final comebackLow =
         isComebackScoreLow(comebackScore(game.activity, now), economy);
+    // Room Cleanup opens only when there is trash in the room.
+    final roomDirty = ref.watch(roomTrashCountProvider) > 0;
+    final trash = ref.watch(roomTrashProvider);
+    void openCleanup() => context.push(AppRoutes.cleanup);
 
     return SafeArea(
       child: LayoutBuilder(
@@ -76,7 +81,10 @@ class _HomeContent extends ConsumerWidget {
                 child: PetView(
                   pet: pet,
                   plants: roomPlants(level.level, economy),
-                  semanticLabel: petSemanticLabel(pet, l10n),
+                  semanticLabel: roomLabelWithTrash(
+                      petSemanticLabel(pet, l10n), trash, l10n),
+                  trash: trash,
+                  onTrashTap: openCleanup,
                 ),
               ),
               const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
@@ -116,8 +124,10 @@ class _HomeContent extends ConsumerWidget {
                 icon: Icons.recycling_rounded,
                 color: EcoColors.primary,
                 title: l10n.homeCleanupTitle,
-                subtitle: l10n.homeCleanupSubtitle,
-                onTap: () => context.push(AppRoutes.cleanup),
+                subtitle: roomDirty
+                    ? l10n.homeCleanupSubtitle
+                    : l10n.roomTrashClean,
+                onTap: roomDirty ? openCleanup : null,
               ),
               const SizedBox(height: EcoSpacing.s + EcoSpacing.xs),
               _ActivityShortcut(
@@ -267,7 +277,8 @@ class _ActivityShortcut extends StatelessWidget {
   final Color color;
   final String title;
   final String subtitle;
-  final VoidCallback onTap;
+  /// Null: the card is shown but disabled (e.g. the room is clean).
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {

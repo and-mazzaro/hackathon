@@ -150,6 +150,48 @@ void main() {
     expect(find.byType(NavigationBar), findsOneWidget); // back on Home
   });
 
+  testWidgets('trash shows in the room and is gone after a cleanup',
+      (tester) async {
+    final semantics = tester.ensureSemantics();
+    final repository = InMemorySaveRepository(onboardedState());
+    await pumpEcoQuestApp(tester, repository: repository);
+
+    // An old save without a cleanup time: 2 items on the room floor.
+    final roomTrash = find.byWidgetPredicate((widget) =>
+        widget.key is ValueKey<String> &&
+        (widget.key! as ValueKey<String>).value.startsWith('room-trash-'));
+    expect(roomTrash, findsNWidgets(2));
+    expect(find.bySemanticsLabel(RegExp('Nella stanza ci sono 2 rifiuti: ')),
+        findsOneWidget);
+
+    // Tapping the trash opens Room Cleanup.
+    await tester.tap(roomTrash.first);
+    await tester.pumpAndSettle();
+    expect(find.text('0 di 8 sistemati'), findsOneWidget);
+
+    for (var i = 0; i < 8; i++) {
+      await _sortFirst(tester);
+    }
+    await tester.tap(find.widgetWithText(EcoButton, 'Vedi il risultato'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(EcoButton, 'Chiudi'));
+    await tester.pumpAndSettle();
+
+    expect(repository.saved!.lastCleanupAt, testNow);
+    expect(roomTrash, findsNothing);
+    expect(find.bySemanticsLabel(RegExp('Nella stanza')), findsNothing);
+    await scrollTo(tester, find.text('La stanza è pulita! Torna più tardi'));
+    expect(find.text('La stanza è pulita! Torna più tardi'), findsOneWidget);
+
+    // The Pet tab button says the room is clean and is disabled.
+    await tapTab(tester, 'Cucciolo');
+    final button =
+        find.widgetWithText(EcoButton, 'La stanza è pulita! Torna più tardi');
+    await scrollTo(tester, button);
+    expect(tester.widget<EcoButton>(button).onPressed, isNull);
+    semantics.dispose();
+  });
+
   testWidgets('leaving a started round asks first and saves nothing',
       (tester) async {
     final repository = InMemorySaveRepository(onboardedState());

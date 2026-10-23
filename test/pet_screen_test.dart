@@ -242,7 +242,9 @@ void main() {
     await pumpEcoQuestApp(tester,
         repository: InMemorySaveRepository(_hatched()));
 
-    expect(find.bySemanticsLabel('Foglia, Cucciolo, Di buon umore'),
+    expect(
+        find.bySemanticsLabel(
+            RegExp(r'^Foglia, Cucciolo, Di buon umore\. Nella stanza ')),
         findsOneWidget);
     expect(find.bySemanticsLabel('Sazietà'), findsOneWidget);
     semantics.dispose();
