@@ -49,6 +49,22 @@ void main() {
     expect(find.text("Guarda l'introduzione"), findsOneWidget);
   });
 
+  testWidgets('small phone with 200% text: every scene fits',
+      (tester) async {
+    useSmallPhoneWithLargeText(tester);
+    await openIntro(tester);
+    expect(tester.takeException(), isNull);
+    await tester.tap(find.text('Tocca per iniziare'));
+    await tester.pumpAndSettle();
+    for (var i = 0; i < 5; i++) {
+      expect(tester.takeException(), isNull);
+      await tester.tap(find.byKey(const ValueKey('intro-speech')));
+      await tester.pumpAndSettle();
+    }
+    expect(tester.takeException(), isNull);
+    expect(find.text("Inizia l'avventura"), findsOneWidget);
+  });
+
   testWidgets('"Salta" works from the guide scene too', (tester) async {
     await openIntro(tester);
     await tester.tap(find.text('Tocca per iniziare'));

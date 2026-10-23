@@ -1069,4 +1069,26 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get introStart => 'Inizia l\'avventura';
+
+  @override
+  String get demoStart => 'Modalità demo';
+
+  @override
+  String get demoStop => 'Esci dalla demo';
+
+  @override
+  String get demoCaptionHome =>
+      'Home: la missione del giorno e i tuoi progressi';
+
+  @override
+  String get demoCaptionLearn =>
+      'Impara: quiz brevi sui temi che ti interessano';
+
+  @override
+  String get demoCaptionPet =>
+      'Cucciolo: prenditi cura di Laiqua, la tua lontra';
+
+  @override
+  String get demoCaptionWardrobe =>
+      'Guardaroba: premi e vestiti per il tuo cucciolo';
 }

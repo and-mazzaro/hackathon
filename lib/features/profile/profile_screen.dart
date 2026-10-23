@@ -12,6 +12,7 @@ import '../../domain/models/eco_topic.dart';
 import '../../domain/models/game_state.dart';
 import '../../domain/rules/progression.dart';
 import '../../l10n/app_localizations.dart';
+import '../demo/demo_mode.dart';
 import 'interest_picker.dart';
 import 'profile_details_sheet.dart';
 import 'profile_labels.dart';
@@ -128,6 +129,12 @@ class _ProfileContent extends ConsumerWidget {
             icon: const Icon(Icons.auto_awesome_rounded),
             label: Text(l10n.introProfileButton),
             onPressed: () => context.push(AppRoutes.intro),
+          ),
+          const SizedBox(height: EcoSpacing.s),
+          OutlinedButton.icon(
+            icon: const Icon(Icons.slideshow_rounded),
+            label: Text(l10n.demoStart),
+            onPressed: () => ref.read(demoModeProvider.notifier).start(),
           ),
           const SizedBox(height: EcoSpacing.l),
           Semantics(
