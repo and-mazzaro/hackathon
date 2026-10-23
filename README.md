@@ -2,6 +2,10 @@
 
 > Impara la sostenibilità, fai crescere il tuo pet.
 
+**Scarica Laiqua per Android:** [Laiqua.apk](https://github.com/and-mazzaro/hackathon/raw/main/presentation%20material/Laiqua.apk) ·
+**Video di gameplay (2 min):** [Laiqua_gameplay_trailer.mp4](presentation%20material/Laiqua_gameplay_trailer.mp4) ·
+tutto il materiale per la presentazione è in [`presentation material/`](presentation%20material/)
+
 un'app mobile di educazione ambientale pensata per un pubblico giovane. Il giocatore si prende cura di un cucciolo virtuale che parte come uovo e cresce man mano che impara: quiz e mini-giochi danno XP e monete, l'XP fa salire di livello, e i livelli fanno schiudere e crescere il pet e rendono la sua stanza più viva.
 
 ## Obiettivo
