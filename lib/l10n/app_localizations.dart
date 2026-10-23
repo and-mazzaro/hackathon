@@ -1671,6 +1671,36 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Attività cancellata.'**
   String get activityCleared;
+
+  /// No description provided for @feedGameTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Prepara la pappa'**
+  String get feedGameTitle;
+
+  /// No description provided for @feedGameIntro.
+  ///
+  /// In it, this message translates to:
+  /// **'Rispondi a 2 domande veloci per preparare la pappa di {name}.'**
+  String feedGameIntro(String name);
+
+  /// No description provided for @feedGameNext.
+  ///
+  /// In it, this message translates to:
+  /// **'Prossima domanda'**
+  String get feedGameNext;
+
+  /// No description provided for @feedGameServe.
+  ///
+  /// In it, this message translates to:
+  /// **'Servi la pappa'**
+  String get feedGameServe;
+
+  /// No description provided for @feedGameKindMessage.
+  ///
+  /// In it, this message translates to:
+  /// **'Ci riproviamo! Intanto {name} ha fatto merenda.'**
+  String feedGameKindMessage(String name);
 }
 
 class _AppLocalizationsDelegate

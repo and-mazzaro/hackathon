@@ -1020,4 +1020,23 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get activityCleared => 'Attività cancellata.';
+
+  @override
+  String get feedGameTitle => 'Prepara la pappa';
+
+  @override
+  String feedGameIntro(String name) {
+    return 'Rispondi a 2 domande veloci per preparare la pappa di $name.';
+  }
+
+  @override
+  String get feedGameNext => 'Prossima domanda';
+
+  @override
+  String get feedGameServe => 'Servi la pappa';
+
+  @override
+  String feedGameKindMessage(String name) {
+    return 'Ci riproviamo! Intanto $name ha fatto merenda.';
+  }
 }
