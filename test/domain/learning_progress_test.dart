@@ -25,17 +25,30 @@ void main() {
         ['oceans_001', 'oceans_002', 'water_001']);
   });
 
-  test('only the last 20 question ids are remembered', () {
+  test('only the last 30 question ids are remembered', () {
     var learning = const LearningProgress();
-    for (var quiz = 0; quiz < 6; quiz++) {
+    for (var quiz = 0; quiz < 8; quiz++) {
       learning = learning.record([
         for (var q = 0; q < 5; q++)
           a('id_${quiz}_$q', EcoTopic.climate, false),
       ]);
     }
-    expect(learning.recentQuestionIds, hasLength(20));
-    expect(learning.recentQuestionIds.last, 'id_5_4');
-    expect(learning.quizzesCompleted, 6);
+    expect(learning.recentQuestionIds, hasLength(30));
+    expect(learning.recentQuestionIds.first, 'id_2_0'); // oldest kept
+    expect(learning.recentQuestionIds.last, 'id_7_4');
+    expect(learning.quizzesCompleted, 8);
+  });
+
+  test('an old save with 20 recent ids still loads and grows to 30', () {
+    final old = LearningProgress.fromJson({
+      'recentQuestionIds': [for (var i = 0; i < 20; i++) 'old_$i'],
+    });
+    expect(old.recentQuestionIds, hasLength(20));
+    final next = old.record([
+      for (var q = 0; q < 5; q++) a('new_$q', EcoTopic.climate, true),
+    ]);
+    expect(next.recentQuestionIds, hasLength(25));
+    expect(next.recentQuestionIds.first, 'old_0');
   });
 
   test('toJson → fromJson keeps everything', () {

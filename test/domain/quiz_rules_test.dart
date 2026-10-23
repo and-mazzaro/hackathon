@@ -95,6 +95,100 @@ void main() {
     });
   });
 
+  group('pickQuizQuestions rotation', () {
+    // 10 questions per topic, like the real content (difficulty 1,1,2,2,3
+    // twice).
+    final bigBank = QuizBank([
+      for (final topic in [EcoTopic.recycling, EcoTopic.oceans, EcoTopic.climate])
+        for (var n = 1; n <= 10; n++) testQuestion(topic, n),
+    ]);
+
+    /// Plays [quizzes] quizzes in a row, recording each one, and returns
+    /// the question ids of every quiz.
+    List<Set<String>> playInARow(int quizzes,
+        {EcoTopic? topic, Set<EcoTopic> interests = const {}, QuizBank? from}) {
+      var learning = const LearningProgress();
+      final random = Random(7);
+      final result = <Set<String>>[];
+      for (var i = 0; i < quizzes; i++) {
+        final questions = pickQuizQuestions(
+          bank: from ?? bigBank,
+          learning: learning,
+          random: random,
+          interests: interests,
+          topic: topic,
+        );
+        result.add(questions.map((q) => q.id).toSet());
+        learning = learning.record([
+          for (final q in questions)
+            AnsweredQuestion(questionId: q.id, topic: q.topic, correct: true),
+        ]);
+      }
+      return result;
+    }
+
+    test('two topic quizzes in a row with 10 questions share nothing', () {
+      for (final topic in [EcoTopic.oceans, EcoTopic.climate]) {
+        final quizzes = playInARow(3, topic: topic);
+        expect(quizzes[0].intersection(quizzes[1]), isEmpty);
+        expect(quizzes[0].union(quizzes[1]), hasLength(10));
+        // Third quiz: all seen, so the oldest (the first quiz) come back.
+        expect(quizzes[2], quizzes[0]);
+      }
+    });
+
+    test('seen questions come back oldest first', () {
+      final ids = [for (var n = 1; n <= 10; n++) 'oceans_${'$n'.padLeft(3, '0')}'];
+      // 001..010 seen, 001 longest ago.
+      final questions = pick(
+        from: bigBank,
+        topic: EcoTopic.oceans,
+        learning: LearningProgress(recentQuestionIds: ids),
+      );
+      expect(questions.map((q) => q.id).toSet(), ids.take(5).toSet());
+    });
+
+    test('mixed quizzes rotate: consecutive quizzes share nothing', () {
+      final quizzes = playInARow(6); // 30 questions, 6 × 5
+      for (var i = 1; i < quizzes.length; i++) {
+        expect(quizzes[i].intersection(quizzes[i - 1]), isEmpty,
+            reason: 'quiz $i');
+      }
+      expect(quizzes.expand((q) => q).toSet(), hasLength(30));
+    });
+
+    test('rotation still prefers the interests', () {
+      final quizzes = playInARow(2, interests: {EcoTopic.climate});
+      for (final quiz in quizzes) {
+        expect(quiz.every((id) => id.startsWith('climate_')), isTrue);
+      }
+      expect(quizzes[0].intersection(quizzes[1]), isEmpty);
+    });
+
+    test('with only 5 questions the same set comes in a new order', () {
+      final orders = {
+        for (var seed = 0; seed < 10; seed++)
+          pick(seed: seed, topic: EcoTopic.oceans)
+              .map((q) => q.id)
+              .join(','),
+      };
+      expect(orders.length, greaterThan(1));
+    });
+
+    test('easy → hard also when picking seen questions', () {
+      final ids = [for (var n = 10; n >= 1; n--) 'oceans_${'$n'.padLeft(3, '0')}'];
+      for (var seed = 0; seed < 10; seed++) {
+        final levels = pick(
+          from: bigBank,
+          topic: EcoTopic.oceans,
+          seed: seed,
+          learning: LearningProgress(recentQuestionIds: ids),
+        ).map((q) => q.difficulty).toList();
+        expect(levels, orderedEquals([...levels]..sort()), reason: 'seed $seed');
+      }
+    });
+  });
+
   group('scoreQuiz', () {
     const economy = EconomyConfig.defaults; // 10 XP, repeat 2, streak +5
 

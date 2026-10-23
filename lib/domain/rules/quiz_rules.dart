@@ -9,8 +9,12 @@ import 'economy_config.dart';
 ///
 /// - [topic] set: only that topic ("Quiz: Oceani").
 ///   [topic] null: a mixed quiz that prefers the player's [interests].
-/// - Questions shown recently are used only if nothing else is left.
-/// - The result is sorted from easy to hard (rising difficulty).
+/// - Questions not shown recently come first, in random order.
+/// - Questions shown recently are used only if nothing else is left, and
+///   then the ones seen LONGEST ago first: quizzes rotate through the bank
+///   instead of repeating the last one.
+/// - The result goes from easy to hard; questions of the same difficulty
+///   are shuffled, so even a repeated set comes in a new order.
 ///
 /// [random] makes the choice testable: tests pass `Random(seed)`.
 List<QuizQuestion> pickQuizQuestions({
@@ -22,22 +26,33 @@ List<QuizQuestion> pickQuizQuestions({
   int count = 5,
 }) {
   final pool = topic == null ? bank.questions : bank.forTopic(topic);
-  final recent = learning.recentQuestionIds.toSet();
+  // recentQuestionIds is oldest → newest, so the index is the age rank.
+  final seenAt = {
+    for (final (index, id) in learning.recentQuestionIds.indexed) id: index,
+  };
+  bool seen(QuizQuestion q) => seenAt.containsKey(q.id);
 
   bool preferred(QuizQuestion q) =>
       topic != null || interests.isEmpty || interests.contains(q.topic);
+  bool other(QuizQuestion q) => !preferred(q);
 
-  // Groups in order of preference; each group is shuffled.
-  List<QuizQuestion> group(bool Function(QuizQuestion) test) =>
-      pool.where(test).toList()..shuffle(random);
+  // Groups in order of preference: unseen ones shuffled, seen ones
+  // oldest first.
+  List<QuizQuestion> fresh(bool Function(QuizQuestion) test) =>
+      pool.where((q) => test(q) && !seen(q)).toList()..shuffle(random);
+  List<QuizQuestion> oldestFirst(bool Function(QuizQuestion) test) =>
+      pool.where((q) => test(q) && seen(q)).toList()
+        ..sort((a, b) => seenAt[a.id]!.compareTo(seenAt[b.id]!));
   final ordered = [
-    ...group((q) => preferred(q) && !recent.contains(q.id)),
-    ...group((q) => !preferred(q) && !recent.contains(q.id)),
-    ...group((q) => preferred(q) && recent.contains(q.id)),
-    ...group((q) => !preferred(q) && recent.contains(q.id)),
+    ...fresh(preferred),
+    ...fresh(other),
+    ...oldestFirst(preferred),
+    ...oldestFirst(other),
   ];
 
-  final chosen = ordered.take(count).toList();
+  // Shuffle before the (stable) difficulty sort: a new order inside each
+  // difficulty level.
+  final chosen = ordered.take(count).toList()..shuffle(random);
   return sortedByDifficulty(chosen);
 }
 

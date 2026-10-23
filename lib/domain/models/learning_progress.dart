@@ -39,8 +39,10 @@ class LearningProgress {
     this.recentQuestionIds = const [],
   });
 
-  /// How many recent question ids we remember to avoid repeats.
-  static const recentMemory = 20;
+  /// How many recent question ids we remember to avoid repeats: with 100
+  /// questions (10 per topic) this covers the last 6 quizzes. Older saves
+  /// with a shorter list load as they are.
+  static const recentMemory = 30;
 
   final int quizzesCompleted;
   final Map<EcoTopic, TopicStats> statsByTopic;
