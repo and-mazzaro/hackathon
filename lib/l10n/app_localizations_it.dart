@@ -1039,4 +1039,53 @@ class AppLocalizationsIt extends AppLocalizations {
   String feedGameKindMessage(String name) {
     return 'Ci riproviamo! Intanto $name ha fatto merenda.';
   }
+
+  @override
+  String get introProfileButton => 'Guarda l\'introduzione';
+
+  @override
+  String get introSkip => 'Salta';
+
+  @override
+  String get introSkipLabel => 'Salta l\'introduzione';
+
+  @override
+  String get introLogo => 'LAIQUA';
+
+  @override
+  String get introSubtitle => 'Salva il pianeta, un gioco alla volta';
+
+  @override
+  String get introPressStart => 'Tocca per iniziare';
+
+  @override
+  String get introNext => 'Tocca per continuare';
+
+  @override
+  String get introLine1 => 'Ciao! Benvenuto nel mondo di Laiqua!';
+
+  @override
+  String get introLine2 =>
+      'Io sono Laiqua, una lontra. Il nostro pianeta ha bisogno di aiuto!';
+
+  @override
+  String get introLine3 =>
+      'Rispondi ai quiz e scopri come proteggere la natura.';
+
+  @override
+  String get introLine4 =>
+      'Impara a dividere i rifiuti e rimetti in ordine la stanza.';
+
+  @override
+  String get introLine5 =>
+      'E prenditi cura di me: pappa, giochi e bagnetto. Insieme salveremo il pianeta!';
+
+  @override
+  String get introOtterLabel => 'Laiqua, la lontra, saluta felice';
+
+  @override
+  String get introFinaleTitle => 'Laiqua!';
+
+  @override
+  String get introStart => 'Inizia l\'avventura';
 }

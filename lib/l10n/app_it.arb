@@ -477,5 +477,20 @@
   "feedGameNext": "Prossima domanda",
   "feedGameServe": "Servi la pappa",
   "feedGameKindMessage": "Ci riproviamo! Intanto {name} ha fatto merenda.",
-  "@feedGameKindMessage": { "placeholders": { "name": { "type": "String" } } }
+  "@feedGameKindMessage": { "placeholders": { "name": { "type": "String" } } },
+  "introProfileButton": "Guarda l'introduzione",
+  "introSkip": "Salta",
+  "introSkipLabel": "Salta l'introduzione",
+  "introLogo": "LAIQUA",
+  "introSubtitle": "Salva il pianeta, un gioco alla volta",
+  "introPressStart": "Tocca per iniziare",
+  "introNext": "Tocca per continuare",
+  "introLine1": "Ciao! Benvenuto nel mondo di Laiqua!",
+  "introLine2": "Io sono Laiqua, una lontra. Il nostro pianeta ha bisogno di aiuto!",
+  "introLine3": "Rispondi ai quiz e scopri come proteggere la natura.",
+  "introLine4": "Impara a dividere i rifiuti e rimetti in ordine la stanza.",
+  "introLine5": "E prenditi cura di me: pappa, giochi e bagnetto. Insieme salveremo il pianeta!",
+  "introOtterLabel": "Laiqua, la lontra, saluta felice",
+  "introFinaleTitle": "Laiqua!",
+  "introStart": "Inizia l'avventura"
 }
