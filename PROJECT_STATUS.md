@@ -8,8 +8,8 @@ M6 pet (`e7b7281`) · M7 cleanup (`8be652d`) · M8 cosmetics (`1d36120`, `686dfa
 Teammates need to be added as collaborators by and-mazzaro before they can push.
 **Audio:** Milestones 1 (audit, `AUDIO_AUDIT.md`), 2 (infrastructure, `be6eace`) and 3 (game events wired) done.
 25 Kenney CC0 effects + the sea ambience are in; only background music is missing. Next: Milestone 4 (settings screen).
-**Next milestone:** M10 — Comeback Score (spec in `MILESTONE_10_RETENTION.md`; its decisions start at D53 now, since
-M8 used D45–D52) or M9 recommendations. Read-aloud (flutter_tts) is a small follow-up.
+**Next milestone:** M10 — Comeback Score (spec in `MILESTONE_10_RETENTION.md`; its decisions start at D54 now, since
+M8 and the otter used D45–D53) or M9 recommendations. Read-aloud (flutter_tts) is a small follow-up.
 **Agent skills:** Matt Pocock's engineering + productivity skills (github.com/mattpocock/skills, MIT, commit `5beb35b`)
 are in `.claude/skills/` (commit `2b337f0`, on `main`, not pushed yet), e.g. `/grill-me`, `/to-spec`, `/to-tickets`,
 `/tdd`, `/diagnosing-bugs`, `/handoff`. Installed by copying, since this PC has no Node.js; update by re-copying.
@@ -81,14 +81,15 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 | D42 | 3 channels (music / effects / pet + ambience) with volumes 0–100 + master mute, saved in `GameState.audio` (defaults 35 / 80 / 60 for old saves) via `GameController.updateAudioSettings` | New (Audio 2) |
 | D43 | "Ambient" audio session: mixes with the player's own music (no audio focus on Android), follows the iOS silent switch. Loops pause in the background and resume on return (unless muted); short sounds are never replayed later | New (Audio 2) |
 | D44 | Important sounds (level-up, hatch/grow, quiz/cleanup complete) duck the music to 30% for 0.5 s, back in 0.3 s; the same sound within 80 ms plays once; a failing file is logged and skipped, never crashes (`AudioTiming` holds the numbers) | New (Audio 2) |
-| D45 | Cosmetics = data: `assets/content/cosmetics_it.json` (id, name, slot `head`/`face`/`neck`, rarity `common`/`rare`/`epic`, icon key, ARGB colour), checked by `test/content/cosmetic_content_test.dart`. Items are drawn with `CustomPaint` (`CosmeticArt`), no image files | New (M8) |
-| D46 | Shop sells commons (60 coins) and rares (150) and reward tickets (100 coins); epics only from the roll. All prices/odds/refunds in `EconomyConfig` | New (M8) |
-| D47 | Reward roll: rarity first with the odds shown on screen (60/30/10 %), then one item of that rarity, equally likely (`pickRolledCosmetic`, `randomProvider`). A rarity with no items falls back to a more common one | New (M8) |
-| D48 | Duplicates can come out of the roll and are paid back in coins (20/40/80 by rarity); the rule is written on the roll card before rolling | New (M8) |
+| D45 | Cosmetics = data: `assets/content/cosmetics_it.json` (id, name, slot `head`/`face`/`neck`/`paws`, rarity `common`/`uncommon`/`rare`/`epic`/`legendary`/`mythic`, drawing key, ARGB colour), checked by `test/content/cosmetic_content_test.dart`. Items are drawn in code (`CosmeticDrawing` in `cosmetic_art.dart`), no image files | Updated (otter) |
+| D46 | Shop sells common (60 coins), uncommon (100) and rare (160) items and reward tickets (100 coins); epic, legendary and mythic only from the roll. Prices, odds and refunds are per-rarity maps in `EconomyConfig` | Updated (otter) |
+| D47 | Reward roll: rarity first with the odds shown on screen (40/25/17/10/6/2 %), then one item of that rarity, equally likely (`pickRolledCosmetic`, `randomProvider`). A rarity with no items falls back to a more common one. A test checks the odds add up to 100 | Updated (otter) |
+| D48 | Duplicates can come out of the roll and are paid back in coins (15/25/40/60/90/150 by rarity); the rule is written on the roll card before rolling | Updated (otter) |
 | D49 | Every level gained pays `ticketsPerLevelUp` (1) ticket inside `claimReward`, in the same write, and is part of `ClaimResult.reward` (result screens say so); a re-claimed id pays nothing | New (M8) |
 | D50 | Spending (`buyTicket`, `buyItem`, `rollCosmetic`) and `equip`/`unequip` go through `GameController`; the screen passes the catalog/item in, the controller never loads content. Not enough coins / not for sale / already owned → nothing saved | New (M8) |
-| D51 | One item per slot (`Inventory.equippedBySlot`); a head item replaces the leaves. Ids not in the content any more are ignored when drawing (`petOutfitProvider`). The egg can own items but shows them only after hatching | New (M8) |
+| D51 | One item per slot (`Inventory.equippedBySlot`). Head items replace the green leaf, neck items the green bandana, face items sit on the eyes, paws items are held between the front paws. Ids not in the content any more are ignored when drawing (`petOutfitProvider`). The egg can own items but shows them only after hatching | Updated (otter) |
 | D52 | Wardrobe = full-screen route `/wardrobe`, opened from a hanger button in the Pet room (no extra row above the care buttons) and from a Home card; bottom tabs unchanged (D3) | New (M8) |
+| D53 | The pet is an otter (design: `docs/art/otter_reference.jpg`), drawn in code by `OtterPainter` in the reference picture's pixel coordinates (`OtterGeometry`: anchors per slot, pivots; `OtterPalette`). Separate layers (tail, body, paws, neck, head group) and an `OtterPose` (headTilt, tailSwing, eyesOpen, earTwitch, bodyLift) so it can be animated later; cosmetics are drawn in the same coordinates | New (otter) |
 
 ## Implemented (M1)
 - App entry point, `ProviderScope`, router in a provider (fresh router per test)
@@ -201,6 +202,19 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 - Every sound id now has a file except `music.main` (no CC0 music loop yet → no background music)
 
 ## Implemented (M8 — Cosmetics)
+- **Otter redesign (2026-10-23):** the pet is now the otter from `docs/art/otter_reference.jpg`, redrawn in code
+  (`lib/features/pet/otter_painter.dart`, `otter_geometry.dart`); outline, eyes, nose, ears, belly, paws and tail line up
+  with the reference within a few pixels. Moods: happy (open mouth), ok (closed smile), sad (small frown, raised
+  brows); dirty = mud spots; stages differ by size (adult fur slightly darker, baby head slightly bigger)
+- **25 cosmetics redesigned for the otter**, six rarities, four slots: head (Foglia rossa, Foglia d'acero, Fiore di
+  campo, Cappellino di ghianda, Corona di alghe, Corona di rami d'oro, **Foglia leggendaria** = mythic), face (Occhiali
+  tondi, Occhiali da sole, Occhialini da nuoto, Maschera da supereroe, Monocolo d'oro), neck (Bandana rossa, Bandana
+  blu, Bandana a pois, Sciarpa di lana, Papillon, Collana di conchiglie, Medaglia dell'eco-eroe), paws (Sassolino
+  preferito, Conchiglia, Stella marina, Pesciolino di pezza, Perla luminosa, **Sasso arcobaleno** = mythic)
+- Wardrobe shows all six odds and refunds; legendary/mythic reveals get their own heading
+- Dev tools (skipped in normal runs): `ECOQUEST_RENDER_DIR=<folder> flutter test test/tools/` renders the otter in every
+  mood/stage/outfit and each item over the reference picture
+- First M8 version (below) had 12 items on the old leafy pet; kept for history
 - Content: 12 items (head 4, face 3, neck 5; 6 common, 4 rare, 2 epic), Italian names, each drawn in code
   (flower, straw hat, party hat, crown of twigs, round glasses, sunglasses, hero mask, scarf, bow tie, bell,
   eco-hero medal, seed necklace)
@@ -259,7 +273,9 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 | M7 drag fix on the emulator: the old version ignored a plain drag (only a ~1 s hold worked); now a quick swipe from an item to a bin sorts it, tap-then-bin still works, swiping on the feedback card scrolls | ✅ Checked by script (2026-10-22) |
 | `flutter test` after M8 — 255 tests (+ shop prices, odds sum, 10 000 seeded rolls within ±2 % of the shown odds, rarity fallback, inventory JSON + old save without inventory, level-up tickets (one/two levels, none on repeat), buy ticket/item incl. not enough coins / epic / already owned, roll new vs duplicate refund, no ticket, equip only owned + one per slot + kept after restart, real cosmetics file, wardrobe flow from Pet room and Home, roll → wear → pet shows it, shop buy/wear/take off, disabled buttons, guidelines, 200% text on a small phone) · `flutter analyze` clean | ✅ All pass (2026-10-23, on the M8 branch) |
 | M8 on the emulator (Pixel_7, existing save from M7 testing: level 2, 26 coins, 1 ticket): new build loaded the old save; hanger button → wardrobe; roll → "Fiore di campo" (common) → "Indossa ora" → flower replaces the leaf, snackbar "Ecò indossa: Fiore di campo"; force-stop + relaunch → Home pet still wears it, save shows `head_flower` owned + equipped, 0 tickets. The tester's save was backed up first and restored afterwards | ✅ Checked by script + screenshots (2026-10-23). Shop purchase on the device not tried (26 coins); covered by widget tests |
-| `flutter build apk --debug` | ✅ Builds (again after M8, 2026-10-23) |
+| `flutter test` after the otter redesign — 275 tests, 2 dev-tool tests skipped (+ otter painter sizes/moods/poses/shouldRepaint, six-rarity prices/odds/refunds, 20 000 seeded rolls within ±1.5 points, real 25-item content file, wardrobe odds/refunds/reveal) · `flutter analyze` clean | ✅ All pass (2026-10-23) |
+| Otter visual check: render of the default otter overlaid on the reference picture, every mood × stage, every item worn, full outfits per rarity, thumbnails; on the emulator the Pet tab shows the otter (sad mood from the saved needs) and the wardrobe shows six odds, six refunds and the computed shop note. Tester save backed up and restored | ✅ Looked at (2026-10-23) |
+| `flutter build apk --debug` | ✅ Builds (again after the otter redesign, 2026-10-23) |
 | Android emulator (Pixel 7, Android 36): app starts, Home renders, tab switch, system Back from a tab returns to Home | ✅ Checked manually with screenshots (2026-10-22) |
 | Android accessibility tree (uiautomator dump): every stat, balance, image, card and tab has an Italian label | ✅ Checked (2026-10-22) |
 | Listening to TalkBack live | ⏳ Not done yet (optional, by a team member) |
@@ -298,4 +314,4 @@ Their `code-review` skill has the same name as Claude Code's built-in one.
 - Cosmetics polish ideas: a small animation for the roll reveal, more items per slot, room decorations
   (left out of M8 on purpose), a "new" badge in "I miei oggetti", a dedicated reveal sound
 - Balancing: shop prices, odds and refunds are first guesses (D21); tune in play-tests
-- Next: M10 comeback score (renumber its decisions from D53) · M9 recommendations · quiz read-aloud
+- Next: M10 comeback score (renumber its decisions from D54) · M9 recommendations · quiz read-aloud
