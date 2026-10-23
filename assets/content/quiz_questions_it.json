@@ -102,6 +102,106 @@
       "sourceExcerpt": "A 77% separate collection target for plastic bottles by 2025, increasing to 90% by 2029"
     },
     {
+      "id": "recycling_006",
+      "topic": "recycling",
+      "difficulty": 1,
+      "question": "Secondo Comieco, il cartone della pizza può andare nella raccolta della carta?",
+      "options": [
+        "No, mai",
+        "Sì, se è svuotato, non intriso e senza pezzi di cibo",
+        "Sì, anche con gli avanzi dentro",
+        "Solo se è stato lavato con l'acqua"
+      ],
+      "correctIndex": 1,
+      "explanation": "Il cartone vuoto e non impregnato di unto si ricicla come la carta. Grasso e avanzi invece rovinano l'impasto della carta riciclata: per le parti molto sporche segui le indicazioni del tuo Comune.",
+      "source": {
+        "name": "Comieco",
+        "url": "https://www.comieco.org/carta-e-cartone/la-raccolta-differenziata/dove-lo-butto/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Cartoni della pizza, contenitori e vaschette per cibo svuotati, non intrisi, senza pezzi di cibo."
+    },
+    {
+      "id": "recycling_007",
+      "topic": "recycling",
+      "difficulty": 1,
+      "question": "I rifiuti organici (l'umido) raccolti separatamente possono diventare compost. Che cos'è il compost?",
+      "options": [
+        "Un tipo di plastica riciclata",
+        "Un carburante per le auto",
+        "Un fertilizzante organico per i terreni",
+        "Un materiale per costruire strade"
+      ],
+      "correctIndex": 2,
+      "explanation": "Il compost restituisce sostanza organica e nutrienti al suolo e si usa soprattutto in agricoltura. Dai rifiuti organici, secondo il CIC, si può ottenere anche biometano.",
+      "source": {
+        "name": "CIC – Consorzio Italiano Compostatori",
+        "url": "https://www.compost.it/il-compost-e-il-marchio-compost-di-qualita-cic/cose-il-compost/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "fertilizzante organico ottenuto dal trattamento dei Rifiuti Organici raccolti separatamente"
+    },
+    {
+      "id": "recycling_008",
+      "topic": "recycling",
+      "difficulty": 2,
+      "question": "Secondo COREPLA, quale di questi oggetti di plastica NON va nella raccolta differenziata della plastica?",
+      "options": [
+        "Un giocattolo di plastica",
+        "Una bottiglia d'acqua vuota",
+        "Un flacone di shampoo vuoto",
+        "Una vaschetta della frutta"
+      ],
+      "correctIndex": 0,
+      "explanation": "Nella raccolta della plastica vanno gli imballaggi. Giocattoli, penne, pennarelli e posate non sono imballaggi: anche se sono di plastica, chiedi al tuo Comune dove conferirli.",
+      "source": {
+        "name": "COREPLA",
+        "url": "https://www.corepla.it/cosa-si-mette-nella-raccolta-differenziata/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Non sono imballaggi in plastica, quindi non vanno nella raccolta differenziata: … GIOCATTOLI DI PLASTICA"
+    },
+    {
+      "id": "recycling_009",
+      "topic": "recycling",
+      "difficulty": 2,
+      "question": "Con l'«uno contro zero» lasci gratis piccoli apparecchi elettronici nei grandi negozi di elettronica. Quanto può misurare al massimo il lato più lungo?",
+      "options": [
+        "10 cm",
+        "50 cm",
+        "1 metro",
+        "25 cm"
+      ],
+      "correctIndex": 3,
+      "explanation": "Vale per i negozi con oltre 400 m² dedicati all'elettronica. Con l'«uno contro uno», invece, quando compri un apparecchio nuovo il negoziante deve ritirare gratis quello vecchio.",
+      "source": {
+        "name": "CdC RAEE – campagna «Lasciali Andare»",
+        "url": "https://www.lascialiandare.it/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Ma ricorda: il lato più lungo non deve superare i 25 cm."
+    },
+    {
+      "id": "recycling_010",
+      "topic": "recycling",
+      "difficulty": 3,
+      "question": "Secondo le regole UE, entro il 2035 la quota di rifiuti urbani mandati in discarica non dovrà superare...",
+      "options": [
+        "Il 50%",
+        "Il 10%",
+        "Il 25%",
+        "Il 35%"
+      ],
+      "correctIndex": 1,
+      "explanation": "La discarica è l'ultima scelta anche perché i rifiuti biodegradabili, decomponendosi lì, producono metano, un potente gas serra. Per questo l'UE chiede di ridurre l'organico mandato in discarica.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://environment.ec.europa.eu/topics/waste-and-recycling/landfill-waste_en",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Limits the share of municipal waste landfilled to 10% by 2035."
+    },
+    {
       "id": "climate_001",
       "topic": "climate",
       "difficulty": 1,
@@ -200,6 +300,106 @@
         "verifiedOn": "2026-10-22"
       },
       "sourceExcerpt": "added water from melting land ice and the expansion of seawater as it warms"
+    },
+    {
+      "id": "climate_006",
+      "topic": "climate",
+      "difficulty": 1,
+      "question": "Qual è la differenza tra meteo e clima?",
+      "options": [
+        "Sono due parole per la stessa cosa",
+        "Il meteo riguarda solo la pioggia, il clima solo il caldo",
+        "Il meteo dura anni, il clima pochi giorni",
+        "Il clima è la media del tempo meteorologico su più decenni"
+      ],
+      "correctIndex": 3,
+      "explanation": "Il meteo descrive cosa succede ora e nei prossimi giorni, anche in un posto preciso. Il clima guarda le medie su tempi lunghi: per questo una giornata fredda non smentisce il riscaldamento globale.",
+      "source": {
+        "name": "NASA",
+        "url": "https://science.nasa.gov/climate-change/faq/whats-the-difference-between-weather-and-climate/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "the weather averaged over several decades"
+    },
+    {
+      "id": "climate_007",
+      "topic": "climate",
+      "difficulty": 1,
+      "question": "Si sente spesso parlare di «zero emissioni nette» (net zero). Cosa significa?",
+      "options": [
+        "Ridurre le emissioni al minimo e assorbire quelle che restano",
+        "Non usare mai più nessun tipo di energia",
+        "Spostare le fabbriche in altri Paesi",
+        "Smettere di misurare le emissioni"
+      ],
+      "correctIndex": 0,
+      "explanation": "Le poche emissioni rimaste vengono assorbite dalla natura o da sistemi di rimozione della CO2. Secondo l'ONU, per restare a 1,5 °C serve arrivare a zero netto entro il 2050.",
+      "source": {
+        "name": "Nazioni Unite",
+        "url": "https://www.un.org/en/climatechange/net-zero-coalition",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Put simply, net zero means cutting carbon emissions to a small amount of residual emissions"
+    },
+    {
+      "id": "climate_008",
+      "topic": "climate",
+      "difficulty": 2,
+      "question": "Secondo il servizio europeo Copernicus, quanto velocemente si sta riscaldando l'Europa rispetto alla media globale?",
+      "options": [
+        "Più lentamente della media globale",
+        "Esattamente come la media globale",
+        "Più del doppio della media globale",
+        "Non si sta riscaldando"
+      ],
+      "correctIndex": 2,
+      "explanation": "L'Europa è il continente che si scalda più in fretta. Tra le cause c'è la neve che diminuisce: il suolo scoperto è più scuro, riflette meno luce solare (albedo) e assorbe più calore.",
+      "source": {
+        "name": "Copernicus Climate Change Service",
+        "url": "https://climate.copernicus.eu/esotc/2025/why-europe-warming-so-quickly",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Europe is the fastest-warming continent, warming more than twice as fast as the global average."
+    },
+    {
+      "id": "climate_009",
+      "topic": "climate",
+      "difficulty": 2,
+      "question": "L'IPCC è stato creato nel 1988 da WMO e UNEP. Qual è il suo compito principale?",
+      "options": [
+        "Gestire i satelliti meteo di tutto il mondo",
+        "Fornire ai governi informazioni scientifiche aggiornate sul clima",
+        "Multare i Paesi che inquinano di più",
+        "Prevedere il meteo dei prossimi giorni"
+      ],
+      "correctIndex": 1,
+      "explanation": "L'IPCC non fa ricerca propria: valuta gli studi scientifici sul clima e li riassume in rapporti che aiutano i governi e alimentano i negoziati internazionali sul clima.",
+      "source": {
+        "name": "WMO",
+        "url": "https://wmo.int/activities/intergovernmental-panel-climate-change-ipcc",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "provides governments at all levels with the most up-to-date, robust scientific information"
+    },
+    {
+      "id": "climate_010",
+      "topic": "climate",
+      "difficulty": 3,
+      "question": "Secondo la NASA, il riscaldamento attuale è più veloce di quello medio dopo un'era glaciale. Di quanto, circa?",
+      "options": [
+        "È più lento",
+        "Circa il doppio",
+        "Circa 1000 volte",
+        "Circa 10 volte"
+      ],
+      "correctIndex": 3,
+      "explanation": "La NASA aggiunge che la CO2 prodotta dalle attività umane aumenta circa 250 volte più in fretta di quanto facesse per cause naturali dopo l'ultima era glaciale.",
+      "source": {
+        "name": "NASA",
+        "url": "https://science.nasa.gov/climate-change/evidence/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "current warming is occurring roughly 10 times faster than the average rate of warming after an ice age"
     },
     {
       "id": "oceans_001",
@@ -302,6 +502,106 @@
       "sourceExcerpt": "fewer carbonate ions available for calcifying organisms to build and maintain their shells"
     },
     {
+      "id": "oceans_006",
+      "topic": "oceans",
+      "difficulty": 1,
+      "question": "Come si chiama il punto più profondo dell'oceano?",
+      "options": [
+        "La Fossa di Porto Rico",
+        "Il Mar Morto",
+        "Il Challenger Deep, nella Fossa delle Marianne",
+        "La Dorsale medio-atlantica"
+      ],
+      "correctIndex": 2,
+      "explanation": "Il Challenger Deep si trova sotto il Pacifico occidentale, all'estremità sud della Fossa delle Marianne. Secondo NOAA è profondo circa 10.935 metri: quasi 11 chilometri sotto la superficie!",
+      "source": {
+        "name": "NOAA",
+        "url": "https://oceanservice.noaa.gov/facts/oceandepth.html",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "The deepest part of the ocean is called the Challenger Deep … in the southern end of the Mariana Trench"
+    },
+    {
+      "id": "oceans_007",
+      "topic": "oceans",
+      "difficulty": 1,
+      "question": "Da dove arriva soprattutto il sale disciolto nell'acqua del mare?",
+      "options": [
+        "Dalle rocce della terraferma, portato dall'acqua",
+        "Dal sale da cucina che finisce negli scarichi",
+        "Dai pesci, che lo producono",
+        "Dalle nuvole che si formano sopra l'oceano"
+      ],
+      "correctIndex": 0,
+      "explanation": "L'acqua che scorre sulla terraferma scioglie i minerali delle rocce e li porta fino al mare. Secondo NOAA altro sale arriva dalle sorgenti idrotermali sul fondale e dalle eruzioni vulcaniche sottomarine.",
+      "source": {
+        "name": "NOAA",
+        "url": "https://oceanservice.noaa.gov/facts/whysalty.html",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Rocks on land are the major source of salts dissolved in seawater."
+    },
+    {
+      "id": "oceans_008",
+      "topic": "oceans",
+      "difficulty": 2,
+      "question": "Secondo NOAA, quanta parte dell'ossigeno prodotto sulla Terra viene dall'oceano?",
+      "options": [
+        "Meno dell'1%",
+        "Circa il 10%",
+        "Quasi tutto, il 99%",
+        "Circa la metà"
+      ],
+      "correctIndex": 3,
+      "explanation": "Lo produce soprattutto il plancton che fa la fotosintesi: piante, alghe e alcuni batteri. Uno di questi, Prochlorococcus, è il più piccolo organismo fotosintetico della Terra.",
+      "source": {
+        "name": "NOAA",
+        "url": "https://oceanservice.noaa.gov/facts/ocean-oxygen.html",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Scientists estimate that roughly half of the oxygen production on Earth comes from the ocean."
+    },
+    {
+      "id": "oceans_009",
+      "topic": "oceans",
+      "difficulty": 2,
+      "question": "In alcune aree del mare si formano le cosiddette «zone morte». Che cosa le caratterizza?",
+      "options": [
+        "Acqua troppo salata per qualsiasi forma di vita",
+        "Pochissimo ossigeno disciolto nell'acqua",
+        "Acqua ghiacciata per tutto l'anno",
+        "Fondali dove non arriva mai la luce"
+      ],
+      "correctIndex": 1,
+      "explanation": "Troppi nutrienti portati da scarichi e dilavamento fanno crescere troppe alghe; quando si decompongono consumano ossigeno. Molti animali muoiono o, come i pesci, si spostano altrove.",
+      "source": {
+        "name": "NOAA",
+        "url": "https://oceanservice.noaa.gov/facts/deadzone.html",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "\"Dead zone\" is a more common term for hypoxia, which refers to a reduced level of oxygen in the water."
+    },
+    {
+      "id": "oceans_010",
+      "topic": "oceans",
+      "difficulty": 3,
+      "question": "Il «nastro trasportatore» oceanico muove l'acqua profonda attorno al pianeta. Da che cosa è guidato?",
+      "options": [
+        "Solo dalle maree causate dalla Luna",
+        "Dall'acqua dei fiumi che sfociano in mare",
+        "Dalle differenze di temperatura e salinità",
+        "Dal passaggio delle grandi navi"
+      ],
+      "correctIndex": 2,
+      "explanation": "L'acqua fredda e salata è più densa e scende verso il fondo, mentre quella calda resta in superficie: è la circolazione termoalina. Vicino alla superficie, invece, le correnti sono spinte anche dal vento.",
+      "source": {
+        "name": "NOAA",
+        "url": "https://oceanservice.noaa.gov/facts/conveyor.html",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "a constantly moving system of deep-ocean circulation driven by temperature and salinity"
+    },
+    {
       "id": "biodiversity_001",
       "topic": "biodiversity",
       "difficulty": 1,
@@ -400,6 +700,106 @@
         "verifiedOn": "2026-10-22"
       },
       "sourceExcerpt": "questa sottospecie endemica di orso, gravemente minacciata di estinzione … oltre 6.000 km2 nell'Appennino centrale"
+    },
+    {
+      "id": "biodiversity_006",
+      "topic": "biodiversity",
+      "difficulty": 1,
+      "question": "Le barriere coralline occupano solo l'1% circa degli oceani. Quanta vita marina ospitano?",
+      "options": [
+        "Quasi nessuna specie",
+        "Solo qualche pesce tropicale",
+        "Circa l'1% delle specie marine",
+        "Almeno il 25% della vita marina"
+      ],
+      "correctIndex": 3,
+      "explanation": "Secondo NOAA le barriere coralline sono casa di oltre 4.000 specie di pesci, coralli e altri organismi marini: piccole come estensione, ma ricchissime di vita.",
+      "source": {
+        "name": "NOAA",
+        "url": "https://oceanservice.noaa.gov/education/tutorial_corals/coral07_importance.html",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "provide habitat for at least 25% of the world’s marine life"
+    },
+    {
+      "id": "biodiversity_007",
+      "topic": "biodiversity",
+      "difficulty": 1,
+      "question": "Che cos'è una «specie aliena invasiva»?",
+      "options": [
+        "Una specie introdotta fuori dal suo ambiente che minaccia la biodiversità",
+        "Una specie rara che vive solo in un piccolo territorio protetto",
+        "Una specie allevata nei parchi per essere reintrodotta in natura",
+        "Una specie appena scoperta che gli scienziati devono ancora studiare"
+      ],
+      "correctIndex": 0,
+      "explanation": "Le specie aliene vengono portate dalle attività umane fuori dal loro areale naturale; diventano invasive quando si diffondono e minacciano la biodiversità. Per la CBD sono tra le principali minacce alla natura.",
+      "source": {
+        "name": "CBD (ONU)",
+        "url": "https://www.cbd.int/invasive/WhatareIAS.shtml",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "An invasive alien species (IAS) is an alien species whose introduction and/or spread threaten biological diversity"
+    },
+    {
+      "id": "biodiversity_008",
+      "topic": "biodiversity",
+      "difficulty": 2,
+      "question": "La Posidonia oceanica forma vaste praterie sui fondali del Mediterraneo. Che cos'è?",
+      "options": [
+        "Un'alga marina diffusa in tutti gli oceani",
+        "Una pianta marina endemica del Mediterraneo",
+        "Una colonia di coralli",
+        "Un tipo di spugna"
+      ],
+      "correctIndex": 1,
+      "explanation": "Anche se spesso la chiamiamo alga, la Posidonia è una vera pianta. Secondo ISPRA le sue praterie offrono cibo, riparo e luoghi di riproduzione a molte specie e difendono le coste dall'erosione.",
+      "source": {
+        "name": "ISPRA",
+        "url": "https://www.isprambiente.gov.it/it/attivita/tema-mare/posidonia-oceanica-spiaggiata-la-gestione-degli-accumuli-e-la-valorizzazione",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "è una pianta marina endemica del Mar Mediterraneo presente lungo molte aree costiere italiane"
+    },
+    {
+      "id": "biodiversity_009",
+      "topic": "biodiversity",
+      "difficulty": 2,
+      "question": "Con l'accordo globale sulla biodiversità di Kunming-Montréal (2022), quanta parte di terre e mari si vuole tutelare entro il 2030?",
+      "options": [
+        "Almeno il 5%",
+        "Almeno il 10%",
+        "Almeno il 30%",
+        "Il 100%"
+      ],
+      "correctIndex": 2,
+      "explanation": "È l'obiettivo chiamato «30x30»: conservare e gestire bene almeno il 30% delle aree terrestri, delle acque interne e delle zone costiere e marine, rispettando i diritti dei popoli indigeni e delle comunità locali.",
+      "source": {
+        "name": "CBD (ONU)",
+        "url": "https://www.cbd.int/gbf/targets/3",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "by 2030 at least 30 per cent of terrestrial, inland water, and of coastal and marine areas"
+    },
+    {
+      "id": "biodiversity_010",
+      "topic": "biodiversity",
+      "difficulty": 3,
+      "question": "Secondo il rapporto globale IPBES del 2019, quale causa diretta ha avuto finora l'impatto maggiore sulla natura?",
+      "options": [
+        "Il cambiamento nell'uso di terre e mari",
+        "L'inquinamento",
+        "Il cambiamento climatico",
+        "Le specie aliene invasive"
+      ],
+      "correctIndex": 0,
+      "explanation": "IPBES elenca cinque cause dirette: uso di terre e mari, sfruttamento diretto degli organismi, clima, inquinamento e specie invasive. Lo stesso rapporto stima circa 1 milione di specie minacciate di estinzione.",
+      "source": {
+        "name": "IPBES",
+        "url": "https://www.ipbes.net/news/Media-Release-Global-Assessment",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "These culprits are, in descending order: (1) changes in land and sea use; (2) direct exploitation of organisms;"
     },
     {
       "id": "forests_001",
@@ -502,6 +902,106 @@
       "sourceExcerpt": "trees generally produce one ring a year, recording the climate conditions each year"
     },
     {
+      "id": "forests_006",
+      "topic": "forests",
+      "difficulty": 1,
+      "question": "Secondo la FAO, che cosa si intende per \"deforestazione\"?",
+      "options": [
+        "Potare i rami di un albero",
+        "Trasformare una foresta in un altro uso del suolo",
+        "Raccogliere funghi e castagne nel bosco",
+        "Il cambio di colore delle foglie in autunno"
+      ],
+      "correctIndex": 1,
+      "explanation": "Per la FAO c'è deforestazione quando una foresta diventa altro, ad esempio campi, pascoli o città, oppure quando gli alberi si riducono a lungo sotto il 10% di copertura del suolo.",
+      "source": {
+        "name": "FAO",
+        "url": "https://www.fao.org/4/y4171e/y4171e10.htm",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "The conversion of forest to another land use"
+    },
+    {
+      "id": "forests_007",
+      "topic": "forests",
+      "difficulty": 1,
+      "question": "In quale giorno si celebra ogni anno la Giornata internazionale delle foreste?",
+      "options": [
+        "Il 1° gennaio",
+        "Il 5 giugno",
+        "Il 21 marzo",
+        "Il 31 ottobre"
+      ],
+      "correctIndex": 2,
+      "explanation": "L'Assemblea generale delle Nazioni Unite ha proclamato il 21 marzo Giornata internazionale delle foreste nel 2012: un'occasione per ricordare quanto foreste e alberi siano importanti per tutti.",
+      "source": {
+        "name": "FAO",
+        "url": "https://www.fao.org/international-day-of-forests/en",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "The United Nations General Assembly proclaimed 21 March the International Day of Forests (IDF) in 2012."
+    },
+    {
+      "id": "forests_008",
+      "topic": "forests",
+      "difficulty": 2,
+      "question": "Secondo la FAO, quale parte di tutte le specie di anfibi conosciute trova casa nelle foreste?",
+      "options": [
+        "Circa l'8%",
+        "Circa il 30%",
+        "Circa la metà",
+        "Circa l'80%"
+      ],
+      "correctIndex": 3,
+      "explanation": "Le foreste ospitano quasi 5.000 specie di anfibi, circa l'80% di quelle conosciute, e anche circa il 75% delle specie di uccelli: proteggere i boschi significa proteggere tantissimi animali.",
+      "source": {
+        "name": "FAO – The State of the World's Forests 2020",
+        "url": "https://www.fao.org/interactive/state-of-forests/2020/en/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "forests provide habitats for almost 5 000 amphibian species (80 percent of all known species)"
+    },
+    {
+      "id": "forests_009",
+      "topic": "forests",
+      "difficulty": 2,
+      "question": "Per la FAO, in una foresta gli alberi devono poter raggiungere almeno quale altezza?",
+      "options": [
+        "5 metri",
+        "1 metro",
+        "20 metri",
+        "50 metri"
+      ],
+      "correctIndex": 0,
+      "explanation": "Secondo la definizione FAO, una foresta deve estendersi su più di mezzo ettaro, con alberi che possono arrivare ad almeno 5 metri e chiome che coprono più del 10% del terreno.",
+      "source": {
+        "name": "FAO",
+        "url": "https://www.fao.org/4/y4171e/y4171e10.htm",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "The trees should be able to reach a minimum height of 5 m."
+    },
+    {
+      "id": "forests_010",
+      "topic": "forests",
+      "difficulty": 3,
+      "question": "Secondo il rapporto FAO sullo stato delle foreste del 2020, quante specie di alberi esistono circa nel mondo?",
+      "options": [
+        "Circa 600",
+        "Circa 6.000",
+        "Circa 60.000",
+        "Circa 6 milioni"
+      ],
+      "correctIndex": 2,
+      "explanation": "Il database GlobalTreeSearch, citato dalla FAO, conta 60.082 specie di alberi. Una varietà enorme: ogni foresta del mondo ha la sua combinazione di specie e di animali che ci vivono.",
+      "source": {
+        "name": "FAO – The State of the World's Forests 2020",
+        "url": "https://www.fao.org/interactive/state-of-forests/2020/en/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "The GlobalTreeSearch database reports the existence of 60,082 tree species."
+    },
+    {
       "id": "energy_001",
       "topic": "energy",
       "difficulty": 1,
@@ -600,6 +1100,106 @@
         "verifiedOn": "2026-10-22"
       },
       "sourceExcerpt": "Turning down the thermostat … by just 1 °C would save around 7% of the energy you use for heating."
+    },
+    {
+      "id": "energy_006",
+      "topic": "energy",
+      "difficulty": 1,
+      "question": "Da dove viene l'energia geotermica?",
+      "options": [
+        "Dal movimento delle maree",
+        "Dalla combustione del carbone",
+        "Dalla forza del vento",
+        "Dal calore che si trova dentro la Terra"
+      ],
+      "correctIndex": 3,
+      "explanation": "Il nome viene dal greco geo (terra) e therme (calore). Il calore del sottosuolo si può usare per riscaldare gli edifici e per produrre elettricità.",
+      "source": {
+        "name": "US EIA",
+        "url": "https://www.eia.gov/energyexplained/geothermal/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Geothermal energy is heat found inside the earth."
+    },
+    {
+      "id": "energy_007",
+      "topic": "energy",
+      "difficulty": 1,
+      "question": "In quale unità le aziende elettriche misurano di solito l'energia elettrica consumata?",
+      "options": [
+        "Il volt (V)",
+        "Il chilowattora (kWh)",
+        "Il metro cubo (m³)",
+        "Il grado Celsius (°C)"
+      ],
+      "correctIndex": 1,
+      "explanation": "Un kWh è l'energia di un kilowatt usato per un'ora. Ad esempio, una lampadina da 40 watt accesa per 5 ore consuma 200 Wh, cioè 0,2 kWh.",
+      "source": {
+        "name": "US EIA",
+        "url": "https://www.eia.gov/energyexplained/electricity/measuring-electricity.php",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Electric utilities and power plants generally measure electricity in kilowatthours (kWh)."
+    },
+    {
+      "id": "energy_008",
+      "topic": "energy",
+      "difficulty": 2,
+      "question": "L'energia eolica sfrutta il vento. Ma che cosa causa il vento?",
+      "options": [
+        "Il Sole che scalda in modo diverso terre e mari",
+        "La rotazione delle pale eoliche",
+        "Il calore che sale dal centro della Terra",
+        "L'attrazione della Luna sulle nuvole"
+      ],
+      "correctIndex": 0,
+      "explanation": "Terra e acqua si scaldano a velocità diverse: l'aria calda sopra la terra sale e quella più fresca prende il suo posto, creando il vento. In un certo senso, anche l'eolico viene dal Sole!",
+      "source": {
+        "name": "US EIA",
+        "url": "https://www.eia.gov/energyexplained/wind/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Wind is caused by uneven heating of the earth's surface by the sun."
+    },
+    {
+      "id": "energy_009",
+      "topic": "energy",
+      "difficulty": 2,
+      "question": "Secondo il GSE, qual è l'obiettivo principale di una Comunità energetica rinnovabile (CER)?",
+      "options": [
+        "Vendere gas naturale a prezzi più bassi",
+        "Costruire nuove centrali a carbone",
+        "Dare benefici ambientali, economici o sociali alla comunità",
+        "Fare profitti per una sola grande azienda"
+      ],
+      "correctIndex": 2,
+      "explanation": "In una CER cittadini, piccole imprese ed enti condividono l'energia rinnovabile prodotta vicino a loro, collegati alla stessa cabina primaria della rete elettrica.",
+      "source": {
+        "name": "GSE",
+        "url": "https://www.gse.it/servizi-per-te/autoconsumo/gruppi-di-autoconsumatori-e-comunita-di-energia-rinnovabile/comunit%C3%A0-energetiche-rinnovabili",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "obiettivo principale è fornire benefici ambientali, economici o sociali a livello di comunità"
+    },
+    {
+      "id": "energy_010",
+      "topic": "energy",
+      "difficulty": 3,
+      "question": "Con la revisione del 2023 della direttiva UE sulle rinnovabili, quale quota minima di rinnovabili vuole raggiungere l'UE entro il 2030?",
+      "options": [
+        "Il 20%",
+        "Almeno il 42,5%",
+        "Il 75%",
+        "Il 100%"
+      ],
+      "correctIndex": 1,
+      "explanation": "La revisione del 2023 ha alzato l'obiettivo UE per il 2030 ad almeno il 42,5% di energia da fonti rinnovabili, con l'ambizione di arrivare al 45%.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://energy.ec.europa.eu/news/commission-adopts-guidance-eu-countries-implementing-revised-directives-renewable-energy-and-energy-2024-09-02_en",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Its 2023 revision increased the EU’s 2030 renewables target to at least 42.5% (aiming to reach 45%)."
     },
     {
       "id": "water_001",
@@ -702,6 +1302,106 @@
       "sourceExcerpt": "For beef, the water footprint per gram of protein is 6 times larger than for pulses."
     },
     {
+      "id": "water_006",
+      "topic": "water",
+      "difficulty": 1,
+      "question": "Dove si trova la maggior parte dell'acqua dolce della Terra?",
+      "options": [
+        "Nei fiumi e nei laghi",
+        "Nelle falde sotterranee",
+        "Nelle nuvole e nell'atmosfera",
+        "Nei ghiacciai e nelle calotte polari"
+      ],
+      "correctIndex": 3,
+      "explanation": "Secondo l'USGS circa il 68,7% dell'acqua dolce del pianeta è congelata in ghiacciai e calotte polari. Quasi il 90% di tutto il ghiaccio della Terra si trova in Antartide.",
+      "source": {
+        "name": "USGS",
+        "url": "https://www.usgs.gov/special-topics/water-science-school/science/ice-snow-and-glaciers-and-water-cycle",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "the majority of total freshwater on Earth, about 68.7 percent, is held in ice caps and glaciers"
+    },
+    {
+      "id": "water_007",
+      "topic": "water",
+      "difficulty": 1,
+      "question": "Secondo l'EPA statunitense, in quale stanza si usa più della metà dell'acqua consumata dentro casa?",
+      "options": [
+        "In bagno",
+        "In cucina",
+        "In soggiorno",
+        "In camera da letto"
+      ],
+      "correctIndex": 0,
+      "explanation": "Tra doccia, WC e lavandino, il bagno è la stanza che consuma di più. Un gesto facile per risparmiare: chiudi il rubinetto mentre ti lavi i denti.",
+      "source": {
+        "name": "US EPA (WaterSense)",
+        "url": "https://www.epa.gov/watersense/start-saving",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "In the bathroom—where over half of all water use inside a home takes place: Turn off the tap while shaving or brushing teeth."
+    },
+    {
+      "id": "water_008",
+      "topic": "water",
+      "difficulty": 2,
+      "question": "A livello mondiale, quale settore preleva più acqua dolce?",
+      "options": [
+        "L'industria",
+        "L'agricoltura",
+        "Le famiglie, per gli usi domestici",
+        "La produzione di acqua in bottiglia"
+      ],
+      "correctIndex": 1,
+      "explanation": "Secondo la FAO i prelievi mondiali di acqua sono circa 69% agricoli, 19% industriali e 12% municipali. In Europa però la quota agricola è molto più bassa: poco più del 20%.",
+      "source": {
+        "name": "FAO (AQUASTAT)",
+        "url": "https://www.fao.org/aquastat/en/overview/methodology/water-use/index.html",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "At global level, the withdrawal ratios are 69 percent agricultural, 12 percent municipal and 19 percent industrial."
+    },
+    {
+      "id": "water_009",
+      "topic": "water",
+      "difficulty": 2,
+      "question": "Secondo l'ISTAT, nel 2020 quanti litri di acqua potabile al giorno per abitante erogavano le reti comunali italiane?",
+      "options": [
+        "Circa 20 litri",
+        "Circa 50 litri",
+        "Circa 215 litri",
+        "Circa 2.000 litri"
+      ],
+      "correctIndex": 2,
+      "explanation": "È una media per abitante sugli usi autorizzati della rete comunale. Non tutta l'acqua però arriva a destinazione: secondo l'ISTAT le perdite nelle reti di distribuzione italiane restano elevate.",
+      "source": {
+        "name": "ISTAT",
+        "url": "https://www.istat.it/comunicato-stampa/le-statistiche-dellistat-sullacqua-anni-2020-2022/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Nel 2020 sono erogati ogni giorno per gli usi autorizzati 215 litri di acqua potabile per abitante nelle reti comunali di distribuzione."
+    },
+    {
+      "id": "water_010",
+      "topic": "water",
+      "difficulty": 3,
+      "question": "L'impronta idrica si divide in verde, blu e grigia. Che cosa misura l'impronta idrica «verde»?",
+      "options": [
+        "L'acqua usata per innaffiare parchi e giardini",
+        "La pioggia trattenuta nel suolo e usata dalle piante",
+        "L'acqua prelevata da fiumi, laghi e falde",
+        "L'acqua necessaria a diluire gli inquinanti"
+      ],
+      "correctIndex": 1,
+      "explanation": "La verde è la pioggia immagazzinata nel suolo e usata dalle piante, importante in agricoltura. La blu viene da fiumi, laghi e falde; la grigia è l'acqua dolce che serve a diluire gli inquinanti.",
+      "source": {
+        "name": "Water Footprint Network",
+        "url": "https://www.waterfootprint.org/water-footprint-2/what-is-a-water-footprint/",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Green water footprint is water from precipitation that is stored in the root zone of the soil and evaporated, transpired or incorporated by plants."
+    },
+    {
       "id": "transport_001",
       "topic": "transport",
       "difficulty": 1,
@@ -800,6 +1500,106 @@
         "verifiedOn": "2026-10-22"
       },
       "sourceExcerpt": "Road is the largest contributor of GHG emissions in transport, accounting for 72.9% in 2023"
+    },
+    {
+      "id": "transport_006",
+      "topic": "transport",
+      "difficulty": 1,
+      "question": "Secondo l'Agenzia europea dell'ambiente, qual è una delle principali cause di inquinamento acustico in Europa?",
+      "options": [
+        "Il canto degli uccelli",
+        "Le onde del mare",
+        "Il traffico stradale",
+        "Il vento tra gli alberi"
+      ],
+      "correctIndex": 2,
+      "explanation": "Secondo l'EEA, l'esposizione prolungata al rumore dei trasporti infastidisce molto oltre 20 milioni di europei e disturba il sonno di quasi 7 milioni. Piedi, bici e mezzi pubblici aiutano anche le orecchie!",
+      "source": {
+        "name": "EEA",
+        "url": "https://www.eea.europa.eu/en/topics/in-depth/transport-and-mobility",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "road transport is one of the main causes of environmental noise pollution in Europe"
+    },
+    {
+      "id": "transport_007",
+      "topic": "transport",
+      "difficulty": 1,
+      "question": "In quali giorni si svolge ogni anno la Settimana europea della mobilità?",
+      "options": [
+        "Dal 1° al 7 gennaio",
+        "Dal 16 al 22 settembre",
+        "Dal 1° al 7 maggio",
+        "Dal 24 al 31 dicembre"
+      ],
+      "correctIndex": 1,
+      "explanation": "È la campagna annuale della Commissione europea per la mobilità urbana sostenibile: per il 2026 erano attese oltre 2.500 città. Puoi controllare se partecipa anche il tuo Comune.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://transport.ec.europa.eu/transport-themes/urban-transport_en",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "From 16 to 22 September, more than 2,500 towns and cities will participate in the European Mobility Week"
+    },
+    {
+      "id": "transport_008",
+      "topic": "transport",
+      "difficulty": 2,
+      "question": "Secondo l'EEA, nel 2023 quale quota di tutte le emissioni di gas serra dell'UE veniva dai trasporti?",
+      "options": [
+        "Circa un terzo",
+        "Circa il 5%",
+        "Circa la metà",
+        "Circa tre quarti"
+      ],
+      "correctIndex": 0,
+      "explanation": "I trasporti sono una delle maggiori fonti di gas serra dell'UE. Per questo il Green Deal europeo punta a ridurre del 90% le loro emissioni entro il 2050.",
+      "source": {
+        "name": "EEA",
+        "url": "https://www.eea.europa.eu/en/topics/in-depth/transport-and-mobility",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Transport accounted for about a third of all EU greenhouse gas emissions in 2023."
+    },
+    {
+      "id": "transport_009",
+      "topic": "transport",
+      "difficulty": 2,
+      "question": "Secondo l'EEA, di quale di questi inquinanti dell'aria i trasporti sono la fonte principale nell'UE?",
+      "options": [
+        "Il radon",
+        "L'ammoniaca",
+        "Il metano",
+        "Gli ossidi di azoto (NOx)"
+      ],
+      "correctIndex": 3,
+      "explanation": "Gli ossidi di azoto danneggiano la salute umana e l'ambiente. Secondo l'EEA, a differenza della maggior parte degli altri settori, le emissioni dei trasporti sono aumentate dal 1990.",
+      "source": {
+        "name": "EEA",
+        "url": "https://www.eea.europa.eu/en/topics/in-depth/transport-and-mobility",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "is also the largest contributor to nitrogen oxides emissions, which harm human health and the environment"
+    },
+    {
+      "id": "transport_010",
+      "topic": "transport",
+      "difficulty": 3,
+      "question": "Produrre un'auto elettrica, batteria compresa, ha un impatto più alto. Secondo l'EEA, cosa succede sull'intero ciclo di vita in Europa?",
+      "options": [
+        "Emette sempre più gas serra di un'auto a benzina",
+        "Emette esattamente quanto un'auto diesel",
+        "Le minori emissioni durante l'uso compensano la produzione",
+        "Conta solo la fase di produzione"
+      ],
+      "correctIndex": 2,
+      "explanation": "Secondo l'EEA, per clima e qualità dell'aria le auto elettriche sono preferibili a quelle diesel e a benzina, anche con l'attuale mix elettrico, che include ancora una quota di carbone.",
+      "source": {
+        "name": "EEA",
+        "url": "https://www.eea.europa.eu/en/about/contact-us/faqs/why-are-electric-cars-a-good-alternative-to-conventional-combustion-vehicles",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "The lower emissions of electric vehicles in the use phase more than offsets the higher impact of raw materials extraction and the production phases."
     },
     {
       "id": "consumption_001",
@@ -902,6 +1702,106 @@
       "sourceExcerpt": "La gestione dei rifiuti avviene nel rispetto della seguente gerarchia: a) prevenzione; b) preparazione per il riutilizzo;"
     },
     {
+      "id": "consumption_006",
+      "topic": "consumption",
+      "difficulty": 1,
+      "question": "Secondo il Parlamento europeo, quanta acqua dolce serve per produrre una sola maglietta di cotone?",
+      "options": [
+        "Circa 2 litri",
+        "Circa 2.700 litri",
+        "Circa 27 litri",
+        "Circa 270.000 litri"
+      ],
+      "correctIndex": 1,
+      "explanation": "Coltivare il cotone richiede tantissima acqua. E solo l'1% degli abiti usati viene riciclato in vestiti nuovi: indossare a lungo, scambiare o comprare di seconda mano fa davvero la differenza.",
+      "source": {
+        "name": "Parlamento europeo",
+        "url": "https://www.europarl.europa.eu/topics/en/article/20201208STO93327/the-impact-of-textile-production-and-waste-on-the-environment-infographics",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "To make a single cotton t-shirt, 2,700 litres of fresh water are required"
+    },
+    {
+      "id": "consumption_007",
+      "topic": "consumption",
+      "difficulty": 1,
+      "question": "Quando si lavano in lavatrice i vestiti di tessuto sintetico, come il poliestere, cosa rilasciano nell'acqua?",
+      "options": [
+        "Vitamine",
+        "Sale marino",
+        "Microplastiche",
+        "Ossigeno"
+      ],
+      "correctIndex": 2,
+      "explanation": "Secondo il Parlamento europeo, i lavaggi dei tessuti sintetici fanno accumulare ogni anno sul fondo degli oceani oltre mezzo milione di tonnellate di microplastiche. Comprare meno capi e farli durare aiuta.",
+      "source": {
+        "name": "Parlamento europeo",
+        "url": "https://www.europarl.europa.eu/topics/en/article/20201208STO93327/the-impact-of-textile-production-and-waste-on-the-environment-infographics",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Washing synthetic fabrics leads to the accumulation of more than half a million tonnes of microplastics"
+    },
+    {
+      "id": "consumption_008",
+      "topic": "consumption",
+      "difficulty": 2,
+      "question": "La FAO distingue tra «perdita» e «spreco» di cibo. Lo spreco alimentare nasce dalle scelte di chi?",
+      "options": [
+        "Negozi, ristorazione e consumatori",
+        "Solo agricoltori durante il raccolto",
+        "Solo chi pesca e alleva animali",
+        "Solo le aziende che trasportano il cibo"
+      ],
+      "correctIndex": 0,
+      "explanation": "Per la FAO la «perdita» avviene lungo la filiera, dal raccolto fino a prima della vendita; lo «spreco» invece dipende da negozi, ristoranti e mense e da noi consumatori. Quindi anche le nostre scelte contano!",
+      "source": {
+        "name": "FAO",
+        "url": "https://www.fao.org/platform-food-loss-waste/food-waste/introduction/en",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "decisions and actions by retailers, food service providers and consumers"
+    },
+    {
+      "id": "consumption_009",
+      "topic": "consumption",
+      "difficulty": 2,
+      "question": "Secondo il nuovo regolamento UE sugli imballaggi, cosa dovrà valere entro il 2030 per tutti gli imballaggi sul mercato UE?",
+      "options": [
+        "Dovranno essere tutti di carta",
+        "Dovranno essere tutti trasparenti",
+        "Dovranno pesare meno di 10 grammi",
+        "Dovranno essere riciclabili"
+      ],
+      "correctIndex": 3,
+      "explanation": "Il regolamento UE 2025/40 vuole imballaggi tutti riciclabili in modo economicamente sostenibile entro il 2030, e limita alcuni monouso in plastica, come le bustine monodose di salse e condimenti.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://environment.ec.europa.eu/topics/waste-and-recycling/packaging-waste_en",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Make all packaging on the EU market recyclable in an economically viable way by 2030"
+    },
+    {
+      "id": "consumption_010",
+      "topic": "consumption",
+      "difficulty": 3,
+      "question": "Con la direttiva UE sul «diritto alla riparazione», cosa ottieni se in garanzia scegli di riparare un prodotto invece di sostituirlo?",
+      "options": [
+        "Un buono sconto per un prodotto nuovo",
+        "Il rimborso completo del prezzo",
+        "Un anno in più di garanzia legale",
+        "Nulla: la riparazione chiude la garanzia"
+      ],
+      "correctIndex": 2,
+      "explanation": "La direttiva UE 2024/1799 premia chi ripara con un anno extra di garanzia. Inoltre i produttori di oggetti come frigoriferi e smartphone dovranno ripararli in tempi e a prezzi ragionevoli.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://commission.europa.eu/law/law-topic/consumer-protection-law/directive-repair-goods_en",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "provides consumers with an extra year of the legal guarantee if they choose to repair the product"
+    },
+    {
       "id": "innovation_001",
       "topic": "innovation",
       "difficulty": 1,
@@ -1000,6 +1900,106 @@
         "verifiedOn": "2026-10-22"
       },
       "sourceExcerpt": "act as a digital identity card … storing valuable data on a product's sustainability performance, recyclability, and environmental impact"
+    },
+    {
+      "id": "innovation_006",
+      "topic": "innovation",
+      "difficulty": 1,
+      "question": "Secondo la Ellen MacArthur Foundation, quale di questi è uno dei tre principi dell'economia circolare?",
+      "options": [
+        "Produrre il più possibile",
+        "Usare solo materiali nuovi",
+        "Bruciare i rifiuti per fare spazio",
+        "Rigenerare la natura"
+      ],
+      "correctIndex": 3,
+      "explanation": "I tre principi sono: eliminare rifiuti e inquinamento, far circolare prodotti e materiali al loro massimo valore e rigenerare la natura. E tutto parte dal design: pensare un oggetto già per durare e rinascere.",
+      "source": {
+        "name": "Ellen MacArthur Foundation",
+        "url": "https://www.ellenmacarthurfoundation.org/topics/circular-economy-introduction/overview",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "The circular economy is based on three principles, driven by design: … Regenerate nature"
+    },
+    {
+      "id": "innovation_007",
+      "topic": "innovation",
+      "difficulty": 1,
+      "question": "Secondo la Commissione europea, quanto è più efficiente una pompa di calore rispetto a una caldaia a gas?",
+      "options": [
+        "È meno efficiente",
+        "Circa 3-5 volte di più",
+        "Esattamente uguale",
+        "Circa 100 volte di più"
+      ],
+      "correctIndex": 1,
+      "explanation": "La pompa di calore non crea calore bruciando gas: lo sposta dall'esterno all'interno. Per questo, con la stessa energia, scalda molto di più. Ed è una tecnologia matura, già usata in tante case.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://energy.ec.europa.eu/topics/energy-efficiency/heat-pumps_en",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Heat pumps are a mature technology that are around 3-5 times more energy efficient than gas boilers."
+    },
+    {
+      "id": "innovation_008",
+      "topic": "innovation",
+      "difficulty": 2,
+      "question": "Secondo la Commissione europea, qual è di gran lunga il principale metodo per immagazzinare energia nell'UE?",
+      "options": [
+        "Le batterie delle auto elettriche",
+        "I serbatoi di idrogeno",
+        "L'idroelettrico a pompaggio",
+        "I volani meccanici"
+      ],
+      "correctIndex": 2,
+      "explanation": "Quando la rete ha elettricità in eccesso, si pompa acqua in un bacino più in alto; quando serve energia, l'acqua scende e fa girare le turbine. Accumuli così aiutano a usare meglio sole e vento.",
+      "source": {
+        "name": "Commissione europea",
+        "url": "https://energy.ec.europa.eu/topics/research-and-technology/energy-storage_en",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "The main energy storage method in the EU is by far 'pumped storage hydropower'"
+    },
+    {
+      "id": "innovation_009",
+      "topic": "innovation",
+      "difficulty": 2,
+      "question": "Dove si produsse per la prima volta elettricità dal calore della Terra (energia geotermica), nel 1904?",
+      "options": [
+        "A Larderello, in Toscana",
+        "In Islanda, vicino a Reykjavík",
+        "Sull'Etna, in Sicilia",
+        "Nel parco di Yellowstone, negli USA"
+      ],
+      "correctIndex": 0,
+      "explanation": "A Larderello il vapore naturale dei «soffioni boraciferi» fu usato per produrre elettricità: da lì partì l'esplorazione geotermica in tutto il mondo. La geotermia è una fonte rinnovabile e disponibile giorno e notte.",
+      "source": {
+        "name": "CNR (IRIS)",
+        "url": "https://iris.cnr.it/handle/20.500.14243/300194",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "In 1904 the first electricity production from geothermal resources took place in Larderello (Italy)"
+    },
+    {
+      "id": "innovation_010",
+      "topic": "innovation",
+      "difficulty": 3,
+      "question": "Il regolamento UE sulle batterie del 2023 fissa una quota minima di litio da recuperare dalle batterie esauste. Qual è entro il 2031?",
+      "options": [
+        "12%",
+        "26%",
+        "50%",
+        "80%"
+      ],
+      "correctIndex": 3,
+      "explanation": "Il litio da recuperare passa dal 50% entro il 2027 all'80% entro il 2031. Così un materiale prezioso torna in nuove batterie invece di andare perso: per questo le pile esauste vanno sempre nella raccolta dedicata.",
+      "source": {
+        "name": "Parlamento europeo",
+        "url": "https://www.europarl.europa.eu/news/en/press-room/20230609IPR96210/making-batteries-more-sustainable-more-durable-and-better-performing",
+        "verifiedOn": "2026-10-23"
+      },
+      "sourceExcerpt": "Minimum levels of materials recovered from waste batteries: lithium - 50% by 2027 and 80% by 2031"
     }
   ]
 }
