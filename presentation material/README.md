@@ -55,6 +55,19 @@ nello stile della presentazione (crema, titoli marroni, verde foglia):
 Per aggiungerle alla presentazione su OneDrive: in PowerPoint **Inserisci → Immagini** e scegli i PNG di `slides/` (una per
 slide, a tutta pagina), oppure apri `Laiqua_slide_aggiornate.pptx` e copia le slide. Le note per chi parla sono nel .pptx.
 
+### Presentazione su OneDrive (aggiornata direttamente)
+
+Nella presentazione condivisa "Laiqua_presentazione 1" (stile originale: crema, titoli Fredoka marroni, illustrazioni della
+lontra) sono state aggiornate o aggiunte queste slide:
+
+- 6: "10 temi, 100 domande" (prima 50)
+- 9: **Il mio territorio** (dati live di Schio, Thiene e Valdagno, quiz dal dato reale, Open-Meteo)
+- 11: **Dal dato all'azione** (consiglio del giorno, "L'ho fatto!", rifiuti nella stanza)
+- 13: "383 test automatici" (prima 225)
+- 15: **Provala!** con il link di download (il QR code va aggiunto a mano: Inserisci → Immagini → `art/qr_download_laiqua.png`)
+- 16: **Cosa c'è dopo** (posizione ovunque, moda sostenibile, eventi a tempo, nuove modalità, AI che spiega i dati)
+- 17: Grazie
+
 ## Altro materiale
 
 - `art/laiqua_icon_1024.png` — icona dell'app (1024 px), per slide e locandine
